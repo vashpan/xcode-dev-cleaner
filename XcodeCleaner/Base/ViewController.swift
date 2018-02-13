@@ -22,6 +22,8 @@ class ViewController: NSViewController {
         }
     }
 
-
+    @IBAction func clearButtonClicked(_ sender: NSButton) {
+        NSLog("Hell yeah!")
+    }
 }
 

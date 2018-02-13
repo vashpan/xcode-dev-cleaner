@@ -1,0 +1,15 @@
+# OS X noise
+.DS_Store
+profile
+
+# XCode noise
+build/*
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+*.xcodeproj/xcuserdata/*
+*.xcodeproj/project.xcworkspace/*
+
+# generated stuff
+Scripts/arrays.txt

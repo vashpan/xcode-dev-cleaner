@@ -53,14 +53,30 @@
 		7110B4902030F17B00EDBFA3 /* XcodeCleaner */ = {
 			isa = PBXGroup;
 			children = (
-				7110B4912030F17B00EDBFA3 /* AppDelegate.swift */,
-				7110B4932030F17B00EDBFA3 /* ViewController.swift */,
+				7110B4A22033A9CE00EDBFA3 /* Base */,
+				7110B4A12033A9C600EDBFA3 /* Resources */,
+			);
+			path = XcodeCleaner;
+			sourceTree = "<group>";
+		};
+		7110B4A12033A9C600EDBFA3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
 				7110B4972030F17B00EDBFA3 /* Main.storyboard */,
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* XcodeCleaner.entitlements */,
 			);
-			path = XcodeCleaner;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7110B4A22033A9CE00EDBFA3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7110B4912030F17B00EDBFA3 /* AppDelegate.swift */,
+				7110B4932030F17B00EDBFA3 /* ViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -252,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -263,12 +279,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = XcodeCleaner/XcodeCleaner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = XcodeCleaner/Resources/XcodeCleaner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = XcodeCleaner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/XcodeCleaner/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.XcodeCleaner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -279,12 +296,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = XcodeCleaner/XcodeCleaner.entitlements;
+				CODE_SIGN_ENTITLEMENTS = XcodeCleaner/Resources/XcodeCleaner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = XcodeCleaner/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/XcodeCleaner/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.XcodeCleaner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
