@@ -9,21 +9,21 @@
 import Cocoa
 
 class ViewController: NSViewController {
-
+    // MARK: Properties & outlets
+    
+    // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    // MARK: Actions
+    @IBAction func openButtonPressed(_ sender: NSButton) {
+        NSLog("Open button pressed!")
     }
-
-    @IBAction func clearButtonClicked(_ sender: NSButton) {
-        NSLog("Hell yeah!")
+    
+    @IBAction func testButtonPressed(_ sender: NSButton) {
+        NSLog("Test button pressed!")
     }
 }
 
