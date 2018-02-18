@@ -13,3 +13,6 @@ build/*
 
 # generated stuff
 Scripts/arrays.txt
+
+# test suite files
+TestSuite/*
