@@ -50,11 +50,9 @@ for root, dirs, files in os.walk(source):
     # create dirs 
     for d in dirs:
         destination_root_path = prepare_destination_path(source, os.path.join(root, d), destination)
-        print destination_root_path
         os.mkdir(destination_root_path)
 
     # add files
     for f in files:
         destination_root_path = prepare_destination_path(source, os.path.join(root, f), destination)
-        print destination_root_path
         make_file(destination_root_path)
