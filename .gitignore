@@ -11,8 +11,5 @@ build/*
 *.xcodeproj/xcuserdata/*
 *.xcodeproj/project.xcworkspace/*
 
-# generated stuff
-Scripts/arrays.txt
-
 # test suite files
 TestSuite/*
