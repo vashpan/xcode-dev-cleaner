@@ -17,7 +17,7 @@ final public class XcodeFiles {
             return nil
         }
         
-        return librariesUrl.appendingPathComponent("Developer", isDirectory: true).absoluteString
+        return librariesUrl.appendingPathComponent("Developer", isDirectory: true).path
     }
     
     // MARK: Initialization
