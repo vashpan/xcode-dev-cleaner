@@ -10,7 +10,7 @@ import Foundation
 
 final public class XcodeFiles {
     // MARK: Properties
-    private let rootLocation: String
+    public let rootLocation: String
     
     public static var defaultXcodeCachesLocation: String? {
         guard let librariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
@@ -32,8 +32,22 @@ final public class XcodeFiles {
     // MARK: Helpers
     private static func checkIfLocationIsValid(location: String) -> Bool {
         // check if folder exists
-        return FileManager.default.fileExists(atPath: location)
+        let folderExists = FileManager.default.fileExists(atPath: location)
         
-        // FIXME: More checks, like folders structure
+        // more checks, like folders structure
+        var structureProper = true
+        
+        let foldersToCheck = ["Xcode", "CoreSimulator", "Shared/Documentation"]
+        for folder in foldersToCheck {
+            let nsStringLocation = location as NSString
+            let folderPath = nsStringLocation.appendingPathComponent(folder)
+            
+            if !FileManager.default.fileExists(atPath: folderPath) {
+                structureProper = false
+                break
+            }
+        }
+        
+        return folderExists && structureProper
     }
 }
