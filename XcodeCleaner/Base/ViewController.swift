@@ -19,7 +19,8 @@ class ViewController: NSViewController {
 
     // MARK: Actions
     @IBAction func openButtonPressed(_ sender: NSButton) {
-        NSLog("Open button pressed!")
+        let xcodeDevLocation = XcodeFiles.defaultXcodeCachesLocation
+        NSLog("Xcode dev location: \(String(describing: xcodeDevLocation))")
     }
     
     @IBAction func testButtonPressed(_ sender: NSButton) {
