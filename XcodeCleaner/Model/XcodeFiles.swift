@@ -8,9 +8,26 @@
 
 import Foundation
 
+// MARK: Xcode files delegate
+public protocol XcodeFilesDelegate: class {
+    func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry)
+    
+    func scanDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry)
+    func sizesCheckDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry)
+}
+
+// MARK: - Xcode files
 final public class XcodeFiles {
+    // MARK: Types
+    public enum Location: Int {
+        case deviceSupport, simulators, archives, derivedData
+    }
+    
     // MARK: Properties
     public let rootLocation: String
+    public weak var delegate: XcodeFilesDelegate?
+    
+    public private(set) var locations: [Location : XcodeFileEntry]
     
     public static var defaultXcodeCachesLocation: String? {
         guard let librariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
@@ -27,6 +44,12 @@ final public class XcodeFiles {
         }
         
         self.rootLocation = xcodeDevLocation
+        self.locations = [
+            .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
+            .simulators: XcodeFileEntry(label: "Simulators", selected: false),
+            .archives: XcodeFileEntry(label: "Archives", selected: false),
+            .derivedData: XcodeFileEntry(label: "Derived Data", selected: true)
+        ]
     }
     
     // MARK: Helpers
@@ -49,5 +72,62 @@ final public class XcodeFiles {
         }
         
         return folderExists && structureProper
+    }
+    
+    //private func
+    
+    // MARK: Scan files
+    public func scanFiles(in location: Location) {
+        guard let entry = self.locations[location] else {
+            precondition(self.locations.keys.contains(location), "❌ No entry found for location: \(location)")
+            return
+        }
+        
+        // scan and find files
+        DispatchQueue.main.sync {
+            self.delegate?.scanWillBegin(for: location, entry: entry)
+        }
+        
+        switch location {
+            case .deviceSupport:
+                entry.addChildren(items: self.scanDeviceSupportLocations())
+            
+            case .simulators:
+                entry.addChildren(items: self.scanSimulatorsLocations())
+            
+            case .archives:
+                entry.addChildren(items: self.scanArchivesLocations())
+            
+            case .derivedData:
+                entry.addChildren(items: self.scanDerivedDataLocations())
+        }
+        
+        DispatchQueue.main.async {
+            self.delegate?.scanDidFinish(for: location, entry: entry)
+        }
+        
+        // check for those files sizes
+        entry.recalculateSize()
+        
+        // TODO: add separate "check did finish notifications per entry?"
+        DispatchQueue.main.async {
+            self.delegate?.sizesCheckDidFinish(for: location, entry: entry)
+        }
+    }
+    
+    private func scanDeviceSupportLocations() -> [XcodeFileEntry] {
+        return []
+    }
+
+    private func scanSimulatorsLocations() -> [XcodeFileEntry] {
+        return []
+    }
+    
+    private func scanArchivesLocations() -> [XcodeFileEntry] {
+        return []
+    }
+    
+    private func scanDerivedDataLocations() -> [XcodeFileEntry] {
+        return []
     }
 }
