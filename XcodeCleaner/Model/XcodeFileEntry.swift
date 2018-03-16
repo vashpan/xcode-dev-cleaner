@@ -53,15 +53,18 @@ final public class XcodeFileEntry: NSObject {
         self.items.append(item)
     }
     
-    public func recalculateSize(completion: (Error?, Size) -> Void) {
+    public func addChildren(items: [XcodeFileEntry]) {
+        self.items.append(contentsOf: items)
+    }
+    
+    @discardableResult
+    public func recalculateSize() -> Size? {
         var result: UInt64 = 0
         
         // calculate sizes of children
         for item in self.items {
-            item.recalculateSize() { (error, resultSize) in
-                if let sizeInBytes = resultSize.numberOfBytes {
-                    result += sizeInBytes
-                }
+            if let size = item.recalculateSize(), let sizeInBytes = size.numberOfBytes {
+                result += sizeInBytes
             }
         }
         
@@ -76,6 +79,6 @@ final public class XcodeFileEntry: NSObject {
         }
         
         self.size = .value(result)
-        completion(nil, self.size)
+        return self.size
     }
 }
