@@ -71,10 +71,9 @@ final public class XcodeFileEntry: NSObject {
         // calculate own size
         let fileManager = FileManager.default
         for path in self.paths {
-            if let pathAttributes = try? fileManager.attributesOfItem(atPath: path) {
-                if let pathSize = pathAttributes[.size] as? NSNumber {
-                    result += pathSize.uint64Value
-                }
+            let pathUrl = URL(fileURLWithPath: path)
+            if let pathSize = try? fileManager.allocatedSizeOfDirectory(atUrl: pathUrl) {
+                result += pathSize
             }
         }
         
