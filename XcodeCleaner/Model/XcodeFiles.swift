@@ -74,7 +74,37 @@ final public class XcodeFiles {
         return folderExists && structureProper
     }
     
-    //private func
+    // MARK: Helpers
+    private func parseDeviceSupportString(_ string: String) -> (String?, Version, String)? {
+        let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
+        
+        // we have device too
+        if splitted.count == 3 {
+            let device = String(splitted[0])
+            let version = Version(describing: String(splitted[1]))
+            let build = String(splitted[2])
+            
+            if let version = version {
+                return (device, version, build)
+            } else {
+                NSLog("⚠️ No version for device support: \(string), skipping")
+            }
+        }
+        
+        // no device so only version and build
+        if splitted.count == 2 {
+            let version = Version(describing: String(splitted[0]))
+            let build = String(splitted[1])
+            
+            if let version = version {
+                return (nil, version, build)
+            } else {
+                NSLog("⚠️ No version for device support: \(string), skipping")
+            }
+        }
+        
+        return nil
+    }
     
     // MARK: Scan files
     public func scanFiles(in location: Location) {
