@@ -84,17 +84,13 @@ final public class XcodeFileEntry: NSObject {
     }
     
     public func debugRepresentation(level: Int = 1) -> String {
-        func bytes2mb(bytes: UInt64) -> Double {
-            return Double(bytes) / 1024.0 / 1024.0
-        }
-        
         var result = String()
         
         // print own
         result += String(repeating: "\t", count: level)
         result += " \(self.label)"
         if let sizeInBytes = self.size.numberOfBytes {
-            result += ": \(bytes2mb(bytes: sizeInBytes))MB"
+            result += ": \(ByteCountFormatter.string(fromByteCount: sizeInBytes, countStyle: .file))"
         }
         result += "\n"
         
