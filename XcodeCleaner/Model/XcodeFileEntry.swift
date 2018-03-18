@@ -44,11 +44,7 @@ final public class XcodeFileEntry: NSObject {
         super.init()
     }
     
-    // MARK: Functions
-    public func addPath(path: String) {
-        self.paths.append(path)
-    }
-    
+    // MARK: Manage children
     public func addChild(item: XcodeFileEntry) {
         self.items.append(item)
     }
@@ -57,6 +53,12 @@ final public class XcodeFileEntry: NSObject {
         self.items.append(contentsOf: items)
     }
     
+    // MARK: Manage paths
+    public func addPath(path: String) {
+        self.paths.append(path)
+    }
+    
+    // MARK: Operations
     @discardableResult
     public func recalculateSize() -> Size? {
         var result: UInt64 = 0
@@ -79,5 +81,28 @@ final public class XcodeFileEntry: NSObject {
         
         self.size = .value(result)
         return self.size
+    }
+    
+    public func debugRepresentation(level: Int = 1) -> String {
+        func bytes2mb(bytes: UInt64) -> Double {
+            return Double(bytes) / 1024.0 / 1024.0
+        }
+        
+        var result = String()
+        
+        // print own
+        result += String(repeating: "\t", count: level)
+        result += " \(self.label)"
+        if let sizeInBytes = self.size.numberOfBytes {
+            result += ": \(bytes2mb(bytes: sizeInBytes))MB"
+        }
+        result += "\n"
+        
+        // print children
+        for item in self.items {
+            result += item.debugRepresentation(level: level + 1)
+        }
+        
+        return result
     }
 }
