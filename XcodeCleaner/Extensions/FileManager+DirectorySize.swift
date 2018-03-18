@@ -27,10 +27,10 @@ public extension FileManager {
     ///
     /// - note: There are a couple of oddities that are not taken into account (like symbolic links, meta data of
     /// directories, hard links, ...).
-    public func allocatedSizeOfDirectory(atUrl url: URL) throws -> UInt64 {
+    public func allocatedSizeOfDirectory(atUrl url: URL) throws -> Int64 {
         
         // We'll sum up content size here:
-        var accumulatedSize: UInt64 = 0
+        var accumulatedSize: Int64 = 0
         
         // prefetching some properties during traversal will speed up things a bit.
         let prefetchedProperties: [URLResourceKey] = [
@@ -75,7 +75,7 @@ public extension FileManager {
             fileSize = fileSize ?? resourceValues.fileAllocatedSize
             
             // We're good, add up the value.
-            accumulatedSize += UInt64(fileSize ?? 0)
+            accumulatedSize += Int64(fileSize ?? 0)
         }
         
         // Bail out on errors from the errorHandler.

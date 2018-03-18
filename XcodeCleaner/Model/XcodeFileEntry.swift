@@ -12,9 +12,9 @@ import Cocoa
 final public class XcodeFileEntry: NSObject {
     // MARK: Types
     public enum Size {
-        case unknown, value(UInt64)
+        case unknown, value(Int64)
         
-        public var numberOfBytes: UInt64? {
+        public var numberOfBytes: Int64? {
             switch self {
                 case .value(let bytes):
                     return bytes
@@ -61,7 +61,7 @@ final public class XcodeFileEntry: NSObject {
     // MARK: Operations
     @discardableResult
     public func recalculateSize() -> Size? {
-        var result: UInt64 = 0
+        var result: Int64 = 0
         
         // calculate sizes of children
         for item in self.items {
