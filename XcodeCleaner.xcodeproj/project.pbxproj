@@ -11,6 +11,7 @@
 		7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* ViewController.swift */; };
 		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
 		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
+		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
 /* End PBXBuildFile section */
@@ -23,6 +24,7 @@
 		7110B4982030F17B00EDBFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7110B49A2030F17B00EDBFA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7110B49B2030F17B00EDBFA3 /* XcodeCleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcodeCleaner.entitlements; sourceTree = "<group>"; };
+		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +59,7 @@
 		7110B4902030F17B00EDBFA3 /* XcodeCleaner */ = {
 			isa = PBXGroup;
 			children = (
+				719B25D7205ECA40007560C0 /* Utilities */,
 				71A21A0A2053F5F500B55651 /* Model */,
 				7110B4A22033A9CE00EDBFA3 /* Base */,
 				7110B4A12033A9C600EDBFA3 /* Resources */,
@@ -82,6 +85,14 @@
 				7110B4932030F17B00EDBFA3 /* ViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		719B25D7205ECA40007560C0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				719B25D8205ECA53007560C0 /* Version.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		71A21A0A2053F5F500B55651 /* Model */ = {
@@ -170,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
+				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
