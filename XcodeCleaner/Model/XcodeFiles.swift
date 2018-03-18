@@ -24,7 +24,7 @@ final public class XcodeFiles {
     }
     
     // MARK: Properties
-    public let rootLocation: String
+    public let rootLocation: NSString
     public weak var delegate: XcodeFilesDelegate?
     
     public private(set) var locations: [Location : XcodeFileEntry]
@@ -43,7 +43,7 @@ final public class XcodeFiles {
             return nil
         }
         
-        self.rootLocation = xcodeDevLocation
+        self.rootLocation = xcodeDevLocation as NSString
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .simulators: XcodeFileEntry(label: "Simulators", selected: false),
@@ -114,8 +114,8 @@ final public class XcodeFiles {
         }
         
         // scan and find files
-        DispatchQueue.main.sync {
-            self.delegate?.scanWillBegin(for: location, entry: entry)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.scanWillBegin(for: location, entry: entry)
         }
         
         switch location {
@@ -132,21 +132,52 @@ final public class XcodeFiles {
                 entry.addChildren(items: self.scanDerivedDataLocations())
         }
         
-        DispatchQueue.main.async {
-            self.delegate?.scanDidFinish(for: location, entry: entry)
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.scanDidFinish(for: location, entry: entry)
         }
         
         // check for those files sizes
         entry.recalculateSize()
         
         // TODO: add separate "check did finish notifications per entry?"
-        DispatchQueue.main.async {
-            self.delegate?.sizesCheckDidFinish(for: location, entry: entry)
+        DispatchQueue.main.async {  [weak self] in
+            self?.delegate?.sizesCheckDidFinish(for: location, entry: entry)
         }
     }
     
     private func scanDeviceSupportLocations() -> [XcodeFileEntry] {
-        return []
+        let deviceSupportEntries = [
+            (entry: XcodeFileEntry(label: "iOS", selected: true), path: "iOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "watchOS", selected: true), path: "watchOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "tvOS", selected: true), path: "tvOS DeviceSupport")
+        ]
+        
+        let xcodeLocation = self.rootLocation.appendingPathComponent("Xcode") as NSString
+        var entries: [XcodeFileEntry] = []
+        for entry in deviceSupportEntries {
+            let entryPath = xcodeLocation.appendingPathComponent(entry.path) as NSString
+            
+            // scan for versions
+            if let symbols = try? FileManager.default.contentsOfDirectory(atPath: entryPath as String) {
+                for symbolPath in symbols {
+                    let nsSymbolPath = symbolPath as NSString
+                    let nsSymbolAbsolutePath = entryPath.appendingPathComponent(nsSymbolPath as String)
+                    
+                    if let deviceSupport = self.parseDeviceSupportString(nsSymbolPath.lastPathComponent) {
+                        let deviceSupportEntry = XcodeFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
+                        deviceSupportEntry.addPath(path: nsSymbolAbsolutePath)
+                        
+                        entry.entry.addChild(item: deviceSupportEntry)
+                    }
+                }
+            } else {
+                NSLog("⚠️ Cannot check contents of '\(entryPath)', skipping")
+            }
+            
+            entries.append(entry.entry)
+        }
+        
+        return entries
     }
 
     private func scanSimulatorsLocations() -> [XcodeFileEntry] {

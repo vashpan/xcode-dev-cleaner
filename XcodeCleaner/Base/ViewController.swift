@@ -19,21 +19,25 @@ class ViewController: NSViewController {
 
     // MARK: Actions
     @IBAction func openButtonPressed(_ sender: NSButton) {
+
+    }
+    
+    @IBAction func testButtonPressed(_ sender: NSButton) {
         guard let xcodeDevLocation = XcodeFiles.defaultXcodeCachesLocation else {
             NSLog("❌ Cannot recognize default caches location!")
             return
         }
-            
+        
         guard let xcodeFiles = XcodeFiles(xcodeDevLocation: xcodeDevLocation) else {
             NSLog("❌ Cannot create XcodeFiles instance!")
             return
         }
         
-        NSLog("Xcode dev location: \(xcodeFiles.rootLocation)")
-    }
-    
-    @IBAction func testButtonPressed(_ sender: NSButton) {
-        NSLog("Test button pressed!")
+        xcodeFiles.scanFiles(in: .deviceSupport)
+        
+        if let deviceSupport = xcodeFiles.locations[.deviceSupport] {
+            NSLog("\n\(deviceSupport.debugRepresentation())")
+        }
     }
 }
 
