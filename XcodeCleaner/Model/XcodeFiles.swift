@@ -87,7 +87,7 @@ final public class XcodeFiles {
             if let version = version {
                 return (device, version, build)
             } else {
-                NSLog("⚠️ No version for device support: \(string), skipping")
+                log.warning("No version for device support: \(string), skipping")
             }
         }
         
@@ -99,7 +99,7 @@ final public class XcodeFiles {
             if let version = version {
                 return (nil, version, build)
             } else {
-                NSLog("⚠️ No version for device support: \(string), skipping")
+                log.warning("No version for device support: \(string), skipping")
             }
         }
         
@@ -171,7 +171,7 @@ final public class XcodeFiles {
                     }
                 }
             } else {
-                NSLog("⚠️ Cannot check contents of '\(entryPath)', skipping")
+                log.warning("Cannot check contents of '\(entryPath)', skipping")
             }
             
             entries.append(entry.entry)

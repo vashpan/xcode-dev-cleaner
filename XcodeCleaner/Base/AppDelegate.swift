@@ -8,6 +8,8 @@
 
 import Cocoa
 
+let log = Logger(level: .info)
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: App configuration
