@@ -11,6 +11,7 @@
 		7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* ViewController.swift */; };
 		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
 		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
+		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -25,6 +26,7 @@
 		7110B4982030F17B00EDBFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7110B49A2030F17B00EDBFA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7110B49B2030F17B00EDBFA3 /* XcodeCleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcodeCleaner.entitlements; sourceTree = "<group>"; };
+		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				719B25D8205ECA53007560C0 /* Version.swift */,
+				7155325D2061AFD80025EB75 /* Logger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */,
+				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
 			);
