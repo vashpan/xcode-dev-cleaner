@@ -24,26 +24,30 @@ final public class XcodeFiles {
     }
     
     // MARK: Properties
-    public let rootLocation: URL
+    private let userDeveloperFolderUrl: URL
+    private let systemDeveloperFolderUrl: URL
+    
     public weak var delegate: XcodeFilesDelegate?
     
     public private(set) var locations: [Location : XcodeFileEntry]
     
-    public static var defaultXcodeCachesLocation: URL? {
-        guard let librariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
-            return nil
-        }
-        
-        return librariesUrl.appendingPathComponent("Developer", isDirectory: true)
-    }
-    
     // MARK: Initialization
-    public init?(xcodeDevLocation: URL) {
-        guard XcodeFiles.checkIfLocationIsValid(location: xcodeDevLocation) else {
+    public init?() {
+        guard let userLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
             return nil
         }
         
-        self.rootLocation = xcodeDevLocation
+        guard let systemLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .systemDomainMask, appropriateFor: nil, create: false) else {
+            return nil
+        }
+        
+        self.userDeveloperFolderUrl = userLibrariesUrl.appendingPathComponent("Developer", isDirectory: true)
+        self.systemDeveloperFolderUrl = systemLibrariesUrl.appendingPathComponent("Developer", isDirectory: true)
+        
+        guard XcodeFiles.checkForXcode(location: self.userDeveloperFolderUrl) else {
+            return nil
+        }
+        
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .simulators: XcodeFileEntry(label: "Simulators", selected: false),
@@ -53,7 +57,7 @@ final public class XcodeFiles {
     }
     
     // MARK: Helpers
-    private static func checkIfLocationIsValid(location: URL) -> Bool {
+    private static func checkForXcode(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)
         
@@ -151,7 +155,7 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "tvOS", selected: true), path: "tvOS DeviceSupport")
         ]
         
-        let xcodeLocation = self.rootLocation.appendingPathComponent("Xcode")
+        let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
         for entry in deviceSupportEntries {
             let entryUrl = xcodeLocation.appendingPathComponent(entry.path)
