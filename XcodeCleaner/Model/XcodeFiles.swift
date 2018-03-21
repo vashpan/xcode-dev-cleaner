@@ -24,26 +24,26 @@ final public class XcodeFiles {
     }
     
     // MARK: Properties
-    public let rootLocation: NSString
+    public let rootLocation: URL
     public weak var delegate: XcodeFilesDelegate?
     
     public private(set) var locations: [Location : XcodeFileEntry]
     
-    public static var defaultXcodeCachesLocation: String? {
+    public static var defaultXcodeCachesLocation: URL? {
         guard let librariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
             return nil
         }
         
-        return librariesUrl.appendingPathComponent("Developer", isDirectory: true).path
+        return librariesUrl.appendingPathComponent("Developer", isDirectory: true)
     }
     
     // MARK: Initialization
-    public init?(xcodeDevLocation: String) {
+    public init?(xcodeDevLocation: URL) {
         guard XcodeFiles.checkIfLocationIsValid(location: xcodeDevLocation) else {
             return nil
         }
         
-        self.rootLocation = xcodeDevLocation as NSString
+        self.rootLocation = xcodeDevLocation
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .simulators: XcodeFileEntry(label: "Simulators", selected: false),
@@ -53,19 +53,18 @@ final public class XcodeFiles {
     }
     
     // MARK: Helpers
-    private static func checkIfLocationIsValid(location: String) -> Bool {
+    private static func checkIfLocationIsValid(location: URL) -> Bool {
         // check if folder exists
-        let folderExists = FileManager.default.fileExists(atPath: location)
+        let folderExists = FileManager.default.fileExists(atPath: location.path)
         
         // more checks, like folders structure
         var structureProper = true
         
         let foldersToCheck = ["Xcode", "CoreSimulator", "Shared/Documentation"]
         for folder in foldersToCheck {
-            let nsStringLocation = location as NSString
-            let folderPath = nsStringLocation.appendingPathComponent(folder)
+            let folderPath = location.appendingPathComponent(folder)
             
-            if !FileManager.default.fileExists(atPath: folderPath) {
+            if !FileManager.default.fileExists(atPath: folderPath.path) {
                 structureProper = false
                 break
             }
@@ -152,26 +151,23 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "tvOS", selected: true), path: "tvOS DeviceSupport")
         ]
         
-        let xcodeLocation = self.rootLocation.appendingPathComponent("Xcode") as NSString
+        let xcodeLocation = self.rootLocation.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
         for entry in deviceSupportEntries {
-            let entryPath = xcodeLocation.appendingPathComponent(entry.path) as NSString
+            let entryUrl = xcodeLocation.appendingPathComponent(entry.path)
             
             // scan for versions
-            if let symbols = try? FileManager.default.contentsOfDirectory(atPath: entryPath as String) {
-                for symbolPath in symbols {
-                    let nsSymbolPath = symbolPath as NSString
-                    let nsSymbolAbsolutePath = entryPath.appendingPathComponent(nsSymbolPath as String)
-                    
-                    if let deviceSupport = self.parseDeviceSupportString(nsSymbolPath.lastPathComponent) {
+            if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
+                for symbolUrl in symbols {
+                    if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
                         let deviceSupportEntry = XcodeFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
-                        deviceSupportEntry.addPath(path: nsSymbolAbsolutePath)
+                        deviceSupportEntry.addPath(path: symbolUrl)
                         
                         entry.entry.addChild(item: deviceSupportEntry)
                     }
                 }
             } else {
-                log.warning("Cannot check contents of '\(entryPath)', skipping")
+                log.warning("Cannot check contents of '\(entryUrl)', skipping")
             }
             
             entries.append(entry.entry)

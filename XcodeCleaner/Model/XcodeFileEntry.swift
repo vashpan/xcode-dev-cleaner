@@ -29,7 +29,7 @@ final public class XcodeFileEntry: NSObject {
     public private(set) var size: Size
     public private(set) var selected: Bool
     
-    public private(set) var paths: [String]
+    public private(set) var paths: [URL]
     public private(set) var items: [XcodeFileEntry]
     
     // MARK: Initialization
@@ -54,7 +54,7 @@ final public class XcodeFileEntry: NSObject {
     }
     
     // MARK: Manage paths
-    public func addPath(path: String) {
+    public func addPath(path: URL) {
         self.paths.append(path)
     }
     
@@ -72,8 +72,7 @@ final public class XcodeFileEntry: NSObject {
         
         // calculate own size
         let fileManager = FileManager.default
-        for path in self.paths {
-            let pathUrl = URL(fileURLWithPath: path)
+        for pathUrl in self.paths {
             if let pathSize = try? fileManager.allocatedSizeOfDirectory(atUrl: pathUrl) {
                 result += pathSize
             }
