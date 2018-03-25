@@ -126,6 +126,32 @@ final public class XcodeFiles {
         return nil
     }
     
+    private func parseDerivedDataProject(from location: URL) -> (String, URL)? {
+        let splitted = location.lastPathComponent.split(separator: "-", maxSplits: 2, omittingEmptySubsequences: true)
+        
+        // check for project name
+        let name: String
+        if splitted.count == 2 {
+            name = String(splitted[0]).replacingOccurrences(of: "_", with: " ") // replace all dashes with spaces
+        } else {
+            return nil
+        }
+        
+        // find project folder path
+        let infoPath = location.appendingPathComponent("info.plist")
+        
+        if let projectInfoDict = NSDictionary(contentsOf: infoPath) {
+            // try to get project folder path from .plist dictionary
+            if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
+                let projectRealUrl = URL(fileURLWithPath: projectRealPath)
+                
+                return (name, projectRealUrl)
+            }
+        }
+        
+        return nil
+    }
+    
     // MARK: Scan files
     public func scanFiles(in location: Location) {
         guard let entry = self.locations[location] else {
@@ -200,7 +226,7 @@ final public class XcodeFiles {
     private func scanSimulatorsLocations() -> [XcodeFileEntry] {
         let simulatorsLocation = self.systemDeveloperFolderUrl.appendingPathComponent("CoreSimulator/Profiles/Runtimes")
         
-        // scan for simulators
+        // scan for simulator runtimes
         var results: [XcodeFileEntry] = []
         if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
             for simulatorRuntimeUrl in simulators {
@@ -213,6 +239,8 @@ final public class XcodeFiles {
             }
         }
         
+        // TODO: Scan for simulators (~/Library/Developer/CoreSimulator/Devices), or use `xcrun simctl delete unavailable` command if possible, but only after runtime deletion
+        
         return results
     }
     
@@ -221,6 +249,26 @@ final public class XcodeFiles {
     }
     
     private func scanDerivedDataLocations() -> [XcodeFileEntry] {
-        return []
+        let derivedDataLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData")
+        
+        // scan for derived data projects
+        var results: [XcodeFileEntry] = []
+        if let projectsFolders = try? FileManager.default.contentsOfDirectory(at: derivedDataLocation, includingPropertiesForKeys: nil) {
+            for projectFolder in projectsFolders {
+                // ignore "ModuleCache" folder
+                if projectFolder.lastPathComponent == "ModuleCache" {
+                    continue
+                }
+                
+                if let projectData = self.parseDerivedDataProject(from: projectFolder) {
+                    let projectEntry = XcodeFileEntry(label: "\(projectData.0) (\(projectData.1.path))", selected: true)
+                    projectEntry.addPath(path: projectFolder)
+                    
+                    results.append(projectEntry)
+                }
+            }
+        }
+        
+        return results
     }
 }
