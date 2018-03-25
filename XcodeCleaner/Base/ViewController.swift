@@ -29,8 +29,13 @@ class ViewController: NSViewController {
         }
         
         xcodeFiles.scanFiles(in: .deviceSupport)
+        xcodeFiles.scanFiles(in: .simulators)
         
         if let deviceSupport = xcodeFiles.locations[.deviceSupport] {
+            log.info("\n\(deviceSupport.debugRepresentation())")
+        }
+        
+        if let deviceSupport = xcodeFiles.locations[.simulators] {
             log.info("\n\(deviceSupport.debugRepresentation())")
         }
     }

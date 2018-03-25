@@ -109,6 +109,23 @@ final public class XcodeFiles {
         return nil
     }
     
+    private func parseSimulatorRuntime(_ string: String) -> (String, Version)? {
+        let splitted = string.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: true)
+        
+        if splitted.count == 2 {
+            let system = String(splitted[0])
+            let systemVersion = Version(describing: String(splitted[1]))
+            
+            if let version = systemVersion {
+                return (system, version)
+            } else {
+                log.warning("No version for simulator: \(string), skipping")
+            }
+        }
+        
+        return nil
+    }
+    
     // MARK: Scan files
     public func scanFiles(in location: Location) {
         guard let entry = self.locations[location] else {
@@ -181,7 +198,22 @@ final public class XcodeFiles {
     }
 
     private func scanSimulatorsLocations() -> [XcodeFileEntry] {
-        return []
+        let simulatorsLocation = self.systemDeveloperFolderUrl.appendingPathComponent("CoreSimulator/Profiles/Runtimes")
+        
+        // scan for simulators
+        var results: [XcodeFileEntry] = []
+        if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
+            for simulatorRuntimeUrl in simulators {
+                if let simulatorRuntime = self.parseSimulatorRuntime(simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
+                    let simulatorEntry = XcodeFileEntry(label: "\(simulatorRuntime.0) \(simulatorRuntime.1)", selected: false)
+                    simulatorEntry.addPath(path: simulatorRuntimeUrl)
+                    
+                    results.append(simulatorEntry)
+                }
+            }
+        }
+        
+        return results
     }
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {
