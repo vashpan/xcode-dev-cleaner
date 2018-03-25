@@ -37,7 +37,7 @@ final public class XcodeFiles {
             return nil
         }
         
-        guard let systemLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .systemDomainMask, appropriateFor: nil, create: false) else {
+        guard let systemLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .localDomainMask, appropriateFor: nil, create: false) else {
             return nil
         }
         
