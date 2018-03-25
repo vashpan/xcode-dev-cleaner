@@ -50,7 +50,7 @@ final public class XcodeFiles {
         
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
-            .simulators: XcodeFileEntry(label: "Simulators", selected: false),
+            .simulators: XcodeFileEntry(label: "Unused Simulators", selected: false),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: true)
         ]
@@ -77,7 +77,17 @@ final public class XcodeFiles {
         return folderExists && structureProper
     }
     
-    // MARK: Helpers
+    public func debugRepresentation() -> String {
+        var result = String()
+        
+        for entry in self.locations.values {
+            result += entry.debugRepresentation()
+            result += "\n"
+        }
+        
+        return result
+    }
+    
     private func parseDeviceSupportString(_ string: String) -> (String?, Version, String)? {
         let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         

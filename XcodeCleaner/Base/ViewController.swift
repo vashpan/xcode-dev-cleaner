@@ -32,17 +32,7 @@ class ViewController: NSViewController {
         xcodeFiles.scanFiles(in: .derivedData)
         xcodeFiles.scanFiles(in: .simulators)
         
-        if let deviceSupport = xcodeFiles.locations[.deviceSupport] {
-            log.info("\n\(deviceSupport.debugRepresentation())")
-        }
-        
-        if let deliveredData = xcodeFiles.locations[.derivedData] {
-            log.info("\n\(deliveredData.debugRepresentation())")
-        }
-        
-        if let simulators = xcodeFiles.locations[.simulators] {
-            log.info("\n\(simulators.debugRepresentation())")
-        }
+        print(xcodeFiles.debugRepresentation())
     }
 }
 
