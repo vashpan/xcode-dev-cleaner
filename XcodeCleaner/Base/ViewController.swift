@@ -30,6 +30,7 @@ class ViewController: NSViewController {
         
         xcodeFiles.scanFiles(in: .deviceSupport)
         xcodeFiles.scanFiles(in: .derivedData)
+        xcodeFiles.scanFiles(in: .archives)
         xcodeFiles.scanFiles(in: .simulators)
         
         print(xcodeFiles.debugRepresentation())

@@ -23,6 +23,30 @@ final public class XcodeFiles {
         case deviceSupport, simulators, archives, derivedData
     }
     
+    private struct DeviceSupportData {
+        let device: String?
+        let version: Version
+        let build: String
+    }
+    
+    private struct SimulatorRuntime {
+        let system: String
+        let version: Version
+    }
+    
+    private struct DerivedDataProject {
+        let projectName: String
+        let url: URL
+    }
+    
+    private struct ArchiveInfo {
+        let projectName: String
+        let bundleName: String
+        let version: Version
+        let build: String
+        let location: URL
+    }
+    
     // MARK: Properties
     private let userDeveloperFolderUrl: URL
     private let systemDeveloperFolderUrl: URL
@@ -162,6 +186,69 @@ final public class XcodeFiles {
         return nil
     }
     
+    private func parseArchiveInfo(from location: URL) -> ArchiveInfo? {
+        let splitted = location.lastPathComponent.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
+        
+        if splitted.count < 2 {
+            return nil // probably completely not what we wanted, like .DS_Store file
+        }
+        
+        // check for project name
+        let projectName: String
+        if let name = splitted.first {
+            projectName = String(name)
+        } else {
+            log.warning("Cannot get project name from archive: \(location.path)")
+            return nil
+        }
+        
+        // open archive info.plist for more informations
+        let bundleName: String
+        let bundleVersion: Version
+        let bundleBuild: String
+        
+        let infoPath = location.appendingPathComponent("Info.plist")
+        if let archiveInfoDict = NSDictionary(contentsOf: infoPath) {
+            if let archiveProperties = archiveInfoDict["ApplicationProperties"] as? [String : Any] {
+                // bundle name
+                if let bundle = archiveProperties["CFBundleIdentifier"] as? String {
+                    bundleName = bundle
+                } else {
+                    log.warning("Cannot get bundle name from archive: \(location.path)")
+                    return nil
+                }
+                
+                // version
+                if let versionString = archiveProperties["CFBundleShortVersionString"] as? String, let version = Version(describing: versionString) {
+                    bundleVersion = version
+                } else {
+                    log.warning("Cannot get bundle version from archive: \(location.path)")
+                    return nil
+                }
+                
+                // build
+                if let build = archiveProperties["CFBundleVersion"] as? String {
+                    bundleBuild = build
+                } else {
+                    log.warning("Cannot get bundle build from archive: \(location.path)")
+                    return nil
+                }
+            } else {
+                log.warning("Cannot get 'ApplicationProperties' from archive Info.plist file: \(location.path)")
+                return nil
+            }
+        } else {
+            log.warning("Cannot open Info.plist file from archive: \(location.path)")
+            return nil
+        }
+        
+        return ArchiveInfo(projectName: projectName,
+                           bundleName: bundleName,
+                           version: bundleVersion,
+                           build: bundleBuild,
+                           location: location)
+    }
+    
     // MARK: Scan files
     public func scanFiles(in location: Location) {
         guard let entry = self.locations[location] else {
@@ -255,7 +342,48 @@ final public class XcodeFiles {
     }
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {
-        return []
+        let archivesLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives")
+        
+        // gather various projects, create entries for each of them
+        var archiveInfos = [String : [ArchiveInfo]]()
+        if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil) {
+            for dateFolder in datesFolders {
+                if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil) {
+                    for xcarchive in xcarchives {
+                        if let xcarchiveInfo = self.parseArchiveInfo(from: xcarchive) {
+                            if archiveInfos.keys.contains(xcarchiveInfo.bundleName) {
+                                archiveInfos[xcarchiveInfo.bundleName]?.append(xcarchiveInfo)
+                            } else {
+                                archiveInfos[xcarchiveInfo.bundleName] = [xcarchiveInfo]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // convert archive infos for project entries
+        return archiveInfos.flatMap { (arg) -> XcodeFileEntry? in
+            let (_, archives) = arg
+            
+            guard let projectName = archives.first?.projectName else {
+                return nil
+            }
+            
+            // root project
+            let projectEntry = XcodeFileEntry(label: projectName, selected: false)
+            
+            // add separate versions
+            for archive in archives {
+                let entryLabel = "\(archive.version.description) \(archive.build)"
+                let archiveEntry = XcodeFileEntry(label: entryLabel, selected: false)
+                archiveEntry.addPath(path: archive.location)
+                
+                projectEntry.addChild(item: archiveEntry)
+            }
+            
+            return projectEntry
+        }
     }
     
     private func scanDerivedDataLocations() -> [XcodeFileEntry] {
