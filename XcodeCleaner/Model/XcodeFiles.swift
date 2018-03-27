@@ -302,14 +302,22 @@ final public class XcodeFiles {
             
             // scan for versions
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
+                var deviceSupportEntries = [XcodeFileEntry]()
                 for symbolUrl in symbols {
                     if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
                         let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
-                        entry.entry.addChild(item: deviceSupportEntry)
+                        deviceSupportEntries.append(deviceSupportEntry)
                     }
                 }
+                
+                deviceSupportEntries = deviceSupportEntries.sorted { (lhs, rhs) -> Bool in
+                    lhs.label > rhs.label
+                }
+                
+                entry.entry.addChildren(items: deviceSupportEntries)
+                
             } else {
                 log.warning("Cannot check contents of '\(entryUrl)', skipping")
             }
@@ -337,6 +345,10 @@ final public class XcodeFiles {
         }
         
         // TODO: Scan for simulators (~/Library/Developer/CoreSimulator/Devices), or use `xcrun simctl delete unavailable` command if possible, but only after runtime deletion
+        
+        results = results.sorted { (lhs, rhs) -> Bool in
+            lhs.label > rhs.label
+        }
         
         return results
     }
@@ -374,13 +386,21 @@ final public class XcodeFiles {
             let projectEntry = XcodeFileEntry(label: projectName, selected: false)
             
             // add separate versions
+            var archiveEntries = [XcodeFileEntry]()
             for archive in archives {
                 let entryLabel = "\(archive.version.description) \(archive.build)"
                 let archiveEntry = ArchiveFileEntry(label: entryLabel, selected: false)
                 archiveEntry.addPath(path: archive.location)
                 
-                projectEntry.addChild(item: archiveEntry)
+                archiveEntries.append(archiveEntry)
             }
+            
+            // sort by label
+            archiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
+                lhs.label > rhs.label
+            }
+            
+            projectEntry.addChildren(items: archiveEntries)
             
             return projectEntry
         }
