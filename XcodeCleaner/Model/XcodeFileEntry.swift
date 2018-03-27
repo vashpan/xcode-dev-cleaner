@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-final public class XcodeFileEntry: NSObject {
+open class XcodeFileEntry: NSObject {
     // MARK: Types
     public enum Size {
         case unknown, value(Int64)

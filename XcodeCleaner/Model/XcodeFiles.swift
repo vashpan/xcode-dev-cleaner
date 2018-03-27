@@ -304,7 +304,7 @@ final public class XcodeFiles {
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
                 for symbolUrl in symbols {
                     if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
-                        let deviceSupportEntry = XcodeFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
+                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         entry.entry.addChild(item: deviceSupportEntry)
@@ -328,7 +328,7 @@ final public class XcodeFiles {
         if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
             for simulatorRuntimeUrl in simulators {
                 if let simulatorRuntime = self.parseSimulatorRuntime(simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
-                    let simulatorEntry = XcodeFileEntry(label: "\(simulatorRuntime.0) \(simulatorRuntime.1)", selected: false)
+                    let simulatorEntry = SimulatorFileEntry(label: "\(simulatorRuntime.0) \(simulatorRuntime.1)", selected: false)
                     simulatorEntry.addPath(path: simulatorRuntimeUrl)
                     
                     results.append(simulatorEntry)
@@ -376,7 +376,7 @@ final public class XcodeFiles {
             // add separate versions
             for archive in archives {
                 let entryLabel = "\(archive.version.description) \(archive.build)"
-                let archiveEntry = XcodeFileEntry(label: entryLabel, selected: false)
+                let archiveEntry = ArchiveFileEntry(label: entryLabel, selected: false)
                 archiveEntry.addPath(path: archive.location)
                 
                 projectEntry.addChild(item: archiveEntry)
@@ -399,7 +399,7 @@ final public class XcodeFiles {
                 }
                 
                 if let projectData = self.parseDerivedDataProject(from: projectFolder) {
-                    let projectEntry = XcodeFileEntry(label: "\(projectData.0) (\(projectData.1.path))", selected: true)
+                    let projectEntry = DerivedDataFileEntry(label: "\(projectData.0) (\(projectData.1.path))", selected: true)
                     projectEntry.addPath(path: projectFolder)
                     
                     results.append(projectEntry)

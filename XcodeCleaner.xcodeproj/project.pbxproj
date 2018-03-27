@@ -16,6 +16,10 @@
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
+		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
+		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
+		71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */; };
+		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,10 @@
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
+		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
+		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
+		71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorFileEntry.swift; sourceTree = "<group>"; };
+		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,10 +120,22 @@
 		71A21A0A2053F5F500B55651 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				71FD37D5206AD67A0042812D /* Entries */,
 				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
 				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		71FD37D5206AD67A0042812D /* Entries */ = {
+			isa = PBXGroup;
+			children = (
+				71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */,
+				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
+				71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */,
+				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
+			);
+			path = Entries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,8 +217,12 @@
 				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
+				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
+				71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */,
+				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
 				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
+				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
 			);
