@@ -110,7 +110,7 @@ final public class XcodeFiles {
         return result
     }
     
-    private func parseDeviceSupportString(_ string: String) -> (String?, Version, String)? {
+    private func parseDeviceSupportString(_ string: String) -> DeviceSupportData? {
         let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         
         // we have device too
@@ -120,7 +120,7 @@ final public class XcodeFiles {
             let build = String(splitted[2])
             
             if let version = version {
-                return (device, version, build)
+                return DeviceSupportData(device: device, version: version, build: build)
             } else {
                 log.warning("No version for device support: \(string), skipping")
             }
@@ -132,7 +132,7 @@ final public class XcodeFiles {
             let build = String(splitted[1])
             
             if let version = version {
-                return (nil, version, build)
+                return DeviceSupportData(device: nil, version: version, build: build)
             } else {
                 log.warning("No version for device support: \(string), skipping")
             }
@@ -141,7 +141,7 @@ final public class XcodeFiles {
         return nil
     }
     
-    private func parseSimulatorRuntime(_ string: String) -> (String, Version)? {
+    private func parseSimulatorRuntime(_ string: String) -> SimulatorRuntime? {
         let splitted = string.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: true)
         
         if splitted.count == 2 {
@@ -149,7 +149,7 @@ final public class XcodeFiles {
             let systemVersion = Version(describing: String(splitted[1]))
             
             if let version = systemVersion {
-                return (system, version)
+                return SimulatorRuntime(system: system, version: version)
             } else {
                 log.warning("No version for simulator: \(string), skipping")
             }
@@ -158,7 +158,7 @@ final public class XcodeFiles {
         return nil
     }
     
-    private func parseDerivedDataProject(from location: URL) -> (String, URL)? {
+    private func parseDerivedDataProject(from location: URL) -> DerivedDataProject? {
         let splitted = location.lastPathComponent.split(separator: "-", maxSplits: 2, omittingEmptySubsequences: true)
         
         // check for project name
@@ -177,7 +177,7 @@ final public class XcodeFiles {
             if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
                 let projectRealUrl = URL(fileURLWithPath: projectRealPath)
                 
-                return (name, projectRealUrl)
+                return DerivedDataProject(projectName: name, url: projectRealUrl)
             }
         }
         
@@ -254,6 +254,9 @@ final public class XcodeFiles {
             return
         }
         
+        // remove previous entries
+        
+        
         // scan and find files
         DispatchQueue.main.async { [weak self] in
             self?.delegate?.scanWillBegin(for: location, entry: entry)
@@ -300,7 +303,7 @@ final public class XcodeFiles {
                 var deviceSupportEntries = [XcodeFileEntry]()
                 for symbolUrl in symbols {
                     if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
-                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.1) \(deviceSupport.2)")
+                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.version) \(deviceSupport.build)")
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
@@ -331,7 +334,7 @@ final public class XcodeFiles {
         if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
             for simulatorRuntimeUrl in simulators {
                 if let simulatorRuntime = self.parseSimulatorRuntime(simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
-                    let simulatorEntry = SimulatorFileEntry(label: "\(simulatorRuntime.0) \(simulatorRuntime.1)", selected: false)
+                    let simulatorEntry = SimulatorFileEntry(label: "\(simulatorRuntime.system) \(simulatorRuntime.version)", selected: false)
                     simulatorEntry.addPath(path: simulatorRuntimeUrl)
                     
                     results.append(simulatorEntry)
@@ -414,7 +417,7 @@ final public class XcodeFiles {
                 }
                 
                 if let projectData = self.parseDerivedDataProject(from: projectFolder) {
-                    let projectEntry = DerivedDataFileEntry(label: "\(projectData.0) (\(projectData.1.path))", selected: true)
+                    let projectEntry = DerivedDataFileEntry(label: "\(projectData.projectName) (\(projectData.url.path))", selected: true)
                     projectEntry.addPath(path: projectFolder)
                     
                     results.append(projectEntry)
