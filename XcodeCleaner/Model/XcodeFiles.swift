@@ -11,9 +11,7 @@ import Foundation
 // MARK: Xcode files delegate
 public protocol XcodeFilesDelegate: class {
     func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry)
-    
     func scanDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry)
-    func sizesCheckDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry)
 }
 
 // MARK: - Xcode files
@@ -275,16 +273,13 @@ final public class XcodeFiles {
                 entry.addChildren(items: self.scanDerivedDataLocations())
         }
         
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.scanDidFinish(for: location, entry: entry)
-        }
-        
         // check for those files sizes
         entry.recalculateSize()
         
-        // TODO: add separate "check did finish notifications per entry?"
         DispatchQueue.main.async {  [weak self] in
-            self?.delegate?.sizesCheckDidFinish(for: location, entry: entry)
+            DispatchQueue.main.async { [weak self] in
+                self?.delegate?.scanDidFinish(for: location, entry: entry)
+            }
         }
     }
     

@@ -10,30 +10,68 @@ import Cocoa
 
 class ViewController: NSViewController {
     // MARK: Properties & outlets
+    @IBOutlet weak var loadingIndicator: NSProgressIndicator!
+    
+    private let xcodeFiles = XcodeFiles()
+    private var scanCounter = 0
     
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        xcodeFiles?.delegate = self
+        
+        self.loadingIndicator.isHidden = true
     }
 
+    // MARK: Helpers
+    private func startLoading() {
+        self.loadingIndicator.isHidden = false
+        self.loadingIndicator.startAnimation(nil)
+    }
+    
+    private func stopLoading() {
+        self.loadingIndicator.stopAnimation(nil)
+        self.loadingIndicator.isHidden = true
+    }
+    
     // MARK: Actions
     @IBAction func openButtonPressed(_ sender: NSButton) {
 
     }
     
     @IBAction func testButtonPressed(_ sender: NSButton) {
-        guard let xcodeFiles = XcodeFiles() else {
+        guard let xcodeFiles = self.xcodeFiles else {
             log.error("Cannot create XcodeFiles instance!")
             return
         }
         
-        xcodeFiles.scanFiles(in: .deviceSupport)
-        xcodeFiles.scanFiles(in: .derivedData)
-        xcodeFiles.scanFiles(in: .archives)
-        xcodeFiles.scanFiles(in: .simulators)
-        
-        print(xcodeFiles.debugRepresentation())
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.scanCounter = 4
+            
+            xcodeFiles.scanFiles(in: .deviceSupport)
+            xcodeFiles.scanFiles(in: .derivedData)
+            xcodeFiles.scanFiles(in: .archives)
+            xcodeFiles.scanFiles(in: .simulators)
+        }
+    }
+}
+
+// MARK: XcodeFilesDelegate implementation
+extension ViewController: XcodeFilesDelegate {
+    func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry) {
+        self.startLoading()
+    }
+    
+    func scanDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry) {
+        scanCounter -= 1
+        if scanCounter == 0 {
+            self.stopLoading()
+            
+            if let xcodeFiles = self.xcodeFiles {
+                print(xcodeFiles.debugRepresentation())
+            }
+        }
     }
 }
 
