@@ -373,7 +373,7 @@ final public class XcodeFiles {
         }
         
         // convert archive infos for project entries
-        return archiveInfos.flatMap { (arg) -> XcodeFileEntry? in
+        return archiveInfos.compactMap { (arg) -> XcodeFileEntry? in
             let (_, archives) = arg
             
             guard let projectName = archives.first?.projectName else {
