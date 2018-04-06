@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4912030F17B00EDBFA3 /* AppDelegate.swift */; };
-		7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* ViewController.swift */; };
+		7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* MainViewController.swift */; };
 		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
 		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
 		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		7110B48E2030F17B00EDBFA3 /* XcodeCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XcodeCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7110B4912030F17B00EDBFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7110B4932030F17B00EDBFA3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7110B4932030F17B00EDBFA3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7110B4952030F17B00EDBFA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7110B4982030F17B00EDBFA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7110B49A2030F17B00EDBFA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,9 +71,9 @@
 		7110B4902030F17B00EDBFA3 /* XcodeCleaner */ = {
 			isa = PBXGroup;
 			children = (
-				719B25DA205EF996007560C0 /* Extensions */,
 				719B25D7205ECA40007560C0 /* Utilities */,
 				71A21A0A2053F5F500B55651 /* Model */,
+				71743ECA2078147B00EC0FE2 /* View Controllers */,
 				7110B4A22033A9CE00EDBFA3 /* Base */,
 				7110B4A12033A9C600EDBFA3 /* Resources */,
 			);
@@ -84,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
-				7110B4972030F17B00EDBFA3 /* Main.storyboard */,
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* XcodeCleaner.entitlements */,
 			);
@@ -95,14 +94,31 @@
 			isa = PBXGroup;
 			children = (
 				7110B4912030F17B00EDBFA3 /* AppDelegate.swift */,
-				7110B4932030F17B00EDBFA3 /* ViewController.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				71743ECB207815D300EC0FE2 /* Main Window */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		71743ECB207815D300EC0FE2 /* Main Window */ = {
+			isa = PBXGroup;
+			children = (
+				7110B4972030F17B00EDBFA3 /* Main.storyboard */,
+				7110B4932030F17B00EDBFA3 /* MainViewController.swift */,
+			);
+			path = "Main Window";
 			sourceTree = "<group>";
 		};
 		719B25D7205ECA40007560C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				719B25DA205EF996007560C0 /* Extensions */,
 				719B25D8205ECA53007560C0 /* Version.swift */,
 				7155325D2061AFD80025EB75 /* Logger.swift */,
 			);
@@ -219,7 +235,7 @@
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */,
-				7110B4942030F17B00EDBFA3 /* ViewController.swift in Sources */,
+				7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */,
 				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
 				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
 				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,

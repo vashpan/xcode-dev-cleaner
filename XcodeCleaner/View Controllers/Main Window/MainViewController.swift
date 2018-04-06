@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  XcodeCleaner
 //
 //  Created by Konrad Kołakowski on 11.02.2018.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+final class MainViewController: NSViewController {
     // MARK: Properties & outlets
     @IBOutlet weak var loadingIndicator: NSProgressIndicator!
     
@@ -58,7 +58,7 @@ class ViewController: NSViewController {
 }
 
 // MARK: XcodeFilesDelegate implementation
-extension ViewController: XcodeFilesDelegate {
+extension MainViewController: XcodeFilesDelegate {
     func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry) {
         self.startLoading()
     }
