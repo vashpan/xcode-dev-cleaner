@@ -70,7 +70,7 @@ final public class XcodeFiles {
         self.userDeveloperFolderUrl = userLibrariesUrl.appendingPathComponent("Developer", isDirectory: true)
         self.systemDeveloperFolderUrl = systemLibrariesUrl.appendingPathComponent("Developer", isDirectory: true)
         
-        guard XcodeFiles.checkForXcode(location: self.userDeveloperFolderUrl) else {
+        guard XcodeFiles.checkForXcodeDataFolders(location: self.userDeveloperFolderUrl) else {
             return nil
         }
         
@@ -83,7 +83,7 @@ final public class XcodeFiles {
     }
     
     // MARK: Helpers
-    private static func checkForXcode(location: URL) -> Bool {
+    private static func checkForXcodeDataFolders(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)
         
@@ -101,6 +101,11 @@ final public class XcodeFiles {
         }
         
         return folderExists && structureProper
+    }
+    
+    public func checkForInstalledXcodes(completion: ([Version]) -> Void) {
+        // TODO: Add real implementation
+        completion([Version(major: 9, minor: 3)])
     }
     
     public func debugRepresentation() -> String {

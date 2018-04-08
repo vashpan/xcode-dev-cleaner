@@ -26,8 +26,17 @@ final class MainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        xcodeFiles?.delegate = self
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
         
+        xcodeFiles.delegate = self
+        
+        // check for installed Xcode versions
+        self.checkForInstalledXcodes()
+        
+        // start initial scan
         self.startScan()
     }
     
@@ -46,6 +55,30 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Helpers
+    private func checkForInstalledXcodes() {
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
+        
+        xcodeFiles.checkForInstalledXcodes { (installedXcodeVersions) in
+            var versionsText = String()
+            
+            var i = 0
+            for version in installedXcodeVersions {
+                if i == 0 {
+                    versionsText = version.description
+                } else {
+                    versionsText += ", " + version.description
+                }
+                
+                i += 1
+            }
+            
+            self.xcodeVersionsTextField.stringValue = versionsText
+        }
+    }
+    
     private func startLoading() {
         DispatchQueue.main.async {
             self.progressIndicator.isHidden = false
