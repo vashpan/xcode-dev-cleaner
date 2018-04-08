@@ -138,7 +138,6 @@
 			children = (
 				71FD37D5206AD67A0042812D /* Entries */,
 				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
-				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +145,7 @@
 		71FD37D5206AD67A0042812D /* Entries */ = {
 			isa = PBXGroup;
 			children = (
+				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
 				71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */,
 				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
 				71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */,
