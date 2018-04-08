@@ -10,6 +10,16 @@ import Cocoa
 
 final class MainViewController: NSViewController {
     // MARK: Properties & outlets
+    @IBOutlet private weak var donationEncourageLabel: NSTextField!
+    
+    @IBOutlet private weak var bytesSelectedTextField: NSTextField!
+    @IBOutlet private weak var totalBytesTextField: NSTextField!
+    
+    @IBOutlet private weak var xcodeVersionsTextField: NSTextField!
+    
+    @IBOutlet private weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet private weak var cleanButton: NSButton!
+    
     private let xcodeFiles = XcodeFiles()
     
     // MARK: Initialization
@@ -17,21 +27,50 @@ final class MainViewController: NSViewController {
         super.viewDidLoad()
 
         xcodeFiles?.delegate = self
+        
+        self.startScan()
     }
     
-    // MARK: Actions
-    @IBAction func scanButtonPressed(_ sender: NSButton) {
+    private func startScan() {
         guard let xcodeFiles = self.xcodeFiles else {
-            log.error("Cannot create XcodeFiles instance!")
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
         
+        self.startLoading()
         DispatchQueue.global(qos: .userInitiated).async {
-            xcodeFiles.scanFiles(in: .deviceSupport)
-            xcodeFiles.scanFiles(in: .derivedData)
-            xcodeFiles.scanFiles(in: .archives)
-            xcodeFiles.scanFiles(in: .simulators)
+            xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
+            
+            self.stopLoading()
         }
+    }
+    
+    // MARK: Helpers
+    private func startLoading() {
+        DispatchQueue.main.async {
+            self.progressIndicator.isHidden = false
+            self.progressIndicator.startAnimation(nil)
+            
+            self.cleanButton.isEnabled = false
+        }
+    }
+    
+    private func stopLoading() {
+        DispatchQueue.main.async {
+            self.progressIndicator.stopAnimation(nil)
+            self.progressIndicator.isHidden = true
+            
+            self.cleanButton.isEnabled = true
+        }
+    }
+    
+    // MARK: Actions
+    @IBAction func cleanButtonPressed(_ sender: NSButton) {
+        log.info("MainViewController: 'Clean' button action not implemented yet!")
+    }
+    
+    @IBAction func donateButtonPressed(_ sender: NSButton) {
+        log.info("MainViewController: 'Donate...' button action not implemented yet!")
     }
 }
 
