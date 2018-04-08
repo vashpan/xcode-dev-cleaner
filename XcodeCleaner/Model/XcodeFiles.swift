@@ -19,6 +19,10 @@ final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int {
         case deviceSupport, simulators, archives, derivedData
+        
+        public static var all: [Location] {
+            return [.deviceSupport, .simulators, .archives, .derivedData]
+        }
     }
     
     private struct DeviceSupportData {
@@ -248,14 +252,19 @@ final public class XcodeFiles {
     }
     
     // MARK: Scan files
+    public func scanFiles(in locations: [Location]) {
+        for location in locations {
+            self.scanFiles(in: location)
+        }
+    }
+    
     public func scanFiles(in location: Location) {
         guard let entry = self.locations[location] else {
             precondition(self.locations.keys.contains(location), "❌ No entry found for location: \(location)")
             return
         }
         
-        // remove previous entries
-        
+        // TODO: remove previous entries
         
         // scan and find files
         DispatchQueue.main.async { [weak self] in
