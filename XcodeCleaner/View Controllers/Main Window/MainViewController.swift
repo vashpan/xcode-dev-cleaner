@@ -9,6 +9,25 @@
 import Cocoa
 
 final class MainViewController: NSViewController {
+    // MARK: Types
+    private enum OutlineViewColumnsIdentifiers: String {
+        case itemColumn = "ItemColumn"
+        case sizeColumn = "SizeColumn"
+        
+        var identifier: NSUserInterfaceItemIdentifier {
+            return NSUserInterfaceItemIdentifier(self.rawValue)
+        }
+    }
+    
+    private enum OutlineViewCellIdentifiers: String {
+        case itemCell = "ItemCell"
+        case sizeCell = "SizeCell"
+        
+        var identifier: NSUserInterfaceItemIdentifier {
+            return NSUserInterfaceItemIdentifier(self.rawValue)
+        }
+    }
+    
     // MARK: Properties & outlets
     @IBOutlet private weak var donationEncourageLabel: NSTextField!
     
@@ -20,7 +39,10 @@ final class MainViewController: NSViewController {
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var cleanButton: NSButton!
     
+    @IBOutlet private weak var outlineView: NSOutlineView!
+    
     private let xcodeFiles = XcodeFiles()
+    private var loaded = false
     
     // MARK: Initialization
     override func viewDidLoad() {
@@ -80,6 +102,8 @@ final class MainViewController: NSViewController {
     }
     
     private func startLoading() {
+        self.loaded = false
+        
         DispatchQueue.main.async {
             self.progressIndicator.isHidden = false
             self.progressIndicator.startAnimation(nil)
@@ -89,11 +113,15 @@ final class MainViewController: NSViewController {
     }
     
     private func stopLoading() {
+        self.loaded = true
+        
         DispatchQueue.main.async {
             self.progressIndicator.stopAnimation(nil)
             self.progressIndicator.isHidden = true
             
             self.cleanButton.isEnabled = true
+            
+            self.outlineView.reloadData()
         }
     }
     
@@ -104,6 +132,82 @@ final class MainViewController: NSViewController {
     
     @IBAction func donateButtonPressed(_ sender: NSButton) {
         log.info("MainViewController: 'Donate...' button action not implemented yet!")
+    }
+}
+
+// MARK: NSOutlineViewDataSource implementation
+extension MainViewController: NSOutlineViewDataSource {
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+        // no items if not loaded
+        if !self.loaded {
+            return 0
+        }
+        
+        guard let xcodeFiles = self.xcodeFiles else {
+            fatalError("MainViewController: Cannot create XcodeFiles instance!")
+        }
+        
+        // for child items
+        if let xcodeFileEntry = item as? XcodeFileEntry {
+            return xcodeFileEntry.items.count
+        }
+        
+        // for root items
+        return xcodeFiles.locations.count
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+        guard let xcodeFiles = self.xcodeFiles else {
+            fatalError("MainViewController: Cannot create XcodeFiles instance!")
+        }
+        
+        // for child items
+        if let xcodeFileEntry = item as? XcodeFileEntry {
+            return xcodeFileEntry.items[index]
+        }
+        
+        // for root items
+        if let location = XcodeFiles.Location(rawValue: index), let xcodeFileEntry = xcodeFiles.locations[location] {
+            return xcodeFileEntry
+        } else {
+            fatalError("MainViewController: Wrong location from index for XcodeFiles!")
+        }
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        // every item that has child items
+        if let xcodeFileEntry = item as? XcodeFileEntry {
+            return xcodeFileEntry.items.count > 0
+        }
+        
+        return false
+    }
+}
+
+// MARK: NSOutlineViewDelegate implementation
+extension MainViewController: NSOutlineViewDelegate {
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        var view: NSTableCellView?
+        
+        if let xcodeFileEntry = item as? XcodeFileEntry, let column = tableColumn {
+            if column.identifier == OutlineViewColumnsIdentifiers.itemColumn.identifier {
+                view = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.itemCell.identifier, owner: self) as? NSTableCellView
+                
+                if let textField = view?.textField {
+                    textField.stringValue = xcodeFileEntry.label
+                    textField.sizeToFit()
+                }
+            } else if column.identifier == OutlineViewColumnsIdentifiers.sizeColumn.identifier {
+                view = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.sizeCell.identifier, owner: self) as? NSTableCellView
+                
+                if let textField = view?.textField, let sizeInBytes = xcodeFileEntry.size.numberOfBytes {
+                    textField.placeholderString = ByteCountFormatter.string(fromByteCount: sizeInBytes, countStyle: .file)
+                    textField.sizeToFit()
+                }
+            }
+        }
+        
+        return view
     }
 }
 
