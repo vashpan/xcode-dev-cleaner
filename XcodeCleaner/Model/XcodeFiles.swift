@@ -57,6 +57,19 @@ final public class XcodeFiles {
     
     public private(set) var locations: [Location : XcodeFileEntry]
     
+    public var totalSize: Int64 {
+        return locations.values.reduce(0) { (result, entry) -> Int64 in
+            return result + (entry.size.numberOfBytes ?? 0)
+        }
+    }
+    
+    public var selectedSize: Int64 {
+        return locations.values.reduce(0) { (result, entry) -> Int64 in
+            let entryBytes = entry.size.numberOfBytes ?? 0
+            return result + (entry.selected ? entryBytes : 0)
+        }
+    }
+    
     // MARK: Initialization
     public init?() {
         guard let userLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
