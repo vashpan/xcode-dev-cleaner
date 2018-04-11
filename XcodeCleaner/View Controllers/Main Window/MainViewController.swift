@@ -68,11 +68,8 @@ final class MainViewController: NSViewController {
             return
         }
         
-        self.startLoading()
         DispatchQueue.global(qos: .userInitiated).async {
             xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
-            
-            self.stopLoading()
         }
     }
     
@@ -104,25 +101,21 @@ final class MainViewController: NSViewController {
     private func startLoading() {
         self.loaded = false
         
-        DispatchQueue.main.async {
-            self.progressIndicator.isHidden = false
-            self.progressIndicator.startAnimation(nil)
-            
-            self.cleanButton.isEnabled = false
-        }
+        self.progressIndicator.isHidden = false
+        self.progressIndicator.startAnimation(nil)
+        
+        self.cleanButton.isEnabled = false
     }
     
     private func stopLoading() {
         self.loaded = true
         
-        DispatchQueue.main.async {
-            self.progressIndicator.stopAnimation(nil)
-            self.progressIndicator.isHidden = true
-            
-            self.cleanButton.isEnabled = true
-            
-            self.outlineView.reloadData()
-        }
+        self.progressIndicator.stopAnimation(nil)
+        self.progressIndicator.isHidden = true
+        
+        self.cleanButton.isEnabled = true
+        
+        self.outlineView.reloadData()
     }
     
     // MARK: Actions
@@ -213,11 +206,11 @@ extension MainViewController: NSOutlineViewDelegate {
 
 // MARK: XcodeFilesDelegate implementation
 extension MainViewController: XcodeFilesDelegate {
-    func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry) {
-        
+    func scanWillBegin(xcodeFiles: XcodeFiles) {
+        self.startLoading()
     }
     
-    func scanDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry) {
-        print(entry.debugRepresentation())
+    func scanDidFinish(xcodeFiles: XcodeFiles) {
+        self.stopLoading()
     }
 }

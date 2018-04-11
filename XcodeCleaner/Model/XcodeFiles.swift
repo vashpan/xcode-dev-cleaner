@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: Xcode files delegate
 public protocol XcodeFilesDelegate: class {
-    func scanWillBegin(for location: XcodeFiles.Location, entry: XcodeFileEntry)
-    func scanDidFinish(for location: XcodeFiles.Location, entry: XcodeFileEntry)
+    func scanWillBegin(xcodeFiles: XcodeFiles)
+    func scanDidFinish(xcodeFiles: XcodeFiles)
 }
 
 // MARK: - Xcode files
@@ -258,12 +258,24 @@ final public class XcodeFiles {
     
     // MARK: Scan files
     public func scanFiles(in locations: [Location]) {
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.scanWillBegin(xcodeFiles: strongSelf)
+            }
+        }
+        
         for location in locations {
             self.scanFiles(in: location)
         }
+        
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.delegate?.scanDidFinish(xcodeFiles: strongSelf)
+            }
+        }
     }
     
-    public func scanFiles(in location: Location) {
+    private func scanFiles(in location: Location) {
         guard let entry = self.locations[location] else {
             precondition(self.locations.keys.contains(location), "❌ No entry found for location: \(location)")
             return
@@ -273,10 +285,6 @@ final public class XcodeFiles {
         entry.removeAllChildren()
         
         // scan and find files
-        DispatchQueue.main.async { [weak self] in
-            self?.delegate?.scanWillBegin(for: location, entry: entry)
-        }
-        
         switch location {
             case .deviceSupport:
                 entry.addChildren(items: self.scanDeviceSupportLocations())
@@ -293,12 +301,6 @@ final public class XcodeFiles {
         
         // check for those files sizes
         entry.recalculateSize()
-        
-        DispatchQueue.main.async {  [weak self] in
-            DispatchQueue.main.async { [weak self] in
-                self?.delegate?.scanDidFinish(for: location, entry: entry)
-            }
-        }
     }
     
     private func scanDeviceSupportLocations() -> [XcodeFileEntry] {
