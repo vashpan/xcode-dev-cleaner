@@ -212,5 +212,9 @@ extension MainViewController: XcodeFilesDelegate {
     
     func scanDidFinish(xcodeFiles: XcodeFiles) {
         self.stopLoading()
+
+        // refresh sizes
+        let sizesString = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
+        self.totalBytesTextField.stringValue = "Total: \(sizesString)"
     }
 }
