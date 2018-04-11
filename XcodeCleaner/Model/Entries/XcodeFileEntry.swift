@@ -53,6 +53,9 @@ open class XcodeFileEntry: NSObject {
         self.items.append(contentsOf: items)
     }
     
+    public func removeAllChildren() {
+        self.items.removeAll()
+    }
     // MARK: Manage paths
     public func addPath(path: URL) {
         self.paths.append(path)

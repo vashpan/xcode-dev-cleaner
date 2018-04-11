@@ -269,7 +269,8 @@ final public class XcodeFiles {
             return
         }
         
-        // TODO: remove previous entries
+        // remove previous entries
+        entry.removeAllChildren()
         
         // scan and find files
         DispatchQueue.main.async { [weak self] in
