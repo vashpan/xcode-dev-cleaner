@@ -161,13 +161,13 @@ DQ
                                     <action selector="cleanButtonPressed:" target="XfG-lQ-9wD" id="D6n-Fn-fQ9"/>
                                 </connections>
                             </button>
-                            <scrollView autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
+                            <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
                                 <rect key="frame" x="20" y="95" width="617" height="309"/>
                                 <clipView key="contentView" drawsBackground="NO" id="dr2-Zy-P8I">
                                     <rect key="frame" x="1" y="0.0" width="615" height="308"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="5" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="8" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
                                             <rect key="frame" x="0.0" y="0.0" width="615" height="285"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="2" height="3"/>
@@ -187,12 +187,26 @@ DQ
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="ItemCell" id="Wnc-64-w87">
-                                                            <rect key="frame" x="1" y="1" width="539" height="17"/>
+                                                        <tableCellView identifier="ItemCell" id="Wnc-64-w87" customClass="XcodeEntryCellView" customModule="XcodeCleaner" customModuleProvider="target">
+                                                            <rect key="frame" x="1" y="1" width="539" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
+                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yFH-5w-t5V">
+                                                                    <rect key="frame" x="6" y="0.0" width="22" height="18"/>
+                                                                    <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Old-sH-WSW">
+                                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                </button>
+                                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F5I-Ap-vz3">
+                                                                    <rect key="frame" x="30" y="0.0" width="14" height="18"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="q3p-tb-FXx"/>
+                                                                    </constraints>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSHomeTemplate" id="lhf-9j-XIn"/>
+                                                                </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bIy-yJ-gOB">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="533" height="17"/>
+                                                                    <rect key="frame" x="46" y="1" width="103" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Xcode File Entry" id="Ei6-4h-Mtz">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -201,11 +215,17 @@ DQ
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="bIy-yJ-gOB" secondAttribute="trailing" constant="8" id="rni-Cp-BtC"/>
-                                                                <constraint firstItem="bIy-yJ-gOB" firstAttribute="leading" secondItem="Wnc-64-w87" secondAttribute="leading" constant="2" id="wRK-f8-hJC"/>
+                                                                <constraint firstItem="F5I-Ap-vz3" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="2n5-PX-Xz0"/>
+                                                                <constraint firstItem="F5I-Ap-vz3" firstAttribute="leading" secondItem="yFH-5w-t5V" secondAttribute="trailing" constant="4" id="7re-uk-VoH"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bIy-yJ-gOB" secondAttribute="trailing" constant="8" id="MXs-bL-UyD"/>
+                                                                <constraint firstItem="bIy-yJ-gOB" firstAttribute="leading" secondItem="F5I-Ap-vz3" secondAttribute="trailing" constant="4" id="NJ9-co-7jh"/>
+                                                                <constraint firstItem="yFH-5w-t5V" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="U0L-mK-I0r"/>
+                                                                <constraint firstItem="yFH-5w-t5V" firstAttribute="leading" secondItem="Wnc-64-w87" secondAttribute="leading" constant="8" id="aWd-AN-UOl"/>
                                                                 <constraint firstItem="bIy-yJ-gOB" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="xC1-v0-2lc"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="checkBox" destination="yFH-5w-t5V" id="LkC-pd-L5q"/>
+                                                                <outlet property="imageView" destination="F5I-Ap-vz3" id="T3b-Gz-Rqt"/>
                                                                 <outlet property="textField" destination="bIy-yJ-gOB" id="Jdo-Ur-SS2"/>
                                                             </connections>
                                                         </tableCellView>
@@ -224,7 +244,7 @@ DQ
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="SizeCell" id="apc-cL-vXW">
+                                                        <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
                                                             <rect key="frame" x="542" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -412,6 +432,7 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="NSHomeTemplate" width="14" height="14"/>
         <image name="XcodeIcon" width="512" height="512"/>
     </resources>
 </document>

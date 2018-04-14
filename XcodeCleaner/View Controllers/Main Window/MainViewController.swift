@@ -184,18 +184,16 @@ extension MainViewController: NSOutlineViewDelegate {
         
         if let xcodeFileEntry = item as? XcodeFileEntry, let column = tableColumn {
             if column.identifier == OutlineViewColumnsIdentifiers.itemColumn.identifier {
-                view = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.itemCell.identifier, owner: self) as? NSTableCellView
-                
-                if let textField = view?.textField {
-                    textField.stringValue = xcodeFileEntry.label
-                    textField.sizeToFit()
+                if let itemView = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.itemCell.identifier, owner: self) as? XcodeEntryCellView {
+                    itemView.setup(with: xcodeFileEntry)
+                    
+                    view = itemView
                 }
             } else if column.identifier == OutlineViewColumnsIdentifiers.sizeColumn.identifier {
-                view = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.sizeCell.identifier, owner: self) as? NSTableCellView
-                
-                if let textField = view?.textField, let sizeInBytes = xcodeFileEntry.size.numberOfBytes {
-                    textField.placeholderString = ByteCountFormatter.string(fromByteCount: sizeInBytes, countStyle: .file)
-                    textField.sizeToFit()
+                if let sizeView = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.sizeCell.identifier, owner: self) as? SizeCellView {
+                    sizeView.setup(with: xcodeFileEntry)
+                    
+                    view = sizeView
                 }
             }
         }
