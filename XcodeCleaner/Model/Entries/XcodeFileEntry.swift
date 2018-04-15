@@ -49,7 +49,7 @@ open class XcodeFileEntry: NSObject {
     public private(set) var items: [XcodeFileEntry]
     
     // MARK: Initialization
-    public init(label: String, selected: Bool = true) {
+    public init(label: String, selected: Bool) {
         self.label = label
         self.selected = selected
         self.size = .unknown

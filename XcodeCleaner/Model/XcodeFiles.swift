@@ -332,15 +332,21 @@ final public class XcodeFiles {
                 var deviceSupportEntries = [XcodeFileEntry]()
                 for symbolUrl in symbols {
                     if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
-                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.version) \(deviceSupport.build)")
+                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.version) \(deviceSupport.build)", selected: true)
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
                     }
                 }
                 
+                // sort
                 deviceSupportEntries = deviceSupportEntries.sorted { (lhs, rhs) -> Bool in
                     lhs.label > rhs.label
+                }
+                
+                // select deselt first one
+                if let firstEntry = deviceSupportEntries.first {
+                    firstEntry.deselectWithChildItems()
                 }
                 
                 entry.entry.addChildren(items: deviceSupportEntries)
