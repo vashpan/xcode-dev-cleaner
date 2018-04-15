@@ -26,8 +26,9 @@ open class XcodeFileEntry: NSObject {
     
     // MARK: Properties
     public let label: String
+    public var selected: Bool
+    
     public private(set) var size: Size
-    public private(set) var selected: Bool
     
     public private(set) var paths: [URL]
     public private(set) var items: [XcodeFileEntry]
@@ -56,9 +57,25 @@ open class XcodeFileEntry: NSObject {
     public func removeAllChildren() {
         self.items.removeAll()
     }
+    
     // MARK: Manage paths
     public func addPath(path: URL) {
         self.paths.append(path)
+    }
+    
+    // MARK: Selection
+    public func selectWithChildItems() {
+        self.selected = true
+        for item in self.items {
+            item.selectWithChildItems()
+        }
+    }
+    
+    public func deselectWithChildItems() {
+        self.selected = false
+        for item in self.items {
+            item.deselectWithChildItems()
+        }
     }
     
     // MARK: Operations
