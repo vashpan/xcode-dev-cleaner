@@ -185,7 +185,7 @@ extension MainViewController: NSOutlineViewDelegate {
         if let xcodeFileEntry = item as? XcodeFileEntry, let column = tableColumn {
             if column.identifier == OutlineViewColumnsIdentifiers.itemColumn.identifier {
                 if let itemView = outlineView.makeView(withIdentifier: OutlineViewCellIdentifiers.itemCell.identifier, owner: self) as? XcodeEntryCellView {
-                    itemView.setup(with: xcodeFileEntry)
+                    itemView.setup(with: xcodeFileEntry, delegate: self)
                     
                     view = itemView
                 }
@@ -199,6 +199,21 @@ extension MainViewController: NSOutlineViewDelegate {
         }
         
         return view
+    }
+}
+
+// MARK: XcodeEntryCellViewDelegate implementation
+extension MainViewController: XcodeEntryCellViewDelegate {
+    func xcodeEntryCellSelectedChanged(_ cell: XcodeEntryCellView, state: NSControl.StateValue, xcodeEntry: XcodeFileEntry?) {
+        if let entry = xcodeEntry {
+            if state == .on {
+                entry.selectWithChildItems()
+            } else if state == .off {
+                entry.deselectWithChildItems()
+            }
+            
+            self.outlineView.reloadItem(entry, reloadChildren: true)
+        }
     }
 }
 

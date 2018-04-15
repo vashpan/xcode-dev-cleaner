@@ -197,6 +197,9 @@ DQ
                                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="checkBoxSwitched:" target="Wnc-64-w87" id="Q3J-hZ-cNP"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F5I-Ap-vz3">
                                                                     <rect key="frame" x="30" y="0.0" width="14" height="18"/>
