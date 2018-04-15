@@ -65,8 +65,7 @@ final public class XcodeFiles {
     
     public var selectedSize: Int64 {
         return locations.values.reduce(0) { (result, entry) -> Int64 in
-            let entryBytes = entry.size.numberOfBytes ?? 0
-            return result + (entry.selected ? entryBytes : 0)
+            return result + entry.selectedSize
         }
     }
     

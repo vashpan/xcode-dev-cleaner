@@ -29,6 +29,21 @@ open class XcodeFileEntry: NSObject {
     public var selected: Bool
     
     public private(set) var size: Size
+    public var selectedSize: Int64 {
+        var result: Int64 = 0
+        
+        // sizes of children
+        for item in self.items {
+            result += item.selectedSize
+        }
+        
+        // own size (only if selected and we have paths)
+        if self.selected && self.paths.count > 0 {
+            result += self.size.numberOfBytes ?? 0
+        }
+        
+        return result
+    }
     
     public private(set) var paths: [URL]
     public private(set) var items: [XcodeFileEntry]
@@ -47,10 +62,22 @@ open class XcodeFileEntry: NSObject {
     
     // MARK: Manage children
     public func addChild(item: XcodeFileEntry) {
+        // you can add path only if we have no children
+        guard self.paths.count == 0 else {
+            assertionFailure("❌ Cannot add child item to XcodeFileEntry if we already have paths!")
+            return
+        }
+        
         self.items.append(item)
     }
     
     public func addChildren(items: [XcodeFileEntry]) {
+        // you can add path only if we have no children
+        guard self.paths.count == 0 else {
+            assertionFailure("❌ Cannot add children items to XcodeFileEntry if we already have paths!")
+            return
+        }
+        
         self.items.append(contentsOf: items)
     }
     
@@ -60,6 +87,12 @@ open class XcodeFileEntry: NSObject {
     
     // MARK: Manage paths
     public func addPath(path: URL) {
+        // you can add path only if we have no children
+        guard self.items.count == 0 else {
+            assertionFailure("❌ Cannot add paths to XcodeFileEntry if we already have children!")
+            return
+        }
+        
         self.paths.append(path)
     }
     
