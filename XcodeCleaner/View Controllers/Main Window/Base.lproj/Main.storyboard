@@ -248,7 +248,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">

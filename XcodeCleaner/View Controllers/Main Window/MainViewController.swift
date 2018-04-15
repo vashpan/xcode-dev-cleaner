@@ -98,6 +98,22 @@ final class MainViewController: NSViewController {
         }
     }
     
+    private func updateTotalAndSelectedSizes() {
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
+        
+        // total size
+        let totalSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
+        self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
+        
+        // selected size
+        let selectedSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.selectedSize, countStyle: .file)
+        self.bytesSelectedTextField.stringValue = "Selected: \(selectedSizeString)"
+    }
+    
+    // MARK: Loading
     private func startLoading() {
         self.loaded = false
         
@@ -213,6 +229,7 @@ extension MainViewController: XcodeEntryCellViewDelegate {
             }
             
             self.outlineView.reloadItem(entry, reloadChildren: true)
+            self.updateTotalAndSelectedSizes()
         }
     }
 }
@@ -226,8 +243,6 @@ extension MainViewController: XcodeFilesDelegate {
     func scanDidFinish(xcodeFiles: XcodeFiles) {
         self.stopLoading()
 
-        // refresh sizes
-        let sizesString = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
-        self.totalBytesTextField.stringValue = "Total: \(sizesString)"
+        self.updateTotalAndSelectedSizes()
     }
 }
