@@ -16,14 +16,14 @@ protocol XcodeEntryCellViewDelegate: class {
 // MARK: Xcode Entry Cell View
 final class XcodeEntryCellView: NSTableCellView {
     // MARK: Properties & outlets
-    @IBOutlet weak var checkBox: NSButton!
+    @IBOutlet private weak var checkBox: NSButton!
     
-    weak var delegate: XcodeEntryCellViewDelegate? = nil
+    internal weak var delegate: XcodeEntryCellViewDelegate? = nil
     
     private weak var entry: XcodeFileEntry?
     
     // MARK: Setup
-    func setup(with xcodeEntry: XcodeFileEntry, delegate: XcodeEntryCellViewDelegate) {
+    internal func setup(with xcodeEntry: XcodeFileEntry, delegate: XcodeEntryCellViewDelegate) {
         guard let textField = self.textField else {
             return
         }
@@ -32,8 +32,8 @@ final class XcodeEntryCellView: NSTableCellView {
         self.delegate = delegate
         
         // checkbox
-        self.checkBox.state = xcodeEntry.selected ? .on : .off
-  
+        self.checkBox.state = self.entrySelectionToControlState(xcodeEntry.selection)
+        
         // label
         textField.stringValue = xcodeEntry.label
         textField.sizeToFit()
@@ -41,8 +41,25 @@ final class XcodeEntryCellView: NSTableCellView {
         self.entry = xcodeEntry
     }
     
+    // MARK: Helpers
+    private func entrySelectionToControlState(_ entrySelection: XcodeFileEntry.Selection) -> NSControl.StateValue {
+        switch entrySelection {
+        case .on:
+            return .on
+        case .off:
+            return .off
+        case .mixed:
+            return .mixed
+        }
+    }
+    
     // MARK: Actions
     @IBAction func checkBoxSwitched(_ sender: NSButton) {
+        // when we click, disallow mixed state
+        if sender.state == .mixed {
+            sender.setNextState()
+        }
+        
         self.delegate?.xcodeEntryCellSelectedChanged(self, state: sender.state, xcodeEntry: self.entry)
     }
 }

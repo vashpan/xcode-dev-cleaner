@@ -228,7 +228,15 @@ extension MainViewController: XcodeEntryCellViewDelegate {
                 entry.deselectWithChildItems()
             }
             
-            self.outlineView.reloadItem(entry, reloadChildren: true)
+            // find parent item and refresh it
+            var rootEntry: XcodeFileEntry = entry.parent ?? entry
+            while let parentEntry = rootEntry.parent {
+                rootEntry = parentEntry
+            }
+            rootEntry.recalculateSelection()
+            
+            self.outlineView.reloadItem(rootEntry, reloadChildren: true)
+            
             self.updateTotalAndSelectedSizes()
         }
     }
