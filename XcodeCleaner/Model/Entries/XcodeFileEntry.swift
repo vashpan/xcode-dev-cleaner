@@ -49,6 +49,8 @@ open class XcodeFileEntry: NSObject {
     }
     
     public private(set) var paths: [URL]
+    
+    public private(set) weak var parent: XcodeFileEntry?
     public private(set) var items: [XcodeFileEntry]
     
     // MARK: Initialization
@@ -71,6 +73,7 @@ open class XcodeFileEntry: NSObject {
             return
         }
         
+        item.parent = self
         self.items.append(item)
     }
     
@@ -79,6 +82,10 @@ open class XcodeFileEntry: NSObject {
         guard self.paths.count == 0 else {
             assertionFailure("❌ Cannot add children items to XcodeFileEntry if we already have paths!")
             return
+        }
+        
+        for item in items {
+            item.parent = self
         }
         
         self.items.append(contentsOf: items)
