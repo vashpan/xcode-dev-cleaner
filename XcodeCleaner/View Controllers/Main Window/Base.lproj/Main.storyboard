@@ -167,7 +167,7 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="615" height="308"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="8" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
                                             <rect key="frame" x="0.0" y="0.0" width="615" height="285"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="2" height="3"/>
@@ -248,7 +248,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
