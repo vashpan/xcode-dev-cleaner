@@ -313,6 +313,9 @@ final public class XcodeFiles {
         
         // check for those files sizes
         entry.recalculateSize()
+        
+        // check for selections
+        entry.recalculateSelection()
     }
     
     private func scanDeviceSupportLocations() -> [XcodeFileEntry] {

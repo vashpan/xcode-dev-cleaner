@@ -24,10 +24,13 @@ open class XcodeFileEntry: NSObject {
         }
     }
     
+    public enum Selection {
+        case on, off, mixed
+    }
+    
     // MARK: Properties
     public let label: String
-    public var selected: Bool
-    
+    public private(set) var selection: Selection
     public private(set) var size: Size
     public var selectedSize: Int64 {
         var result: Int64 = 0
@@ -38,7 +41,7 @@ open class XcodeFileEntry: NSObject {
         }
         
         // own size (only if selected and we have paths)
-        if self.selected && self.paths.count > 0 {
+        if self.selection == .on && self.paths.count > 0 {
             result += self.size.numberOfBytes ?? 0
         }
         
@@ -51,7 +54,7 @@ open class XcodeFileEntry: NSObject {
     // MARK: Initialization
     public init(label: String, selected: Bool) {
         self.label = label
-        self.selected = selected
+        self.selection = selected ? .on : .off
         self.size = .unknown
         
         self.paths = []
@@ -98,14 +101,14 @@ open class XcodeFileEntry: NSObject {
     
     // MARK: Selection
     public func selectWithChildItems() {
-        self.selected = true
+        self.selection = .on
         for item in self.items {
             item.selectWithChildItems()
         }
     }
     
     public func deselectWithChildItems() {
-        self.selected = false
+        self.selection = .off
         for item in self.items {
             item.deselectWithChildItems()
         }
@@ -133,6 +136,36 @@ open class XcodeFileEntry: NSObject {
         
         self.size = .value(result)
         return self.size
+    }
+    
+    @discardableResult
+    public func recalculateSelection() -> Selection {
+        var result: Selection
+        
+        // calculate selection for child items
+        for item in self.items {
+            item.recalculateSelection()
+        }
+        
+        // calculate own selection
+        if self.items.count > 0 {
+            let selectedItems = self.items.reduce(0) { (result, item) -> Int in
+                return result + (item.selection == .on ? 1 : 0)
+            }
+            
+            if selectedItems == self.items.count {
+                result = .on
+            } else if selectedItems == 0 {
+                result = .off
+            } else {
+                result = .mixed
+            }
+        } else {
+            result = self.selection // with no items use current selection
+        }
+        
+        self.selection = result
+        return result
     }
     
     public func debugRepresentation(level: Int = 1) -> String {
