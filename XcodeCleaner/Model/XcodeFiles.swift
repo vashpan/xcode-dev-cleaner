@@ -146,7 +146,7 @@ final public class XcodeFiles {
             if let version = version {
                 return DeviceSupportData(device: device, version: version, build: build)
             } else {
-                log.warning("No version for device support: \(string), skipping")
+                log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
         }
         
@@ -158,7 +158,7 @@ final public class XcodeFiles {
             if let version = version {
                 return DeviceSupportData(device: nil, version: version, build: build)
             } else {
-                log.warning("No version for device support: \(string), skipping")
+                log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
         }
         
@@ -175,7 +175,7 @@ final public class XcodeFiles {
             if let version = systemVersion {
                 return SimulatorRuntime(system: system, version: version)
             } else {
-                log.warning("No version for simulator: \(string), skipping")
+                log.warning("XcodeFiles: No version for simulator: \(string), skipping")
             }
         }
         
@@ -220,7 +220,7 @@ final public class XcodeFiles {
         if let name = splitted.first {
             projectName = String(name)
         } else {
-            log.warning("Cannot get project name from archive: \(location.path)")
+            log.warning("XcodeFiles: Cannot get project name from archive: \(location.path)")
             return nil
         }
         
@@ -236,7 +236,7 @@ final public class XcodeFiles {
                 if let bundle = archiveProperties["CFBundleIdentifier"] as? String {
                     bundleName = bundle
                 } else {
-                    log.warning("Cannot get bundle name from archive: \(location.path)")
+                    log.warning("XcodeFiles: Cannot get bundle name from archive: \(location.path)")
                     return nil
                 }
                 
@@ -244,7 +244,7 @@ final public class XcodeFiles {
                 if let versionString = archiveProperties["CFBundleShortVersionString"] as? String, let version = Version(describing: versionString) {
                     bundleVersion = version
                 } else {
-                    log.warning("Cannot get bundle version from archive: \(location.path)")
+                    log.warning("XcodeFiles: Cannot get bundle version from archive: \(location.path)")
                     return nil
                 }
                 
@@ -252,15 +252,15 @@ final public class XcodeFiles {
                 if let build = archiveProperties["CFBundleVersion"] as? String {
                     bundleBuild = build
                 } else {
-                    log.warning("Cannot get bundle build from archive: \(location.path)")
+                    log.warning("XcodeFiles: Cannot get bundle build from archive: \(location.path)")
                     return nil
                 }
             } else {
-                log.warning("Cannot get 'ApplicationProperties' from archive Info.plist file: \(location.path)")
+                log.warning("XcodeFiles: Cannot get 'ApplicationProperties' from archive Info.plist file: \(location.path)")
                 return nil
             }
         } else {
-            log.warning("Cannot open Info.plist file from archive: \(location.path)")
+            log.warning("XcodeFiles: Cannot open Info.plist file from archive: \(location.path)")
             return nil
         }
         
@@ -358,7 +358,7 @@ final public class XcodeFiles {
                 entry.entry.addChildren(items: deviceSupportEntries)
                 
             } else {
-                log.warning("Cannot check contents of '\(entryUrl)', skipping")
+                log.warning("XcodeFiles: Cannot check contents of '\(entryUrl)', skipping")
             }
             
             entries.append(entry.entry)
