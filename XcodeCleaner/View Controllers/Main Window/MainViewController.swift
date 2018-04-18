@@ -50,6 +50,17 @@ final class MainViewController: NSViewController {
 
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
+            
+            // display a popup that tells us that this is basically a fatal error, and quit!
+            let alert = NSAlert()
+            alert.alertStyle = .critical
+            alert.messageText = "Cannot locate Xcode cache files"
+            alert.informativeText = "Check if you have Xcode installed and run at least once"
+            alert.addButton(withTitle: "Quit")
+            alert.runModal()
+            
+            NSApp.terminate(nil)
+            
             return
         }
         
