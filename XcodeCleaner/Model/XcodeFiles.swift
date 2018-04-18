@@ -102,7 +102,7 @@ final public class XcodeFiles {
         // more checks, like folders structure
         var structureProper = true
         
-        let foldersToCheck = ["Xcode", "CoreSimulator", "Shared/Documentation"]
+        let foldersToCheck = ["Xcode", "CoreSimulator"]
         for folder in foldersToCheck {
             let folderPath = location.appendingPathComponent(folder)
             
