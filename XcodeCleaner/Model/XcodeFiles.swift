@@ -72,10 +72,12 @@ final public class XcodeFiles {
     // MARK: Initialization
     public init?() {
         guard let userLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) else {
+            log.error("XcodeFiles: Cannot create because user Libraries folder is not available!")
             return nil
         }
         
         guard let systemLibrariesUrl = try? FileManager.default.url(for: .allLibrariesDirectory, in: .localDomainMask, appropriateFor: nil, create: false) else {
+            log.error("XcodeFiles: Cannot create because system Libraries folder is not available!")
             return nil
         }
         
@@ -83,6 +85,7 @@ final public class XcodeFiles {
         self.systemDeveloperFolderUrl = systemLibrariesUrl.appendingPathComponent("Developer", isDirectory: true)
         
         guard XcodeFiles.checkForXcodeDataFolders(location: self.userDeveloperFolderUrl) else {
+            log.error("XcodeFiles: Cannot create because Xcode cache folders doesn't seem to exist!")
             return nil
         }
         
