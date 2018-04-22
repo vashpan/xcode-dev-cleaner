@@ -189,14 +189,14 @@ DQ
                                                                     </connections>
                                                                 </button>
                                                                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F5I-Ap-vz3">
-                                                                    <rect key="frame" x="30" y="0.0" width="14" height="18"/>
+                                                                    <rect key="frame" x="26" y="0.0" width="32" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="q3p-tb-FXx"/>
                                                                     </constraints>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSHomeTemplate" id="lhf-9j-XIn"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSFolder" id="lhf-9j-XIn"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bIy-yJ-gOB">
-                                                                    <rect key="frame" x="46" y="1" width="103" height="17"/>
+                                                                    <rect key="frame" x="56" y="1" width="103" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Xcode File Entry" id="Ei6-4h-Mtz">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -206,9 +206,9 @@ DQ
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="F5I-Ap-vz3" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="2n5-PX-Xz0"/>
-                                                                <constraint firstItem="F5I-Ap-vz3" firstAttribute="leading" secondItem="yFH-5w-t5V" secondAttribute="trailing" constant="4" id="7re-uk-VoH"/>
+                                                                <constraint firstItem="F5I-Ap-vz3" firstAttribute="leading" secondItem="yFH-5w-t5V" secondAttribute="trailing" id="7re-uk-VoH"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bIy-yJ-gOB" secondAttribute="trailing" constant="8" id="MXs-bL-UyD"/>
-                                                                <constraint firstItem="bIy-yJ-gOB" firstAttribute="leading" secondItem="F5I-Ap-vz3" secondAttribute="trailing" constant="4" id="NJ9-co-7jh"/>
+                                                                <constraint firstItem="bIy-yJ-gOB" firstAttribute="leading" secondItem="F5I-Ap-vz3" secondAttribute="trailing" id="NJ9-co-7jh"/>
                                                                 <constraint firstItem="yFH-5w-t5V" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="U0L-mK-I0r"/>
                                                                 <constraint firstItem="yFH-5w-t5V" firstAttribute="leading" secondItem="Wnc-64-w87" secondAttribute="leading" constant="8" id="aWd-AN-UOl"/>
                                                                 <constraint firstItem="bIy-yJ-gOB" firstAttribute="centerY" secondItem="Wnc-64-w87" secondAttribute="centerY" id="xC1-v0-2lc"/>
@@ -422,7 +422,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSFolder" width="32" height="32"/>
         <image name="XcodeIcon" width="512" height="512"/>
     </resources>
 </document>

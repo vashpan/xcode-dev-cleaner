@@ -38,6 +38,9 @@ final class XcodeEntryCellView: NSTableCellView {
         textField.stringValue = xcodeEntry.label
         textField.sizeToFit()
         
+        // icon
+        self.imageView?.image = self.iconForEntry(xcodeEntry)
+        
         // disable if no children and path
         if xcodeEntry.isEmpty {
             self.checkBox.isEnabled = false
@@ -70,6 +73,23 @@ final class XcodeEntryCellView: NSTableCellView {
         case .mixed:
             return .mixed
         }
+    }
+    
+    private func iconForEntry(_ xcodeEntry: XcodeFileEntry) -> NSImage? {
+        var result: NSImage?
+        
+        // for root entries, no image
+        if xcodeEntry.parent == nil {
+            result = nil
+        } else { // for others there is a huge variation 😎
+            if xcodeEntry is DerivedDataFileEntry {
+                result = NSImage(named: .folder)
+            } else {
+                result = NSImage(named: .homeTemplate)
+            }
+        }
+        
+        return result
     }
     
     // MARK: Actions
