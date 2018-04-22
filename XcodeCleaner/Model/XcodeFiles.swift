@@ -25,30 +25,6 @@ final public class XcodeFiles {
         }
     }
     
-    private struct DeviceSupportData {
-        let device: String?
-        let version: Version
-        let build: String
-    }
-    
-    private struct SimulatorRuntime {
-        let system: String
-        let version: Version
-    }
-    
-    private struct DerivedDataProject {
-        let projectName: String
-        let url: URL
-    }
-    
-    private struct ArchiveInfo {
-        let projectName: String
-        let bundleName: String
-        let version: Version
-        let build: String
-        let location: URL
-    }
-    
     // MARK: Properties
     private let userDeveloperFolderUrl: URL
     private let systemDeveloperFolderUrl: URL
@@ -134,7 +110,7 @@ final public class XcodeFiles {
         return result
     }
     
-    private func parseDeviceSupportString(_ string: String) -> DeviceSupportData? {
+    private func deviceSupportEntry(from string: String) -> DeviceSupportFileEntry? {
         let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         
         // we have device too
@@ -144,7 +120,7 @@ final public class XcodeFiles {
             let build = String(splitted[2])
             
             if let version = version {
-                return DeviceSupportData(device: device, version: version, build: build)
+                return DeviceSupportFileEntry(device: device, version: version, build: build, selected: true)
             } else {
                 log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
@@ -156,7 +132,7 @@ final public class XcodeFiles {
             let build = String(splitted[1])
             
             if let version = version {
-                return DeviceSupportData(device: nil, version: version, build: build)
+                return DeviceSupportFileEntry(device: nil, version: version, build: build, selected: true)
             } else {
                 log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
@@ -165,7 +141,7 @@ final public class XcodeFiles {
         return nil
     }
     
-    private func parseSimulatorRuntime(_ string: String) -> SimulatorRuntime? {
+    private func simulatorRuntimeEntry(from string: String) -> SimulatorFileEntry? {
         let splitted = string.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: true)
         
         if splitted.count == 2 {
@@ -173,7 +149,7 @@ final public class XcodeFiles {
             let systemVersion = Version(describing: String(splitted[1]))
             
             if let version = systemVersion {
-                return SimulatorRuntime(system: system, version: version)
+                return SimulatorFileEntry(system: system, version: version, selected: false)
             } else {
                 log.warning("XcodeFiles: No version for simulator: \(string), skipping")
             }
@@ -182,7 +158,7 @@ final public class XcodeFiles {
         return nil
     }
     
-    private func parseDerivedDataProject(from location: URL) -> DerivedDataProject? {
+    private func derivedDataEntry(from location: URL) -> DerivedDataFileEntry? {
         let splitted = location.lastPathComponent.split(separator: "-", maxSplits: 2, omittingEmptySubsequences: true)
         
         // check for project name
@@ -199,16 +175,16 @@ final public class XcodeFiles {
         if let projectInfoDict = NSDictionary(contentsOf: infoPath) {
             // try to get project folder path from .plist dictionary
             if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
-                let projectRealUrl = URL(fileURLWithPath: projectRealPath)
+                let projectRealPathUrl = URL(fileURLWithPath: projectRealPath)
                 
-                return DerivedDataProject(projectName: name, url: projectRealUrl)
+                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, selected: true)
             }
         }
         
         return nil
     }
     
-    private func parseArchiveInfo(from location: URL) -> ArchiveInfo? {
+    private func archiveFileEntry(from location: URL) -> ArchiveFileEntry? {
         let splitted = location.lastPathComponent.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         
         if splitted.count < 2 {
@@ -264,11 +240,12 @@ final public class XcodeFiles {
             return nil
         }
         
-        return ArchiveInfo(projectName: projectName,
-                           bundleName: bundleName,
-                           version: bundleVersion,
-                           build: bundleBuild,
-                           location: location)
+        return ArchiveFileEntry(projectName: projectName,
+                                 bundleName: bundleName,
+                                    version: bundleVersion,
+                                      build: bundleBuild,
+                                   location: location,
+                                   selected: false)
     }
     
     // MARK: Scan files
@@ -337,8 +314,7 @@ final public class XcodeFiles {
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
                 var deviceSupportEntries = [XcodeFileEntry]()
                 for symbolUrl in symbols {
-                    if let deviceSupport = self.parseDeviceSupportString(symbolUrl.lastPathComponent) {
-                        let deviceSupportEntry = DeviceSupportFileEntry(label: "\(deviceSupport.version) \(deviceSupport.build)", selected: true)
+                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent) {
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
@@ -350,7 +326,7 @@ final public class XcodeFiles {
                     lhs.label > rhs.label
                 }
                 
-                // select deselt first one
+                // deselect first one (we usually will want those symbols)
                 if let firstEntry = deviceSupportEntries.first {
                     firstEntry.deselectWithChildItems()
                 }
@@ -374,8 +350,7 @@ final public class XcodeFiles {
         var results: [XcodeFileEntry] = []
         if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
             for simulatorRuntimeUrl in simulators {
-                if let simulatorRuntime = self.parseSimulatorRuntime(simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
-                    let simulatorEntry = SimulatorFileEntry(label: "\(simulatorRuntime.system) \(simulatorRuntime.version)", selected: false)
+                if let simulatorEntry = self.simulatorRuntimeEntry(from: simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
                     simulatorEntry.addPath(path: simulatorRuntimeUrl)
                     
                     results.append(simulatorEntry)
@@ -396,16 +371,16 @@ final public class XcodeFiles {
         let archivesLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives")
         
         // gather various projects, create entries for each of them
-        var archiveInfos = [String : [ArchiveInfo]]()
+        var archiveInfos = [String : [ArchiveFileEntry]]()
         if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil) {
             for dateFolder in datesFolders {
                 if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil) {
                     for xcarchive in xcarchives {
-                        if let xcarchiveInfo = self.parseArchiveInfo(from: xcarchive) {
-                            if archiveInfos.keys.contains(xcarchiveInfo.bundleName) {
-                                archiveInfos[xcarchiveInfo.bundleName]?.append(xcarchiveInfo)
+                        if let xcarchiveEntry = self.archiveFileEntry(from: xcarchive) {
+                            if archiveInfos.keys.contains(xcarchiveEntry.bundleName) {
+                                archiveInfos[xcarchiveEntry.bundleName]?.append(xcarchiveEntry)
                             } else {
-                                archiveInfos[xcarchiveInfo.bundleName] = [xcarchiveInfo]
+                                archiveInfos[xcarchiveEntry.bundleName] = [xcarchiveEntry]
                             }
                         }
                     }
@@ -415,31 +390,21 @@ final public class XcodeFiles {
         
         // convert archive infos for project entries
         return archiveInfos.compactMap { (arg) -> XcodeFileEntry? in
-            let (_, archives) = arg
+            let (_, archiveEntries) = arg
             
-            guard let projectName = archives.first?.projectName else {
+            guard let projectName = archiveEntries.first?.projectName else {
                 return nil
             }
             
             // root project
             let projectEntry = XcodeFileEntry(label: projectName, selected: false)
             
-            // add separate versions
-            var archiveEntries = [XcodeFileEntry]()
-            for archive in archives {
-                let entryLabel = "\(archive.version.description) \(archive.build)"
-                let archiveEntry = ArchiveFileEntry(label: entryLabel, selected: false)
-                archiveEntry.addPath(path: archive.location)
-                
-                archiveEntries.append(archiveEntry)
-            }
-            
             // sort by label
-            archiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
+            let projectArchiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
                 lhs.label > rhs.label
             }
             
-            projectEntry.addChildren(items: archiveEntries)
+            projectEntry.addChildren(items: projectArchiveEntries)
             
             return projectEntry
         }
@@ -457,8 +422,7 @@ final public class XcodeFiles {
                     continue
                 }
                 
-                if let projectData = self.parseDerivedDataProject(from: projectFolder) {
-                    let projectEntry = DerivedDataFileEntry(label: "\(projectData.projectName) (\(projectData.url.path))", selected: true)
+                if let projectEntry = self.derivedDataEntry(from: projectFolder) {
                     projectEntry.addPath(path: projectFolder)
                     
                     results.append(projectEntry)

@@ -8,6 +8,16 @@
 
 import Foundation
 
-final class DeviceSupportFileEntry: XcodeFileEntry {
+public final class DeviceSupportFileEntry: XcodeFileEntry {
+    public let device: String?
+    public let version: Version
+    public let build: String
     
+    public init(device: String?, version: Version, build: String, selected: Bool) {
+        self.device = device
+        self.version = version
+        self.build = build
+        
+        super.init(label: "\(self.version) \(self.build)", selected: selected)
+    }
 }

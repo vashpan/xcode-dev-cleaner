@@ -8,6 +8,20 @@
 
 import Foundation
 
-final class ArchiveFileEntry: XcodeFileEntry {
+public final class ArchiveFileEntry: XcodeFileEntry {
+    public let projectName: String
+    public let bundleName: String
+    public let version: Version
+    public let build: String
     
+    public init(projectName: String, bundleName: String, version: Version, build: String, location: URL, selected: Bool) {
+        self.projectName = projectName
+        self.bundleName = bundleName
+        self.version = version
+        self.build = build
+        
+        super.init(label: "\(self.version.description) \(self.build)", selected: selected)
+        
+        self.addPath(path: location)
+    }
 }

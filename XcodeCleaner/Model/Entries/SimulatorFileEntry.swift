@@ -8,6 +8,14 @@
 
 import Foundation
 
-final class SimulatorFileEntry: XcodeFileEntry {
+public final class SimulatorFileEntry: XcodeFileEntry {
+    public let system: String
+    public let version: Version
     
+    public init(system: String, version: Version, selected: Bool) {
+        self.system = system
+        self.version = version
+        
+        super.init(label: "\(self.system) \(self.version)", selected: selected)
+    }
 }
