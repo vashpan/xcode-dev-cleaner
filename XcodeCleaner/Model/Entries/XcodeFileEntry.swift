@@ -53,6 +53,10 @@ open class XcodeFileEntry: NSObject {
     public private(set) weak var parent: XcodeFileEntry?
     public private(set) var items: [XcodeFileEntry]
     
+    public var isEmpty: Bool {
+        return (self.items.count == 0 && self.paths.count == 0)
+    }
+    
     // MARK: Initialization
     public init(label: String, selected: Bool) {
         self.label = label

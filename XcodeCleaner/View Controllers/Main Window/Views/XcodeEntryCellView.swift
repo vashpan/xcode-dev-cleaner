@@ -38,6 +38,15 @@ final class XcodeEntryCellView: NSTableCellView {
         textField.stringValue = xcodeEntry.label
         textField.sizeToFit()
         
+        // disable if no children and path
+        if xcodeEntry.isEmpty {
+            self.checkBox.isEnabled = false
+            self.checkBox.state = .off
+            
+            self.imageView?.isEnabled = false
+            self.textField?.isEnabled = false
+        }
+        
         self.entry = xcodeEntry
     }
     
