@@ -51,6 +51,16 @@ final class XcodeEntryCellView: NSTableCellView {
     }
     
     // MARK: Helpers
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.checkBox.isEnabled = true
+        self.checkBox.state = .off
+        
+        self.imageView?.isEnabled = true
+        self.textField?.isEnabled = true
+    }
+    
     private func entrySelectionToControlState(_ entrySelection: XcodeFileEntry.Selection) -> NSControl.StateValue {
         switch entrySelection {
         case .on:
