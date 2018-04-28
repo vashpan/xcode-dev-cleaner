@@ -13,11 +13,11 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
     public let version: Version
     public let build: String
     
-    public init(device: String?, version: Version, build: String, selected: Bool) {
+    public init(device: String?, version: Version, build: String, icon: Icon? = nil, selected: Bool) {
         self.device = device
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.version) \(self.build)", selected: selected)
+        super.init(label: "\(self.version) \(self.build)", icon: icon, selected: selected)
     }
 }

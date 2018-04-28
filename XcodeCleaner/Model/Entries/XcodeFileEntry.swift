@@ -28,8 +28,15 @@ open class XcodeFileEntry: NSObject {
         case on, off, mixed
     }
     
+    public enum Icon {
+        case image(name: String)
+        case system(name: NSImage.Name)
+    }
+    
     // MARK: Properties
     public let label: String
+    public let icon: Icon?
+    
     public private(set) var selection: Selection
     public private(set) var size: Size
     public var selectedSize: Int64 {
@@ -58,8 +65,10 @@ open class XcodeFileEntry: NSObject {
     }
     
     // MARK: Initialization
-    public init(label: String, selected: Bool) {
+    public init(label: String, icon: Icon? = nil, selected: Bool) {
         self.label = label
+        self.icon = icon
+        
         self.selection = selected ? .on : .off
         self.size = .unknown
         

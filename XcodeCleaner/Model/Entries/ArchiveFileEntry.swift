@@ -14,13 +14,13 @@ public final class ArchiveFileEntry: XcodeFileEntry {
     public let version: Version
     public let build: String
     
-    public init(projectName: String, bundleName: String, version: Version, build: String, location: URL, selected: Bool) {
+    public init(projectName: String, bundleName: String, version: Version, build: String, location: URL, icon: Icon? = nil, selected: Bool) {
         self.projectName = projectName
         self.bundleName = bundleName
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.version.description) \(self.build)", selected: selected)
+        super.init(label: "\(self.version.description) \(self.build)", icon: icon, selected: selected)
         
         self.addPath(path: location)
     }

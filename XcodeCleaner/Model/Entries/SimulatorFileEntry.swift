@@ -12,10 +12,10 @@ public final class SimulatorFileEntry: XcodeFileEntry {
     public let system: String
     public let version: Version
     
-    public init(system: String, version: Version, selected: Bool) {
+    public init(system: String, version: Version, icon: Icon? = nil, selected: Bool) {
         self.system = system
         self.version = version
         
-        super.init(label: "\(self.system) \(self.version)", selected: selected)
+        super.init(label: "\(self.system) \(self.version)", icon: icon, selected: selected)
     }
 }

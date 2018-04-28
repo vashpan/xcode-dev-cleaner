@@ -76,17 +76,17 @@ final class XcodeEntryCellView: NSTableCellView {
     }
     
     private func iconForEntry(_ xcodeEntry: XcodeFileEntry) -> NSImage? {
-        var result: NSImage?
+        let result: NSImage?
         
-        // for root entries, no image
-        if xcodeEntry.parent == nil {
-            result = nil
-        } else { // for others there is a huge variation 😎
-            if xcodeEntry is DerivedDataFileEntry {
-                result = NSImage(named: .folder)
-            } else {
-                result = NSImage(named: .homeTemplate)
+        if let entryIcon = xcodeEntry.icon {
+            switch entryIcon {
+                case .image(let name):
+                    result = NSImage(imageLiteralResourceName: name)
+                case .system(let name):
+                    result = NSImage(named: name)
             }
+        } else {
+            result = nil
         }
         
         return result
