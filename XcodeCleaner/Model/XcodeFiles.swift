@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 
 // MARK: Xcode files delegate
 public protocol XcodeFilesDelegate: class {
@@ -110,6 +111,7 @@ final public class XcodeFiles {
         return result
     }
     
+    // MARK: Creating entries
     private func deviceSupportEntry(from string: String) -> DeviceSupportFileEntry? {
         let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         
@@ -177,7 +179,7 @@ final public class XcodeFiles {
             if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
                 let projectRealPathUrl = URL(fileURLWithPath: projectRealPath)
                 
-                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, selected: true)
+                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, icon: .system(name: .folder), selected: true)
             }
         }
         
