@@ -145,7 +145,8 @@ DQ
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="cleanButtonPressed:" target="XfG-lQ-9wD" id="D6n-Fn-fQ9"/>
+                                    <action selector="startCleaning:" target="XfG-lQ-9wD" id="3WZ-h0-IAn"/>
+                                    <segue destination="clE-D7-ddV" kind="sheet" id="QaY-Vl-kek"/>
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
@@ -353,9 +354,6 @@ DQ
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="donateButtonPressed:" target="XfG-lQ-9wD" id="L1k-eY-2vR"/>
-                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
                                 <rect key="frame" x="553" y="70" width="86" height="17"/>
@@ -419,6 +417,59 @@ DQ
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="143.5" y="1033"/>
+        </scene>
+        <!--Cleaning View Controller-->
+        <scene sceneID="QJU-cj-JtO">
+            <objects>
+                <viewController id="clE-D7-ddV" customClass="CleaningViewController" customModule="XcodeCleaner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Qar-gS-3Or">
+                        <rect key="frame" x="0.0" y="0.0" width="456" height="168"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82I-5P-ih8">
+                                <rect key="frame" x="18" y="131" width="191" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cleaning Xcode cache files..." id="c30-6z-VCU">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="o5G-Pd-N6U">
+                                <rect key="frame" x="20" y="51" width="416" height="20"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </progressIndicator>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qj2-Iq-HeV">
+                                <rect key="frame" x="18" y="78" width="420" height="17"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Deleting: Something/Foo/Bar..." id="V0B-U5-CwY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6e-XM-Ml5">
+                                <rect key="frame" x="366" y="13" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VHB-aQ-ZWD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="clE-D7-ddV" id="pkQ-h8-Hf9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="currentFileLabel" destination="Qj2-Iq-HeV" id="KXB-yF-QQ3"/>
+                        <outlet property="doneButton" destination="f6e-XM-Ml5" id="83S-qu-CDv"/>
+                        <outlet property="progressIndicator" destination="o5G-Pd-N6U" id="psz-bl-Gcy"/>
+                    </connections>
+                </viewController>
+                <customObject id="Oez-2f-U02" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="438" y="1671"/>
         </scene>
     </scenes>
     <resources>

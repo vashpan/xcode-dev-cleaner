@@ -146,12 +146,8 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Actions
-    @IBAction func cleanButtonPressed(_ sender: NSButton) {
-        log.info("MainViewController: 'Clean' button action not implemented yet!")
-    }
-    
-    @IBAction func donateButtonPressed(_ sender: NSButton) {
-        log.info("MainViewController: 'Donate...' button action not implemented yet!")
+    @IBAction func startCleaning(_ sender: NSButton) {
+        log.info("MainViewController: 'startCleaning' not implemented yet!")
     }
 }
 
