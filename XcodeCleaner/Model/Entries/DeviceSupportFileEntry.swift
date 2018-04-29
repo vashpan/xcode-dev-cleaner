@@ -40,6 +40,39 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.version) \(self.build)", icon: nil, selected: selected)
+        super.init(label: "\(self.version) \(self.build)", icon: DeviceSupportFileEntry.icon(for: osType, version: version), selected: selected)
+    }
+    
+    // MARK: Helpers
+    private static func icon(for os: OSType, version: Version) -> Icon {
+        var result: Icon
+        
+        switch os {
+            case .iOS:
+                if version.major >= 2 && version.major <= 11 {
+                    result = .image(name: "OS/iOS/\(version.major)")
+                } else {
+                    result = .image(name: "OS/iOS/Generic")
+                }
+            
+            case .watchOS:
+                if version.major >= 2 && version.major <= 4 {
+                    result = .image(name: "OS/watchOS/\(version.major)")
+                } else {
+                    result = .image(name: "OS/watchOS/Generic")
+                }
+            
+            case .tvOS:
+                if version.major >= 9 && version.major <= 11 {
+                    result = .image(name: "OS/tvOS/\(version.major)")
+                } else {
+                    result = .image(name: "OS/tvOS/Generic")
+                }
+            
+            default:
+                result = .image(name: "OS/iOS/Generic")
+        }
+        
+        return result
     }
 }
