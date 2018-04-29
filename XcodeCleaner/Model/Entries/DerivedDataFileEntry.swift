@@ -14,10 +14,10 @@ public final class DerivedDataFileEntry: XcodeFileEntry {
     public let pathUrl: URL
     
     // MARK: Initialization
-    public init(projectName: String, pathUrl: URL, icon: Icon? = nil, selected: Bool) {
+    public init(projectName: String, pathUrl: URL, selected: Bool) {
         self.projectName = projectName
         self.pathUrl = pathUrl
         
-        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: icon, selected: selected)
+        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: .system(name: .folder), selected: selected)
     }
 }

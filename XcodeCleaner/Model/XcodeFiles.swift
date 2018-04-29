@@ -187,7 +187,7 @@ final public class XcodeFiles {
             if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
                 let projectRealPathUrl = URL(fileURLWithPath: projectRealPath)
                 
-                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, icon: .system(name: .folder), selected: true)
+                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, selected: true)
             }
         }
         
