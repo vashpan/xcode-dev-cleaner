@@ -112,7 +112,7 @@ final public class XcodeFiles {
     }
     
     // MARK: Creating entries
-    private func deviceSupportEntry(from string: String) -> DeviceSupportFileEntry? {
+    private func deviceSupportEntry(from string: String, osLabel: String) -> DeviceSupportFileEntry? {
         let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
         
         // we have device too
@@ -122,7 +122,11 @@ final public class XcodeFiles {
             let build = String(splitted[2])
             
             if let version = version {
-                return DeviceSupportFileEntry(device: device, version: version, build: build, selected: true)
+                return DeviceSupportFileEntry(device: device,
+                                              osType: DeviceSupportFileEntry.OSType(label: osLabel),
+                                              version: version,
+                                              build: build,
+                                              selected: true)
             } else {
                 log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
@@ -134,7 +138,11 @@ final public class XcodeFiles {
             let build = String(splitted[1])
             
             if let version = version {
-                return DeviceSupportFileEntry(device: nil, version: version, build: build, selected: true)
+                return DeviceSupportFileEntry(device: nil,
+                                              osType: DeviceSupportFileEntry.OSType(label: osLabel),
+                                              version: version,
+                                              build: build,
+                                              selected: true)
             } else {
                 log.warning("XcodeFiles: No version for device support: \(string), skipping")
             }
@@ -316,7 +324,7 @@ final public class XcodeFiles {
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
                 var deviceSupportEntries = [XcodeFileEntry]()
                 for symbolUrl in symbols {
-                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent) {
+                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent, osLabel: entry.entry.label) {
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
