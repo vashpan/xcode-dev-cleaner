@@ -80,6 +80,8 @@ final class XcodeEntryCellView: NSTableCellView {
         
         if let entryIcon = xcodeEntry.icon {
             switch entryIcon {
+                case .path(let url):
+                    result = NSImage(byReferencing: url)
                 case .image(let name):
                     result = NSImage(imageLiteralResourceName: name)
                 case .system(let name):

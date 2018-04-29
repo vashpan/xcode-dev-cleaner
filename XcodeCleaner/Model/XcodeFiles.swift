@@ -407,7 +407,7 @@ final public class XcodeFiles {
             }
             
             // root project
-            let projectEntry = XcodeFileEntry(label: projectName, selected: false)
+            let projectEntry = XcodeFileEntry(label: projectName, icon: .image(name: "XCArchive"), selected: false)
             
             // sort by label
             let projectArchiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in

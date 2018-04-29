@@ -29,6 +29,7 @@ open class XcodeFileEntry: NSObject {
     }
     
     public enum Icon {
+        case path(url: URL)
         case image(name: String)
         case system(name: NSImage.Name)
     }
