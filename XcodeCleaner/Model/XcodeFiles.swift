@@ -302,9 +302,9 @@ final public class XcodeFiles {
     
     private func scanDeviceSupportLocations() -> [XcodeFileEntry] {
         let deviceSupportEntries = [
-            (entry: XcodeFileEntry(label: "iOS", selected: true), path: "iOS DeviceSupport"),
-            (entry: XcodeFileEntry(label: "watchOS", selected: true), path: "watchOS DeviceSupport"),
-            (entry: XcodeFileEntry(label: "tvOS", selected: true), path: "tvOS DeviceSupport")
+            (entry: XcodeFileEntry(label: "iOS", icon: .image(name: "Devices/iPadIcon"), selected: true), path: "iOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "watchOS", icon: .image(name: "Devices/WatchIcon"), selected: true), path: "watchOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport")
         ]
         
         let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
