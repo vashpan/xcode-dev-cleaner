@@ -9,9 +9,11 @@
 import Foundation
 
 public final class DerivedDataFileEntry: XcodeFileEntry {
+    // MARK: Properties
     public let projectName: String
     public let pathUrl: URL
     
+    // MARK: Initialization
     public init(projectName: String, pathUrl: URL, icon: Icon? = nil, selected: Bool) {
         self.projectName = projectName
         self.pathUrl = pathUrl

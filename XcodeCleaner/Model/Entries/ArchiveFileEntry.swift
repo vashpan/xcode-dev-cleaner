@@ -9,11 +9,13 @@
 import Foundation
 
 public final class ArchiveFileEntry: XcodeFileEntry {
+    // MARK: Properties
     public let projectName: String
     public let bundleName: String
     public let version: Version
     public let build: String
     
+    // MARK: Initialization
     public init(projectName: String, bundleName: String, version: Version, build: String, location: URL, icon: Icon? = nil, selected: Bool) {
         self.projectName = projectName
         self.bundleName = bundleName

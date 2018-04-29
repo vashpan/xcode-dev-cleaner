@@ -9,9 +9,11 @@
 import Foundation
 
 public final class SimulatorFileEntry: XcodeFileEntry {
+    // MARK: Properties
     public let system: String
     public let version: Version
     
+    // MARK: Initialization
     public init(system: String, version: Version, selected: Bool) {
         self.system = system
         self.version = version
