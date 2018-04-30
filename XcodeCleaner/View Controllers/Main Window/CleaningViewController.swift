@@ -69,3 +69,18 @@ internal final class CleaningViewController: NSViewController {
         }
     }
 }
+
+extension CleaningViewController: XcodeFilesDeleteDelegate {
+    func deleteWillBegin(xcodeFiles: XcodeFiles) {
+        self.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+    }
+    
+    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL, current: Int, total: Int) {
+        let progress = Double(current) / Double(total) * 100.0
+        self.state = .working(title: location.capitalized, details: label, progress: progress)
+    }
+    
+    func deleteDidFinish(xcodeFiles: XcodeFiles) {
+        self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
+    }
+}

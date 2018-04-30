@@ -80,7 +80,9 @@ final class MainViewController: NSViewController {
     // MARK: Navigation
     private func prepareCleaningView(with segue: NSStoryboardSegue) {
         if let cleaningViewController = segue.destinationController as? CleaningViewController {
-            cleaningViewController.state = .idle(title: "Initializing", indeterminate: true, doneButtonEnabled: true)
+            cleaningViewController.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+            
+            self.xcodeFiles?.deleteDelegate = cleaningViewController
         }
     }
     
