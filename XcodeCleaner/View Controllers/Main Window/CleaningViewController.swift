@@ -8,16 +8,64 @@
 
 import Cocoa
 
-final class CleaningViewController: NSViewController {
+internal final class CleaningViewController: NSViewController {
+    // MARK: Types
+    internal enum State {
+        case undefined
+        
+        case idle(title: String, indeterminate: Bool, doneButtonEnabled: Bool)
+        case working(title: String, details: String, progress: Double)
+    }
+    
     // MARK: Properties & outlets
     @IBOutlet private weak var currentFileLabel: NSTextField!
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var doneButton: NSButton!
     
+    internal var state: State = .undefined {
+        didSet {
+            if self.isViewLoaded {
+                self.update(state: self.state)
+            }
+        }
+    }
+    
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.doneButton.isEnabled = true
+        // update first state we set
+        self.update(state: self.state)
+    }
+    
+    // MARK: Updating state
+    private func update(state: State) {
+        switch state {
+            case .idle(let title, let indeterminate, let doneButtonEnabled):
+                self.doneButton.isEnabled = doneButtonEnabled
+                self.currentFileLabel.stringValue = title
+                
+                if indeterminate {
+                    self.progressIndicator.isIndeterminate = true
+                    self.progressIndicator.startAnimation(self)
+                } else {
+                    self.progressIndicator.isIndeterminate = false
+                    self.progressIndicator.stopAnimation(self)
+                    
+                    self.progressIndicator.doubleValue = 100.0
+                }
+            
+            case .working(let title, let details, let progress):
+                self.doneButton.isEnabled = false
+                self.currentFileLabel.stringValue = "\(title): \(details)"
+                
+                self.progressIndicator.isIndeterminate = false
+                self.progressIndicator.stopAnimation(self)
+                
+                self.progressIndicator.doubleValue = progress
+            
+            case .undefined:
+                assert(false, "CleaningViewController: Cannot update to state 'undefined'")
+        }
     }
 }

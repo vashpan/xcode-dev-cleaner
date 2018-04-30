@@ -28,6 +28,10 @@ final class MainViewController: NSViewController {
         }
     }
     
+    private enum Segue: String {
+        case showCleaningView = "ShowCleaningView"
+    }
+    
     // MARK: Properties & outlets
     @IBOutlet private weak var donationEncourageLabel: NSTextField!
     
@@ -73,6 +77,26 @@ final class MainViewController: NSViewController {
         self.startScan()
     }
     
+    // MARK: Navigation
+    private func prepareCleaningView(with segue: NSStoryboardSegue) {
+        if let cleaningViewController = segue.destinationController as? CleaningViewController {
+            cleaningViewController.state = .idle(title: "Initializing", indeterminate: true, doneButtonEnabled: true)
+        }
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier?.rawValue, let segueId = Segue(rawValue: identifier) else {
+            log.warning("MainViewController: Unrecognized segue: \(segue)")
+            return
+        }
+        
+        switch segueId {
+            case .showCleaningView:
+                self.prepareCleaningView(with: segue)
+        }
+    }
+    
+    // MARK: Helpers
     private func startScan() {
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
@@ -84,7 +108,6 @@ final class MainViewController: NSViewController {
         }
     }
     
-    // MARK: Helpers
     private func checkForInstalledXcodes() {
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")

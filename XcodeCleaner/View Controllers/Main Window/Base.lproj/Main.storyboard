@@ -146,7 +146,7 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="startCleaning:" target="XfG-lQ-9wD" id="3WZ-h0-IAn"/>
-                                    <segue destination="clE-D7-ddV" kind="sheet" id="QaY-Vl-kek"/>
+                                    <segue destination="clE-D7-ddV" kind="sheet" identifier="ShowCleaningView" id="QaY-Vl-kek"/>
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
@@ -236,7 +236,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -423,11 +423,11 @@ DQ
             <objects>
                 <viewController id="clE-D7-ddV" customClass="CleaningViewController" customModule="XcodeCleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Qar-gS-3Or">
-                        <rect key="frame" x="0.0" y="0.0" width="456" height="168"/>
+                        <rect key="frame" x="0.0" y="0.0" width="456" height="148"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82I-5P-ih8">
-                                <rect key="frame" x="18" y="131" width="191" height="17"/>
+                                <rect key="frame" x="18" y="111" width="191" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cleaning Xcode cache files..." id="c30-6z-VCU">
                                     <font key="font" metaFont="systemBold"/>
@@ -449,11 +449,14 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6e-XM-Ml5">
-                                <rect key="frame" x="366" y="13" width="72" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="370" y="4" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VHB-aQ-ZWD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="dismissController:" target="clE-D7-ddV" id="pkQ-h8-Hf9"/>
@@ -469,7 +472,7 @@ DQ
                 </viewController>
                 <customObject id="Oez-2f-U02" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="438" y="1671"/>
+            <point key="canvasLocation" x="438" y="1661"/>
         </scene>
     </scenes>
     <resources>
