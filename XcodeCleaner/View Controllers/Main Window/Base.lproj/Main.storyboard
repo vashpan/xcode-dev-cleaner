@@ -146,7 +146,6 @@ DQ
                                 </buttonCell>
                                 <connections>
                                     <action selector="startCleaning:" target="XfG-lQ-9wD" id="3WZ-h0-IAn"/>
-                                    <segue destination="clE-D7-ddV" kind="sheet" identifier="ShowCleaningView" id="QaY-Vl-kek"/>
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
@@ -236,7 +235,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -412,6 +411,7 @@ DQ
                         <outlet property="progressIndicator" destination="kWj-vG-o6z" id="9rB-Mr-oPa"/>
                         <outlet property="totalBytesTextField" destination="lXf-LO-pmC" id="FZ6-xo-Qsp"/>
                         <outlet property="xcodeVersionsTextField" destination="P52-Ov-Rpw" id="k0U-AM-6rf"/>
+                        <segue destination="clE-D7-ddV" kind="sheet" identifier="ShowCleaningView" id="Yc0-bu-VmE"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

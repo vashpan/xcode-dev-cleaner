@@ -30,6 +30,10 @@ final class MainViewController: NSViewController {
     
     private enum Segue: String {
         case showCleaningView = "ShowCleaningView"
+        
+        var segueIdentifier: NSStoryboardSegue.Identifier {
+            return NSStoryboardSegue.Identifier(rawValue: self.rawValue)
+        }
     }
     
     // MARK: Properties & outlets
@@ -172,7 +176,16 @@ final class MainViewController: NSViewController {
     
     // MARK: Actions
     @IBAction func startCleaning(_ sender: NSButton) {
-        log.info("MainViewController: 'startCleaning' not implemented yet!")
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
+        
+        self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            xcodeFiles.deleteSelectedEntries(debug: true)
+        }
     }
 }
 
