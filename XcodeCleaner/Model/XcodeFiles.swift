@@ -266,6 +266,13 @@ final public class XcodeFiles {
                                    selected: false)
     }
     
+    // MARK: Clearing items
+    public func cleanAllEntries() {
+        for location in locations.values {
+            location.removeAllChildren()
+        }
+    }
+    
     // MARK: Scan files
     public func scanFiles(in locations: [Location]) {
         DispatchQueue.main.async { [weak self] in
@@ -273,6 +280,8 @@ final public class XcodeFiles {
                 strongSelf.scanDelegate?.scanWillBegin(xcodeFiles: strongSelf)
             }
         }
+        
+        self.cleanAllEntries()
         
         for location in locations {
             self.scanFiles(in: location)
