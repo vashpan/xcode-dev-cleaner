@@ -109,6 +109,10 @@ final class MainViewController: NSViewController {
             return
         }
         
+        // clear data
+        xcodeFiles.cleanAllEntries()
+        
+        // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
             xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
         }
@@ -156,6 +160,8 @@ final class MainViewController: NSViewController {
     // MARK: Loading
     private func startLoading() {
         self.loaded = false
+        
+        self.outlineView.reloadData()
         
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimation(nil)
