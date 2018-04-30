@@ -85,6 +85,7 @@ final class MainViewController: NSViewController {
     private func prepareCleaningView(with segue: NSStoryboardSegue) {
         if let cleaningViewController = segue.destinationController as? CleaningViewController {
             cleaningViewController.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+            cleaningViewController.delegate = self
             
             self.xcodeFiles?.deleteDelegate = cleaningViewController
         }
@@ -290,6 +291,13 @@ extension MainViewController: XcodeEntryCellViewDelegate {
             
             self.updateTotalAndSelectedSizes()
         }
+    }
+}
+
+// MARK: CleaningViewControllerDelegate implememntation
+extension MainViewController: CleaningViewControllerDelegate {
+    func didDismissViewController(_ vc: CleaningViewController) {
+        self.startScan()
     }
 }
 

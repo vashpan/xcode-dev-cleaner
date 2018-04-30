@@ -8,6 +8,12 @@
 
 import Cocoa
 
+// MARK: Cleaning view controller delegate
+internal protocol CleaningViewControllerDelegate: class {
+    func didDismissViewController(_ vc: CleaningViewController)
+}
+
+// MARK: - Cleaning view controller
 internal final class CleaningViewController: NSViewController {
     // MARK: Types
     internal enum State {
@@ -21,6 +27,8 @@ internal final class CleaningViewController: NSViewController {
     @IBOutlet private weak var currentFileLabel: NSTextField!
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var doneButton: NSButton!
+    
+    internal weak var delegate: CleaningViewControllerDelegate?
     
     internal var state: State = .undefined {
         didSet {
@@ -67,6 +75,13 @@ internal final class CleaningViewController: NSViewController {
             case .undefined:
                 assert(false, "CleaningViewController: Cannot update to state 'undefined'")
         }
+    }
+    
+    // MARK: Action
+    @IBAction func dismissCleaningView(_ sender: Any) {
+        self.dismiss(sender)
+        
+        self.delegate?.didDismissViewController(self)
     }
 }
 

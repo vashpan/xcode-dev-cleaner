@@ -459,7 +459,7 @@ DQ
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="dismissController:" target="clE-D7-ddV" id="pkQ-h8-Hf9"/>
+                                    <action selector="dismissCleaningView:" target="clE-D7-ddV" id="foH-ng-wQR"/>
                                 </connections>
                             </button>
                         </subviews>
