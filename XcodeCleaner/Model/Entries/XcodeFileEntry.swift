@@ -65,6 +65,10 @@ open class XcodeFileEntry: NSObject {
         return (self.items.count == 0 && self.paths.count == 0)
     }
     
+    public var isSelected: Bool {
+        return self.selection != .off
+    }
+    
     // MARK: Initialization
     public init(label: String, icon: Icon? = nil, selected: Bool) {
         self.label = label
