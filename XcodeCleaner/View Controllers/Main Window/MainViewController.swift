@@ -68,7 +68,7 @@ final class MainViewController: NSViewController {
             return
         }
         
-        xcodeFiles.delegate = self
+        xcodeFiles.scanDelegate = self
         
         // check for installed Xcode versions
         self.checkForInstalledXcodes()
@@ -272,8 +272,8 @@ extension MainViewController: XcodeEntryCellViewDelegate {
     }
 }
 
-// MARK: XcodeFilesDelegate implementation
-extension MainViewController: XcodeFilesDelegate {
+// MARK: XcodeFilesScanDelegate implementation
+extension MainViewController: XcodeFilesScanDelegate {
     func scanWillBegin(xcodeFiles: XcodeFiles) {
         self.startLoading()
     }

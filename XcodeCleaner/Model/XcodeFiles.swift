@@ -9,10 +9,17 @@
 import Foundation
 import Cocoa
 
-// MARK: Xcode files delegate
-public protocol XcodeFilesDelegate: class {
+// MARK: Xcode scan delegate
+public protocol XcodeFilesScanDelegate: class {
     func scanWillBegin(xcodeFiles: XcodeFiles)
     func scanDidFinish(xcodeFiles: XcodeFiles)
+}
+
+// MARK: - Xcode delete delegate
+public protocol XcodeFilesDeleteDelegate: class {
+    func deleteWillBegin(xcodeFiles: XcodeFiles)
+    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL, current: Int, total: Int)
+    func deleteDidFinish(xcodeFiles: XcodeFiles)
 }
 
 // MARK: - Xcode files
@@ -30,7 +37,8 @@ final public class XcodeFiles {
     private let userDeveloperFolderUrl: URL
     private let systemDeveloperFolderUrl: URL
     
-    public weak var delegate: XcodeFilesDelegate?
+    public weak var scanDelegate: XcodeFilesScanDelegate?
+    public weak var deleteDelegate: XcodeFilesDeleteDelegate?
     
     public private(set) var locations: [Location : XcodeFileEntry]
     
@@ -262,7 +270,7 @@ final public class XcodeFiles {
     public func scanFiles(in locations: [Location]) {
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
-                strongSelf.delegate?.scanWillBegin(xcodeFiles: strongSelf)
+                strongSelf.scanDelegate?.scanWillBegin(xcodeFiles: strongSelf)
             }
         }
         
@@ -272,7 +280,7 @@ final public class XcodeFiles {
         
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
-                strongSelf.delegate?.scanDidFinish(xcodeFiles: strongSelf)
+                strongSelf.scanDelegate?.scanDidFinish(xcodeFiles: strongSelf)
             }
         }
     }
@@ -441,5 +449,67 @@ final public class XcodeFiles {
         }
         
         return results
+    }
+    
+    // MARK: Deleting files
+    public func deleteSelectedEntries(debug: Bool = false) {
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.deleteDelegate?.deleteWillBegin(xcodeFiles: strongSelf)
+            }
+        }
+        
+        // gather a list of items to delete
+        typealias DeletionItem = (location: String, label: String, path: URL)
+        var itemsToDelete = [DeletionItem]()
+        
+        for location in self.locations.values where location.isSelected {
+            var searchStack = Stack<XcodeFileEntry>()
+            searchStack.push(location)
+            
+            // simple iterative pre-order tree search algorithm
+            while !searchStack.isEmpty {
+                if let currentEntry = searchStack.pop() {
+                    if currentEntry.isSelected && currentEntry.paths.count > 0 {
+                        let pathsFromNode = currentEntry.paths.map { DeletionItem(location: location.label, label: currentEntry.label, path: $0) }
+                        itemsToDelete.append(contentsOf: pathsFromNode)
+                    }
+                    
+                    for nextEntry in currentEntry.items {
+                        searchStack.push(nextEntry)
+                    }
+                }
+            }
+        }
+        
+        // perform deletions
+        let itemsCount = itemsToDelete.count
+        var ordinal = 0
+        for itemToDelete in itemsToDelete {
+            ordinal += 1
+            
+            // TODO: Add real deleting!
+            // fake deleting
+            log.info("Deleting: \(itemToDelete.location): \(itemToDelete.label) (\(itemToDelete.path.path))")
+            Thread.sleep(forTimeInterval: 0.15)
+            //
+            
+            DispatchQueue.main.async { [weak self] in
+                if let strongSelf = self {
+                    strongSelf.deleteDelegate?.deleteInProgress(xcodeFiles: strongSelf,
+                                                                location: itemToDelete.location,
+                                                                label: itemToDelete.label,
+                                                                url: itemToDelete.path,
+                                                                current: ordinal,
+                                                                total: itemsCount)
+                }
+            }
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            if let strongSelf = self {
+                strongSelf.deleteDelegate?.deleteDidFinish(xcodeFiles: strongSelf)
+            }
+        }
     }
 }
