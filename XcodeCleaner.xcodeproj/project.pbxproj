@@ -13,6 +13,7 @@
 		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
 		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
 		7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12320966D1500081E4E /* CleaningViewController.swift */; };
+		7162E1262097255C00081E4E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E1252097255C00081E4E /* Stack.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -35,6 +36,7 @@
 		7110B49B2030F17B00EDBFA3 /* XcodeCleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XcodeCleaner.entitlements; sourceTree = "<group>"; };
 		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7162E12320966D1500081E4E /* CleaningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningViewController.swift; sourceTree = "<group>"; };
+		7162E1252097255C00081E4E /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				719B25DA205EF996007560C0 /* Extensions */,
 				719B25D8205ECA53007560C0 /* Version.swift */,
 				7155325D2061AFD80025EB75 /* Logger.swift */,
+				7162E1252097255C00081E4E /* Stack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
+				7162E1262097255C00081E4E /* Stack.swift in Sources */,
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
