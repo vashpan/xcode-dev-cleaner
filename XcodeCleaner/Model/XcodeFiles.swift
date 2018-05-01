@@ -270,6 +270,7 @@ final public class XcodeFiles {
     public func cleanAllEntries() {
         for location in locations.values {
             location.removeAllChildren()
+            location.recalculateSize()
         }
     }
     
