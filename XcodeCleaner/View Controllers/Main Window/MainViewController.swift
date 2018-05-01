@@ -113,6 +113,8 @@ final class MainViewController: NSViewController {
         // clear data
         xcodeFiles.cleanAllEntries()
         
+        self.updateTotalAndSelectedSizes()
+        
         // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
             xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
