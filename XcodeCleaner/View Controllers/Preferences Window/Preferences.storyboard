@@ -94,21 +94,18 @@
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDr-vm-P7l" userLabel="Notifications Period Pop Up">
                                 <rect key="frame" x="193" y="93" width="137" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Every month" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="SUg-JC-xDa" id="ZYn-gd-dn2">
+                                <popUpButtonCell key="cell" type="push" title="Every 2 weeks" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VSs-6E-SUA" id="ZYn-gd-dn2">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="VIs-zS-R1C">
                                         <items>
-                                            <menuItem title="Every week" id="XoZ-ow-2Ej">
-                                                <modifierMask key="keyEquivalentModifierMask"/>
-                                            </menuItem>
                                             <menuItem title="Every 2 weeks" id="VSs-6E-SUA">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
                                             <menuItem title="Every month" state="on" id="SUg-JC-xDa">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
-                                            <menuItem title="Every 3 months" id="gGB-03-bp0">
+                                            <menuItem title="Every 2 months" id="gGB-03-bp0">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
                                         </items>
