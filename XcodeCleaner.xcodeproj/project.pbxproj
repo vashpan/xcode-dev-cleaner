@@ -17,6 +17,7 @@
 		7162E1292097624600081E4E /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7162E1282097624600081E4E /* Preferences.storyboard */; };
 		7162E12B209901FB00081E4E /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12A209901FB00081E4E /* PreferencesViewController.swift */; };
 		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
+		7162E12F209C9CED00081E4E /* XcodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12E209C9CED00081E4E /* XcodeFinder.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -43,6 +44,7 @@
 		7162E1282097624600081E4E /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		7162E12A209901FB00081E4E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7162E12C209905BC00081E4E /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		7162E12E209C9CED00081E4E /* XcodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFinder.swift; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				71FD37D5206AD67A0042812D /* Entries */,
 				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
+				7162E12E209C9CED00081E4E /* XcodeFinder.swift */,
 				7162E12C209905BC00081E4E /* Preferences.swift */,
 			);
 			path = Model;
@@ -283,6 +286,7 @@
 				7162E12B209901FB00081E4E /* PreferencesViewController.swift in Sources */,
 				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
 				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,
+				7162E12F209C9CED00081E4E /* XcodeFinder.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */,
 			);

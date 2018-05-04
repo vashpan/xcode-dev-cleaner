@@ -122,12 +122,7 @@ final class MainViewController: NSViewController {
     }
     
     private func checkForInstalledXcodes() {
-        guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
-            return
-        }
-        
-        xcodeFiles.checkForInstalledXcodeVersion { (installedXcodeVersion) in
+        XcodeFinder.shared.checkForInstalledXcodeVersion { (installedXcodeVersion) in
             let versionsText: String
             
             if let version = installedXcodeVersion {
