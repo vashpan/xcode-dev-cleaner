@@ -56,27 +56,20 @@ final class MainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // check for installed Xcode versions
+        self.checkForInstalledXcode()
+        
+        // create XcodeFiles instance
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
-            // display a popup that tells us that this is basically a fatal error, and quit!
-            let alert = NSAlert()
-            alert.alertStyle = .critical
-            alert.messageText = "Cannot locate Xcode cache files"
-            alert.informativeText = "Check if you have Xcode installed and some projects built"
-            alert.addButton(withTitle: "Quit")
-            alert.runModal()
-            
-            NSApp.terminate(nil)
-            
+            self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files",
+                                          message: "Check if you have Xcode installed and some projects built")
             return
         }
         
         xcodeFiles.scanDelegate = self
-        
-        // check for installed Xcode versions
-        self.checkForInstalledXcodes()
-        
+    
         // start initial scan
         self.startScan()
     }
@@ -121,7 +114,7 @@ final class MainViewController: NSViewController {
         }
     }
     
-    private func checkForInstalledXcodes() {
+    private func checkForInstalledXcode() {
         XcodeFinder.shared.checkForInstalledXcodeVersion { (installedXcodeVersion) in
             let versionsText: String
             
@@ -129,6 +122,9 @@ final class MainViewController: NSViewController {
                 versionsText = version.description
             } else {
                 versionsText = "Not found?"
+                
+                self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
+                                              message: "Check if you have Xcode installed")
             }
             
             self.xcodeVersionsTextField.stringValue = versionsText
@@ -148,6 +144,18 @@ final class MainViewController: NSViewController {
         // selected size
         let selectedSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.selectedSize, countStyle: .file)
         self.bytesSelectedTextField.stringValue = "Selected: \(selectedSizeString)"
+    }
+    
+    private func fatalErrorMessageAndQuit(title: String, message: String) {
+        // display a popup that tells us that this is basically a fatal error, and quit!
+        let alert = NSAlert()
+        alert.alertStyle = .critical
+        alert.messageText = title
+        alert.informativeText = message
+        alert.addButton(withTitle: "Quit")
+        alert.runModal()
+        
+        NSApp.terminate(nil)
     }
     
     // MARK: Loading
