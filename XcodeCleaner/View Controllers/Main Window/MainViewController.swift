@@ -141,6 +141,8 @@ final class MainViewController: NSViewController {
         let totalSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
         self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
         
+        self.view.window?.title = "Xcode Cleaner - \(totalSizeString) available to clean"
+        
         // selected size
         let selectedSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.selectedSize, countStyle: .file)
         self.bytesSelectedTextField.stringValue = "Selected: \(selectedSizeString)"
