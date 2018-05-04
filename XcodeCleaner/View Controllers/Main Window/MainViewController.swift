@@ -196,6 +196,16 @@ final class MainViewController: NSViewController {
             xcodeFiles.deleteSelectedEntries(debug: true)
         }
     }
+    
+    @IBAction func showInFinder(_ sender: Any) {
+        guard let selectedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
+            return
+        }
+        
+        if selectedEntry.paths.count > 0 {
+            NSWorkspace.shared.activateFileViewerSelecting(selectedEntry.paths)
+        }
+    }
 }
 
 // MARK: NSOutlineViewDataSource implementation
@@ -269,6 +279,29 @@ extension MainViewController: NSOutlineViewDelegate {
         }
         
         return view
+    }
+}
+
+// MARK: NSMenuDelegate implementation
+extension MainViewController: NSMenuDelegate {
+    func menuNeedsUpdate(_ menu: NSMenu) {
+        guard menu == self.outlineView.menu else {
+            return
+        }
+        
+        guard let showInFinderMenuItem = menu.item(at: 0) else {
+            return
+        }
+        
+        guard let selectedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
+            return
+        }
+        
+        if selectedEntry.paths.count > 0 {
+            showInFinderMenuItem.isEnabled = true
+        } else {
+            showInFinderMenuItem.isEnabled = false
+        }
     }
 }
 

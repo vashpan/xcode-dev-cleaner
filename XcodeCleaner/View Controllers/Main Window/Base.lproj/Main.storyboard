@@ -166,7 +166,7 @@ DQ
                                     <rect key="frame" x="1" y="0.0" width="615" height="308"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
                                             <rect key="frame" x="0.0" y="0.0" width="615" height="285"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="2" height="3"/>
@@ -247,7 +247,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -274,6 +274,7 @@ DQ
                                             <connections>
                                                 <outlet property="dataSource" destination="XfG-lQ-9wD" id="Gpq-3s-lc5"/>
                                                 <outlet property="delegate" destination="XfG-lQ-9wD" id="doz-8T-pxy"/>
+                                                <outlet property="menu" destination="JKM-eE-XhK" id="3Ab-jT-JBQ"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -427,6 +428,19 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu title="Entries Menu" autoenablesItems="NO" id="JKM-eE-XhK" userLabel="Entries Menu">
+                    <items>
+                        <menuItem title="Show in Finder..." tag="1001" enabled="NO" id="me3-fP-eUu">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="XfG-lQ-9wD" id="IMq-mw-Ptp"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                    <connections>
+                        <outlet property="delegate" destination="XfG-lQ-9wD" id="Fnf-FC-LAd"/>
+                    </connections>
+                </menu>
             </objects>
             <point key="canvasLocation" x="143.5" y="1033"/>
         </scene>
