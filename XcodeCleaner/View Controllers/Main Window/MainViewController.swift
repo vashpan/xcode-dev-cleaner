@@ -183,6 +183,22 @@ final class MainViewController: NSViewController {
         self.outlineView.reloadData()
     }
     
+    // MARK: Events
+    override func keyDown(with event: NSEvent) {
+        // handle space for selecting items
+        if event.keyCode == 49 { // 49 is space: https://boredzo.org/blog/archives/2007-05-22/virtual-key-codes
+            let selectedRow = self.outlineView.selectedRow
+            let selectedColumn = self.outlineView.selectedColumn
+            
+            if let entryCellView = self.outlineView.view(atColumn: selectedColumn, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
+                entryCellView.switchCheckBox() // just send a switch even and the rest will be handled by code in XcodeEntryCellView
+            }
+            
+            // restore selection
+            self.outlineView.selectRowIndexes([selectedRow], byExtendingSelection: false)
+        }
+    }
+    
     // MARK: Actions
     @IBAction func startCleaning(_ sender: NSButton) {
         guard let xcodeFiles = self.xcodeFiles else {
@@ -198,12 +214,12 @@ final class MainViewController: NSViewController {
     }
     
     @IBAction func showInFinder(_ sender: Any) {
-        guard let selectedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
+        guard let clickedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
             return
         }
         
-        if selectedEntry.paths.count > 0 {
-            NSWorkspace.shared.activateFileViewerSelecting(selectedEntry.paths)
+        if clickedEntry.paths.count > 0 {
+            NSWorkspace.shared.activateFileViewerSelecting(clickedEntry.paths)
         }
     }
 }
@@ -293,11 +309,11 @@ extension MainViewController: NSMenuDelegate {
             return
         }
         
-        guard let selectedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
+        guard let clickedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
             return
         }
         
-        if selectedEntry.paths.count > 0 {
+        if clickedEntry.paths.count > 0 {
             showInFinderMenuItem.isEnabled = true
         } else {
             showInFinderMenuItem.isEnabled = false
