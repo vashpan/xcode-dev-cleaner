@@ -63,7 +63,7 @@ final class MainViewController: NSViewController {
             let alert = NSAlert()
             alert.alertStyle = .critical
             alert.messageText = "Cannot locate Xcode cache files"
-            alert.informativeText = "Check if you have Xcode installed and run at least once"
+            alert.informativeText = "Check if you have Xcode installed and some projects built"
             alert.addButton(withTitle: "Quit")
             alert.runModal()
             
