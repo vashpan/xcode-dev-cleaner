@@ -103,9 +103,32 @@ final public class XcodeFiles {
         return folderExists && structureProper
     }
     
-    public func checkForInstalledXcodes(completion: ([Version]) -> Void) {
-        // TODO: Add real implementation
-        completion([Version(major: 9, minor: 3)])
+    public func checkForInstalledXcodeVersion(completion: (Version?) -> Void) {
+        // TODO: try to find ALL installed Xcodes, not only the one returned from NSWorkspace, Spotlight could be useful for that (NSMetadataQuery)
+        
+        // find Xcode bundle path & open it
+        guard let xcodePath = NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") else {
+            completion(nil)
+            return
+        }
+        
+        guard let xcodeBundle = Bundle(path: xcodePath) else {
+            completion(nil)
+            return
+        }
+        
+        // figure out a version from Xcode bundle
+        guard let xcodeBundleInfo = xcodeBundle.infoDictionary else {
+            completion(nil)
+            return
+        }
+        
+        guard let versionString = xcodeBundleInfo["CFBundleShortVersionString"] as? String, let version = Version(describing: versionString) else {
+            completion(nil)
+            return
+        }
+        
+        completion(version)
     }
     
     public func debugRepresentation() -> String {

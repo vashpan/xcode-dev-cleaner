@@ -127,18 +127,13 @@ final class MainViewController: NSViewController {
             return
         }
         
-        xcodeFiles.checkForInstalledXcodes { (installedXcodeVersions) in
-            var versionsText = String()
+        xcodeFiles.checkForInstalledXcodeVersion { (installedXcodeVersion) in
+            let versionsText: String
             
-            var i = 0
-            for version in installedXcodeVersions {
-                if i == 0 {
-                    versionsText = version.description
-                } else {
-                    versionsText += ", " + version.description
-                }
-                
-                i += 1
+            if let version = installedXcodeVersion {
+                versionsText = version.description
+            } else {
+                versionsText = "Not found?"
             }
             
             self.xcodeVersionsTextField.stringValue = versionsText
