@@ -24,6 +24,7 @@ internal final class CleaningViewController: NSViewController {
     }
     
     // MARK: Properties & outlets
+    @IBOutlet private weak var headerLabel: NSTextField!
     @IBOutlet private weak var currentFileLabel: NSTextField!
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var doneButton: NSButton!
@@ -44,6 +45,10 @@ internal final class CleaningViewController: NSViewController {
         
         // update first state we set
         self.update(state: self.state)
+        
+        // check if we are in dry run and mark it
+        let dryRunText = Preferences.shared.dryRunEnabled ? "(Dry run) " : String()
+        self.headerLabel.stringValue = "\(dryRunText)Cleaning Xcode cache files..."
     }
     
     // MARK: Updating state

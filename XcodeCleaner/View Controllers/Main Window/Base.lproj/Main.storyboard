@@ -453,8 +453,8 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82I-5P-ih8">
-                                <rect key="frame" x="18" y="111" width="191" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <rect key="frame" x="18" y="111" width="420" height="17"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cleaning Xcode cache files..." id="c30-6z-VCU">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -493,6 +493,7 @@ DQ
                     <connections>
                         <outlet property="currentFileLabel" destination="Qj2-Iq-HeV" id="KXB-yF-QQ3"/>
                         <outlet property="doneButton" destination="f6e-XM-Ml5" id="83S-qu-CDv"/>
+                        <outlet property="headerLabel" destination="82I-5P-ih8" id="7JL-PS-iJ2"/>
                         <outlet property="progressIndicator" destination="o5G-Pd-N6U" id="psz-bl-Gcy"/>
                     </connections>
                 </viewController>
