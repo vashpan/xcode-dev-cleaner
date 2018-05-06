@@ -160,6 +160,17 @@ final class MainViewController: NSViewController {
         NSApp.terminate(nil)
     }
     
+    private func warningMessage(title: String, message: String, okButtonText: String = "OK") -> NSApplication.ModalResponse {
+        let alert = NSAlert()
+        alert.alertStyle = .critical
+        alert.messageText = title
+        alert.informativeText = message
+        alert.addButton(withTitle: okButtonText)
+        alert.addButton(withTitle: "Cancel")
+        
+        return alert.runModal()
+    }
+    
     // MARK: Loading
     private func startLoading() {
         self.loaded = false
@@ -205,14 +216,22 @@ final class MainViewController: NSViewController {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
-    
-        let dryRunEnabled = Preferences.shared.dryRunEnabled
         
-        self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
+        // show warning message with question if we want to proceed
+        let messageResult = self.warningMessage(title: "Clean Xcode cache files",
+                                                message: "Are you sure to proceed? This can't be undone.",
+                                                okButtonText: "Clean")
         
-        DispatchQueue.global(qos: .userInitiated).async {
-            xcodeFiles.deleteSelectedEntries(dryRun: dryRunEnabled)
+        // continue only if we agree
+        if messageResult == .alertFirstButtonReturn {
+            self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                xcodeFiles.deleteSelectedEntries(dryRun: Preferences.shared.dryRunEnabled)
+            }
         }
+        
+        
     }
     
     @IBAction func showInFinder(_ sender: Any) {
