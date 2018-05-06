@@ -22,7 +22,7 @@ public final class ArchiveFileEntry: XcodeFileEntry {
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.version.description) \(self.build)", icon: nil, selected: selected)
+        super.init(label: "\(self.version.description) (\(self.build))", icon: nil, selected: selected)
         
         self.addPath(path: location)
     }
