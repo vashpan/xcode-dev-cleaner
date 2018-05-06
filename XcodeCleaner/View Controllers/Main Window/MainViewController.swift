@@ -205,11 +205,13 @@ final class MainViewController: NSViewController {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
+    
+        let dryRunEnabled = Preferences.shared.dryRunEnabled
         
         self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
         
         DispatchQueue.global(qos: .userInitiated).async {
-            xcodeFiles.deleteSelectedEntries(debug: true)
+            xcodeFiles.deleteSelectedEntries(dryRun: dryRunEnabled)
         }
     }
     

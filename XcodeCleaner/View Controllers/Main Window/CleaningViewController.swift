@@ -95,6 +95,16 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
         self.state = .working(title: location.capitalized, details: label, progress: progress)
     }
     
+    func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL) {
+        // show error message
+        let alert = NSAlert()
+        alert.alertStyle = .warning
+        alert.messageText = "Failed to delete item"
+        alert.informativeText = "Following file couldn't be removed:\n\(location.capitalized): \(url.path)"
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
+    }
+    
     func deleteDidFinish(xcodeFiles: XcodeFiles) {
         self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
     }
