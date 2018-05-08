@@ -160,7 +160,12 @@ final class MainViewController: NSViewController {
         NSApp.terminate(nil)
     }
     
-    private func warningMessage(title: String, message: String, okButtonText: String = "OK") -> NSApplication.ModalResponse {
+    private func warningMessage(title: String, message: String, okButtonText: String = "OK", completionHandler: @escaping (NSApplication.ModalResponse) -> Void) {
+        guard let currentWindow = self.view.window else {
+            log.error("MainViewController: No window for current view?!")
+            return
+        }
+        
         let alert = NSAlert()
         alert.alertStyle = .critical
         alert.messageText = title
@@ -168,7 +173,7 @@ final class MainViewController: NSViewController {
         alert.addButton(withTitle: okButtonText)
         alert.addButton(withTitle: "Cancel")
         
-        return alert.runModal()
+        alert.beginSheetModal(for: currentWindow, completionHandler: completionHandler)
     }
     
     // MARK: Loading
@@ -217,21 +222,16 @@ final class MainViewController: NSViewController {
             return
         }
         
-        // show warning message with question if we want to proceed
-        let messageResult = self.warningMessage(title: "Clean Xcode cache files",
-                                                message: "Are you sure to proceed? This can't be undone.",
-                                                okButtonText: "Clean")
-        
-        // continue only if we agree
-        if messageResult == .alertFirstButtonReturn {
-            self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                xcodeFiles.deleteSelectedEntries(dryRun: Preferences.shared.dryRunEnabled)
+        // show warning message with question if we want to proceed and continue only if we agree
+        self.warningMessage(title: "Clean Xcode cache files", message: "Are you sure to proceed? This can't be undone.", okButtonText: "Clean") { (messageResult) in
+            if messageResult == .alertFirstButtonReturn {
+                self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
+                
+                DispatchQueue.global(qos: .userInitiated).async {
+                    xcodeFiles.deleteSelectedEntries(dryRun: Preferences.shared.dryRunEnabled)
+                }
             }
         }
-        
-        
     }
     
     @IBAction func showInFinder(_ sender: Any) {
