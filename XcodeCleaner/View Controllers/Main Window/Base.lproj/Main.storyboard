@@ -247,7 +247,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -369,6 +369,7 @@ DQ
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JvS-uJ-6t5"/>
                             <constraint firstItem="8Gh-Ea-jZF" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Kv5-LU-bRM"/>
                             <constraint firstAttribute="trailing" secondItem="0Yp-uh-F76" secondAttribute="trailing" constant="20" id="MmA-VX-2cE"/>
+                            <constraint firstAttribute="trailing" secondItem="P52-Ov-Rpw" secondAttribute="trailing" constant="570" id="RG9-ie-wfr"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="top" secondItem="pF6-87-JUR" secondAttribute="bottom" constant="8" id="UNU-HP-CHX"/>
                             <constraint firstItem="lXf-LO-pmC" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="8" id="WUR-R5-KWP"/>
                             <constraint firstAttribute="bottom" secondItem="qY4-v6-aG6" secondAttribute="bottom" constant="20" id="X2X-sC-iSk"/>
@@ -378,7 +379,7 @@ DQ
                             <constraint firstItem="S06-6o-y2V" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="bZg-eP-bdy"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="cQ7-aE-rn6"/>
                             <constraint firstItem="pF6-87-JUR" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="csg-B8-Bd6"/>
-                            <constraint firstItem="P52-Ov-Rpw" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="fPL-ip-vjx"/>
+                            <constraint firstItem="P52-Ov-Rpw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="fPL-ip-vjx"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="lXf-LO-pmC" secondAttribute="bottom" constant="8" id="g25-D5-sif"/>
                             <constraint firstAttribute="trailing" secondItem="qY4-v6-aG6" secondAttribute="trailing" constant="20" id="gmj-Ip-4s6"/>
                             <constraint firstItem="lXf-LO-pmC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ifQ-md-COJ"/>
@@ -409,7 +410,7 @@ DQ
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu title="Entries Menu" autoenablesItems="NO" id="JKM-eE-XhK" userLabel="Entries Menu">
                     <items>
-                        <menuItem title="Show in Finder..." tag="1001" enabled="NO" id="me3-fP-eUu">
+                        <menuItem title="Show in Finder" tag="1001" enabled="NO" id="me3-fP-eUu">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="showInFinder:" target="XfG-lQ-9wD" id="IMq-mw-Ptp"/>
