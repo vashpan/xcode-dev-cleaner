@@ -161,13 +161,13 @@ DQ
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
-                                <rect key="frame" x="20" y="95" width="617" height="309"/>
+                                <rect key="frame" x="20" y="95" width="617" height="330"/>
                                 <clipView key="contentView" drawsBackground="NO" id="dr2-Zy-P8I">
-                                    <rect key="frame" x="1" y="0.0" width="615" height="308"/>
+                                    <rect key="frame" x="1" y="0.0" width="615" height="329"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
-                                            <rect key="frame" x="0.0" y="0.0" width="615" height="285"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="615" height="306"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="2" height="3"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -247,7 +247,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="541.5" y="1" width="73" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -294,7 +294,7 @@ DQ
                                 </tableHeaderView>
                             </scrollView>
                             <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-vG-o6z">
-                                <rect key="frame" x="313" y="234" width="32" height="32"/>
+                                <rect key="frame" x="313" y="248" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Gh-Ea-jZF">
@@ -306,10 +306,10 @@ DQ
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="XcodeIcon" id="guH-2t-Xph"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
-                                <rect key="frame" x="93" y="474" width="546" height="51"/>
+                                <rect key="frame" x="93" y="440" width="546" height="85"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AcK-WQ-6Fn">
                                     <font key="font" metaFont="system"/>
-                                    <string key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.</string>
+                                    <mutableString key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</mutableString>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -345,26 +345,11 @@ DQ
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-uh-F76">
                                 <rect key="frame" x="20" y="59" width="617" height="5"/>
                             </box>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="geB-pr-d1Z">
-                                <rect key="frame" x="93" y="446" width="389" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved 0 bytes in total. Consider support if you like this app:" id="3kT-sa-ma3">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S06-6o-y2V">
                                 <rect key="frame" x="18" y="17" width="25" height="25"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pba-GW-CWa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qXy-qb-Ecw">
-                                <rect key="frame" x="488" y="443" width="66" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Donate..." bezelStyle="roundedRect" alignment="center" borderStyle="border" inset="2" id="jJT-Gm-TzI">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
@@ -377,17 +362,13 @@ DQ
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="geB-pr-d1Z" firstAttribute="leading" secondItem="P52-Ov-Rpw" secondAttribute="trailing" constant="8" id="0mb-px-HtY"/>
-                            <constraint firstItem="qXy-qb-Ecw" firstAttribute="top" secondItem="RaE-kH-QJe" secondAttribute="bottom" constant="12" id="1OU-bb-vVN"/>
                             <constraint firstAttribute="trailing" secondItem="pF6-87-JUR" secondAttribute="trailing" constant="20" id="6UU-fO-kKk"/>
                             <constraint firstAttribute="bottom" secondItem="S06-6o-y2V" secondAttribute="bottom" constant="20" id="A0K-GU-eaV"/>
                             <constraint firstAttribute="trailing" secondItem="ynz-vf-S6e" secondAttribute="trailing" constant="20" id="CSy-Zq-kPb"/>
                             <constraint firstItem="7x4-OM-pal" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="CZd-hj-dbW"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JvS-uJ-6t5"/>
                             <constraint firstItem="8Gh-Ea-jZF" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Kv5-LU-bRM"/>
-                            <constraint firstItem="qXy-qb-Ecw" firstAttribute="leading" secondItem="geB-pr-d1Z" secondAttribute="trailing" constant="8" symbolic="YES" id="Lue-gp-uBw"/>
                             <constraint firstAttribute="trailing" secondItem="0Yp-uh-F76" secondAttribute="trailing" constant="20" id="MmA-VX-2cE"/>
-                            <constraint firstItem="geB-pr-d1Z" firstAttribute="top" secondItem="RaE-kH-QJe" secondAttribute="bottom" constant="11" id="S5s-cw-k0c"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="top" secondItem="pF6-87-JUR" secondAttribute="bottom" constant="8" id="UNU-HP-CHX"/>
                             <constraint firstItem="lXf-LO-pmC" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="8" id="WUR-R5-KWP"/>
                             <constraint firstAttribute="bottom" secondItem="qY4-v6-aG6" secondAttribute="bottom" constant="20" id="X2X-sC-iSk"/>
@@ -396,9 +377,7 @@ DQ
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="7x4-OM-pal" secondAttribute="bottom" constant="8" id="aRy-hw-wt2"/>
                             <constraint firstItem="S06-6o-y2V" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="bZg-eP-bdy"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="cQ7-aE-rn6"/>
-                            <constraint firstItem="ynz-vf-S6e" firstAttribute="top" secondItem="qXy-qb-Ecw" secondAttribute="bottom" constant="40" id="cYE-0A-JPu"/>
                             <constraint firstItem="pF6-87-JUR" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="csg-B8-Bd6"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qXy-qb-Ecw" secondAttribute="trailing" constant="20" id="cuz-l6-6gz"/>
                             <constraint firstItem="P52-Ov-Rpw" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="fPL-ip-vjx"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="lXf-LO-pmC" secondAttribute="bottom" constant="8" id="g25-D5-sif"/>
                             <constraint firstAttribute="trailing" secondItem="qY4-v6-aG6" secondAttribute="trailing" constant="20" id="gmj-Ip-4s6"/>
@@ -414,12 +393,12 @@ DQ
                             <constraint firstAttribute="trailing" secondItem="lXf-LO-pmC" secondAttribute="trailing" constant="20" id="xti-D5-39o"/>
                             <constraint firstItem="P52-Ov-Rpw" firstAttribute="top" secondItem="8Gh-Ea-jZF" secondAttribute="bottom" constant="8" id="zBC-DV-N5D"/>
                             <constraint firstItem="7x4-OM-pal" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="8" id="zDa-eQ-uSg"/>
+                            <constraint firstItem="ynz-vf-S6e" firstAttribute="top" secondItem="RaE-kH-QJe" secondAttribute="bottom" constant="15" id="zUh-fw-rIc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bytesSelectedTextField" destination="7x4-OM-pal" id="1Aj-I4-Mpx"/>
                         <outlet property="cleanButton" destination="qY4-v6-aG6" id="Txw-Is-yfd"/>
-                        <outlet property="donationEncourageLabel" destination="geB-pr-d1Z" id="AAi-1E-dNR"/>
                         <outlet property="outlineView" destination="xU2-il-hl0" id="HhD-WY-k3B"/>
                         <outlet property="progressIndicator" destination="kWj-vG-o6z" id="9rB-Mr-oPa"/>
                         <outlet property="totalBytesTextField" destination="lXf-LO-pmC" id="FZ6-xo-Qsp"/>
