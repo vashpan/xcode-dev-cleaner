@@ -173,7 +173,7 @@ DQ
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="ItemColumn" width="538.5" minWidth="200" maxWidth="1000" id="WoQ-aT-xsT">
+                                                <tableColumn identifier="ItemColumn" width="536" minWidth="200" maxWidth="1000" id="WoQ-aT-xsT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Item">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -187,7 +187,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="ItemCell" id="Wnc-64-w87" customClass="XcodeEntryCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="539" height="18"/>
+                                                            <rect key="frame" x="1" y="1" width="536" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yFH-5w-t5V">
@@ -233,7 +233,7 @@ DQ
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="SizeColumn" width="72.5" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
+                                                <tableColumn identifier="SizeColumn" width="75" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Size">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -247,7 +247,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="XcodeCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="542" y="1" width="73" height="17"/>
+                                                            <rect key="frame" x="539" y="1" width="75" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
@@ -261,7 +261,7 @@ DQ
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="rz5-mq-2Ix" firstAttribute="leading" secondItem="apc-cL-vXW" secondAttribute="leading" constant="2" id="Qfg-tc-s5i"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rz5-mq-2Ix" secondAttribute="trailing" constant="2" id="V3x-5u-qOK"/>
+                                                                <constraint firstAttribute="trailing" secondItem="rz5-mq-2Ix" secondAttribute="trailing" constant="4" id="V3x-5u-qOK"/>
                                                                 <constraint firstItem="rz5-mq-2Ix" firstAttribute="centerY" secondItem="apc-cL-vXW" secondAttribute="centerY" id="d3R-3C-cel"/>
                                                             </constraints>
                                                             <connections>
@@ -281,7 +281,7 @@ DQ
                                     <nil key="backgroundColor"/>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="p1y-QG-xIv">
-                                    <rect key="frame" x="1" y="7" width="0.0" height="16"/>
+                                    <rect key="frame" x="1" y="313" width="615" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="3Uz-J4-Lkn">
