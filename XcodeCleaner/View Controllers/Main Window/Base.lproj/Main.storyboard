@@ -339,6 +339,9 @@ DQ
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="showGitHubPage:" target="XfG-lQ-9wD" id="FXS-wu-ilK"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
                                 <rect key="frame" x="553" y="70" width="86" height="17"/>
