@@ -37,12 +37,8 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Properties & outlets
-    @IBOutlet private weak var donationEncourageLabel: NSTextField!
-    
     @IBOutlet private weak var bytesSelectedTextField: NSTextField!
     @IBOutlet private weak var totalBytesTextField: NSTextField!
-    
-    @IBOutlet private weak var xcodeVersionsTextField: NSTextField!
     
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var cleanButton: NSButton!
@@ -116,18 +112,10 @@ final class MainViewController: NSViewController {
     
     private func checkForInstalledXcode() {
         XcodeFinder.shared.checkForInstalledXcodeVersion { (installedXcodeVersion) in
-            let versionsText: String
-            
-            if let version = installedXcodeVersion {
-                versionsText = version.description
-            } else {
-                versionsText = "Not found?"
-                
+            if installedXcodeVersion == nil {
                 self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
                                               message: "Check if you have Xcode installed")
             }
-            
-            self.xcodeVersionsTextField.stringValue = versionsText
         }
     }
     

@@ -298,18 +298,18 @@ DQ
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </progressIndicator>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Gh-Ea-jZF">
-                                <rect key="frame" x="20" y="471" width="67" height="67"/>
+                                <rect key="frame" x="20" y="464" width="67" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="67" id="HEL-Qg-Gzh"/>
                                     <constraint firstAttribute="height" constant="67" id="t77-jf-oZ9"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="XcodeIcon" id="guH-2t-Xph"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="XcodeCleanerIcon" id="guH-2t-Xph"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
                                 <rect key="frame" x="93" y="440" width="546" height="85"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AcK-WQ-6Fn">
                                     <font key="font" metaFont="system"/>
-                                    <mutableString key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</mutableString>
+                                    <string key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -319,18 +319,6 @@ DQ
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Xcode Cleaner" id="8Ix-rm-3dw">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P52-Ov-Rpw">
-                                <rect key="frame" x="18" y="449" width="71" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="42" id="V7b-mw-7El"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="bmu-zE-f4u"/>
-                                </constraints>
-                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="9.3" id="gUh-vi-JFT">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -369,7 +357,6 @@ DQ
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JvS-uJ-6t5"/>
                             <constraint firstItem="8Gh-Ea-jZF" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Kv5-LU-bRM"/>
                             <constraint firstAttribute="trailing" secondItem="0Yp-uh-F76" secondAttribute="trailing" constant="20" id="MmA-VX-2cE"/>
-                            <constraint firstAttribute="trailing" secondItem="P52-Ov-Rpw" secondAttribute="trailing" constant="570" id="RG9-ie-wfr"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="top" secondItem="pF6-87-JUR" secondAttribute="bottom" constant="8" id="UNU-HP-CHX"/>
                             <constraint firstItem="lXf-LO-pmC" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="8" id="WUR-R5-KWP"/>
                             <constraint firstAttribute="bottom" secondItem="qY4-v6-aG6" secondAttribute="bottom" constant="20" id="X2X-sC-iSk"/>
@@ -379,20 +366,18 @@ DQ
                             <constraint firstItem="S06-6o-y2V" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="bZg-eP-bdy"/>
                             <constraint firstItem="RaE-kH-QJe" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="cQ7-aE-rn6"/>
                             <constraint firstItem="pF6-87-JUR" firstAttribute="leading" secondItem="8Gh-Ea-jZF" secondAttribute="trailing" constant="8" id="csg-B8-Bd6"/>
-                            <constraint firstItem="P52-Ov-Rpw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="fPL-ip-vjx"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="lXf-LO-pmC" secondAttribute="bottom" constant="8" id="g25-D5-sif"/>
                             <constraint firstAttribute="trailing" secondItem="qY4-v6-aG6" secondAttribute="trailing" constant="20" id="gmj-Ip-4s6"/>
                             <constraint firstItem="lXf-LO-pmC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="ifQ-md-COJ"/>
                             <constraint firstItem="qY4-v6-aG6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="kzY-LT-Hxv"/>
                             <constraint firstItem="pF6-87-JUR" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="leN-S1-MqU"/>
-                            <constraint firstItem="8Gh-Ea-jZF" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="32" id="mbv-CU-PdJ"/>
+                            <constraint firstItem="8Gh-Ea-jZF" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="39" id="mbv-CU-PdJ"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="33" id="r5b-2g-f2E"/>
                             <constraint firstItem="qY4-v6-aG6" firstAttribute="top" secondItem="0Yp-uh-F76" secondAttribute="bottom" constant="20" id="rMA-Wm-ksZ"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7x4-OM-pal" secondAttribute="trailing" constant="20" symbolic="YES" id="uL5-Fb-pHg"/>
                             <constraint firstAttribute="trailing" secondItem="RaE-kH-QJe" secondAttribute="trailing" constant="20" id="uuy-TL-U3O"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="top" secondItem="7x4-OM-pal" secondAttribute="bottom" constant="8" id="xIo-zQ-Nun"/>
                             <constraint firstAttribute="trailing" secondItem="lXf-LO-pmC" secondAttribute="trailing" constant="20" id="xti-D5-39o"/>
-                            <constraint firstItem="P52-Ov-Rpw" firstAttribute="top" secondItem="8Gh-Ea-jZF" secondAttribute="bottom" constant="8" id="zBC-DV-N5D"/>
                             <constraint firstItem="7x4-OM-pal" firstAttribute="top" secondItem="ynz-vf-S6e" secondAttribute="bottom" constant="8" id="zDa-eQ-uSg"/>
                             <constraint firstItem="ynz-vf-S6e" firstAttribute="top" secondItem="RaE-kH-QJe" secondAttribute="bottom" constant="15" id="zUh-fw-rIc"/>
                         </constraints>
@@ -403,7 +388,6 @@ DQ
                         <outlet property="outlineView" destination="xU2-il-hl0" id="HhD-WY-k3B"/>
                         <outlet property="progressIndicator" destination="kWj-vG-o6z" id="9rB-Mr-oPa"/>
                         <outlet property="totalBytesTextField" destination="lXf-LO-pmC" id="FZ6-xo-Qsp"/>
-                        <outlet property="xcodeVersionsTextField" destination="P52-Ov-Rpw" id="k0U-AM-6rf"/>
                         <segue destination="clE-D7-ddV" kind="sheet" identifier="ShowCleaningView" id="Yc0-bu-VmE"/>
                     </connections>
                 </viewController>
@@ -484,6 +468,6 @@ DQ
     </scenes>
     <resources>
         <image name="NSFolder" width="32" height="32"/>
-        <image name="XcodeIcon" width="512" height="512"/>
+        <image name="XcodeCleanerIcon" width="256" height="256"/>
     </resources>
 </document>
