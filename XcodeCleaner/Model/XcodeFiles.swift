@@ -336,7 +336,7 @@ final public class XcodeFiles {
             
             // scan for versions
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
-                var deviceSupportEntries = [XcodeFileEntry]()
+                var deviceSupportEntries = [DeviceSupportFileEntry]()
                 for symbolUrl in symbols {
                     if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent, osLabel: entry.entry.label) {
                         deviceSupportEntry.addPath(path: symbolUrl)
@@ -347,7 +347,7 @@ final public class XcodeFiles {
                 
                 // sort
                 deviceSupportEntries = deviceSupportEntries.sorted { (lhs, rhs) -> Bool in
-                    lhs.label > rhs.label
+                    lhs.version > rhs.version
                 }
                 
                 // deselect first one (we usually will want those symbols)
@@ -371,7 +371,7 @@ final public class XcodeFiles {
         let simulatorsLocation = self.systemDeveloperFolderUrl.appendingPathComponent("CoreSimulator/Profiles/Runtimes")
         
         // scan for simulator runtimes
-        var results: [XcodeFileEntry] = []
+        var results: [SimulatorFileEntry] = []
         if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
             for simulatorRuntimeUrl in simulators {
                 if let simulatorEntry = self.simulatorRuntimeEntry(from: simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
@@ -384,8 +384,9 @@ final public class XcodeFiles {
         
         // TODO: Scan for simulators (~/Library/Developer/CoreSimulator/Devices), or use `xcrun simctl delete unavailable` command if possible, but only after runtime deletion
         
+        // sort by version
         results = results.sorted { (lhs, rhs) -> Bool in
-            lhs.label > rhs.label
+            lhs.version > rhs.version
         }
         
         return results
@@ -423,9 +424,14 @@ final public class XcodeFiles {
             // root project
             let projectEntry = XcodeFileEntry(label: projectName, icon: .image(name: "XCArchive"), selected: false)
             
-            // sort by label
+            // sort by version & build
             let projectArchiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
-                lhs.label > rhs.label
+                if lhs.version == rhs.version {
+                    return lhs.build > rhs.build
+                } else {
+                    return lhs.version > rhs.version
+                }
+                
             }
             
             projectEntry.addChildren(items: projectArchiveEntries)
