@@ -25,6 +25,19 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                     self = .other
             }
         }
+        
+        public var description: String {
+            switch self {
+                case .iOS:
+                    return "iOS"
+                case .watchOS:
+                    return "watchOS"
+                case .tvOS:
+                    return "tvOS"
+                case .other:
+                    return ""
+            }
+        }
     }
     
     // MARK: Properties
@@ -40,7 +53,7 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.version) \(self.build)", icon: DeviceSupportFileEntry.icon(for: osType, version: version), selected: selected)
+        super.init(label: "\(self.osType.description) \(self.version) \(self.build)", icon: DeviceSupportFileEntry.icon(for: osType, version: version), selected: selected)
     }
     
     // MARK: Helpers
