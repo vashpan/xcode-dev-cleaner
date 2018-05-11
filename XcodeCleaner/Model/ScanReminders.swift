@@ -64,8 +64,6 @@ public final class ScanReminders {
     }
     
     public static func disableReminder() {
-        let notification = NSUserNotification()
-        notification.identifier = reminderIdentifier
-        NSUserNotificationCenter.default.removeScheduledNotification(notification)
+        NSUserNotificationCenter.default.scheduledNotifications = []
     }
 }
