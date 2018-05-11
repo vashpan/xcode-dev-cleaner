@@ -26,7 +26,7 @@ final class PreferencesViewController: NSViewController {
     }
     
     // MARK: Helpers
-    private func titleFromPeriod(_ period: Preferences.NotificationsPeriod) -> String {
+    private func titleFromPeriod(_ period: ScanReminders.Period) -> String {
         let result: String
         switch period {
             case .every2weeks:
@@ -40,8 +40,8 @@ final class PreferencesViewController: NSViewController {
         return result
     }
     
-    private func periodFromTitle(_ title: String) -> Preferences.NotificationsPeriod? {
-        let result: Preferences.NotificationsPeriod?
+    private func periodFromTitle(_ title: String) -> ScanReminders.Period? {
+        let result: ScanReminders.Period?
         switch title {
             case "Every 2 weeks":
                 result = .every2weeks
@@ -61,7 +61,7 @@ final class PreferencesViewController: NSViewController {
         self.notificationsPeriodPopUpButton.isEnabled = value
     }
     
-    private func setNotificationsPeriod(_ period: Preferences.NotificationsPeriod) {
+    private func setNotificationsPeriod(_ period: ScanReminders.Period) {
         let periodTitle = self.titleFromPeriod(period)
         self.notificationsPeriodPopUpButton.selectItem(withTitle: periodTitle)
     }
@@ -77,6 +77,12 @@ final class PreferencesViewController: NSViewController {
         self.setNotificationsEnabled(enabled)
         
         Preferences.shared.notificationsEnabled = enabled
+        
+        if enabled {
+            ScanReminders.scheduleReminder(period: Preferences.shared.notificationsPeriod)
+        } else {
+            ScanReminders.disableReminder()
+        }
     }
     
     @IBAction func updatePeriod(_ sender: NSPopUpButton) {
@@ -89,6 +95,7 @@ final class PreferencesViewController: NSViewController {
         }
         
         Preferences.shared.notificationsPeriod = selectedPeriod
+        ScanReminders.scheduleReminder(period: Preferences.shared.notificationsPeriod)
     }
     
     @IBAction func updateDryRun(_ sender: NSButton) {

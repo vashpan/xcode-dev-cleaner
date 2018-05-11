@@ -8,12 +8,7 @@
 
 import Foundation
 
-final class Preferences {
-    // MARK: Types
-    public enum NotificationsPeriod: Int {
-        case every2weeks, everyMonth, every2Months
-    }
-    
+public final class Preferences {
     // MARK: Properties & constants
     public static let shared = Preferences()
     
@@ -41,7 +36,7 @@ final class Preferences {
         }
     }
     
-    public var notificationsPeriod: NotificationsPeriod {
+    public var notificationsPeriod: ScanReminders.Period {
         get {
             guard UserDefaults.standard.object(forKey: notificationsPeriodKey) != nil else {
                 return .everyMonth
@@ -49,7 +44,7 @@ final class Preferences {
             
             let periodInt = UserDefaults.standard.integer(forKey: notificationsPeriodKey)
             
-            guard let period = NotificationsPeriod(rawValue: periodInt) else {
+            guard let period = ScanReminders.Period(rawValue: periodInt) else {
                 return .everyMonth
             }
             
