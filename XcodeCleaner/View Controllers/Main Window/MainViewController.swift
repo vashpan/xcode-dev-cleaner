@@ -111,7 +111,7 @@ final class MainViewController: NSViewController {
     }
     
     private func checkForInstalledXcode() {
-        XcodeFinder.shared.checkForInstalledXcodeVersion { (installedXcodeVersion) in
+        XcodeFinder.checkForInstalledXcodeVersion { (installedXcodeVersion) in
             if installedXcodeVersion == nil {
                 self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
                                               message: "Check if you have Xcode installed")
