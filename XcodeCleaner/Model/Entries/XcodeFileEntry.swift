@@ -175,7 +175,7 @@ open class XcodeFileEntry: NSObject {
         // calculate own selection
         if self.items.count > 0 {
             let selectedItems = self.items.reduce(0) { (result, item) -> Int in
-                return result + (item.selection == .on ? 1 : 0)
+                return result + (item.isSelected ? 1 : 0)
             }
             
             if selectedItems == self.items.count {
