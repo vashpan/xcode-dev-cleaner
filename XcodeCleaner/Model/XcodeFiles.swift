@@ -79,7 +79,7 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .simulators: XcodeFileEntry(label: "Unused Simulators", selected: false),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
-            .derivedData: XcodeFileEntry(label: "Derived Data", selected: true)
+            .derivedData: XcodeFileEntry(label: "Derived Data", selected: false)
         ]
     }
     
@@ -191,7 +191,7 @@ final public class XcodeFiles {
             if let projectRealPath = projectInfoDict["WorkspacePath"] as? String {
                 let projectRealPathUrl = URL(fileURLWithPath: projectRealPath)
                 
-                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, selected: true)
+                return DerivedDataFileEntry(projectName: name, pathUrl: projectRealPathUrl, selected: false)
             }
         }
         
