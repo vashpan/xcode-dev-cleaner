@@ -19,7 +19,7 @@ public final class ScanReminders {
             var result = DateComponents()
             
             #if DEBUG
-            result.minute = 2 + self.rawValue // for debug we change our periods to minutes
+            result.day = 1 // for debug we change our periods to one day
             #else
             switch self {
                 case .every2weeks:
