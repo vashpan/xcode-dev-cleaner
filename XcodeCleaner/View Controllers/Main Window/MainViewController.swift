@@ -340,21 +340,27 @@ extension MainViewController: NSMenuDelegate {
 // MARK: XcodeEntryCellViewDelegate implementation
 extension MainViewController: XcodeEntryCellViewDelegate {
     func xcodeEntryCellSelectedChanged(_ cell: XcodeEntryCellView, state: NSControl.StateValue, xcodeEntry: XcodeFileEntry?) {
-        if let entry = xcodeEntry {
+        if let item = xcodeEntry {
             if state == .on {
-                entry.selectWithChildItems()
+                item.selectWithChildItems()
             } else if state == .off {
-                entry.deselectWithChildItems()
+                item.deselectWithChildItems()
             }
             
-            // find parent item and refresh it
-            var rootEntry: XcodeFileEntry = entry.parent ?? entry
+            // create a list of current and parent items
+            var rootEntry: XcodeFileEntry = item.parent ?? item
+            var itemsToRefresh: [XcodeFileEntry] = [rootEntry]
             while let parentEntry = rootEntry.parent {
+                itemsToRefresh.append(parentEntry)
                 rootEntry = parentEntry
             }
             rootEntry.recalculateSelection()
             
-            self.outlineView.reloadItem(rootEntry, reloadChildren: true)
+            // refresh parent items and current item
+            for itemToRefresh in itemsToRefresh {
+                self.outlineView.reloadItem(itemToRefresh, reloadChildren: false)
+            }
+            self.outlineView.reloadItem(item, reloadChildren: true)
             
             self.updateTotalAndSelectedSizes()
         }

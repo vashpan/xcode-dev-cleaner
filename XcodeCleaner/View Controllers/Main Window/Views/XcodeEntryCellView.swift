@@ -24,9 +24,8 @@ final class XcodeEntryCellView: NSTableCellView {
     
     // MARK: Setup
     internal func setup(with xcodeEntry: XcodeFileEntry, delegate: XcodeEntryCellViewDelegate) {
-        guard let textField = self.textField else {
-            return
-        }
+        // reassing entry
+        self.entry = xcodeEntry
         
         // delegate
         self.delegate = delegate
@@ -35,8 +34,8 @@ final class XcodeEntryCellView: NSTableCellView {
         self.checkBox.state = self.entrySelectionToControlState(xcodeEntry.selection)
         
         // label
-        textField.stringValue = xcodeEntry.label
-        textField.sizeToFit()
+        self.textField?.stringValue = xcodeEntry.label
+        self.textField?.sizeToFit()
         
         // icon
         self.imageView?.image = self.iconForEntry(xcodeEntry)
@@ -49,8 +48,6 @@ final class XcodeEntryCellView: NSTableCellView {
             self.imageView?.isEnabled = false
             self.textField?.isEnabled = false
         }
-        
-        self.entry = xcodeEntry
     }
     
     // MARK: Helpers
