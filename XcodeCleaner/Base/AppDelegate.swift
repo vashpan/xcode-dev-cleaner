@@ -19,7 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: App lifetime events
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        // update notifications
+        if Preferences.shared.notificationsEnabled {
+            ScanReminders.scheduleReminder(period: Preferences.shared.notificationsPeriod)
+        } else {
+            ScanReminders.disableReminder()
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
