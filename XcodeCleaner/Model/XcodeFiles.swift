@@ -104,6 +104,29 @@ final public class XcodeFiles {
         return folderExists && structureProper
     }
     
+    // runs shell command synchronously and returns an output
+    @discardableResult
+    private static func runShellCommand(_ command: String) -> String {
+        let pipe = Pipe()
+        let process = Process()
+        
+        process.launchPath = "/bin/sh"
+        process.arguments = ["-c", command]
+        process.standardOutput = pipe
+        process.standardError = pipe
+        
+        let file = pipe.fileHandleForReading
+        
+        process.launch()
+        
+        guard let result = String(data: file.readDataToEndOfFile(), encoding: .utf8) else {
+            log.error("XcodeFiles: Error while reading output from shell command: \(command)")
+            return ""
+        }
+        
+        return result
+    }
+    
     public func debugRepresentation() -> String {
         var result = String()
         
@@ -382,8 +405,6 @@ final public class XcodeFiles {
             }
         }
         
-        // TODO: Scan for simulators (~/Library/Developer/CoreSimulator/Devices), or use `xcrun simctl delete unavailable` command if possible, but only after runtime deletion
-        
         // sort by version
         results = results.sorted { (lhs, rhs) -> Bool in
             lhs.version > rhs.version
@@ -495,10 +516,14 @@ final public class XcodeFiles {
         }
         
         // perform deletions
+        let dryRunInfo = dryRun ? "[DRY RUN!]" : String()
+        
         let itemsCount = itemsToDelete.count
         var ordinal = 0
         for itemToDelete in itemsToDelete {
             ordinal += 1
+            
+            // TODO: Special considerations for deleting simulators
             
             DispatchQueue.main.async { [weak self] in
                 if let strongSelf = self {
@@ -511,7 +536,6 @@ final public class XcodeFiles {
                 }
             }
             
-            let dryRunInfo = dryRun ? "[DRY RUN!]" : String()
             log.info("Deleting \(dryRunInfo): \(itemToDelete.location): \(itemToDelete.label) (\(itemToDelete.path.path))")
             
             if dryRun {
