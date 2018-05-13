@@ -18,8 +18,8 @@ public protocol XcodeFilesScanDelegate: class {
 // MARK: - Xcode delete delegate
 public protocol XcodeFilesDeleteDelegate: class {
     func deleteWillBegin(xcodeFiles: XcodeFiles)
-    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL, current: Int, total: Int)
-    func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL)
+    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL?, current: Int, total: Int)
+    func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL?)
     func deleteDidFinish(xcodeFiles: XcodeFiles)
 }
 

@@ -95,17 +95,17 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
         self.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
     }
     
-    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL, current: Int, total: Int) {
+    func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL?, current: Int, total: Int) {
         let progress = Double(current) / Double(total) * 100.0
         self.state = .working(title: location.capitalized, details: label, progress: progress)
     }
     
-    func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL) {
+    func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL?) {
         // show error message
         let alert = NSAlert()
         alert.alertStyle = .critical
         alert.messageText = "Failed to delete item"
-        alert.informativeText = "Following file couldn't be removed:\n\(location.capitalized): \(url.path)"
+        alert.informativeText = "Following file couldn't be removed:\n\(location.capitalized): \(url?.path ?? "-")"
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
