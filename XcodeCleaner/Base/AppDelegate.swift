@@ -25,6 +25,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             ScanReminders.disableReminder()
         }
+        
+        // information about upcoming notifications
+        if let upcomingReminderDate = ScanReminders.dateOfNextReminder {
+            log.info("Next reminder: \(upcomingReminderDate.description(with: Locale.current))")
+        } else {
+            log.info("No reminder scheduled!")
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

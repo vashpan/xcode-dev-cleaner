@@ -35,6 +35,15 @@ public final class ScanReminders {
         }
     }
     
+    // MARK: Properties
+    public static var dateOfNextReminder: Date? {
+        if let firstScheduledNotification = NSUserNotificationCenter.default.scheduledNotifications.first {
+            return firstScheduledNotification.deliveryDate
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: Constants
     private static let reminderIdentifier = "com.oneminutegames.XcodeCleaner.scanReminder"
     
