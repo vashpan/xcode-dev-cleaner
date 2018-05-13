@@ -1,5 +1,7 @@
 # Xcode Cleaner
 
+![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
+
 *Currently tested with macOS 10.13 and Xcode 9.x*
 
 If you want to reclaim tens of gigabytes of your storage used for various Xcode caches - this tool is for you!
@@ -10,12 +12,8 @@ and could consume a large amount of your storage, which is especially important 
 Xcode Cleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about 
 scan after a while.
 
-Please note that **this application is relying on internal folder structures and undocumented things**. It could stop working with
-newer versions of Xcode! Although I tried to make sure it works as supposed to, please **make backup before use it**.
-
-If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
-
-http://www.one-minute-games.com
+Please note that **this application is relying on internal folder structures and undocumented features**. It could stop working with
+newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please **make backup before use it**.
 
 ## What Xcode Cleaner could actually clean?
 
@@ -50,3 +48,16 @@ This section is not selected by default.
 This is the major "cache" part of Xcode files, where autocompletion data, logs, debug builds, intermediate products and other stuff lives.
 The point is that it could be regenerated if necessary. Also some older projects could be removed completely because its rather unusual that 
 we would use them again.
+
+## Contact
+
+If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
+
+Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
+Website: http://www.one-minute-games.com
+
+## Contribution
+
+This application is my first macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, maybe some caches I missed, let me know as well in issues.
+
+Application is licensed using GPL3.
