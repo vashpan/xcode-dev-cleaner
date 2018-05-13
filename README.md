@@ -54,6 +54,7 @@ we would use them again.
 If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
 
 Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
+
 Website: http://www.one-minute-games.com
 
 ## Contribution
