@@ -26,22 +26,13 @@ to your computer, for efficient debugging. It consumes around 2GB per version. E
 
 It could accumulate to hold tens of gigabytes of data.
 
-This section is selected by default, with exception of the latest versions.
-
-### Unused Simulators
-
-Sometime we need older simulators for testing. Unfortunately there is no easy way to delete them when we don't need them, this
-section helps with removing them.
-
-This section is not selected by default.
+This section is selected by default, with exception of the latest version of each system.
 
 ### Archives
 
 When we create build for distrubution or export, a new archive is created. For each version it contains a build, debug symbols and 
 other informations. Usually we need those archived items for crashes symbolications for example, but for sure we don't need all of them.
 Xcode Cleaner allows to quickly inspect the archives and delete older ones or builds that are not on store.
-
-This section is not selected by default.
 
 ### Derived Data
 

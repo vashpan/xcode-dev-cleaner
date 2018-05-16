@@ -28,7 +28,6 @@
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
-		71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +46,7 @@
 		7162E12A209901FB00081E4E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7162E12C209905BC00081E4E /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		7162E12E209C9CED00081E4E /* XcodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFinder.swift; sourceTree = "<group>"; };
+		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -57,7 +57,6 @@
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
 		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
-		71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorFileEntry.swift; sourceTree = "<group>"; };
 		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				7110B4902030F17B00EDBFA3 /* XcodeCleaner */,
+				7164260420ACE2EC00D47EF2 /* README.md */,
 				7110B48F2030F17B00EDBFA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -194,7 +194,6 @@
 				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
 				71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */,
 				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
-				71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */,
 				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
 			);
 			path = Entries;
@@ -304,7 +303,6 @@
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
 				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
-				71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */,
 				71B01E902082551000940041 /* SizeCellView.swift in Sources */,
 				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
