@@ -179,7 +179,11 @@ open class XcodeFileEntry: NSObject {
             }
             
             if selectedItems == self.items.count {
-                result = .on
+                if self.items.filter( { $0.selection == .mixed } ).count > 0 {
+                    result = .mixed
+                } else {
+                    result = .on
+                }
             } else if selectedItems == 0 {
                 result = .off
             } else {
