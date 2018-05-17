@@ -197,28 +197,26 @@ final public class XcodeFiles {
     }
     
     private func archiveFileEntry(from location: URL) -> ArchiveFileEntry? {
-        let splitted = location.lastPathComponent.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
-        
-        if splitted.count < 2 {
-            return nil // probably completely not what we wanted, like .DS_Store file
-        }
-        
-        // check for project name
-        let projectName: String
-        if let name = splitted.first {
-            projectName = String(name)
-        } else {
-            log.warning("XcodeFiles: Cannot get project name from archive: \(location.path)")
+        guard location.pathExtension == "xcarchive" else {
             return nil
         }
         
         // open archive info.plist for more informations
+        let projectName: String
         let bundleName: String
         let bundleVersion: Version
         let bundleBuild: String
         
         let infoPath = location.appendingPathComponent("Info.plist")
         if let archiveInfoDict = NSDictionary(contentsOf: infoPath) {
+            // project name
+            if let name = archiveInfoDict["Name"] as? String {
+                projectName = name
+            } else {
+                log.warning("XcodeFiles: Cannot get project name from archive: \(location.path)")
+                return nil
+            }
+            
             if let archiveProperties = archiveInfoDict["ApplicationProperties"] as? [String : Any] {
                 // bundle name
                 if let bundle = archiveProperties["CFBundleIdentifier"] as? String {
