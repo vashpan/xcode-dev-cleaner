@@ -13,3 +13,6 @@ build/*
 
 # test suite files
 TestSuite/*
+
+# builds
+Builds/*
