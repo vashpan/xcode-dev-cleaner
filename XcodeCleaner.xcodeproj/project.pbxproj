@@ -95,6 +95,7 @@
 			children = (
 				719B25D7205ECA40007560C0 /* Utilities */,
 				71A21A0A2053F5F500B55651 /* Model */,
+				7164260920B0A5C000D47EF2 /* Managers */,
 				71743ECA2078147B00EC0FE2 /* View Controllers */,
 				7110B4A22033A9CE00EDBFA3 /* Base */,
 				7110B4A12033A9C600EDBFA3 /* Resources */,
@@ -128,6 +129,15 @@
 				7162E12A209901FB00081E4E /* PreferencesViewController.swift */,
 			);
 			path = "Preferences Window";
+			sourceTree = "<group>";
+		};
+		7164260920B0A5C000D47EF2 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */,
+				7162E12C209905BC00081E4E /* Preferences.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
@@ -176,8 +186,6 @@
 				71FD37D5206AD67A0042812D /* Entries */,
 				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
 				7162E12E209C9CED00081E4E /* XcodeFinder.swift */,
-				71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */,
-				7162E12C209905BC00081E4E /* Preferences.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
