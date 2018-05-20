@@ -215,6 +215,7 @@ final public class XcodeFiles {
         let bundleName: String
         let bundleVersion: Version
         let bundleBuild: String
+        let archiveDate: Date
         
         let infoPath = location.appendingPathComponent("Info.plist")
         if let archiveInfoDict = NSDictionary(contentsOf: infoPath) {
@@ -223,6 +224,14 @@ final public class XcodeFiles {
                 projectName = name
             } else {
                 log.warning("XcodeFiles: Cannot get project name from archive: \(location.path)")
+                return nil
+            }
+            
+            // archive date
+            if let date = archiveInfoDict["CreationDate"] as? Date {
+                archiveDate = date
+            } else {
+                log.warning("XcodeFiles: Cannot get archive date from archive: \(location.path)")
                 return nil
             }
             
@@ -260,11 +269,12 @@ final public class XcodeFiles {
         }
         
         return ArchiveFileEntry(projectName: projectName,
-                                 bundleName: bundleName,
-                                    version: bundleVersion,
-                                      build: bundleBuild,
-                                   location: location,
-                                   selected: false)
+                                bundleName: bundleName,
+                                version: bundleVersion,
+                                build: bundleBuild,
+                                date: archiveDate,
+                                location: location,
+                                selected: false)
     }
     
     // MARK: Clearing items

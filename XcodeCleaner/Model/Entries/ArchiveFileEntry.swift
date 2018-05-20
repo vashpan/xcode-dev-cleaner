@@ -26,15 +26,23 @@ public final class ArchiveFileEntry: XcodeFileEntry {
     public let bundleName: String
     public let version: Version
     public let build: String
+    public let date: Date
     
     // MARK: Initialization
-    public init(projectName: String, bundleName: String, version: Version, build: String, location: URL, selected: Bool) {
+    public init(projectName: String, bundleName: String, version: Version, build: String, date: Date, location: URL, selected: Bool) {
         self.projectName = projectName
         self.bundleName = bundleName
         self.version = version
         self.build = build
+        self.date = date
         
-        super.init(label: "\(self.version.description) (\(self.build))", icon: nil, selected: selected)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        
+        let dateString = dateFormatter.string(from: self.date)
+        
+        super.init(label: "\(self.version.description) (\(self.build)) - \(dateString)", icon: nil, selected: selected)
         
         self.addPath(path: location)
     }
