@@ -51,7 +51,7 @@ internal final class CleaningViewController: NSViewController {
         }
     }
     
-    // MARK: Initialization
+    // MARK: Initialization & overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +61,12 @@ internal final class CleaningViewController: NSViewController {
         // check if we are in dry run and mark it
         let dryRunText = Preferences.shared.dryRunEnabled ? "(Dry run) " : String()
         self.headerLabel.stringValue = "\(dryRunText)Cleaning Xcode cache files..."
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        self.view.window?.styleMask.remove(.resizable)
     }
     
     // MARK: Updating state
