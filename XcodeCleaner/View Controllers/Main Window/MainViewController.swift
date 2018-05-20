@@ -131,6 +131,10 @@ final class MainViewController: NSViewController {
         }
     }
     
+    private func formatBytesToString(bytes: Int64) -> String {
+        return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
+    }
+    
     private func updateTotalAndSelectedSizes() {
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
@@ -138,14 +142,12 @@ final class MainViewController: NSViewController {
         }
         
         // total size
-        let totalSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
+        let totalSizeString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
         self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
-        
         self.view.window?.title = "Xcode Cleaner - \(totalSizeString) available to clean"
         
         // selected size
-        let selectedSizeString = ByteCountFormatter.string(fromByteCount: xcodeFiles.selectedSize, countStyle: .file)
-        self.bytesSelectedTextField.stringValue = "Selected: \(selectedSizeString)"
+        self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: xcodeFiles.selectedSize))"
     }
     
     private func fatalErrorMessageAndQuit(title: String, message: String) {
