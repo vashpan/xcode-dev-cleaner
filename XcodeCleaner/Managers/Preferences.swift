@@ -27,6 +27,7 @@ public final class Preferences {
     private let notificationsEnabledKey = "NotificationsEnabledKey"
     private let notificationsPeriodKey = "NotificationsPeriodKey"
     private let dryRunEnabledKey = "DryRunEnabledKey"
+    private let totalBytesCleanedKey = "TotalBytesCleaned"
     
     // MARK: Initialization
     public init() {
@@ -83,6 +84,21 @@ public final class Preferences {
         
         set {
             UserDefaults.standard.set(newValue, forKey: dryRunEnabledKey)
+        }
+    }
+    
+    public var totalBytesCleaned: Int64 {
+        get {
+            if let value = UserDefaults.standard.object(forKey: totalBytesCleanedKey) as? NSNumber {
+                return value.int64Value
+            }
+            
+            return 0
+        }
+        
+        set {
+            let numberValue = NSNumber(value: newValue)
+            UserDefaults.standard.set(numberValue, forKey: totalBytesCleanedKey)
         }
     }
 }
