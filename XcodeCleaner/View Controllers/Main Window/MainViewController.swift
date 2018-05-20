@@ -229,8 +229,20 @@ final class MainViewController: NSViewController {
             if messageResult == .alertFirstButtonReturn {
                 self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
                 
+                let dryRunEnabled = Preferences.shared.dryRunEnabled
+                
+                #if DEBUG
+                Preferences.shared.totalBytesCleaned += xcodeFiles.selectedSize
+                #else
+                if !dryRunEnabled {
+                    Preferences.shared.totalBytesCleaned += xcodeFiles.selectedSize
+                }
+                #endif
+                
+                log.info("MainViewController: Total bytes cleaned - \(self.formatBytesToString(bytes: Preferences.shared.totalBytesCleaned))")
+                
                 DispatchQueue.global(qos: .userInitiated).async {
-                    xcodeFiles.deleteSelectedEntries(dryRun: Preferences.shared.dryRunEnabled)
+                    xcodeFiles.deleteSelectedEntries(dryRun: dryRunEnabled)
                 }
             }
         }
