@@ -481,7 +481,7 @@ DQ
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTd-49-WSb">
                                 <rect key="frame" x="18" y="147" width="320" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved total of 100,0GB thanks to XcodeCleaner!" id="eYP-cA-BOu">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved total of 100,0GB thanks to XcodeCleaner!" allowsEditingTextAttributes="YES" id="eYP-cA-BOu">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -489,6 +489,9 @@ DQ
                             </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="xcodeCleanerBenefitsTextField" destination="BTd-49-WSb" id="eW6-sQ-kmC"/>
+                    </connections>
                 </viewController>
                 <customObject id="ZG3-NQ-XbY" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

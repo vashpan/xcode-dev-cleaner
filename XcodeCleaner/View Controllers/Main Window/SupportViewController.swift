@@ -21,10 +21,15 @@
 import Cocoa
 
 internal final class SupportViewController: NSViewController {
-    // MARK: Properties
+    // MARK: Properties & outlets
+    @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
     
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // update benefits label
+        let totalBytesString = ByteCountFormatter.string(fromByteCount: Preferences.shared.totalBytesCleaned, countStyle: .file)
+        self.xcodeCleanerBenefitsTextField.stringValue = "You saved total of \(totalBytesString) thanks to XcodeCleaner!"
     }
 }
