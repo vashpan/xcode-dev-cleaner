@@ -29,13 +29,34 @@ internal final class SupportViewController: NSViewController {
         super.viewDidLoad()
         
         // update benefits label
-        let totalBytesString = ByteCountFormatter.string(fromByteCount: Preferences.shared.totalBytesCleaned, countStyle: .file)
-        self.xcodeCleanerBenefitsTextField.stringValue = "You saved total of \(totalBytesString) thanks to XcodeCleaner!"
+        self.xcodeCleanerBenefitsTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
         self.view.window?.styleMask.remove(.resizable)
+    }
+    
+    // MARK: Helpers
+    private func benefitsAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
+        let totalBytesString = ByteCountFormatter.string(fromByteCount: totalBytesCleaned, countStyle: .file)
+        
+        let fontSize: CGFloat = 13.0
+        let result = NSMutableAttributedString()
+        
+        let partOne = NSAttributedString(string: "You saved total of ",
+                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        result.append(partOne)
+        
+        let partTwo = NSAttributedString(string: "\(totalBytesString)",
+                                            attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
+        result.append(partTwo)
+        
+        let partThree = NSAttributedString(string: " thanks to XcodeCleaner!",
+                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        result.append(partThree)
+        
+        return result
     }
 }

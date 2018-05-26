@@ -488,7 +488,7 @@ DQ
                                 </buttonCell>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hs-MD-87I">
-                                <rect key="frame" x="18" y="168" width="339" height="17"/>
+                                <rect key="frame" x="18" y="168" width="394" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="If you think this app helped you, consider a small tip" id="qCK-kW-qFt">
                                     <font key="font" metaFont="systemBold"/>
@@ -497,7 +497,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTd-49-WSb">
-                                <rect key="frame" x="18" y="147" width="320" height="17"/>
+                                <rect key="frame" x="18" y="147" width="394" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved total of 100,0GB thanks to XcodeCleaner!" allowsEditingTextAttributes="YES" id="eYP-cA-BOu">
                                     <font key="font" metaFont="system"/>

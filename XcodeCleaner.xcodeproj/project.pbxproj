@@ -19,6 +19,7 @@
 		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
 		7162E12F209C9CED00081E4E /* XcodeFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12E209C9CED00081E4E /* XcodeFinder.swift */; };
 		7164260820B090FE00D47EF2 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164260720B090FD00D47EF2 /* SupportViewController.swift */; };
+		7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7164260B20B8903000D47EF2 /* StoreKit.framework */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -49,6 +50,7 @@
 		7162E12E209C9CED00081E4E /* XcodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFinder.swift; sourceTree = "<group>"; };
 		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7164260720B090FD00D47EF2 /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
+		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 				7110B4902030F17B00EDBFA3 /* XcodeCleaner */,
 				7164260420ACE2EC00D47EF2 /* README.md */,
 				7110B48F2030F17B00EDBFA3 /* Products */,
+				7164260A20B8903000D47EF2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +142,14 @@
 				7162E12C209905BC00081E4E /* Preferences.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		7164260A20B8903000D47EF2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7164260B20B8903000D47EF2 /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
@@ -245,6 +257,9 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
