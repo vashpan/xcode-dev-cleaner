@@ -19,7 +19,6 @@
 		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
 		7164260820B090FE00D47EF2 /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164260720B090FD00D47EF2 /* SupportViewController.swift */; };
 		7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7164260B20B8903000D47EF2 /* StoreKit.framework */; };
-		7164260E20BA1E6800D47EF2 /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7164260D20BA1E6800D47EF2 /* Donations.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -47,7 +46,6 @@
 		7162E1282097624600081E4E /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 		7162E12A209901FB00081E4E /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		7162E12C209905BC00081E4E /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
-		7162E12E209C9CED00081E4E /* XcodeFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFinder.swift; sourceTree = "<group>"; };
 		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7164260720B090FD00D47EF2 /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };

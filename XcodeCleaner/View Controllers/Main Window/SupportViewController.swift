@@ -19,10 +19,24 @@
 //  along with XcodeCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
+import StoreKit
 
 internal final class SupportViewController: NSViewController {
+    // MARK: Types
+    enum DonationType: String {
+        case smallCoffee = "SMALL_COFFEE"
+        case bigCoffee = "BIG_COFFEE"
+        case lunch = "LUNCH"
+        
+        static var allProducts: [DonationType] {
+            return [.smallCoffee, .bigCoffee, .lunch]
+        }
+    }
+    
     // MARK: Properties & outlets
     @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
+    
+    private var productsRequest: SKProductsRequest? = nil
     
     // MARK: Initialization & overrides
     override func viewDidLoad() {
@@ -30,6 +44,9 @@ internal final class SupportViewController: NSViewController {
         
         // update benefits label
         self.xcodeCleanerBenefitsTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        
+        // update donation products
+        self.fetchProductsInfo()
     }
     
     override func viewDidAppear() {
@@ -59,4 +76,31 @@ internal final class SupportViewController: NSViewController {
         
         return result
     }
+    
+    // MARK: Purchasing donations
+    private func fetchProductsInfo() {
+        let donationProductsIds = DonationType.allProducts.map { $0.rawValue }
+        
+        self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
+        self.productsRequest?.delegate = self
+        self.productsRequest?.start()
+    }
+    
+    private func buy(product: DonationType) {
+        
+    }
 }
+
+extension SupportViewController: SKProductsRequestDelegate {
+    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        for product in response.products {
+            guard let productType = DonationType(rawValue: product.productIdentifier) else {
+                log.error("SupportViewController: Unrecognized product: \(product.productIdentifier)")
+                continue
+            }
+            
+            log.info("SupportViewController: Product received: \(productType.rawValue) = \(product.localizedTitle)")
+        }
+    }
+}
+
