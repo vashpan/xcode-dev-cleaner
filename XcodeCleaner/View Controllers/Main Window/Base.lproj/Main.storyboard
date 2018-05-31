@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -368,6 +368,7 @@ DQ
                             <constraint firstAttribute="bottom" secondItem="S06-6o-y2V" secondAttribute="bottom" constant="20" id="A0K-GU-eaV"/>
                             <constraint firstAttribute="trailing" secondItem="ynz-vf-S6e" secondAttribute="trailing" constant="20" id="CSy-Zq-kPb"/>
                             <constraint firstItem="7x4-OM-pal" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="CZd-hj-dbW"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nSL-jb-aDV" secondAttribute="trailing" constant="20" symbolic="YES" id="JKk-Rn-Sbj"/>
                             <constraint firstItem="0Yp-uh-F76" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="JvS-uJ-6t5"/>
                             <constraint firstItem="8Gh-Ea-jZF" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Kv5-LU-bRM"/>
                             <constraint firstAttribute="trailing" secondItem="0Yp-uh-F76" secondAttribute="trailing" constant="20" id="MmA-VX-2cE"/>
