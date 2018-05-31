@@ -123,11 +123,9 @@ final class MainViewController: NSViewController {
     }
     
     private func checkForInstalledXcode() {
-        XcodeFinder.checkForInstalledXcodeVersion { (installedXcodeVersion) in
-            if installedXcodeVersion == nil {
-                self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
-                                              message: "Check if you have Xcode installed")
-            }
+        if NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") == nil {
+            self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
+                                          message: "Check if you have Xcode installed")
         }
     }
     
