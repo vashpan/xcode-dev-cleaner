@@ -35,6 +35,8 @@ internal final class SupportViewController: NSViewController {
     
     // MARK: Properties & outlets
     @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
+    @IBOutlet weak var closeButton: NSButton!
+    private var loadingView: LoadingView! = nil
     
     private var productsRequest: SKProductsRequest? = nil
     
@@ -47,6 +49,10 @@ internal final class SupportViewController: NSViewController {
         
         // update donation products
         self.fetchProductsInfo()
+        
+        // start loading
+        self.loadingView = LoadingView(frame: self.view.frame)
+        self.view.addSubview(self.loadingView, positioned: .below, relativeTo: self.closeButton)
     }
     
     override func viewDidAppear() {
@@ -93,6 +99,10 @@ internal final class SupportViewController: NSViewController {
 
 extension SupportViewController: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        DispatchQueue.main.async {
+            self.loadingView.removeFromSuperview()
+        }
+        
         for product in response.products {
             guard let productType = DonationType(rawValue: product.productIdentifier) else {
                 log.error("SupportViewController: Unrecognized product: \(product.productIdentifier)")

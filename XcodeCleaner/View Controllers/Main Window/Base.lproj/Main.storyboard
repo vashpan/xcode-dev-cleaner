@@ -124,8 +124,7 @@
                     <window key="window" title="Xcode Cleaner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" tabbingMode="disallowed" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" fullScreenNone="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="657" height="371"/>
+                        <rect key="contentRect" x="485" y="339" width="657" height="371"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
@@ -545,6 +544,7 @@ DQ
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="oxG-i5-oR5" id="j0Z-aR-BM6"/>
                         <outlet property="xcodeCleanerBenefitsTextField" destination="BTd-49-WSb" id="eW6-sQ-kmC"/>
                     </connections>
                 </viewController>
