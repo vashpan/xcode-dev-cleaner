@@ -423,10 +423,10 @@ DQ
             </objects>
             <point key="canvasLocation" x="143.5" y="1033"/>
         </scene>
-        <!--Support View Controller-->
+        <!--Donation View Controller-->
         <scene sceneID="Ggl-ej-5a2">
             <objects>
-                <viewController id="IAy-IY-fju" customClass="SupportViewController" customModule="XcodeCleaner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IAy-IY-fju" customClass="DonationViewController" customModule="XcodeCleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="hK8-Ap-qEC">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="205"/>
                         <autoresizingMask key="autoresizingMask"/>

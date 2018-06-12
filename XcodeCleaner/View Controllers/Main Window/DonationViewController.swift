@@ -1,5 +1,5 @@
 //
-//  SupportViewController.swift
+//  DonationViewController.swift
 //  XcodeCleaner
 //
 //  Created by Konrad Kołakowski on 19.05.2018.
@@ -21,7 +21,7 @@
 import Cocoa
 import StoreKit
 
-internal final class SupportViewController: NSViewController {
+internal final class DonationViewController: NSViewController {
     // MARK: Types
     enum DonationType: String {
         case smallCoffee = "SMALL_COFFEE"
@@ -107,7 +107,7 @@ internal final class SupportViewController: NSViewController {
     }
 }
 
-extension SupportViewController: SKProductsRequestDelegate {
+extension DonationViewController: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         DispatchQueue.main.async {
             self.loadingView.removeFromSuperview()
