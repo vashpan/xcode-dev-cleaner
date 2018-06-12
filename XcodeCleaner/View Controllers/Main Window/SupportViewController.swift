@@ -36,6 +36,16 @@ internal final class SupportViewController: NSViewController {
     // MARK: Properties & outlets
     @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
     @IBOutlet weak var closeButton: NSButton!
+    
+    @IBOutlet weak var lunchPriceLabel: NSTextField!
+    @IBOutlet weak var lunchInfoLabel: NSTextField!
+    
+    @IBOutlet weak var bigCoffeePriceLabel: NSTextField!
+    @IBOutlet weak var bigCoffeeInfoLabel: NSTextField!
+    
+    @IBOutlet weak var smallCoffeePriceLabel: NSTextField!
+    @IBOutlet weak var smallCoffeeInfoLabel: NSTextField!
+    
     private var loadingView: LoadingView! = nil
     
     private var productsRequest: SKProductsRequest? = nil
@@ -110,6 +120,24 @@ extension SupportViewController: SKProductsRequestDelegate {
             }
             
             log.info("SupportViewController: Product received: \(productType.rawValue) = \(product.localizedTitle)")
+            
+            DispatchQueue.main.async {
+                let nf = NumberFormatter()
+                nf.numberStyle = .currency
+                nf.locale = product.priceLocale
+                
+                switch productType {
+                    case .smallCoffee:
+                        self.smallCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
+                        self.smallCoffeeInfoLabel.stringValue = product.localizedTitle
+                    case .bigCoffee:
+                        self.bigCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
+                        self.bigCoffeeInfoLabel.stringValue = product.localizedTitle
+                    case .lunch:
+                        self.lunchPriceLabel.stringValue = nf.string(from: product.price) ?? ""
+                        self.lunchInfoLabel.stringValue = product.localizedTitle
+                }
+            }
         }
     }
 }
