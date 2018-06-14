@@ -22,17 +22,6 @@ import Cocoa
 import StoreKit
 
 internal final class DonationViewController: NSViewController {
-    // MARK: Types
-    enum DonationType: String {
-        case smallCoffee = "SMALL_COFFEE"
-        case bigCoffee = "BIG_COFFEE"
-        case lunch = "LUNCH"
-        
-        static var allProducts: [DonationType] {
-            return [.smallCoffee, .bigCoffee, .lunch]
-        }
-    }
-    
     // MARK: Properties & outlets
     @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
     @IBOutlet weak var closeButton: NSButton!
@@ -49,6 +38,7 @@ internal final class DonationViewController: NSViewController {
     private var loadingView: LoadingView! = nil
     
     private var productsRequest: SKProductsRequest? = nil
+    private var iapProducts: [SKProduct] = []
     
     // MARK: Initialization & overrides
     override func viewDidLoad() {
@@ -95,14 +85,14 @@ internal final class DonationViewController: NSViewController {
     
     // MARK: Purchasing donations
     private func fetchProductsInfo() {
-        let donationProductsIds = DonationType.allProducts.map { $0.rawValue }
+        let donationProductsIds = ["SMALL_COFFEE", "BIG_COFFEE", "LUNCH"]
         
         self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
         self.productsRequest?.delegate = self
         self.productsRequest?.start()
     }
     
-    private func buy(product: DonationType) {
+    private func buy(product: SKProduct) {
         
     }
 }
@@ -113,29 +103,27 @@ extension DonationViewController: SKProductsRequestDelegate {
             self.loadingView.removeFromSuperview()
         }
         
-        for product in response.products {
-            guard let productType = DonationType(rawValue: product.productIdentifier) else {
-                log.error("SupportViewController: Unrecognized product: \(product.productIdentifier)")
-                continue
-            }
-            
-            log.info("SupportViewController: Product received: \(productType.rawValue) = \(product.localizedTitle)")
+        self.iapProducts = response.products
+        for product in self.iapProducts {
+            log.info("SupportViewController: Product received: \(product.productIdentifier) = \(product.localizedTitle)")
             
             DispatchQueue.main.async {
                 let nf = NumberFormatter()
                 nf.numberStyle = .currency
                 nf.locale = product.priceLocale
                 
-                switch productType {
-                    case .smallCoffee:
+                switch product.productIdentifier {
+                    case "SMALL_COFFEE":
                         self.smallCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
                         self.smallCoffeeInfoLabel.stringValue = product.localizedTitle
-                    case .bigCoffee:
+                    case "BIG_COFFEE":
                         self.bigCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
                         self.bigCoffeeInfoLabel.stringValue = product.localizedTitle
-                    case .lunch:
+                    case "LUNCH":
                         self.lunchPriceLabel.stringValue = nf.string(from: product.price) ?? ""
                         self.lunchInfoLabel.stringValue = product.localizedTitle
+                    default:
+                        log.error("SupportViewController: Unrecognized product: \(product.productIdentifier)")
                 }
             }
         }
