@@ -36,9 +36,8 @@ internal final class DonationViewController: NSViewController {
     @IBOutlet weak var smallCoffeeInfoLabel: NSTextField!
     
     private var loadingView: LoadingView! = nil
-    
-    private var productsRequest: SKProductsRequest? = nil
-    private var iapProducts: [SKProduct] = []
+
+    private var donationProducts: [Donations.Product] = []
     
     // MARK: Initialization & overrides
     override func viewDidLoad() {
@@ -48,7 +47,8 @@ internal final class DonationViewController: NSViewController {
         self.xcodeCleanerBenefitsTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // update donation products
-        self.fetchProductsInfo()
+        Donations.shared.delegate = self
+        Donations.shared.fetchProductsInfo()
         
         // start loading
         self.loadingView = LoadingView(frame: self.view.frame)
@@ -82,51 +82,72 @@ internal final class DonationViewController: NSViewController {
         
         return result
     }
-    
-    // MARK: Purchasing donations
-    private func fetchProductsInfo() {
-        let donationProductsIds = ["SMALL_COFFEE", "BIG_COFFEE", "LUNCH"]
-        
-        self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
-        self.productsRequest?.delegate = self
-        self.productsRequest?.start()
+
+    private func productKindForTag(_ tag: Int) -> Donations.Product.Kind? {
+        switch tag {
+            case 1: return .smallCoffee
+            case 2: return .bigCoffee
+            case 3: return .lunch
+            default: return nil
+        }
     }
     
-    private func buy(product: SKProduct) {
+    private func productForProductKind(_ productKind: Donations.Product.Kind) -> Donations.Product? {
+        return self.donationProducts.filter { $0.kind == productKind }.first
+    }
+
+    // MARK: Actions
+    @IBAction func buyProduct(_ sender: NSButton) {
+        guard let productKind = self.productKindForTag(sender.tag) else {
+            log.warning("SupportViewController: Product kind for given sender tag not found: \(sender.tag)")
+            return
+        }
         
+        guard let product = self.productForProductKind(productKind) else {
+            log.warning("SupportViewController: Product of given kind not found: \(productKind)")
+            return
+        }
+        
+        // TODO: Call real 'buy' method: 'Donations.shared.buy(product: product)'
+        log.info("SupportViewController: Will buy product: \(product.identifier)")
     }
 }
 
-extension DonationViewController: SKProductsRequestDelegate {
-    public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+extension DonationViewController: DonationsDelegate {
+    public func donations(_ donations: Donations, didReceive products: [Donations.Product]) {
         DispatchQueue.main.async {
             self.loadingView.removeFromSuperview()
-        }
         
-        self.iapProducts = response.products
-        for product in self.iapProducts {
-            log.info("SupportViewController: Product received: \(product.productIdentifier) = \(product.localizedTitle)")
+            self.donationProducts = products
             
-            DispatchQueue.main.async {
-                let nf = NumberFormatter()
-                nf.numberStyle = .currency
-                nf.locale = product.priceLocale
-                
-                switch product.productIdentifier {
-                    case "SMALL_COFFEE":
-                        self.smallCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
-                        self.smallCoffeeInfoLabel.stringValue = product.localizedTitle
-                    case "BIG_COFFEE":
-                        self.bigCoffeePriceLabel.stringValue = nf.string(from: product.price) ?? ""
-                        self.bigCoffeeInfoLabel.stringValue = product.localizedTitle
-                    case "LUNCH":
-                        self.lunchPriceLabel.stringValue = nf.string(from: product.price) ?? ""
-                        self.lunchInfoLabel.stringValue = product.localizedTitle
-                    default:
-                        log.error("SupportViewController: Unrecognized product: \(product.productIdentifier)")
+            // update UI
+            for product in self.donationProducts {
+                switch product.kind {
+                    case .smallCoffee:
+                        self.smallCoffeePriceLabel.stringValue = product.price
+                        self.smallCoffeeInfoLabel.stringValue = product.info
+                    case .bigCoffee:
+                        self.bigCoffeePriceLabel.stringValue = product.price
+                        self.bigCoffeeInfoLabel.stringValue = product.info
+                    case .lunch:
+                        self.lunchPriceLabel.stringValue = product.price
+                        self.lunchInfoLabel.stringValue = product.info
+
                 }
             }
         }
+    }
+    
+    public func transactionDidStart(for product: Donations.Product) {
+        
+    }
+    
+    public func transactionIsBeingProcessed(for product: Donations.Product) {
+        
+    }
+    
+    public func transactionDidFinish(for product: Donations.Product, error: Error?) {
+        
     }
 }
 
