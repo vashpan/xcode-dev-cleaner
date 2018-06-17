@@ -116,14 +116,12 @@ extension Donations: SKPaymentTransactionObserver {
             switch transaction.transactionState {
                 case .purchasing, .deferred:
                     self.delegate?.transactionIsBeingProcessed(for: transactionProduct)
-                case .purchased:
+                case .purchased, .failed:
                     self.delegate?.transactionDidFinish(for: transactionProduct, error: transaction.error)
                     queue.finishTransaction(transaction)
                 case .restored:
                     // we don't support restored purchases here, so no delegate
                     queue.finishTransaction(transaction)
-                default:
-                    break
             }
         }
     }
