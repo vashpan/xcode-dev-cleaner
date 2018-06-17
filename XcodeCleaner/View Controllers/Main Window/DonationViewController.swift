@@ -43,22 +43,33 @@ internal final class DonationViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // make loading view
+        self.loadingView = LoadingView(frame: self.view.frame)
+        self.startLoading()
+        
         // update benefits label
         self.xcodeCleanerBenefitsTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // update donation products
         Donations.shared.delegate = self
         Donations.shared.fetchProductsInfo()
-        
-        // start loading
-        self.loadingView = LoadingView(frame: self.view.frame)
-        self.view.addSubview(self.loadingView, positioned: .below, relativeTo: self.closeButton)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
         self.view.window?.styleMask.remove(.resizable)
+    }
+    
+    // MARK: Loading
+    private func startLoading() {
+        if self.loadingView.superview == nil {
+            self.view.addSubview(self.loadingView)
+        }
+    }
+    
+    private func stopLoading() {
+        self.loadingView.removeFromSuperview()
     }
     
     // MARK: Helpers
@@ -108,16 +119,13 @@ internal final class DonationViewController: NSViewController {
             return
         }
         
-        // TODO: Call real 'buy' method: 'Donations.shared.buy(product: product)'
-        log.info("SupportViewController: Will buy product: \(product.identifier)")
+        Donations.shared.buy(product: product)
     }
 }
 
 extension DonationViewController: DonationsDelegate {
     public func donations(_ donations: Donations, didReceive products: [Donations.Product]) {
         DispatchQueue.main.async {
-            self.loadingView.removeFromSuperview()
-        
             self.donationProducts = products
             
             // update UI
@@ -135,19 +143,42 @@ extension DonationViewController: DonationsDelegate {
 
                 }
             }
+            
+            self.stopLoading()
         }
     }
     
     public func transactionDidStart(for product: Donations.Product) {
-        
+        DispatchQueue.main.async {
+            self.startLoading()
+        }
     }
     
     public func transactionIsBeingProcessed(for product: Donations.Product) {
-        
+        DispatchQueue.main.async {
+            self.startLoading()
+        }
     }
     
     public func transactionDidFinish(for product: Donations.Product, error: Error?) {
-        
+        DispatchQueue.main.async {
+            self.stopLoading()
+            
+            // add a message view
+            var targetMessageViewFrame = self.view.frame
+            targetMessageViewFrame.origin.y += 50.0
+            targetMessageViewFrame.size.height -= 50.0
+            
+            let messageView = MessageView(frame: targetMessageViewFrame)
+            self.view.addSubview(messageView)
+            
+            // check for error or dismiss our donation sheet
+            if error == nil {
+                messageView.message = "🎉 Thank you for your donation!"
+            } else {
+                messageView.message = "😔 Donation failed! Try again later..."
+            }
+        }
     }
 }
 
