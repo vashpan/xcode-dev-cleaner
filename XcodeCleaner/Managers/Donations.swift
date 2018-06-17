@@ -91,6 +91,8 @@ public final class Donations: NSObject {
         payment.quantity = 1
         
         SKPaymentQueue.default().add(payment)
+        
+        self.delegate?.transactionDidStart(for: product)
     }
 }
 
