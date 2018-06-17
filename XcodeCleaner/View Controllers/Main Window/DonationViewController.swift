@@ -35,6 +35,8 @@ internal final class DonationViewController: NSViewController {
     @IBOutlet weak var smallCoffeePriceLabel: NSTextField!
     @IBOutlet weak var smallCoffeeInfoLabel: NSTextField!
     
+    @IBOutlet weak var donationsInterfaceView: NSView!
+    
     private var loadingView: LoadingView! = nil
 
     private var donationProducts: [Donations.Product] = []
@@ -64,11 +66,13 @@ internal final class DonationViewController: NSViewController {
     // MARK: Loading
     private func startLoading() {
         if self.loadingView.superview == nil {
+            self.donationsInterfaceView.isHidden = true
             self.view.addSubview(self.loadingView)
         }
     }
     
     private func stopLoading() {
+        self.donationsInterfaceView.isHidden = false
         self.loadingView.removeFromSuperview()
     }
     
@@ -164,12 +168,12 @@ extension DonationViewController: DonationsDelegate {
         DispatchQueue.main.async {
             self.stopLoading()
             
-            // add a message view
-            var targetMessageViewFrame = self.view.frame
-            targetMessageViewFrame.origin.y += 50.0
-            targetMessageViewFrame.size.height -= 50.0
+            // hide donations interface
+            self.donationsInterfaceView.isHidden = true
             
-            let messageView = MessageView(frame: targetMessageViewFrame)
+            // add a message view
+            let messageView = MessageView(frame: self.view.frame)
+            messageView.backgroundColor = .clear
             self.view.addSubview(messageView)
             
             // check for error or dismiss our donation sheet
@@ -181,4 +185,3 @@ extension DonationViewController: DonationsDelegate {
         }
     }
 }
-
