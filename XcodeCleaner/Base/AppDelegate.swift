@@ -31,6 +31,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: App lifetime events
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // register as transactions observer
+        Donations.shared.startObservingTransactionsQueue()
+        
         // update notifications
         if Preferences.shared.notificationsEnabled {
             ScanReminders.scheduleReminder(period: Preferences.shared.notificationsPeriod)
