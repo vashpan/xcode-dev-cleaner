@@ -18,6 +18,13 @@ public class MessageView: NSView {
         }
     }
     
+    public var backgroundColor: NSColor = .windowBackgroundColor {
+        didSet {
+            self.wantsLayer = true
+            self.layer?.backgroundColor = self.backgroundColor.cgColor
+        }
+    }
+    
     // MARK: Initialization & overrides
     public convenience init() {
         self.init(frame: .zero)
@@ -27,8 +34,7 @@ public class MessageView: NSView {
         super.init(frame: frameRect)
         
         // set background
-        self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        self.backgroundColor = NSColor.windowBackgroundColor
         
         // set message label
         self.label.font = NSFont.systemFont(ofSize: 17.0, weight: .bold)
