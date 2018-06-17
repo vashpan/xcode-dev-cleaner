@@ -109,7 +109,11 @@ extension Donations: SKPaymentTransactionObserver {
         for transaction in transactions {
             // get our product related to transaction
             guard let transactionProduct = self.iapProducts.filter( { $0.identifier == transaction.payment.productIdentifier } ).first else {
-                log.warning("Donations: Updated transaction thats product have unknown identifier: \(transaction.payment.productIdentifier)")
+                log.warning("Donations: Updated transaction thats product have unknown identifier or not yet fetched: \(transaction.payment.productIdentifier)")
+                
+                // we can safely finish such transaction since we don't deliver any special stuff
+                queue.finishTransaction(transaction)
+                
                 continue
             }
             
