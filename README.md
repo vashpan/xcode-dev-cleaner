@@ -1,4 +1,4 @@
-# Xcode Cleaner
+# DevCleaner
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
@@ -15,7 +15,7 @@ scan after a while.
 Please note that **this application is relying on internal folder structures and undocumented features**. It could stop working with
 newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please **make backup before use it**.
 
-## What Xcode Cleaner could actually clean?
+## What DevCleaner could actually clean?
 
 <insert some screenshot here>
 

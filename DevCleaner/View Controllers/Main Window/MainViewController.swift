@@ -241,7 +241,7 @@ final class MainViewController: NSViewController {
     }
     
     @IBAction func showGitHubPage(_ sender: Any) {
-        if let gitHubUrl = URL(string: "https://github.com/vashpan/xcode-cleaner") {
+        if let gitHubUrl = URL(string: "https://github.com/vashpan/xcode-dev-cleaner") {
             NSWorkspace.shared.open(gitHubUrl)
         }
     }
