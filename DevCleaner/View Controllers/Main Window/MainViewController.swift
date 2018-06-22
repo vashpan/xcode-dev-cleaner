@@ -142,7 +142,7 @@ final class MainViewController: NSViewController {
         // total size
         let totalSizeString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
         self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
-        self.view.window?.title = "Xcode Cleaner - \(totalSizeString) available to clean"
+        self.view.window?.title = "DevCleaner - \(totalSizeString) available to clean"
         
         // selected size
         self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: xcodeFiles.selectedSize))"
