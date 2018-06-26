@@ -64,6 +64,9 @@ final class MainViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // open ~/Library/Developer folder
+        self.acquireDeveloperFolderPermissions()
+        
         // check for installed Xcode versions
         self.checkForInstalledXcode()
         
@@ -120,6 +123,37 @@ final class MainViewController: NSViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
         }
+    }
+    
+    @discardableResult
+    private func acquireDeveloperFolderPermissions() -> Bool {
+        let developerFolder = XcodeFiles.userDeveloperFolderUrl
+        
+        // check if we already have access, then we don't need to show the dialog
+        if FileManager.default.isReadableFile(atPath: developerFolder.path) {
+            return true
+        }
+        
+        // open "acquiring" panel
+        let openPanel = NSOpenPanel()
+        openPanel.directoryURL = developerFolder
+        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files."
+        openPanel.prompt = "Open"
+        
+        openPanel.allowedFileTypes = ["none"]
+        openPanel.allowsOtherFileTypes = false
+        openPanel.canChooseDirectories = true
+        
+        openPanel.runModal()
+        
+        // check if we get proper file, if not, repeat
+        for openedDevFolderUrl in openPanel.urls {
+            if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
+                return true
+            }
+        }
+        
+        return self.acquireDeveloperFolderPermissions()
     }
     
     private func checkForInstalledXcode() {
