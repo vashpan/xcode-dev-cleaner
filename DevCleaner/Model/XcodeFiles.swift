@@ -47,7 +47,11 @@ final public class XcodeFiles {
     }
     
     // MARK: Properties
-    private let userDeveloperFolderUrl: URL
+    public static var userDeveloperFolderUrl: URL = {
+        let userName = NSUserName()
+        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
+        return userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
+    }()
     
     public weak var scanDelegate: XcodeFilesScanDelegate?
     public weak var deleteDelegate: XcodeFilesDeleteDelegate?
@@ -68,11 +72,7 @@ final public class XcodeFiles {
     
     // MARK: Initialization
     public init?() {
-        let userName = NSUserName()
-        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
-        self.userDeveloperFolderUrl = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
-
-        guard XcodeFiles.checkForXcodeDataFolders(location: self.userDeveloperFolderUrl) else {
+        guard XcodeFiles.checkForXcodeDataFolders(location: XcodeFiles.userDeveloperFolderUrl) else {
             log.error("XcodeFiles: Cannot create because Xcode cache folders doesn't seem to exist!")
             return nil
         }
@@ -341,7 +341,7 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport")
         ]
         
-        let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
+        let xcodeLocation = XcodeFiles.userDeveloperFolderUrl.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
         for entry in deviceSupportEntries {
             let entryUrl = xcodeLocation.appendingPathComponent(entry.path)
@@ -380,7 +380,7 @@ final public class XcodeFiles {
     }
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {
-        let archivesLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives")
+        let archivesLocation = XcodeFiles.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives")
         
         // gather various projects, create entries for each of them
         var archiveInfos = [String : [ArchiveFileEntry]]()
@@ -428,7 +428,7 @@ final public class XcodeFiles {
     }
     
     private func scanDerivedDataLocations() -> [XcodeFileEntry] {
-        let derivedDataLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData")
+        let derivedDataLocation = XcodeFiles.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData")
         
         // scan for derived data projects
         var results: [XcodeFileEntry] = []
