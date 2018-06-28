@@ -57,32 +57,37 @@ final class MainViewController: NSViewController {
     
     @IBOutlet private weak var outlineView: NSOutlineView!
     
-    private let xcodeFiles = XcodeFiles()
+    private var xcodeFiles: XcodeFiles?
     private var loaded = false
     
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // open ~/Library/Developer folder
-        self.acquireDeveloperFolderPermissions()
         
         // check for installed Xcode versions
         self.checkForInstalledXcode()
-        
-        // create XcodeFiles instance
-        guard let xcodeFiles = self.xcodeFiles else {
+
+        // open ~/Library/Developer folder & create XcodeFiles instance
+        guard let developerLibraryFolder = self.acquireDeveloperFolderPermissions(), let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
-            self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files",
+            self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
                                           message: "Check if you have Xcode installed and some projects built")
             return
         }
+        
+        self.xcodeFiles = xcodeFiles
         
         xcodeFiles.scanDelegate = self
     
         // start initial scan
         self.startScan()
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        self.view.window?.delegate = self
     }
     
     // MARK: Navigation
@@ -126,15 +131,36 @@ final class MainViewController: NSViewController {
     }
     
     @discardableResult
-    private func acquireDeveloperFolderPermissions() -> Bool {
-        let developerFolder = XcodeFiles.userDeveloperFolderUrl
+    private func acquireDeveloperFolderPermissions() -> URL? {
+        let devFolderBookmarkDataKey = "DCDevFolderBookmarkDataKey"
         
-        // check if we already have access, then we don't need to show the dialog
+        let userName = NSUserName()
+        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
+        let developerFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
+        
+        // check if we already have access, then we don't need to show the dialog or use security bookmarks
         if FileManager.default.isReadableFile(atPath: developerFolder.path) {
-            return true
+            return developerFolder
         }
         
-        // open "acquiring" panel
+        // if we don't have access, so first try to load security bookmark
+        if let bookmarkData = UserDefaults.standard.data(forKey: devFolderBookmarkDataKey) {
+            do {
+                var isBookmarkStale = false
+                let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
+                
+                if !isBookmarkStale {
+                    return bookmarkedUrl
+                } else {
+                    throw NSError()
+                }
+            } catch { // in case of stale bookmark or fail to get one, try again to open our folder again
+                UserDefaults.standard.set(nil, forKey: devFolderBookmarkDataKey)
+                return self.acquireDeveloperFolderPermissions()
+            }
+        }
+        
+        // well, so maybe first acquire the bookmark by opening open panel?
         let openPanel = NSOpenPanel()
         openPanel.directoryURL = developerFolder
         openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files."
@@ -146,10 +172,14 @@ final class MainViewController: NSViewController {
         
         openPanel.runModal()
         
-        // check if we get proper file, if not, repeat
-        for openedDevFolderUrl in openPanel.urls {
+        // check if we get proper file & save bookmark to it, if not, repeat
+        if let openedDevFolderUrl = openPanel.urls.first {
             if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
-                return true
+                if let bookmarkData = try? openedDevFolderUrl.bookmarkData() {
+                    UserDefaults.standard.set(bookmarkData, forKey: devFolderBookmarkDataKey)
+                    
+                    return openedDevFolderUrl
+                }
             }
         }
         
@@ -353,6 +383,12 @@ extension MainViewController: NSOutlineViewDelegate {
         }
         
         return view
+    }
+}
+
+extension MainViewController: NSWindowDelegate {
+    func windowWillClose(_ notification: Notification) {
+        self.xcodeFiles = nil
     }
 }
 

@@ -115,7 +115,7 @@
                 <controllerPlaceholder storyboardName="Preferences" id="nZ1-vI-bJQ" sceneMemberID="viewController"/>
                 <customObject id="h3h-tG-T4B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="-33"/>
+            <point key="canvasLocation" x="1" y="23"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
