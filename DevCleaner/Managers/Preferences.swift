@@ -24,10 +24,11 @@ public final class Preferences {
     // MARK: Properties & constants
     public static let shared = Preferences()
     
-    private let notificationsEnabledKey = "NotificationsEnabledKey"
-    private let notificationsPeriodKey = "NotificationsPeriodKey"
-    private let dryRunEnabledKey = "DryRunEnabledKey"
-    private let totalBytesCleanedKey = "TotalBytesCleaned"
+    private let notificationsEnabledKey = "DCNotificationsEnabledKey"
+    private let notificationsPeriodKey = "DCNotificationsPeriodKey"
+    private let dryRunEnabledKey = "DCDryRunEnabledKey"
+    private let totalBytesCleanedKey = "DCTotalBytesCleaned"
+    private let devFolderBookmarkDataKey = "DCDevFolderBookmarkDataKey"
     
     // MARK: Initialization
     public init() {
@@ -99,6 +100,16 @@ public final class Preferences {
         set {
             let numberValue = NSNumber(value: newValue)
             UserDefaults.standard.set(numberValue, forKey: totalBytesCleanedKey)
+        }
+    }
+    
+    public var devFoolderBookmark: Data? {
+        get {
+            return UserDefaults.standard.data(forKey: devFolderBookmarkDataKey)
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: devFolderBookmarkDataKey)
         }
     }
 }

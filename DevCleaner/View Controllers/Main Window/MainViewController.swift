@@ -132,8 +132,6 @@ final class MainViewController: NSViewController {
     
     @discardableResult
     private func acquireDeveloperFolderPermissions() -> URL? {
-        let devFolderBookmarkDataKey = "DCDevFolderBookmarkDataKey"
-        
         let userName = NSUserName()
         let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
         let developerFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
@@ -144,7 +142,7 @@ final class MainViewController: NSViewController {
         }
         
         // if we don't have access, so first try to load security bookmark
-        if let bookmarkData = UserDefaults.standard.data(forKey: devFolderBookmarkDataKey) {
+        if let bookmarkData = Preferences.shared.devFoolderBookmark {
             do {
                 var isBookmarkStale = false
                 let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
@@ -155,7 +153,7 @@ final class MainViewController: NSViewController {
                     throw NSError()
                 }
             } catch { // in case of stale bookmark or fail to get one, try again to open our folder again
-                UserDefaults.standard.set(nil, forKey: devFolderBookmarkDataKey)
+                Preferences.shared.devFoolderBookmark = nil
                 return self.acquireDeveloperFolderPermissions()
             }
         }
@@ -163,7 +161,7 @@ final class MainViewController: NSViewController {
         // well, so maybe first acquire the bookmark by opening open panel?
         let openPanel = NSOpenPanel()
         openPanel.directoryURL = developerFolder
-        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files."
+        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files. This is a one time authorization."
         openPanel.prompt = "Open"
         
         openPanel.allowedFileTypes = ["none"]
@@ -176,7 +174,7 @@ final class MainViewController: NSViewController {
         if let openedDevFolderUrl = openPanel.urls.first {
             if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
                 if let bookmarkData = try? openedDevFolderUrl.bookmarkData() {
-                    UserDefaults.standard.set(bookmarkData, forKey: devFolderBookmarkDataKey)
+                    Preferences.shared.devFoolderBookmark = bookmarkData
                     
                     return openedDevFolderUrl
                 }
