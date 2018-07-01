@@ -52,4 +52,6 @@ Website: http://www.one-minute-games.com
 
 This application is my first macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, maybe some caches I missed, let me know as well in issues.
 
-Application is licensed using GPL3.
+Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, as copyright holder can submit it to the Mac App Store.
+
+Copyright © 2018 One Minute Games Konrad Kołakowski.
