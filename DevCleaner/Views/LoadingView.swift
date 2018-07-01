@@ -1,6 +1,6 @@
 //
 //  LoadingView.swift
-//  XcodeCleaner
+//  DevCleaner
 //
 //  Created by Konrad Kołakowski on 05.06.2018.
 //  Copyright © 2018 One Minute Games. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Donations.swift
-//  XcodeCleaner
+//  DevCleaner
 //
 //  Created by Konrad Kołakowski on 17.06.2018.
 //  Copyright © 2018 One Minute Games. All rights reserved.

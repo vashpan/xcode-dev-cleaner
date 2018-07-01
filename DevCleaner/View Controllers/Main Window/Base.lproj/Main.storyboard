@@ -302,7 +302,7 @@ DQ
                                     <constraint firstAttribute="width" constant="67" id="HEL-Qg-Gzh"/>
                                     <constraint firstAttribute="height" constant="67" id="t77-jf-oZ9"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="XcodeCleanerIcon" id="guH-2t-Xph"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DevCleanerIcon" id="guH-2t-Xph"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
                                 <rect key="frame" x="93" y="440" width="546" height="85"/>
@@ -633,7 +633,7 @@ DQ
         </scene>
     </scenes>
     <resources>
+        <image name="DevCleanerIcon" width="128" height="128"/>
         <image name="NSFolder" width="32" height="32"/>
-        <image name="XcodeCleanerIcon" width="256" height="256"/>
     </resources>
 </document>
