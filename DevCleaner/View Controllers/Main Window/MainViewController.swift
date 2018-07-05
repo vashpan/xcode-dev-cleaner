@@ -161,7 +161,7 @@ final class MainViewController: NSViewController {
         // well, so maybe first acquire the bookmark by opening open panel?
         let openPanel = NSOpenPanel()
         openPanel.directoryURL = developerFolder
-        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files. This is a one time authorization."
+        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\". This is a one time authorization."
         openPanel.prompt = "Open"
         
         openPanel.allowedFileTypes = ["none"]
