@@ -351,8 +351,8 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nSL-jb-aDV">
-                                <rect key="frame" x="53" y="19" width="138" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Like this app? Tip me!" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-2l-xC7">
+                                <rect key="frame" x="53" y="19" width="243" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="Like this app? You can tip me or share it!" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-2l-xC7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
@@ -556,6 +556,17 @@ DQ
                                     <action selector="dismissController:" target="ZG3-NQ-XbY" id="XXl-vz-553"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iDd-O7-VmP">
+                                <rect key="frame" x="8" y="14" width="84" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Just share..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dq8-ep-eMe">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="share:" target="IAy-IY-fju" id="dHL-lM-Kio"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -633,7 +644,7 @@ DQ
         </scene>
     </scenes>
     <resources>
-        <image name="DevCleanerIcon" width="128" height="128"/>
+        <image name="DevCleanerIcon" width="256" height="256"/>
         <image name="NSFolder" width="32" height="32"/>
     </resources>
 </document>
