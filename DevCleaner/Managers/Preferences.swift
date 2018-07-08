@@ -39,7 +39,7 @@ public final class Preferences {
     public var notificationsEnabled: Bool {
         get {
             guard UserDefaults.standard.object(forKey: notificationsEnabledKey) != nil else {
-                return false // default value
+                return true // default value
             }
             
             return UserDefaults.standard.bool(forKey: notificationsEnabledKey)
