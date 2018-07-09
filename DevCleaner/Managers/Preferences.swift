@@ -103,7 +103,7 @@ public final class Preferences {
         }
     }
     
-    public var devFoolderBookmark: Data? {
+    public var devFolderBookmark: Data? {
         get {
             return UserDefaults.standard.data(forKey: devFolderBookmarkDataKey)
         }

@@ -142,7 +142,7 @@ final class MainViewController: NSViewController {
         }
         
         // if we don't have access, so first try to load security bookmark
-        if let bookmarkData = Preferences.shared.devFoolderBookmark {
+        if let bookmarkData = Preferences.shared.devFolderBookmark {
             do {
                 var isBookmarkStale = false
                 let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
@@ -153,7 +153,7 @@ final class MainViewController: NSViewController {
                     throw NSError()
                 }
             } catch { // in case of stale bookmark or fail to get one, try again to open our folder again
-                Preferences.shared.devFoolderBookmark = nil
+                Preferences.shared.devFolderBookmark = nil
                 return self.acquireDeveloperFolderPermissions()
             }
         }
@@ -174,7 +174,7 @@ final class MainViewController: NSViewController {
         if let openedDevFolderUrl = openPanel.urls.first {
             if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
                 if let bookmarkData = try? openedDevFolderUrl.bookmarkData() {
-                    Preferences.shared.devFoolderBookmark = bookmarkData
+                    Preferences.shared.devFolderBookmark = bookmarkData
                     
                     return openedDevFolderUrl
                 }
