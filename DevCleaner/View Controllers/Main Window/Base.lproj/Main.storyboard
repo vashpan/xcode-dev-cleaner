@@ -172,7 +172,7 @@ DQ
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="ItemColumn" width="536" minWidth="200" maxWidth="1000" id="WoQ-aT-xsT">
+                                                <tableColumn identifier="ItemColumn" width="530" minWidth="200" maxWidth="1000" id="WoQ-aT-xsT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Item">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -186,7 +186,7 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="ItemCell" id="Wnc-64-w87" customClass="XcodeEntryCellView" customModule="DevCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="1" y="1" width="536" height="18"/>
+                                                            <rect key="frame" x="1" y="1" width="530" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yFH-5w-t5V">
@@ -232,7 +232,7 @@ DQ
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="SizeColumn" width="75" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
+                                                <tableColumn identifier="SizeColumn" width="80" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Size">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -246,11 +246,11 @@ DQ
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="DevCleaner" customModuleProvider="target">
-                                                            <rect key="frame" x="539" y="1" width="75" height="17"/>
+                                                            <rect key="frame" x="533" y="1" width="80" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="73" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="78" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" placeholderString="Size" id="B9I-jq-BbO">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
