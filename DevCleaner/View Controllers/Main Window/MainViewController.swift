@@ -48,6 +48,10 @@ final class MainViewController: NSViewController {
         }
     }
     
+    private struct DevFolderAccessError: Error {
+        
+    }
+    
     // MARK: Properties & outlets
     @IBOutlet private weak var bytesSelectedTextField: NSTextField!
     @IBOutlet private weak var totalBytesTextField: NSTextField!
@@ -148,9 +152,13 @@ final class MainViewController: NSViewController {
                 let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
                 
                 if !isBookmarkStale {
-                    return bookmarkedUrl
+                    if let finalUrl = bookmarkedUrl, FileManager.default.isReadableFile(atPath: finalUrl.path) {
+                        return finalUrl
+                    } else {
+                        throw DevFolderAccessError()
+                    }
                 } else {
-                    throw NSError()
+                    throw DevFolderAccessError()
                 }
             } catch { // in case of stale bookmark or fail to get one, try again to open our folder again
                 Preferences.shared.devFolderBookmark = nil

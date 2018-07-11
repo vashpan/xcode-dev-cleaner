@@ -344,7 +344,7 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "watchOS", icon: .image(name: "Devices/WatchIcon"), selected: true), path: "watchOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport")
         ]
-        
+                
         let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
         for entry in deviceSupportEntries {
