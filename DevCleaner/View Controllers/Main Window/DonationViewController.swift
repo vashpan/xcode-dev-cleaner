@@ -111,6 +111,12 @@ internal final class DonationViewController: NSViewController {
         return self.donationProducts.filter { $0.kind == productKind }.first
     }
 
+    private func fitCurrencyLabels() {
+        self.smallCoffeePriceLabel.adjustFontSizeToFitWidth()
+        self.bigCoffeePriceLabel.adjustFontSizeToFitWidth()
+        self.lunchPriceLabel.adjustFontSizeToFitWidth()
+    }
+    
     // MARK: Actions
     @IBAction func buyProduct(_ sender: NSButton) {
         guard let productKind = self.productKindForTag(sender.tag) else {
@@ -160,6 +166,8 @@ extension DonationViewController: DonationsDelegate {
 
                 }
             }
+            
+            self.fitCurrencyLabels()
             
             self.stopLoading()
         }
