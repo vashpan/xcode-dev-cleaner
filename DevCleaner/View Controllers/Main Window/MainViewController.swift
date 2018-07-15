@@ -277,11 +277,12 @@ final class MainViewController: NSViewController {
         }
         
         // show warning message with question if we want to proceed and continue only if we agree
-        self.warningMessage(title: "Clean Xcode cache files", message: "Are you sure to proceed? This can't be undone.", okButtonText: "Clean") { (messageResult) in
+        let dryRunEnabled = Preferences.shared.dryRunEnabled
+        let warningMessage = dryRunEnabled ? "DevCleaner is running in \"dry run\" mode. It means that files won't be deleted and nothing will change. If you want to clean files for real, go to \"Preferences\" and disable dry run mode."
+                                           : "Are you sure to proceed? This can't be undone."
+        self.warningMessage(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean") { (messageResult) in
             if messageResult == .alertFirstButtonReturn {
                 self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
-                
-                let dryRunEnabled = Preferences.shared.dryRunEnabled
                 
                 #if DEBUG
                 Preferences.shared.totalBytesCleaned += xcodeFiles.selectedSize
