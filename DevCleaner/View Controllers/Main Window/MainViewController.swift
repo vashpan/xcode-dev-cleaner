@@ -78,7 +78,7 @@ final class MainViewController: NSViewController {
             Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
             
             self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
-                                          message: "Check if you have Xcode installed and some projects built")
+                                          message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
             return
         }
         
@@ -182,6 +182,14 @@ final class MainViewController: NSViewController {
         
         // check if we get proper file & save bookmark to it, if not, repeat
         if let openedDevFolderUrl = openPanel.urls.first {
+            if openedDevFolderUrl != developerFolder {
+                self.infoMessage(title: "Can't get access to ~/Library/Developer folder",
+                                 message: "Did you choose the right folder?",
+                                 okButtonText: "Repeat")
+                
+                return self.acquireDeveloperFolderPermissions()
+            }
+            
             if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
                 if let bookmarkData = try? openedDevFolderUrl.bookmarkData() {
                     Preferences.shared.devFolderBookmark = bookmarkData
@@ -227,8 +235,8 @@ final class MainViewController: NSViewController {
         alert.messageText = title
         alert.informativeText = message
         alert.addButton(withTitle: "Quit")
+
         alert.runModal()
-        
         NSApp.terminate(nil)
     }
     
@@ -246,6 +254,16 @@ final class MainViewController: NSViewController {
         alert.addButton(withTitle: "Cancel")
         
         alert.beginSheetModal(for: currentWindow, completionHandler: completionHandler)
+    }
+    
+    private func infoMessage(title: String, message: String, okButtonText: String = "OK") {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = title
+        alert.informativeText = message
+        alert.addButton(withTitle: okButtonText)
+
+        alert.runModal()
     }
     
     // MARK: Loading
