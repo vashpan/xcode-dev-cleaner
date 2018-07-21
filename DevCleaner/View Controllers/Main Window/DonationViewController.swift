@@ -26,14 +26,9 @@ internal final class DonationViewController: NSViewController {
     @IBOutlet weak var xcodeCleanerBenefitsTextField: NSTextField!
     @IBOutlet weak var closeButton: NSButton!
     
-    @IBOutlet weak var lunchPriceLabel: NSTextField!
-    @IBOutlet weak var lunchInfoLabel: NSTextField!
-    
-    @IBOutlet weak var bigCoffeePriceLabel: NSTextField!
-    @IBOutlet weak var bigCoffeeInfoLabel: NSTextField!
-    
-    @IBOutlet weak var smallCoffeePriceLabel: NSTextField!
-    @IBOutlet weak var smallCoffeeInfoLabel: NSTextField!
+    @IBOutlet weak var smallDonationButton: NSButton!
+    @IBOutlet weak var mediumDonationButton: NSButton!
+    @IBOutlet weak var bigDonationButton: NSButton!
     
     @IBOutlet weak var donationsInterfaceView: NSView!
     
@@ -111,10 +106,56 @@ internal final class DonationViewController: NSViewController {
         return self.donationProducts.filter { $0.kind == productKind }.first
     }
 
-    private func fitCurrencyLabels() {
-        self.smallCoffeePriceLabel.adjustFontSizeToFitWidth()
-        self.bigCoffeePriceLabel.adjustFontSizeToFitWidth()
-        self.lunchPriceLabel.adjustFontSizeToFitWidth()
+    // MARK: Updating price & titles labels
+    private func adjustPriceFontSize(for attributedString: NSAttributedString, initialFont: NSFont, buttonWidth: CGFloat) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(attributedString: attributedString)
+        var fontSize = initialFont.pointSize
+        var stringSize = attributedString.size()
+        
+        while ceil(stringSize.width) >= (buttonWidth - 10) { // including some margins
+            if fontSize <= 1.0 { // we can't go any further
+                break
+            }
+    
+            let newFontSize = fontSize - 1.5
+            if let newFont = NSFont(descriptor: initialFont.fontDescriptor, size: newFontSize) {
+                attributedString.addAttribute(.font, value: newFont, range: NSMakeRange(0, attributedString.length))
+                
+                fontSize = newFontSize
+                stringSize = attributedString.size()
+            } else {
+                continue
+            }
+        }
+        
+        return attributedString
+    }
+    
+    private func updateDonationButton(button: NSButton, price: String, info: String) {
+        let priceFontSize: CGFloat = 24.0
+        let infoFontSize: CGFloat = 13.0
+        
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
+        style.allowsDefaultTighteningForTruncation = true
+        style.lineBreakMode = .byWordWrapping
+        
+        let title = NSMutableAttributedString()
+        
+        // price part
+        let priceFont = NSFont.boldSystemFont(ofSize: priceFontSize)
+        let pricePart = NSAttributedString(string: price + "\n",
+                                           attributes: [.font : priceFont])
+        title.append(self.adjustPriceFontSize(for: pricePart, initialFont: priceFont, buttonWidth: button.frame.size.width))
+        
+        // info part
+        let infoPart = NSAttributedString(string: info,
+                                          attributes: [.font : NSFont.systemFont(ofSize: infoFontSize)])
+        title.append(infoPart)
+        
+        title.addAttribute(.paragraphStyle, value: style, range: NSMakeRange(0, title.length))
+        
+        button.attributedTitle = title
     }
     
     // MARK: Actions
@@ -155,19 +196,20 @@ extension DonationViewController: DonationsDelegate {
             for product in self.donationProducts {
                 switch product.kind {
                     case .smallCoffee:
-                        self.smallCoffeePriceLabel.stringValue = product.price
-                        self.smallCoffeeInfoLabel.stringValue = product.info
+                        self.updateDonationButton(button: self.smallDonationButton,
+                                                  price: product.price,
+                                                  info: product.info)
                     case .bigCoffee:
-                        self.bigCoffeePriceLabel.stringValue = product.price
-                        self.bigCoffeeInfoLabel.stringValue = product.info
+                        self.updateDonationButton(button: self.mediumDonationButton,
+                                                  price: product.price,
+                                                  info: product.info)
                     case .lunch:
-                        self.lunchPriceLabel.stringValue = product.price
-                        self.lunchInfoLabel.stringValue = product.info
+                        self.updateDonationButton(button: self.bigDonationButton,
+                                                  price: product.price,
+                                                  info: product.info)
 
                 }
             }
-            
-            self.fitCurrencyLabels()
             
             self.stopLoading()
         }
