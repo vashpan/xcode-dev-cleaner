@@ -53,6 +53,8 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Properties & outlets
+    @IBOutlet weak var allTimesBytesTextField: NSTextField!
+    
     @IBOutlet private weak var bytesSelectedTextField: NSTextField!
     @IBOutlet private weak var totalBytesTextField: NSTextField!
     
@@ -70,7 +72,10 @@ final class MainViewController: NSViewController {
         
         // check for installed Xcode versions
         self.checkForInstalledXcode()
-
+        
+        // set all time saved bytes label
+        self.allTimesBytesTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        
         // open ~/Library/Developer folder & create XcodeFiles instance
         guard let developerLibraryFolder = self.acquireDeveloperFolderPermissions(), let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
@@ -82,9 +87,8 @@ final class MainViewController: NSViewController {
             return
         }
         
-        self.xcodeFiles = xcodeFiles
-        
         xcodeFiles.scanDelegate = self
+        self.xcodeFiles = xcodeFiles
     
         // start initial scan
         self.startScan()
@@ -264,6 +268,27 @@ final class MainViewController: NSViewController {
         alert.addButton(withTitle: okButtonText)
 
         alert.runModal()
+    }
+    
+    private func benefitsAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
+        let totalBytesString = ByteCountFormatter.string(fromByteCount: totalBytesCleaned, countStyle: .file)
+        
+        let fontSize: CGFloat = 13.0
+        let result = NSMutableAttributedString()
+        
+        let partOne = NSAttributedString(string: "You saved total of ",
+                                         attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        result.append(partOne)
+        
+        let partTwo = NSAttributedString(string: "\(totalBytesString)",
+            attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
+        result.append(partTwo)
+        
+        let partThree = NSAttributedString(string: " thanks to DevCleaner!",
+                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+        result.append(partThree)
+        
+        return result
     }
     
     // MARK: Loading
