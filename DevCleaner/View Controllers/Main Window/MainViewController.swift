@@ -53,13 +53,12 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Properties & outlets
-    @IBOutlet weak var allTimesBytesTextField: NSTextField!
-    
     @IBOutlet private weak var bytesSelectedTextField: NSTextField!
     @IBOutlet private weak var totalBytesTextField: NSTextField!
     
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var cleanButton: NSButton!
+    @IBOutlet private weak var benefitsButton: NSButton!
     
     @IBOutlet private weak var outlineView: NSOutlineView!
     
@@ -74,7 +73,7 @@ final class MainViewController: NSViewController {
         self.checkForInstalledXcode()
         
         // set all time saved bytes label
-        self.allTimesBytesTextField.attributedStringValue = self.benefitsAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // open ~/Library/Developer folder & create XcodeFiles instance
         guard let developerLibraryFolder = self.acquireDeveloperFolderPermissions(), let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
@@ -230,6 +229,9 @@ final class MainViewController: NSViewController {
         
         // selected size
         self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: xcodeFiles.selectedSize))"
+        
+        // all time size / donate button
+        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
     
     private func fatalErrorMessageAndQuit(title: String, message: String) {
@@ -270,23 +272,30 @@ final class MainViewController: NSViewController {
         alert.runModal()
     }
     
-    private func benefitsAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
+    private func benefitsButtonAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
         let totalBytesString = ByteCountFormatter.string(fromByteCount: totalBytesCleaned, countStyle: .file)
         
-        let fontSize: CGFloat = 13.0
+        let fontSize: CGFloat = 12.0
         let result = NSMutableAttributedString()
         
-        let partOne = NSAttributedString(string: "You saved total of ",
-                                         attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
-        result.append(partOne)
-        
-        let partTwo = NSAttributedString(string: "\(totalBytesString)",
-            attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
-        result.append(partTwo)
-        
-        let partThree = NSAttributedString(string: " thanks to DevCleaner!",
-                                           attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
-        result.append(partThree)
+        if totalBytesCleaned > 0 {
+            let partOne = NSAttributedString(string: "You saved total of ",
+                                             attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+            result.append(partOne)
+            
+            let partTwo = NSAttributedString(string: "\(totalBytesString)",
+                attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
+            result.append(partTwo)
+            
+            let partThree = NSAttributedString(string: "! Tip me or share it!",
+                                               attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+            result.append(partThree)
+        } else {
+            let oneAndOnlyPart = NSAttributedString(string: "Like this app? You can tip me or share it!",
+                                                    attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
+            
+            result.append(oneAndOnlyPart)
+        }
         
         return result
     }
