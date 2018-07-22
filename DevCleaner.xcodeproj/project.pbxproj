@@ -13,7 +13,6 @@
 		7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4972030F17B00EDBFA3 /* Main.storyboard */; };
 		712F999E20D65229003927BC /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999D20D65229003927BC /* Donations.swift */; };
 		712F99A020D6810A003927BC /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999F20D6810A003927BC /* MessageView.swift */; };
-		713FF72A20FB490B00246404 /* NSTextField+FitFontSizeToWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713FF72920FB490B00246404 /* NSTextField+FitFontSizeToWidth.swift */; };
 		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
 		7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12320966D1500081E4E /* CleaningViewController.swift */; };
 		7162E1262097255C00081E4E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E1252097255C00081E4E /* Stack.swift */; };
@@ -46,7 +45,6 @@
 		7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DevCleaner.entitlements; sourceTree = "<group>"; };
 		712F999D20D65229003927BC /* Donations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donations.swift; sourceTree = "<group>"; };
 		712F999F20D6810A003927BC /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
-		713FF72920FB490B00246404 /* NSTextField+FitFontSizeToWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+FitFontSizeToWidth.swift"; sourceTree = "<group>"; };
 		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		7162E12320966D1500081E4E /* CleaningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleaningViewController.swift; sourceTree = "<group>"; };
 		7162E1252097255C00081E4E /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -207,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */,
-				713FF72920FB490B00246404 /* NSTextField+FitFontSizeToWidth.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -352,7 +349,6 @@
 				71B01E902082551000940041 /* SizeCellView.swift in Sources */,
 				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
 				7162E12B209901FB00081E4E /* PreferencesViewController.swift in Sources */,
-				713FF72A20FB490B00246404 /* NSTextField+FitFontSizeToWidth.swift in Sources */,
 				712F99A020D6810A003927BC /* MessageView.swift in Sources */,
 				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
 				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,
