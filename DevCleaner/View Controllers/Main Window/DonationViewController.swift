@@ -107,7 +107,7 @@ internal final class DonationViewController: NSViewController {
     }
 
     // MARK: Updating price & titles labels
-    private func adjustPriceFontSize(for attributedString: NSAttributedString, initialFont: NSFont, buttonWidth: CGFloat) -> NSAttributedString {
+    private func fittingPriceFontSize(for attributedString: NSAttributedString, initialFont: NSFont, buttonWidth: CGFloat) -> CGFloat {
         let attributedString = NSMutableAttributedString(attributedString: attributedString)
         var fontSize = initialFont.pointSize
         var stringSize = attributedString.size()
@@ -128,13 +128,10 @@ internal final class DonationViewController: NSViewController {
             }
         }
         
-        return attributedString
+        return fontSize
     }
     
-    private func updateDonationButton(button: NSButton, price: String, info: String) {
-        let priceFontSize: CGFloat = 24.0
-        let infoFontSize: CGFloat = 13.0
-        
+    private func updateDonationButton(button: NSButton, price: String, info: String, priceFontSize: CGFloat, infoFontSize: CGFloat) {
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         style.allowsDefaultTighteningForTruncation = true
@@ -143,10 +140,9 @@ internal final class DonationViewController: NSViewController {
         let title = NSMutableAttributedString()
         
         // price part
-        let priceFont = NSFont.boldSystemFont(ofSize: priceFontSize)
         let pricePart = NSAttributedString(string: price + "\n",
-                                           attributes: [.font : priceFont])
-        title.append(self.adjustPriceFontSize(for: pricePart, initialFont: priceFont, buttonWidth: button.frame.size.width))
+                                           attributes: [.font : NSFont.boldSystemFont(ofSize: priceFontSize)])
+        title.append(pricePart)
         
         // info part
         let infoPart = NSAttributedString(string: info,
@@ -156,6 +152,51 @@ internal final class DonationViewController: NSViewController {
         title.addAttribute(.paragraphStyle, value: style, range: NSMakeRange(0, title.length))
         
         button.attributedTitle = title
+    }
+    
+    private func updateDonationsButtons(for products: [Donations.Product]) {
+        var priceFontSize: CGFloat = 25.0
+        let infoFontSize: CGFloat = 13.0
+        let buttonWidth: CGFloat = 100.0
+        
+        // calculate what size price font should have
+        var priceFontSizes = [CGFloat]()
+        for product in products {
+            let priceFont = NSFont.boldSystemFont(ofSize: priceFontSize)
+            let priceAttributedString = NSAttributedString(string: product.price + "\n",
+                                               attributes: [.font : priceFont])
+            let fittingPriceFontSize = self.fittingPriceFontSize(for: priceAttributedString, initialFont: priceFont, buttonWidth: buttonWidth)
+            priceFontSizes.append(fittingPriceFontSize)
+        }
+        
+        if let minPriceFontSize = priceFontSizes.min() {
+            priceFontSize = minPriceFontSize
+        }
+        
+        // update all the buttons
+        for product in self.donationProducts {
+            switch product.kind {
+                case .smallCoffee:
+                    self.updateDonationButton(button: self.smallDonationButton,
+                                              price: product.price,
+                                              info: product.info,
+                                              priceFontSize: priceFontSize,
+                                              infoFontSize: infoFontSize)
+                case .bigCoffee:
+                    self.updateDonationButton(button: self.mediumDonationButton,
+                                              price: product.price,
+                                              info: product.info,
+                                              priceFontSize: priceFontSize,
+                                              infoFontSize: infoFontSize)
+                case .lunch:
+                    self.updateDonationButton(button: self.bigDonationButton,
+                                              price: product.price,
+                                              info: product.info,
+                                              priceFontSize: priceFontSize,
+                                              infoFontSize: infoFontSize)
+                
+            }
+        }
     }
     
     // MARK: Actions
@@ -193,23 +234,7 @@ extension DonationViewController: DonationsDelegate {
             self.donationProducts = products
             
             // update UI
-            for product in self.donationProducts {
-                switch product.kind {
-                    case .smallCoffee:
-                        self.updateDonationButton(button: self.smallDonationButton,
-                                                  price: product.price,
-                                                  info: product.info)
-                    case .bigCoffee:
-                        self.updateDonationButton(button: self.mediumDonationButton,
-                                                  price: product.price,
-                                                  info: product.info)
-                    case .lunch:
-                        self.updateDonationButton(button: self.bigDonationButton,
-                                                  price: product.price,
-                                                  info: product.info)
-
-                }
-            }
+            self.updateDonationsButtons(for: products)
             
             self.stopLoading()
         }
