@@ -4,6 +4,8 @@
 
 *Currently tested with macOS 10.13 and Xcode 9.x*
 
+Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
+
 If you want to reclaim tens of gigabytes of your storage used for various Xcode caches - this tool is for you!
 
 Xcode could store tens of gigabytes in `~/Developer` folder. Most of those cached files & symbols is not reclaimed over time
