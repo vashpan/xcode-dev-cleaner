@@ -44,7 +44,7 @@ final class MainViewController: NSViewController {
         case showCleaningView = "ShowCleaningView"
         
         var segueIdentifier: NSStoryboardSegue.Identifier {
-            return NSStoryboardSegue.Identifier(rawValue: self.rawValue)
+            return self.rawValue
         }
     }
     
@@ -110,7 +110,7 @@ final class MainViewController: NSViewController {
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier?.rawValue, let segueId = Segue(rawValue: identifier) else {
+        guard let identifier = segue.identifier, let segueId = Segue(rawValue: identifier) else {
             log.warning("MainViewController: Unrecognized segue: \(segue)")
             return
         }
@@ -157,8 +157,8 @@ final class MainViewController: NSViewController {
                 let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
                 
                 if !isBookmarkStale {
-                    if let finalUrl = bookmarkedUrl, FileManager.default.isReadableFile(atPath: finalUrl.path) {
-                        return finalUrl
+                    if FileManager.default.isReadableFile(atPath: bookmarkedUrl.path) {
+                        return bookmarkedUrl
                     } else {
                         throw DevFolderAccessError()
                     }

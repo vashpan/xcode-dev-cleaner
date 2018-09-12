@@ -19,6 +19,7 @@
 //  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import AppKit
 
 public final class DerivedDataFileEntry: XcodeFileEntry {
     // MARK: Properties
@@ -30,6 +31,6 @@ public final class DerivedDataFileEntry: XcodeFileEntry {
         self.projectName = projectName
         self.pathUrl = pathUrl
         
-        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: .system(name: .folder), selected: selected)
+        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: .system(name: NSImage.folderName), selected: selected)
     }
 }
