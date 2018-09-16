@@ -82,7 +82,7 @@ final public class XcodeFiles {
         
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
-            .simulators: XcodeFileEntry(label: "Unused Simulators", selected: false),
+            .simulators: XcodeFileEntry(label: "Additional Simulators", selected: false),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false)
         ]
