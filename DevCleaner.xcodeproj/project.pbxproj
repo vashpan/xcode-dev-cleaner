@@ -31,6 +31,7 @@
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F838214E930500A11601 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F837214E930500A11601 /* Messages.swift */; };
+		71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F839214E9A4300A11601 /* String+MD5.swift */; };
 		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
@@ -209,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */,
+				71E7F839214E9A4300A11601 /* String+MD5.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -348,6 +350,7 @@
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
+				71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
 				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
