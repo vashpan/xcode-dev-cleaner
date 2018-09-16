@@ -79,8 +79,8 @@ final class MainViewController: NSViewController {
             
             //Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
             
-            self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
-                                          message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
+            Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
+                                              message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
             return
         }
         
@@ -157,8 +157,8 @@ final class MainViewController: NSViewController {
     
     private func checkForInstalledXcode() {
         if NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") == nil {
-            self.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
-                                          message: "Check if you have Xcode installed")
+            Messages.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
+                                              message: "Check if you have Xcode installed")
         }
     }
     
@@ -182,44 +182,6 @@ final class MainViewController: NSViewController {
         
         // all time size / donate button
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
-    }
-    
-    private func fatalErrorMessageAndQuit(title: String, message: String) {
-        // display a popup that tells us that this is basically a fatal error, and quit!
-        let alert = NSAlert()
-        alert.alertStyle = .critical
-        alert.messageText = title
-        alert.informativeText = message
-        alert.addButton(withTitle: "Quit")
-
-        alert.runModal()
-        NSApp.terminate(nil)
-    }
-    
-    private func warningMessage(title: String, message: String, okButtonText: String = "OK", completionHandler: @escaping (NSApplication.ModalResponse) -> Void) {
-        guard let currentWindow = self.view.window else {
-            log.error("MainViewController: No window for current view?!")
-            return
-        }
-        
-        let alert = NSAlert()
-        alert.alertStyle = .critical
-        alert.messageText = title
-        alert.informativeText = message
-        alert.addButton(withTitle: okButtonText)
-        alert.addButton(withTitle: "Cancel")
-        
-        alert.beginSheetModal(for: currentWindow, completionHandler: completionHandler)
-    }
-    
-    private func infoMessage(title: String, message: String, okButtonText: String = "OK") {
-        let alert = NSAlert()
-        alert.alertStyle = .informational
-        alert.messageText = title
-        alert.informativeText = message
-        alert.addButton(withTitle: okButtonText)
-
-        alert.runModal()
     }
     
     private func benefitsButtonAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
@@ -284,7 +246,7 @@ final class MainViewController: NSViewController {
         let dryRunEnabled = Preferences.shared.dryRunEnabled
         let warningMessage = dryRunEnabled ? "DevCleaner is running in \"dry run\" mode. It means that files won't be deleted and nothing will change. If you want to clean files for real, go to \"Preferences\" and disable dry run mode."
                                            : "Are you sure to proceed? This can't be undone."
-        self.warningMessage(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean") { (messageResult) in
+        Messages.warningMessage(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean", window: self.view.window) { (messageResult) in
             if messageResult == .alertFirstButtonReturn {
                 self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
                 
