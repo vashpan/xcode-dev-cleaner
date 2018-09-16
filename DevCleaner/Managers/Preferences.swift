@@ -28,7 +28,6 @@ public final class Preferences {
     private let notificationsPeriodKey = "DCNotificationsPeriodKey"
     private let dryRunEnabledKey = "DCDryRunEnabledKey"
     private let totalBytesCleanedKey = "DCTotalBytesCleaned"
-    private let devFolderBookmarkDataKey = "DCDevFolderBookmarkDataKey"
     
     // MARK: Initialization
     public init() {
@@ -103,13 +102,18 @@ public final class Preferences {
         }
     }
     
-    public var devFolderBookmark: Data? {
-        get {
-            return UserDefaults.standard.data(forKey: devFolderBookmarkDataKey)
-        }
-        
-        set {
-            UserDefaults.standard.set(newValue, forKey: devFolderBookmarkDataKey)
-        }
+    // MARK: Folder bookmarks
+    private func folderBookmarkKey(for url: URL) -> String {
+        return "DCFolderBookmark_\(url.absoluteString.md5)"
+    }
+    
+    public func folderBookmark(for url: URL) -> Data? {
+        let key = self.folderBookmarkKey(for: url)
+        return UserDefaults.standard.data(forKey: key)
+    }
+    
+    public func setFolderBookmark(bookmarkData: Data, for url: URL) {
+        let key = self.folderBookmarkKey(for: url)
+        UserDefaults.standard.set(bookmarkData, forKey: key)
     }
 }

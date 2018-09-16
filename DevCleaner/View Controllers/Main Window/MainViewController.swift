@@ -48,10 +48,6 @@ final class MainViewController: NSViewController {
         }
     }
     
-    private struct DevFolderAccessError: Error {
-        
-    }
-    
     // MARK: Properties & outlets
     @IBOutlet private weak var bytesSelectedTextField: NSTextField!
     @IBOutlet private weak var totalBytesTextField: NSTextField!
@@ -76,10 +72,12 @@ final class MainViewController: NSViewController {
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // open ~/Library/Developer folder & create XcodeFiles instance
-        guard let developerLibraryFolder = self.acquireDeveloperFolderPermissions(), let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
+        guard let developerLibraryFolder = self.acquireUserDeveloperFolderPermissions(),
+              let systemLibraryFolder = self.acquireSystemDeveloperFolderPermissions(),
+              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder, systemDeveloperFolder: systemLibraryFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
-            Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
+            //Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
             
             self.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
                                           message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
@@ -140,69 +138,21 @@ final class MainViewController: NSViewController {
     }
     
     @discardableResult
-    private func acquireDeveloperFolderPermissions() -> URL? {
+    private func acquireUserDeveloperFolderPermissions() -> URL? {
         let userName = NSUserName()
         let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
-        let developerFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
+        let userDeveloperFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
         
-        // check if we already have access, then we don't need to show the dialog or use security bookmarks
-        if FileManager.default.isReadableFile(atPath: developerFolder.path) {
-            return developerFolder
-        }
+        return userDeveloperFolder.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: userDeveloperFolder),
+                                                        openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
+    }
+    
+    @discardableResult
+    private func acquireSystemDeveloperFolderPermissions() -> URL? {
+        let systemDeveloperFolder = URL(fileURLWithPath: "/Library/Developer")
         
-        // if we don't have access, so first try to load security bookmark
-        if let bookmarkData = Preferences.shared.devFolderBookmark {
-            do {
-                var isBookmarkStale = false
-                let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
-                
-                if !isBookmarkStale {
-                    if FileManager.default.isReadableFile(atPath: bookmarkedUrl.path) {
-                        return bookmarkedUrl
-                    } else {
-                        throw DevFolderAccessError()
-                    }
-                } else {
-                    throw DevFolderAccessError()
-                }
-            } catch { // in case of stale bookmark or fail to get one, try again to open our folder again
-                Preferences.shared.devFolderBookmark = nil
-                return self.acquireDeveloperFolderPermissions()
-            }
-        }
-        
-        // well, so maybe first acquire the bookmark by opening open panel?
-        let openPanel = NSOpenPanel()
-        openPanel.directoryURL = developerFolder
-        openPanel.message = "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\"."
-        openPanel.prompt = "Open"
-        
-        openPanel.allowedFileTypes = ["none"]
-        openPanel.allowsOtherFileTypes = false
-        openPanel.canChooseDirectories = true
-        
-        openPanel.runModal()
-        
-        // check if we get proper file & save bookmark to it, if not, repeat
-        if let openedDevFolderUrl = openPanel.urls.first {
-            if openedDevFolderUrl != developerFolder {
-                self.infoMessage(title: "Can't get access to ~/Library/Developer folder",
-                                 message: "Did you choose the right folder?",
-                                 okButtonText: "Repeat")
-                
-                return self.acquireDeveloperFolderPermissions()
-            }
-            
-            if FileManager.default.isReadableFile(atPath: openedDevFolderUrl.path) {
-                if let bookmarkData = try? openedDevFolderUrl.bookmarkData() {
-                    Preferences.shared.devFolderBookmark = bookmarkData
-                    
-                    return openedDevFolderUrl
-                }
-            }
-        }
-        
-        return self.acquireDeveloperFolderPermissions()
+        return systemDeveloperFolder.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: systemDeveloperFolder),
+                                                              openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
     }
     
     private func checkForInstalledXcode() {

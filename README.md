@@ -30,6 +30,11 @@ It could accumulate to hold tens of gigabytes of data.
 
 This section is selected by default, with exception of the latest version of each system.
 
+### Unused Simulators
+
+Sometime we need older simulators for testing. Unfortunately there is no easy way to delete them when we don't need them, this
+section helps with removing them.
+
 ### Archives
 
 When we create build for distrubution or export, a new archive is created. For each version it contains a build, debug symbols and 
