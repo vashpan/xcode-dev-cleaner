@@ -347,14 +347,14 @@ final public class XcodeFiles {
                 
         let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")
         var entries: [XcodeFileEntry] = []
-        for entry in deviceSupportEntries {
-            let entryUrl = xcodeLocation.appendingPathComponent(entry.path)
+        for osEntry in deviceSupportEntries {
+            let entryUrl = xcodeLocation.appendingPathComponent(osEntry.path)
             
             // scan for versions
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
                 var deviceSupportEntries = [DeviceSupportFileEntry]()
                 for symbolUrl in symbols {
-                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent, osLabel: entry.entry.label) {
+                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent, osLabel: osEntry.entry.label) {
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
@@ -371,13 +371,13 @@ final public class XcodeFiles {
                     firstEntry.deselectWithChildItems()
                 }
                 
-                entry.entry.addChildren(items: deviceSupportEntries)
+                osEntry.entry.addChildren(items: deviceSupportEntries)
                 
             } else {
                 log.warning("XcodeFiles: Cannot check contents of '\(entryUrl)', skipping")
             }
             
-            entries.append(entry.entry)
+            entries.append(osEntry.entry)
         }
         
         return entries

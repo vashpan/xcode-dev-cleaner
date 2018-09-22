@@ -202,7 +202,12 @@ open class XcodeFileEntry: NSObject {
                 result = .mixed
             }
         } else {
-            result = self.selection // with no items use current selection
+            // with no items use current selection or deselect if its empty
+            if self.isEmpty {
+                result = .off
+            } else {
+                result = self.selection
+            }
         }
         
         self.selection = result
