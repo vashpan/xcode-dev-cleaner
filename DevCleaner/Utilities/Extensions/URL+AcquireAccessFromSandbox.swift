@@ -15,8 +15,14 @@ public extension URL {
     }
     
     public func acquireAccessFromSandbox(bookmark: Data? = nil, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
+        func doWeHaveAccess(for path: String) -> Bool {
+            let fm = FileManager.default
+            
+            return fm.isReadableFile(atPath: path) && fm.isWritableFile(atPath: path)
+        }
+        
         // check if we already have access, then we don't need to show the dialog or use security bookmarks
-        if FileManager.default.isReadableFile(atPath: self.path) {
+        if doWeHaveAccess(for: self.path) {
             return self
         }
         
@@ -27,7 +33,7 @@ public extension URL {
                 let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
                 
                 if !isBookmarkStale {
-                    if FileManager.default.isReadableFile(atPath: bookmarkedUrl.path) {
+                    if doWeHaveAccess(for: bookmarkedUrl.path) {
                         return bookmarkedUrl
                     } else {
                         throw SandboxFolderAccessError()
@@ -62,12 +68,14 @@ public extension URL {
                 return self.acquireAccessFromSandbox(bookmark: nil, openPanelMessage: openPanelMessage)
             }
             
-            if FileManager.default.isReadableFile(atPath: folderUrl.path) {
+            if doWeHaveAccess(for: folderUrl.path) {
                 if let bookmarkData = try? folderUrl.bookmarkData() {
                     Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: self)
                     
                     return folderUrl
                 }
+            } else {
+                return nil // well, we tried but we can't get access to this folder
             }
         }
         
