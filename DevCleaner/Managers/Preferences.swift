@@ -112,7 +112,7 @@ public final class Preferences {
         return UserDefaults.standard.data(forKey: key)
     }
     
-    public func setFolderBookmark(bookmarkData: Data, for url: URL) {
+    public func setFolderBookmark(bookmarkData: Data?, for url: URL) {
         let key = self.folderBookmarkKey(for: url)
         UserDefaults.standard.set(bookmarkData, forKey: key)
     }

@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 public extension URL {
-    public struct SandboxFolderAccessError: Error {
+    private struct SandboxFolderAccessError: Error {
         
     }
     
@@ -75,7 +75,12 @@ public extension URL {
                     return folderUrl
                 }
             } else {
-                return nil // well, we tried but we can't get access to this folder
+                // well, we tried but we can't get access to this folder
+                
+                // delete folder bookmark just in case
+                Preferences.shared.setFolderBookmark(bookmarkData: nil, for: self)
+                
+                return nil
             }
         }
         

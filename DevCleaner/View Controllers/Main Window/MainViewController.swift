@@ -76,8 +76,6 @@ final class MainViewController: NSViewController {
               let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
-            //Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
-            
             Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
                                               message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
             return
