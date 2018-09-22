@@ -39,16 +39,15 @@ public protocol XcodeFilesDeleteDelegate: class {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int {
-        case deviceSupport, simulators, archives, derivedData
+        case deviceSupport, archives, derivedData
         
         public static var all: [Location] {
-            return [.deviceSupport, .simulators, .archives, .derivedData]
+            return [.deviceSupport, .archives, .derivedData]
         }
     }
     
     // MARK: Properties
     private var userDeveloperFolderUrl: URL
-    private var systemDeveloperFolderUrl: URL
     
     public weak var scanDelegate: XcodeFilesScanDelegate?
     public weak var deleteDelegate: XcodeFilesDeleteDelegate?
@@ -68,12 +67,10 @@ final public class XcodeFiles {
     }
     
     // MARK: Initialization
-    public init?(developerFolder: URL, systemDeveloperFolder: URL) {
+    public init?(developerFolder: URL) {
         self.userDeveloperFolderUrl = developerFolder
-        self.systemDeveloperFolderUrl = systemDeveloperFolder
         
         let _ = self.userDeveloperFolderUrl.startAccessingSecurityScopedResource()
-        let _ = self.systemDeveloperFolderUrl.startAccessingSecurityScopedResource()
         
         guard XcodeFiles.checkForXcodeDataFolders(location: developerFolder) else {
             log.error("XcodeFiles: Cannot create because Xcode cache folders doesn't seem to exist or we don't have proper access to them!")
@@ -82,7 +79,6 @@ final public class XcodeFiles {
         
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
-            .simulators: XcodeFileEntry(label: "Additional Simulators", selected: false),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false)
         ]
@@ -90,7 +86,6 @@ final public class XcodeFiles {
     
     deinit {
         self.userDeveloperFolderUrl.stopAccessingSecurityScopedResource()
-        self.systemDeveloperFolderUrl.stopAccessingSecurityScopedResource()
     }
     
     // MARK: Helpers
@@ -182,23 +177,6 @@ final public class XcodeFiles {
                                               selected: true)
             } else {
                 log.warning("XcodeFiles: No version for device support: \(string), skipping")
-            }
-        }
-        
-        return nil
-    }
-    
-    private func simulatorRuntimeEntry(from string: String) -> SimulatorFileEntry? {
-        let splitted = string.split(separator: " ", maxSplits: 2, omittingEmptySubsequences: true)
-        
-        if splitted.count == 2 {
-            let system = String(splitted[0])
-            let systemVersion = Version(describing: String(splitted[1]))
-            
-            if let version = systemVersion {
-                return SimulatorFileEntry(system: system, version: version, selected: false)
-            } else {
-                log.warning("XcodeFiles: No version for simulator: \(string), skipping")
             }
         }
         
@@ -346,9 +324,6 @@ final public class XcodeFiles {
             case .deviceSupport:
                 entry.addChildren(items: self.scanDeviceSupportLocations())
             
-            case .simulators:
-                entry.addChildren(items: self.scanSimulatorsLocations())
-            
             case .archives:
                 entry.addChildren(items: self.scanArchivesLocations())
             
@@ -406,29 +381,6 @@ final public class XcodeFiles {
         }
         
         return entries
-    }
-
-    private func scanSimulatorsLocations() -> [XcodeFileEntry] {
-        let simulatorsLocation = self.systemDeveloperFolderUrl.appendingPathComponent("CoreSimulator/Profiles/Runtimes")
-        
-        // scan for simulator runtimes
-        var results: [SimulatorFileEntry] = []
-        if let simulators = try? FileManager.default.contentsOfDirectory(at: simulatorsLocation, includingPropertiesForKeys: nil) {
-            for simulatorRuntimeUrl in simulators {
-                if let simulatorEntry = self.simulatorRuntimeEntry(from: simulatorRuntimeUrl.deletingPathExtension().lastPathComponent) {
-                    simulatorEntry.addPath(path: simulatorRuntimeUrl)
-                    
-                    results.append(simulatorEntry)
-                }
-            }
-        }
-        
-        // sort by version
-        results = results.sorted { (lhs, rhs) -> Bool in
-            lhs.version > rhs.version
-        }
-        
-        return results
     }
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {

@@ -73,8 +73,7 @@ final class MainViewController: NSViewController {
         
         // open ~/Library/Developer folder & create XcodeFiles instance
         guard let developerLibraryFolder = self.acquireUserDeveloperFolderPermissions(),
-              let systemLibraryFolder = self.acquireSystemDeveloperFolderPermissions(),
-              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder, systemDeveloperFolder: systemLibraryFolder) else {
+              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
             //Preferences.shared.devFolderBookmark = nil // reset data bookmark in case we choose wrong folder
@@ -145,14 +144,6 @@ final class MainViewController: NSViewController {
         
         return userDeveloperFolder.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: userDeveloperFolder),
                                                         openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
-    }
-    
-    @discardableResult
-    private func acquireSystemDeveloperFolderPermissions() -> URL? {
-        let systemDeveloperFolder = URL(fileURLWithPath: "/Library/Developer")
-        
-        return systemDeveloperFolder.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: systemDeveloperFolder),
-                                                              openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
     }
     
     private func checkForInstalledXcode() {

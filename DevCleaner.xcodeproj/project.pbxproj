@@ -35,7 +35,6 @@
 		71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F839214E9A4300A11601 /* String+MD5.swift */; };
 		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
-		71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +72,6 @@
 		71E7F839214E9A4300A11601 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
 		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
-		71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorFileEntry.swift; sourceTree = "<group>"; };
 		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -244,7 +242,6 @@
 				71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */,
 				71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */,
 				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
-				71FD37DA206AD7520042812D /* SimulatorFileEntry.swift */,
 				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
 			);
 			path = Entries;
@@ -361,7 +358,6 @@
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
 				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
-				71FD37DB206AD7520042812D /* SimulatorFileEntry.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */,
 				71B01E902082551000940041 /* SizeCellView.swift in Sources */,
 				71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */,
