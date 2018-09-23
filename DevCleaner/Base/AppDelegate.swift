@@ -20,7 +20,7 @@
 
 import Cocoa
 
-let log = Logger(level: .info)
+let log = Logger(name: "MainLog", level: .info, toFile: true)
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

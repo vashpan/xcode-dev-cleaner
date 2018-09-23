@@ -28,17 +28,63 @@ public class Logger {
     
     // MARK: Properties
     public let level: Level
+    public let name: String
+    public var fileLogging: Bool {
+        return self.logFileHandle != nil
+    }
+    
+    private let logFileHandle: FileHandle?
     
     // MARK: Initialization
-    public init(level: Level = .error) {
+    public init(name: String, level: Level = .error, toFile: Bool = false) {
+        self.name = name
         self.level = level
+        
+        if toFile {
+            // create logfile path
+            let bundleId = Bundle.main.bundleIdentifier ?? "UnknownApp"
+            let logFileName = "\(bundleId)-\(self.name)-LogFile-latest.log"
+            let documentsFolder = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            
+            // create if needed & open log file to write
+            if let logFilePath = documentsFolder?.appendingPathComponent(logFileName) {
+                do {
+                    FileManager.default.createFile(atPath: logFilePath.path, contents: nil, attributes: nil)
+                    self.logFileHandle = try FileHandle(forWritingTo: logFilePath)
+                } catch(let error) {
+                    self.logFileHandle = nil
+                    NSLog("❌ Can't create log file: \(logFilePath.path). Error: \(error)")
+                }
+            } else {
+                self.logFileHandle = nil
+            }
+        } else {
+            self.logFileHandle = nil
+        }
+    }
+    
+    deinit {
+        self.logFileHandle?.closeFile()
+    }
+    
+    // MARK: Helpers
+    private func writeLog(text: String) {
+        NSLog(text)
+        
+        if let fileHandle = self.logFileHandle {
+            let textToLogToFile = text + "\n" // add new line for each entry
+            if let logData = textToLogToFile.data(using: .utf8) {
+                fileHandle.write(logData)
+                fileHandle.synchronizeFile()
+            }
+        }
     }
     
     // MARK: Log methods
     public func info(_ message: String) {
         switch self.level {
             case .info:
-                NSLog("❕ \(message)")
+                self.writeLog(text: "❕ \(message)")
             default:
                 return
         }
@@ -47,7 +93,7 @@ public class Logger {
     public func warning(_ message: String) {
         switch self.level {
             case .info, .warning:
-                NSLog("⚠️ \(message)")
+                self.writeLog(text: "⚠️ \(message)")
             default:
                 return
         }
@@ -56,7 +102,7 @@ public class Logger {
     public func error(_ message: String) {
         switch self.level {
             case .info, .warning, .error:
-                NSLog("❌ \(message)")
+                self.writeLog(text: "❌ \(message)")
         }
     }
 }
