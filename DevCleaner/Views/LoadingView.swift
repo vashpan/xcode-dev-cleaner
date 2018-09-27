@@ -12,11 +12,14 @@ public class LoadingView: NSView {
     // MARK: Properties
     private let progressIndicator = NSProgressIndicator()
     
+    // MARK: Constants
+    private let indicatorSize: CGFloat = 32.0
+    
     // MARK: Initialization & overrides
     public convenience init() {
         self.init(frame: .zero)
     }
-    
+
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
@@ -26,7 +29,8 @@ public class LoadingView: NSView {
         
         // add loading indicator
         self.progressIndicator.style = .spinning
-        self.progressIndicator.frame = frameRect
+        self.progressIndicator.controlSize = .regular
+        self.progressIndicator.frame = self.indicatorFrame(size: indicatorSize, in: frameRect)
         
         self.addSubview(progressIndicator)
     }
@@ -36,7 +40,7 @@ public class LoadingView: NSView {
     }
     
     public override func layout() {
-        self.progressIndicator.frame = self.frame
+        self.progressIndicator.frame = self.indicatorFrame(size: indicatorSize, in: self.frame)
         
         super.layout()
     }
@@ -47,5 +51,11 @@ public class LoadingView: NSView {
         } else {
             self.progressIndicator.startAnimation(self)
         }
+    }
+    
+    // MARK: Helpers
+    private func indicatorFrame(size: CGFloat, in frameRect: CGRect) -> CGRect {
+        return CGRect(x: (frameRect.width - size) / 2.0, y: (frameRect.height - size) / 2.0,
+                      width: size, height: size)
     }
 }
