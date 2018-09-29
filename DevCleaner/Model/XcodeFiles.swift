@@ -488,9 +488,7 @@ final public class XcodeFiles {
         var ordinal = 0
         for itemToDelete in itemsToDelete {
             ordinal += 1
-            
-            // TODO: Special considerations for deleting simulators
-            
+
             DispatchQueue.main.async { [weak self] in
                 if let strongSelf = self {
                     strongSelf.deleteDelegate?.deleteInProgress(xcodeFiles: strongSelf,
