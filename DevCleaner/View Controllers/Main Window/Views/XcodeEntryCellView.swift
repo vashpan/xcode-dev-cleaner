@@ -103,12 +103,12 @@ final class XcodeEntryCellView: NSTableCellView {
     
     private func entrySelectionToControlState(_ entrySelection: XcodeFileEntry.Selection) -> NSControl.StateValue {
         switch entrySelection {
-        case .on:
-            return .on
-        case .off:
-            return .off
-        case .mixed:
-            return .mixed
+            case .on:
+                return .on
+            case .off:
+                return .off
+            case .mixed:
+                return .mixed
         }
     }
     
@@ -132,10 +132,6 @@ final class XcodeEntryCellView: NSTableCellView {
     }
     
     // MARK: Actions
-    internal func switchCheckBox() {
-        self.checkBox.performClick(nil)
-    }
-    
     @IBAction func checkBoxSwitched(_ sender: NSButton) {
         // when we click, disallow mixed state
         if sender.state == .mixed {

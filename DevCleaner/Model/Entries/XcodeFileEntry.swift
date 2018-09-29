@@ -83,6 +83,10 @@ open class XcodeFileEntry: NSObject {
     public private(set) weak var parent: XcodeFileEntry?
     public private(set) var items: [XcodeFileEntry]
     
+    public var numberOfNonEmptyItems: Int {
+        return self.items.filter { !$0.isEmpty }.count
+    }
+    
     public var isEmpty: Bool {
         return (self.items.count == 0 && self.paths.count == 0)
     }
@@ -197,12 +201,12 @@ open class XcodeFileEntry: NSObject {
         }
         
         // calculate own selection
-        if self.items.count > 0 {
+        if self.numberOfNonEmptyItems > 0 {
             let selectedItems = self.items.reduce(0) { (result, item) -> Int in
                 return result + (item.isSelected ? 1 : 0)
             }
             
-            if selectedItems == self.items.count {
+            if selectedItems == self.numberOfNonEmptyItems {
                 if self.items.filter( { $0.selection == .mixed } ).count > 0 {
                     result = .mixed
                 } else {
