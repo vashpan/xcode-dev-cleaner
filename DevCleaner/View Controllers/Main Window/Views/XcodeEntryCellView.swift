@@ -46,12 +46,12 @@ final class XcodeEntryCellView: NSTableCellView {
         self.checkBox.state = self.entrySelectionToControlState(xcodeEntry.selection)
         
         // label
-        self.textField?.stringValue = xcodeEntry.label
+        self.textField?.attributedStringValue = self.attributedString(for: xcodeEntry)
         self.textField?.sizeToFit()
         
         // tooltip
         if xcodeEntry.tooltip {
-            self.toolTip = xcodeEntry.label
+            self.toolTip = xcodeEntry.fullDescription
         }
         
         // icon
@@ -76,6 +76,29 @@ final class XcodeEntryCellView: NSTableCellView {
         
         self.imageView?.isEnabled = true
         self.textField?.isEnabled = true
+    }
+    
+    private func attributedString(for xcodeEntry: XcodeFileEntry) -> NSAttributedString {
+        let result = NSMutableAttributedString()
+        
+        // label
+        let label = NSAttributedString(string: xcodeEntry.label)
+        result.append(label)
+        
+        // extra info if present
+        if !xcodeEntry.extraInfo.isEmpty {
+            let extraInfo = NSAttributedString(string: " " + xcodeEntry.extraInfo, attributes: [
+                    NSAttributedString.Key.foregroundColor: NSColor.secondaryLabelColor
+                ])
+            result.append(extraInfo)
+        }
+        
+        // add truncating options
+        let style = NSMutableParagraphStyle()
+        style.lineBreakMode = .byTruncatingTail
+        result.addAttributes([NSAttributedString.Key.paragraphStyle: style], range: NSRange(location: 0, length: result.length))
+        
+        return result
     }
     
     private func entrySelectionToControlState(_ entrySelection: XcodeFileEntry.Selection) -> NSControl.StateValue {

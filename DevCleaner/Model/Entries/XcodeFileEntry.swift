@@ -47,9 +47,18 @@ open class XcodeFileEntry: NSObject {
     }
     
     // MARK: Properties
-    public let label: String
     public let icon: Icon?
+    public let label: String
+    public let extraInfo: String
     public let tooltip: Bool
+    
+    public var fullDescription: String {
+        if !self.extraInfo.isEmpty {
+            return "\(self.label) \(self.extraInfo)"
+        } else {
+            return self.label
+        }
+    }
     
     public private(set) var selection: Selection
     public private(set) var size: Size
@@ -83,9 +92,10 @@ open class XcodeFileEntry: NSObject {
     }
     
     // MARK: Initialization
-    public init(label: String, icon: Icon? = nil, tooltip: Bool = false, selected: Bool) {
-        self.label = label
+    public init(label: String, extraInfo: String = String(), icon: Icon? = nil, tooltip: Bool = false, selected: Bool) {
         self.icon = icon
+        self.label = label
+        self.extraInfo = extraInfo
         self.tooltip = tooltip
         
         self.selection = selected ? .on : .off
