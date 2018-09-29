@@ -184,15 +184,11 @@ final public class XcodeFiles {
     }
     
     private func derivedDataEntry(from location: URL) -> DerivedDataFileEntry? {
-        let splitted = location.lastPathComponent.split(separator: "-", maxSplits: 2, omittingEmptySubsequences: true)
+        // drop last part that's the kind of id of a project
+        let splitted = location.lastPathComponent.split(separator: "-", omittingEmptySubsequences: true).dropLast()
         
-        // check for project name
-        let name: String
-        if splitted.count == 2 {
-            name = String(splitted[0]).replacingOccurrences(of: "_", with: " ") // replace all dashes with spaces
-        } else {
-            return nil
-        }
+        // create project name
+        let name = splitted.joined(separator: "-").replacingOccurrences(of: "_", with: " ") // replace all dashes with spaces
         
         // find project folder path
         let infoPath = location.appendingPathComponent("info.plist")
