@@ -34,6 +34,15 @@ public final class Preferences {
         
     }
     
+    // MARK: Environment
+    public func envValue(key: String) -> String? {
+        return ProcessInfo.processInfo.environment[key]
+    }
+    
+    public func envKeyPresent(key: String) -> Bool {
+        return ProcessInfo.processInfo.environment.keys.contains(key)
+    }
+    
     // MARK: Options
     public var notificationsEnabled: Bool {
         get {
