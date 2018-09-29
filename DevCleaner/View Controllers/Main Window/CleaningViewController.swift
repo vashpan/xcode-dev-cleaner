@@ -119,11 +119,17 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
     }
     
     func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL?) {
+        // prepare error message
+        let message = """
+        Following file couldn't be removed:\n\(location.capitalized): \(url?.path ?? "-")\n\n
+        \(error.localizedDescription)
+        """
+        
         // show error message
         let alert = NSAlert()
         alert.alertStyle = .critical
         alert.messageText = "Failed to delete item"
-        alert.informativeText = "Following file couldn't be removed:\n\(location.capitalized): \(url?.path ?? "-")"
+        alert.informativeText = message
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
