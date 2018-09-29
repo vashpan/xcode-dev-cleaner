@@ -31,6 +31,6 @@ public final class DerivedDataFileEntry: XcodeFileEntry {
         self.projectName = projectName
         self.pathUrl = pathUrl
         
-        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: .system(name: NSImage.folderName), selected: selected)
+        super.init(label: "\(self.projectName) (\(self.pathUrl.path))", icon: .system(name: NSImage.folderName), tooltip: true, selected: selected)
     }
 }

@@ -49,6 +49,11 @@ final class XcodeEntryCellView: NSTableCellView {
         self.textField?.stringValue = xcodeEntry.label
         self.textField?.sizeToFit()
         
+        // tooltip
+        if xcodeEntry.tooltip {
+            self.toolTip = xcodeEntry.label
+        }
+        
         // icon
         self.imageView?.image = self.iconForEntry(xcodeEntry)
         

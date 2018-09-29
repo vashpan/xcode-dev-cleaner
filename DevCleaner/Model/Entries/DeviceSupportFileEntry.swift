@@ -65,7 +65,7 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         self.version = version
         self.build = build
         
-        super.init(label: "\(self.osType.description) \(self.version) \(self.build)", icon: DeviceSupportFileEntry.icon(for: osType, version: version), selected: selected)
+        super.init(label: "\(self.osType.description) \(self.version) \(self.build)", icon: DeviceSupportFileEntry.icon(for: osType, version: version), tooltip: true, selected: selected)
     }
     
     // MARK: Helpers
