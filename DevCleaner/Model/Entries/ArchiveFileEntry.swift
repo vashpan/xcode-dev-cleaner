@@ -42,7 +42,7 @@ public final class ArchiveFileEntry: XcodeFileEntry {
         
         let dateString = dateFormatter.string(from: self.date)
         
-        super.init(label: "\(self.version.description) (\(self.build)) - \(dateString)", icon: nil, tooltip: true, selected: selected)
+        super.init(label: "\(self.version.description) (\(self.build))", extraInfo: dateString, icon: nil, tooltip: true, selected: selected)
         
         self.addPath(path: location)
     }
