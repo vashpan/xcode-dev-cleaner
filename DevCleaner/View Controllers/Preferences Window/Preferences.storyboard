@@ -220,10 +220,12 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="archivesPopUpButton" destination="qvG-u8-9Gl" id="Lwv-RI-s1E"/>
                         <outlet property="changeCustomArchivesButton" destination="bcB-vP-Avp" id="rAK-ef-bPK"/>
                         <outlet property="changeCustomDerivedDataButton" destination="ANu-fE-M70" id="TBy-Js-eqE"/>
                         <outlet property="customArchivesTextField" destination="E18-xx-Grs" id="oCn-bq-JrP"/>
                         <outlet property="customDerivedDataTextField" destination="4Pb-4L-Zbf" id="hrJ-fE-MAc"/>
+                        <outlet property="derivedDataPopUpButton" destination="6d1-pk-CMl" id="WhR-CV-xjE"/>
                         <outlet property="dryRunEnabledButton" destination="pEa-e4-Td9" id="Yhf-Zs-6dY"/>
                         <outlet property="notificationsEnabledButton" destination="rdq-vd-Sas" id="bWx-iW-PaX"/>
                         <outlet property="notificationsPeriodPopUpButton" destination="uDr-vm-P7l" id="CT3-Ic-JxV"/>

@@ -36,6 +36,9 @@ final class PreferencesViewController: NSViewController {
     @IBOutlet private weak var customDerivedDataTextField: NSTextField!
     @IBOutlet private weak var customArchivesTextField: NSTextField!
     
+    @IBOutlet private weak var archivesPopUpButton: NSPopUpButton!
+    @IBOutlet private weak var derivedDataPopUpButton: NSPopUpButton!
+    
     @IBOutlet private weak var changeCustomDerivedDataButton: NSButton!
     @IBOutlet private weak var changeCustomArchivesButton: NSButton!
     
@@ -69,6 +72,18 @@ final class PreferencesViewController: NSViewController {
                 result = .custom
             default:
                 result = nil
+        }
+        
+        return result
+    }
+    
+    private func titleFromCustomFolderLocation(_ location: CustomLocation) -> String {
+        let result: String
+        switch location {
+            case .custom:
+                result = "Custom"
+            case .default:
+                result = "Default"
         }
         
         return result
@@ -123,6 +138,7 @@ final class PreferencesViewController: NSViewController {
             self.customDerivedDataTextField.stringValue = customFolder.path
             self.customDerivedDataTextField.toolTip = customFolder.path
             
+            self.derivedDataPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.custom))
             self.customDerivedDataTextField.isEnabled = true
             self.changeCustomDerivedDataButton.isEnabled = true
         } else {
@@ -130,6 +146,7 @@ final class PreferencesViewController: NSViewController {
             self.customDerivedDataTextField.stringValue = defaultFolder
             self.customDerivedDataTextField.toolTip = defaultFolder
             
+            self.derivedDataPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.default))
             self.changeCustomDerivedDataButton.isEnabled = false
             self.customDerivedDataTextField.isEnabled = false
         }
@@ -140,6 +157,7 @@ final class PreferencesViewController: NSViewController {
             self.customArchivesTextField.stringValue = customFolder.path
             self.customArchivesTextField.toolTip = customFolder.path
             
+            self.archivesPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.custom))
             self.customArchivesTextField.isEnabled = true
             self.changeCustomArchivesButton.isEnabled = true
         } else {
@@ -147,6 +165,7 @@ final class PreferencesViewController: NSViewController {
             self.customArchivesTextField.stringValue = defaultFolder
             self.customArchivesTextField.toolTip = defaultFolder
             
+            self.archivesPopUpButton.selectItem(withTitle: self.titleFromCustomFolderLocation(.default))
             self.customArchivesTextField.isEnabled = false
             self.changeCustomArchivesButton.isEnabled = false
         }
