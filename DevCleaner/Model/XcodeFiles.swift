@@ -48,6 +48,8 @@ final public class XcodeFiles {
     
     // MARK: Properties
     private var userDeveloperFolderUrl: URL
+    private var customDerivedDataFolderUrl: URL?
+    private var customArchivesFolderUrl: URL?
     
     public weak var scanDelegate: XcodeFilesScanDelegate?
     public weak var deleteDelegate: XcodeFilesDeleteDelegate?
@@ -67,10 +69,14 @@ final public class XcodeFiles {
     }
     
     // MARK: Initialization
-    public init?(developerFolder: URL) {
+    public init?(developerFolder: URL, customDerivedDataFolder: URL?, customArchivesFolder: URL?) {
         self.userDeveloperFolderUrl = developerFolder
+        self.customDerivedDataFolderUrl = customDerivedDataFolder
+        self.customArchivesFolderUrl = customArchivesFolder
         
         let _ = self.userDeveloperFolderUrl.startAccessingSecurityScopedResource()
+        let _ = self.customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = self.customArchivesFolderUrl?.startAccessingSecurityScopedResource()
         
         guard XcodeFiles.checkForXcodeDataFolders(location: developerFolder) else {
             log.error("XcodeFiles: Cannot create because Xcode cache folders doesn't seem to exist or we don't have proper access to them!")
@@ -86,6 +92,8 @@ final public class XcodeFiles {
     
     deinit {
         self.userDeveloperFolderUrl.stopAccessingSecurityScopedResource()
+        self.customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
+        self.customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
     }
     
     // MARK: Helpers
@@ -380,19 +388,26 @@ final public class XcodeFiles {
     }
     
     private func scanArchivesLocations() -> [XcodeFileEntry] {
-        let archivesLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives")
+        var archiveLocations = [URL]()
+        archiveLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives"))
+        
+        if let customArchivesLocation = self.customArchivesFolderUrl {
+            archiveLocations.append(customArchivesLocation)
+        }
         
         // gather various projects, create entries for each of them
         var archiveInfos = [String : [ArchiveFileEntry]]()
-        if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil) {
-            for dateFolder in datesFolders {
-                if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil) {
-                    for xcarchive in xcarchives {
-                        if let xcarchiveEntry = self.archiveFileEntry(from: xcarchive) {
-                            if archiveInfos.keys.contains(xcarchiveEntry.bundleName) {
-                                archiveInfos[xcarchiveEntry.bundleName]?.append(xcarchiveEntry)
-                            } else {
-                                archiveInfos[xcarchiveEntry.bundleName] = [xcarchiveEntry]
+        for archivesLocation in archiveLocations {
+            if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil) {
+                for dateFolder in datesFolders {
+                    if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil) {
+                        for xcarchive in xcarchives {
+                            if let xcarchiveEntry = self.archiveFileEntry(from: xcarchive) {
+                                if archiveInfos.keys.contains(xcarchiveEntry.bundleName) {
+                                    archiveInfos[xcarchiveEntry.bundleName]?.append(xcarchiveEntry)
+                                } else {
+                                    archiveInfos[xcarchiveEntry.bundleName] = [xcarchiveEntry]
+                                }
                             }
                         }
                     }
@@ -428,21 +443,28 @@ final public class XcodeFiles {
     }
     
     private func scanDerivedDataLocations() -> [XcodeFileEntry] {
-        let derivedDataLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData")
+        var derivedDataLocations = [URL]()
+        derivedDataLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData"))
+        
+        if let customDerivedDataLocation = self.customDerivedDataFolderUrl {
+            derivedDataLocations.append(customDerivedDataLocation)
+        }
         
         // scan for derived data projects
         var results: [XcodeFileEntry] = []
-        if let projectsFolders = try? FileManager.default.contentsOfDirectory(at: derivedDataLocation, includingPropertiesForKeys: nil) {
-            for projectFolder in projectsFolders {
-                // ignore "ModuleCache" folder
-                if projectFolder.lastPathComponent == "ModuleCache" {
-                    continue
-                }
-                
-                if let projectEntry = self.derivedDataEntry(from: projectFolder) {
-                    projectEntry.addPath(path: projectFolder)
+        for derivedDataLocation in derivedDataLocations {
+            if let projectsFolders = try? FileManager.default.contentsOfDirectory(at: derivedDataLocation, includingPropertiesForKeys: nil) {
+                for projectFolder in projectsFolders {
+                    // ignore "ModuleCache" folder
+                    if projectFolder.lastPathComponent == "ModuleCache" {
+                        continue
+                    }
                     
-                    results.append(projectEntry)
+                    if let projectEntry = self.derivedDataEntry(from: projectFolder) {
+                        projectEntry.addPath(path: projectFolder)
+                        
+                        results.append(projectEntry)
+                    }
                 }
             }
         }

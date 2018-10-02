@@ -73,7 +73,9 @@ final class MainViewController: NSViewController {
         
         // open ~/Library/Developer folder & create XcodeFiles instance
         guard let developerLibraryFolder = self.acquireUserDeveloperFolderPermissions(),
-              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder) else {
+              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
+                                          customDerivedDataFolder: Preferences.shared.customDerivedDataFolder,
+                                          customArchivesFolder: Preferences.shared.customArchivesFolder) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
             Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
