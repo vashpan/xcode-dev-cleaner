@@ -28,6 +28,8 @@ public final class Preferences {
     private let notificationsPeriodKey = "DCNotificationsPeriodKey"
     private let dryRunEnabledKey = "DCDryRunEnabledKey"
     private let totalBytesCleanedKey = "DCTotalBytesCleaned"
+    private let customArchivesFolderKey = "DCCustomArchivesFolderKey"
+    private let customDerivedDataFolderKey = "DCCustomDerivedDataFolderKey"
     
     // MARK: Initialization
     public init() {
@@ -108,6 +110,34 @@ public final class Preferences {
         set {
             let numberValue = NSNumber(value: newValue)
             UserDefaults.standard.set(numberValue, forKey: totalBytesCleanedKey)
+        }
+    }
+    
+    public var customArchivesFolder: URL? {
+        get {
+            if let archives = UserDefaults.standard.object(forKey: customArchivesFolderKey) as? URL {
+                return archives
+            }
+            
+            return nil
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: customArchivesFolderKey)
+        }
+    }
+    
+    public var customDerivedDataFolder: URL? {
+        get {
+            if let derivedData = UserDefaults.standard.object(forKey: customDerivedDataFolderKey) as? URL {
+                return derivedData
+            }
+            
+            return nil
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: customDerivedDataFolderKey)
         }
     }
     
