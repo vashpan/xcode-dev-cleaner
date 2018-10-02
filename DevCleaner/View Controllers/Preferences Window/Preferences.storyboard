@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="CR2-lt-sJT">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="CR2-lt-sJT">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -10,7 +10,7 @@
         <scene sceneID="OW6-dy-8wW">
             <objects>
                 <windowController storyboardIdentifier="PreferencesWindowController" showSeguePresentationStyle="single" id="CR2-lt-sJT" sceneMemberID="viewController">
-                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="9Tc-sf-wY7">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="9Tc-sf-wY7">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="425" y="461" width="480" height="270"/>
@@ -30,13 +30,13 @@
         <!--Preferences View Controller-->
         <scene sceneID="Czf-go-jwB">
             <objects>
-                <viewController id="fYt-6V-GDA" customClass="PreferencesViewController" customModule="XcodeCleaner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fYt-6V-GDA" customClass="PreferencesViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="NCD-1f-q3x">
-                        <rect key="frame" x="0.0" y="0.0" width="420" height="159"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="304"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rdq-vd-Sas">
-                                <rect key="frame" x="111" y="123" width="218" height="18"/>
+                                <rect key="frame" x="111" y="268" width="218" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Remind about scans periodically" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Uk5-0G-DJi">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-PX-Ljt">
-                                <rect key="frame" x="142" y="98" width="47" height="17"/>
+                                <rect key="frame" x="142" y="243" width="47" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Period:" id="WfS-sn-FqF">
                                     <font key="font" metaFont="system"/>
@@ -56,11 +56,11 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Gdl-iV-lbX">
-                                <rect key="frame" x="20" y="74" width="380" height="5"/>
+                                <rect key="frame" x="20" y="219" width="440" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEa-e4-Td9">
-                                <rect key="frame" x="111" y="40" width="67" height="18"/>
+                                <rect key="frame" x="111" y="185" width="67" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Dry run" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xW1-qw-Ei5">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -71,16 +71,16 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BsC-bM-OZk">
-                                <rect key="frame" x="130" y="20" width="164" height="14"/>
+                                <rect key="frame" x="130" y="165" width="164" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cleaning won't delete any files" id="dhP-rf-8uP">
-                                    <font key="font" metaFont="system" size="11"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O7v-zJ-eg3">
-                                <rect key="frame" x="18" y="122" width="85" height="17"/>
+                                <rect key="frame" x="20" y="270" width="85" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Notifications:" id="zSB-LN-JAK">
                                     <font key="font" metaFont="system"/>
@@ -89,7 +89,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rld-H0-ba5">
-                                <rect key="frame" x="20" y="39" width="48" height="17"/>
+                                <rect key="frame" x="57" y="187" width="48" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Debug:" id="obe-Gk-pJX">
                                     <font key="font" metaFont="system"/>
@@ -98,17 +98,17 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uDr-vm-P7l" userLabel="Notifications Period Pop Up">
-                                <rect key="frame" x="193" y="93" width="137" height="26"/>
+                                <rect key="frame" x="193" y="238" width="137" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <popUpButtonCell key="cell" type="push" title="Every 2 weeks" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VSs-6E-SUA" id="ZYn-gd-dn2">
+                                <popUpButtonCell key="cell" type="push" title="Every 2 weeks" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="VSs-6E-SUA" id="ZYn-gd-dn2">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="VIs-zS-R1C">
                                         <items>
-                                            <menuItem title="Every 2 weeks" id="VSs-6E-SUA">
+                                            <menuItem title="Every 2 weeks" state="on" id="VSs-6E-SUA">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
-                                            <menuItem title="Every month" state="on" id="SUg-JC-xDa">
+                                            <menuItem title="Every month" id="SUg-JC-xDa">
                                                 <modifierMask key="keyEquivalentModifierMask"/>
                                             </menuItem>
                                             <menuItem title="Every 2 months" id="gGB-03-bp0">
@@ -121,9 +121,109 @@
                                     <action selector="updatePeriod:" target="fYt-6V-GDA" id="nWT-ym-oxH"/>
                                 </connections>
                             </popUpButton>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Tsi-dt-g2r">
+                                <rect key="frame" x="20" y="142" width="440" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NJT-A3-7va">
+                                <rect key="frame" x="18" y="104" width="87" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Derived Data:" id="wVo-Xq-2wN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6d1-pk-CMl">
+                                <rect key="frame" x="111" y="99" width="85" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="zM1-VH-rcm" id="OKL-bn-EBE">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="BUX-yO-ynf">
+                                        <items>
+                                            <menuItem title="Default" state="on" id="zM1-VH-rcm"/>
+                                            <menuItem title="Custom" id="Wo1-5G-pdy"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changeDerivedDataFolder:" target="fYt-6V-GDA" id="7lr-BI-fPB"/>
+                                </connections>
+                            </popUpButton>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Pb-4L-Zbf">
+                                <rect key="frame" x="201" y="102" width="259" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="/Users/Konrad/Library/Developer/DerivedData" drawsBackground="YES" usesSingleLineMode="YES" id="8NM-dh-CqB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2lM-S9-kIG">
+                                <rect key="frame" x="45" y="48" width="60" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Archives:" id="Irv-iy-fIy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qvG-u8-9Gl">
+                                <rect key="frame" x="111" y="43" width="85" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="v5D-nh-0Wg" id="Ixp-aU-5UB">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="tXB-Er-y7V">
+                                        <items>
+                                            <menuItem title="Default" state="on" id="v5D-nh-0Wg"/>
+                                            <menuItem title="Custom" id="Hte-2z-Ay0"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="changeArchivesFolder:" target="fYt-6V-GDA" id="8sM-zH-fZH"/>
+                                </connections>
+                            </popUpButton>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E18-xx-Grs">
+                                <rect key="frame" x="201" y="46" width="259" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="truncatingTail" truncatesLastVisibleLine="YES" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="/Users/Konrad/Library/Developer/Archives" drawsBackground="YES" usesSingleLineMode="YES" id="EzF-fv-4Rk">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bcB-vP-Avp">
+                                <rect key="frame" x="391" y="19" width="69" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Change..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ts5-gR-b3D">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectCustomArchivesFolder:" target="fYt-6V-GDA" id="f0e-Pk-fPk"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANu-fE-M70">
+                                <rect key="frame" x="391" y="75" width="69" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="roundRect" title="Change..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ja7-26-qPV">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="selectCustomDerivedDataFolder:" target="fYt-6V-GDA" id="pIY-vN-Z1a"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="changeCustomArchivesButton" destination="bcB-vP-Avp" id="rAK-ef-bPK"/>
+                        <outlet property="changeCustomDerivedDataButton" destination="ANu-fE-M70" id="TBy-Js-eqE"/>
+                        <outlet property="customArchivesTextField" destination="E18-xx-Grs" id="oCn-bq-JrP"/>
+                        <outlet property="customDerivedDataTextField" destination="4Pb-4L-Zbf" id="hrJ-fE-MAc"/>
                         <outlet property="dryRunEnabledButton" destination="pEa-e4-Td9" id="Yhf-Zs-6dY"/>
                         <outlet property="notificationsEnabledButton" destination="rdq-vd-Sas" id="bWx-iW-PaX"/>
                         <outlet property="notificationsPeriodPopUpButton" destination="uDr-vm-P7l" id="CT3-Ic-JxV"/>
@@ -131,7 +231,7 @@
                 </viewController>
                 <customObject id="3XI-Vk-vwK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117" y="218"/>
+            <point key="canvasLocation" x="117" y="276.5"/>
         </scene>
     </scenes>
 </document>
