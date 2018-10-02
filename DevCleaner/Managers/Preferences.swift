@@ -115,8 +115,8 @@ public final class Preferences {
     
     public var customArchivesFolder: URL? {
         get {
-            if let archives = UserDefaults.standard.object(forKey: customArchivesFolderKey) as? URL {
-                return archives
+            if let archivesPath = UserDefaults.standard.object(forKey: customArchivesFolderKey) as? String {
+                return URL(fileURLWithPath: archivesPath)
             }
             
             return nil
@@ -129,8 +129,8 @@ public final class Preferences {
     
     public var customDerivedDataFolder: URL? {
         get {
-            if let derivedData = UserDefaults.standard.object(forKey: customDerivedDataFolderKey) as? URL {
-                return derivedData
+            if let derivedDataPath = UserDefaults.standard.object(forKey: customDerivedDataFolderKey) as? String {
+                return URL(fileURLWithPath: derivedDataPath)
             }
             
             return nil
