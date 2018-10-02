@@ -55,6 +55,47 @@ final class PreferencesViewController: NSViewController {
     }
     
     // MARK: Helpers
+    private func chooseAndBookmarkFolder(startWith folder: URL) -> URL? {
+        func doWeHaveAccess(for path: String) -> Bool {
+            let fm = FileManager.default
+            
+            return fm.isReadableFile(atPath: path) && fm.isWritableFile(atPath: path)
+        }
+        
+        let openPanel = NSOpenPanel()
+        openPanel.directoryURL = folder
+        openPanel.message = "Choose a new location"
+        openPanel.prompt = "Choose"
+        
+        openPanel.allowedFileTypes = ["none"]
+        openPanel.allowsOtherFileTypes = false
+        openPanel.canChooseDirectories = true
+        
+        openPanel.runModal()
+        
+        // check if we get proper file & save bookmark to it
+        if let folderUrl = openPanel.urls.first {
+            if doWeHaveAccess(for: folderUrl.path) {
+                if let bookmarkData = try? folderUrl.bookmarkData() {
+                    Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: folderUrl)
+                    return folderUrl
+                } else {
+                    Messages.infoMessage(title: "Can't choose this folder",
+                                         message: "Some problem with security.")
+                    
+                    return nil
+                }
+            } else {
+                Messages.infoMessage(title: "Can't choose this folder",
+                                     message: "Access to this folder is denied.")
+                
+                return nil
+            }
+        }
+        
+        return nil
+    }
+    
     private func xcodeDefaultFolder(appending path: String) -> URL {
         let userName = NSUserName()
         let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
@@ -242,18 +283,36 @@ final class PreferencesViewController: NSViewController {
         }
         
         switch location {
-        case .default:
-            Preferences.shared.customArchivesFolder = nil
+            case .default:
+                Preferences.shared.customArchivesFolder = nil
+                
+                self.changeCustomArchivesButton.isEnabled = false
+                self.customArchivesTextField.isEnabled = false
+                self.customArchivesTextField.stringValue = self.xcodeDefaultFolder(appending: "Archives").path
+            case .custom:
+                let folderUrl = URL(fileURLWithPath: self.customArchivesTextField.stringValue, isDirectory: true)
+                Preferences.shared.customArchivesFolder = folderUrl
+                
+                self.customArchivesTextField.isEnabled = true
+                self.changeCustomArchivesButton.isEnabled = true
+        }
+    }
+    
+    @IBAction func selectCustomDerivedDataFolder(_ sender: NSButton) {
+        let startFolder = URL(fileURLWithPath: self.customDerivedDataTextField.stringValue, isDirectory: true)
+        if let selectedDerivedDataFolder = self.chooseAndBookmarkFolder(startWith: startFolder) {
+            Preferences.shared.customDerivedDataFolder = selectedDerivedDataFolder
             
-            self.changeCustomArchivesButton.isEnabled = false
-            self.customArchivesTextField.isEnabled = false
-            self.customArchivesTextField.stringValue = self.xcodeDefaultFolder(appending: "Archives").path
-        case .custom:
-            let folderUrl = URL(fileURLWithPath: self.customArchivesTextField.stringValue, isDirectory: true)
-            Preferences.shared.customArchivesFolder = folderUrl
+            self.customDerivedDataTextField.stringValue = selectedDerivedDataFolder.path
+        }
+    }
+    
+    @IBAction func selectCustomArchivesFolder(_ sender: NSButton) {
+        let startFolder = URL(fileURLWithPath: self.customArchivesTextField.stringValue, isDirectory: true)
+        if let selectedArchivesFolder = self.chooseAndBookmarkFolder(startWith: startFolder) {
+            Preferences.shared.customArchivesFolder = selectedArchivesFolder
             
-            self.customArchivesTextField.isEnabled = true
-            self.changeCustomArchivesButton.isEnabled = true
+            self.customArchivesTextField.stringValue = selectedArchivesFolder.path
         }
     }
 }
