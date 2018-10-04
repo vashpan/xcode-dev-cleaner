@@ -407,7 +407,9 @@ final public class XcodeFiles {
         archiveLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/Archives"))
         
         if let customArchivesLocation = self.customArchivesFolderUrl {
-            archiveLocations.append(customArchivesLocation)
+            if !archiveLocations.contains(customArchivesLocation) {
+                archiveLocations.append(customArchivesLocation)
+            }
         }
         
         // gather various projects, create entries for each of them
@@ -462,7 +464,9 @@ final public class XcodeFiles {
         derivedDataLocations.append(self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DerivedData"))
         
         if let customDerivedDataLocation = self.customDerivedDataFolderUrl {
-            derivedDataLocations.append(customDerivedDataLocation)
+            if !derivedDataLocations.contains(customDerivedDataLocation) {
+                derivedDataLocations.append(customDerivedDataLocation)
+            }
         }
         
         // scan for derived data projects
