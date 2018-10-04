@@ -94,8 +94,8 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsEnabled)
             UserDefaults.standard.set(newValue, forKey: Keys.notificationsEnabled)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsEnabled)
         }
     }
     
@@ -115,8 +115,8 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsPeriod)
             UserDefaults.standard.set(newValue.rawValue, forKey: Keys.notificationsPeriod)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsPeriod)
         }
     }
     
@@ -134,8 +134,8 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.dryRunEnabled)
             UserDefaults.standard.set(newValue, forKey: Keys.dryRunEnabled)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.dryRunEnabled)
         }
     }
     
@@ -149,10 +149,10 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.totalBytesCleaned)
-            
             let numberValue = NSNumber(value: newValue)
             UserDefaults.standard.set(numberValue, forKey: Keys.totalBytesCleaned)
+            
+            self.informAllObserversAboutChange(keyThatChanged: Keys.totalBytesCleaned)
         }
     }
     
@@ -166,8 +166,8 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.customArchivesFolder)
             UserDefaults.standard.set(newValue, forKey: Keys.customArchivesFolder)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.customArchivesFolder)
         }
     }
     
@@ -181,8 +181,8 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: Keys.customDerivedDataFolder)
             UserDefaults.standard.set(newValue, forKey: Keys.customDerivedDataFolder)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.customDerivedDataFolder)
         }
     }
     
