@@ -20,9 +20,17 @@
 
 import Foundation
 
+// MARK: Preferences Observer
+@objc public protocol PreferencesObserver: class {
+    func preferenceDidChange(key: String)
+}
+
+// MARK: - Preferences Class
 public final class Preferences {
     // MARK: Properties & constants
     public static let shared = Preferences()
+    
+    private var observers = [Weak<PreferencesObserver>]()
     
     private let notificationsEnabledKey = "DCNotificationsEnabledKey"
     private let notificationsPeriodKey = "DCNotificationsPeriodKey"
@@ -34,6 +42,29 @@ public final class Preferences {
     // MARK: Initialization
     public init() {
         
+    }
+    
+    // MARK: Observers
+    public func addObserver(_ observer: PreferencesObserver) {
+        let weakObserver = Weak(value: observer)
+        
+        if !self.observers.contains(weakObserver) {
+            self.observers.append(weakObserver)
+        }
+    }
+    
+    public func removeObserver(_ observer: PreferencesObserver) {
+        let weakObserverToRemove = Weak(value: observer)
+        
+        self.observers.removeAll { (observer) -> Bool in
+            return observer == weakObserverToRemove
+        }
+    }
+    
+    private func informAllObserversAboutChange(keyThatChanged: String) {
+        for observer in self.observers {
+            observer.value?.preferenceDidChange(key: keyThatChanged)
+        }
     }
     
     // MARK: Environment
@@ -56,6 +87,7 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: notificationsEnabledKey)
             UserDefaults.standard.set(newValue, forKey: notificationsEnabledKey)
         }
     }
@@ -76,6 +108,7 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: notificationsPeriodKey)
             UserDefaults.standard.set(newValue.rawValue, forKey: notificationsPeriodKey)
         }
     }
@@ -94,6 +127,7 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: dryRunEnabledKey)
             UserDefaults.standard.set(newValue, forKey: dryRunEnabledKey)
         }
     }
@@ -108,6 +142,8 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: totalBytesCleanedKey)
+            
             let numberValue = NSNumber(value: newValue)
             UserDefaults.standard.set(numberValue, forKey: totalBytesCleanedKey)
         }
@@ -123,6 +159,7 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: customArchivesFolderKey)
             UserDefaults.standard.set(newValue, forKey: customArchivesFolderKey)
         }
     }
@@ -137,6 +174,7 @@ public final class Preferences {
         }
         
         set {
+            self.informAllObserversAboutChange(keyThatChanged: customDerivedDataFolderKey)
             UserDefaults.standard.set(newValue, forKey: customDerivedDataFolderKey)
         }
     }
