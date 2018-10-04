@@ -293,6 +293,21 @@ final public class XcodeFiles {
         }
     }
     
+    // MARK: Updating required data
+    public func updateCustomFolders(customDerivedDataFolder: URL?, customArchivesFolder: URL?) {
+        // clear old security access
+        self.customDerivedDataFolderUrl?.stopAccessingSecurityScopedResource()
+        self.customArchivesFolderUrl?.stopAccessingSecurityScopedResource()
+        
+        // update folders
+        self.customDerivedDataFolderUrl = customDerivedDataFolder
+        self.customArchivesFolderUrl = customArchivesFolder
+        
+        // restart security scope access
+        let _ = self.customDerivedDataFolderUrl?.startAccessingSecurityScopedResource()
+        let _ = self.customArchivesFolderUrl?.startAccessingSecurityScopedResource()
+    }
+    
     // MARK: Scan files
     public func scanFiles(in locations: [Location]) {
         DispatchQueue.main.async { [weak self] in

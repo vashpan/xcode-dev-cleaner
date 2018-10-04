@@ -160,6 +160,19 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Helpers
+    private func updateCustomFolders() {
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
+        
+        let derivedDataFolder = self.acquireCustomDerivedDataFolderPermissions()
+        let archivesFolder = self.acquireCustomArchivesFolderPermissions()
+        
+        xcodeFiles.updateCustomFolders(customDerivedDataFolder: derivedDataFolder,
+                                       customArchivesFolder: archivesFolder)
+    }
+    
     private func startScan() {
         guard let xcodeFiles = self.xcodeFiles else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
@@ -464,6 +477,7 @@ extension MainViewController: XcodeFilesScanDelegate {
 extension MainViewController: PreferencesObserver {
     func preferenceDidChange(key: String) {
         if key == Preferences.Keys.customArchivesFolder || key == Preferences.Keys.customDerivedDataFolder {
+            self.updateCustomFolders()
             self.startScan()
         }
     }
