@@ -74,8 +74,8 @@ final class MainViewController: NSViewController {
         // open ~/Library/Developer folder & create XcodeFiles instance
         guard let developerLibraryFolder = self.acquireUserDeveloperFolderPermissions(),
               let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
-                                          customDerivedDataFolder: Preferences.shared.customDerivedDataFolder,
-                                          customArchivesFolder: Preferences.shared.customArchivesFolder) else {
+                                          customDerivedDataFolder: self.acquireCustomDerivedDataFolderPermissions(),
+                                          customArchivesFolder: self.acquireCustomArchivesFolderPermissions()) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
             Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
@@ -125,6 +125,40 @@ final class MainViewController: NSViewController {
         }
     }
     
+    // MARK: Acquire folder permissions
+    private func acquireFolderPermissions(folderUrl: URL, openPanelMessage: String? = nil) -> URL? {
+        let message = openPanelMessage ??
+                      "DevCleaner needs permission to this folder to scan its contents. Folder should be already selected and all you need to do is to click \"Open\"."
+        
+        return folderUrl.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: folderUrl),
+                                          openPanelMessage: message)
+    }
+    
+    private func acquireUserDeveloperFolderPermissions() -> URL? {
+        let userName = NSUserName()
+        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
+        let userDeveloperFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
+        
+        return self.acquireFolderPermissions(folderUrl: userDeveloperFolder,
+                                             openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
+    }
+    
+    private func acquireCustomDerivedDataFolderPermissions() -> URL? {
+        guard let customDerivedDataFolderUrl = Preferences.shared.customDerivedDataFolder else {
+            return nil
+        }
+        
+        return self.acquireFolderPermissions(folderUrl: customDerivedDataFolderUrl)
+    }
+    
+    private func acquireCustomArchivesFolderPermissions() -> URL? {
+        guard let customArchivesFolderUrl = Preferences.shared.customArchivesFolder else {
+            return nil
+        }
+        
+        return self.acquireFolderPermissions(folderUrl: customArchivesFolderUrl)
+    }
+    
     // MARK: Helpers
     private func startScan() {
         guard let xcodeFiles = self.xcodeFiles else {
@@ -142,17 +176,7 @@ final class MainViewController: NSViewController {
             xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
         }
     }
-    
-    @discardableResult
-    private func acquireUserDeveloperFolderPermissions() -> URL? {
-        let userName = NSUserName()
-        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
-        let userDeveloperFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
-        
-        return userDeveloperFolder.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: userDeveloperFolder),
-                                                        openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
-    }
-    
+
     private func checkForInstalledXcode() {
         if NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") == nil {
             Messages.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
