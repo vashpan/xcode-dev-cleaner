@@ -27,18 +27,25 @@ import Foundation
 
 // MARK: - Preferences Class
 public final class Preferences {
+    // MARK: Keys
+    public struct Keys {
+        public static let notificationsEnabled = "DCNotificationsEnabledKey"
+        public static let notificationsPeriod = "DCNotificationsPeriodKey"
+        public static let dryRunEnabled = "DCDryRunEnabledKey"
+        public static let totalBytesCleaned = "DCTotalBytesCleaned"
+        public static let customArchivesFolder = "DCCustomArchivesFolderKey"
+        public static let customDerivedDataFolder = "DCCustomDerivedDataFolderKey"
+        
+        fileprivate static func folderBookmarkKey(for url: URL) -> String {
+            return "DCFolderBookmark_\(url.absoluteString.md5)"
+        }
+    }
+    
     // MARK: Properties & constants
     public static let shared = Preferences()
     
     private var observers = [Weak<PreferencesObserver>]()
-    
-    private let notificationsEnabledKey = "DCNotificationsEnabledKey"
-    private let notificationsPeriodKey = "DCNotificationsPeriodKey"
-    private let dryRunEnabledKey = "DCDryRunEnabledKey"
-    private let totalBytesCleanedKey = "DCTotalBytesCleaned"
-    private let customArchivesFolderKey = "DCCustomArchivesFolderKey"
-    private let customDerivedDataFolderKey = "DCCustomDerivedDataFolderKey"
-    
+
     // MARK: Initialization
     public init() {
         
@@ -79,26 +86,26 @@ public final class Preferences {
     // MARK: Options
     public var notificationsEnabled: Bool {
         get {
-            guard UserDefaults.standard.object(forKey: notificationsEnabledKey) != nil else {
+            guard UserDefaults.standard.object(forKey: Keys.notificationsEnabled) != nil else {
                 return true // default value
             }
             
-            return UserDefaults.standard.bool(forKey: notificationsEnabledKey)
+            return UserDefaults.standard.bool(forKey: Keys.notificationsEnabled)
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: notificationsEnabledKey)
-            UserDefaults.standard.set(newValue, forKey: notificationsEnabledKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsEnabled)
+            UserDefaults.standard.set(newValue, forKey: Keys.notificationsEnabled)
         }
     }
     
     public var notificationsPeriod: ScanReminders.Period {
         get {
-            guard UserDefaults.standard.object(forKey: notificationsPeriodKey) != nil else {
+            guard UserDefaults.standard.object(forKey: Keys.notificationsPeriod) != nil else {
                 return .everyMonth
             }
             
-            let periodInt = UserDefaults.standard.integer(forKey: notificationsPeriodKey)
+            let periodInt = UserDefaults.standard.integer(forKey: Keys.notificationsPeriod)
             
             guard let period = ScanReminders.Period(rawValue: periodInt) else {
                 return .everyMonth
@@ -108,14 +115,14 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: notificationsPeriodKey)
-            UserDefaults.standard.set(newValue.rawValue, forKey: notificationsPeriodKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.notificationsPeriod)
+            UserDefaults.standard.set(newValue.rawValue, forKey: Keys.notificationsPeriod)
         }
     }
     
     public var dryRunEnabled: Bool {
         get {
-            guard UserDefaults.standard.object(forKey: dryRunEnabledKey) != nil else {
+            guard UserDefaults.standard.object(forKey: Keys.dryRunEnabled) != nil else {
                 #if DEBUG
                 return true // default value
                 #else
@@ -123,18 +130,18 @@ public final class Preferences {
                 #endif 
             }
             
-            return UserDefaults.standard.bool(forKey: dryRunEnabledKey)
+            return UserDefaults.standard.bool(forKey: Keys.dryRunEnabled)
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: dryRunEnabledKey)
-            UserDefaults.standard.set(newValue, forKey: dryRunEnabledKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.dryRunEnabled)
+            UserDefaults.standard.set(newValue, forKey: Keys.dryRunEnabled)
         }
     }
     
     public var totalBytesCleaned: Int64 {
         get {
-            if let value = UserDefaults.standard.object(forKey: totalBytesCleanedKey) as? NSNumber {
+            if let value = UserDefaults.standard.object(forKey: Keys.totalBytesCleaned) as? NSNumber {
                 return value.int64Value
             }
             
@@ -142,16 +149,16 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: totalBytesCleanedKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.totalBytesCleaned)
             
             let numberValue = NSNumber(value: newValue)
-            UserDefaults.standard.set(numberValue, forKey: totalBytesCleanedKey)
+            UserDefaults.standard.set(numberValue, forKey: Keys.totalBytesCleaned)
         }
     }
     
     public var customArchivesFolder: URL? {
         get {
-            if let archivesPath = UserDefaults.standard.object(forKey: customArchivesFolderKey) as? String {
+            if let archivesPath = UserDefaults.standard.object(forKey: Keys.customArchivesFolder) as? String {
                 return URL(fileURLWithPath: archivesPath)
             }
             
@@ -159,14 +166,14 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: customArchivesFolderKey)
-            UserDefaults.standard.set(newValue, forKey: customArchivesFolderKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.customArchivesFolder)
+            UserDefaults.standard.set(newValue, forKey: Keys.customArchivesFolder)
         }
     }
     
     public var customDerivedDataFolder: URL? {
         get {
-            if let derivedDataPath = UserDefaults.standard.object(forKey: customDerivedDataFolderKey) as? String {
+            if let derivedDataPath = UserDefaults.standard.object(forKey: Keys.customDerivedDataFolder) as? String {
                 return URL(fileURLWithPath: derivedDataPath)
             }
             
@@ -174,23 +181,19 @@ public final class Preferences {
         }
         
         set {
-            self.informAllObserversAboutChange(keyThatChanged: customDerivedDataFolderKey)
-            UserDefaults.standard.set(newValue, forKey: customDerivedDataFolderKey)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.customDerivedDataFolder)
+            UserDefaults.standard.set(newValue, forKey: Keys.customDerivedDataFolder)
         }
     }
     
     // MARK: Folder bookmarks
-    private func folderBookmarkKey(for url: URL) -> String {
-        return "DCFolderBookmark_\(url.absoluteString.md5)"
-    }
-    
     public func folderBookmark(for url: URL) -> Data? {
-        let key = self.folderBookmarkKey(for: url)
+        let key = Keys.folderBookmarkKey(for: url)
         return UserDefaults.standard.data(forKey: key)
     }
     
     public func setFolderBookmark(bookmarkData: Data?, for url: URL) {
-        let key = self.folderBookmarkKey(for: url)
+        let key = Keys.folderBookmarkKey(for: url)
         UserDefaults.standard.set(bookmarkData, forKey: key)
     }
 }
