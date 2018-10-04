@@ -86,8 +86,15 @@ final class MainViewController: NSViewController {
         xcodeFiles.scanDelegate = self
         self.xcodeFiles = xcodeFiles
     
+        // observe preferences
+        Preferences.shared.addObserver(self)
+        
         // start initial scan
         self.startScan()
+    }
+    
+    deinit {
+        Preferences.shared.removeObserver(self)
     }
     
     override func viewWillAppear() {
@@ -426,5 +433,14 @@ extension MainViewController: XcodeFilesScanDelegate {
         self.stopLoading()
 
         self.updateTotalAndSelectedSizes()
+    }
+}
+
+// MARK: PreferencesObserver implementation
+extension MainViewController: PreferencesObserver {
+    func preferenceDidChange(key: String) {
+        if key == Preferences.Keys.customArchivesFolder || key == Preferences.Keys.customDerivedDataFolder {
+            self.startScan()
+        }
     }
 }
