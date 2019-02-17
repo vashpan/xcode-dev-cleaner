@@ -135,8 +135,7 @@ final class MainViewController: NSViewController {
     }
     
     private func acquireUserDeveloperFolderPermissions() -> URL? {
-        let userName = NSUserName()
-        let userHomeDirectory = URL(fileURLWithPath: "/Users/\(userName)")
+        let userHomeDirectory = FileManager.default.realHomeDirectoryForCurrentUser
         let userDeveloperFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
         
         return self.acquireFolderPermissions(folderUrl: userDeveloperFolder,
