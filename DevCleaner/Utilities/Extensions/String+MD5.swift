@@ -22,7 +22,7 @@
 import Foundation
 import CommonCrypto
 
-public extension String {
+extension String {
     public var md5: String {
         let str = self.cString(using: String.Encoding.utf8)
         let strLen = CUnsignedInt(self.lengthOfBytes(using: String.Encoding.utf8))

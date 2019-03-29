@@ -126,6 +126,9 @@ extension Donations: SKPaymentTransactionObserver {
                 case .restored:
                     // we don't support restored purchases here, so no delegate
                     queue.finishTransaction(transaction)
+                @unknown default:
+                    // in case of any future cases, just finish transaction which seems sensible
+                    queue.finishTransaction(transaction)
             }
         }
     }

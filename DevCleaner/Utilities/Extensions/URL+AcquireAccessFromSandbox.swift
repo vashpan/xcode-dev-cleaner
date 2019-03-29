@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-public extension URL {
+extension URL {
     private struct SandboxFolderAccessError: Error {
         
     }

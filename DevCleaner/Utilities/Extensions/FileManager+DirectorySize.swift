@@ -30,7 +30,7 @@
 
 import Foundation
 
-public extension FileManager {
+extension FileManager {
     /// This method calculates the accumulated size of a directory on the volume in bytes.
     ///
     /// As there's no simple way to get this information from the file system it has to crawl the entire hierarchy,
