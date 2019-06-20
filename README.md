@@ -2,7 +2,7 @@
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
-*Currently tested with macOS 10.13 and Xcode 9.x*
+*Currently tested with macOS 10.14 and Xcode 10.2.x*
 
 Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
 
@@ -24,7 +24,7 @@ newer versions of Xcode! I tried to make sure this application is safe, but if y
 ### Device Support
 
 It consumes the largest part of the Xcode caches. Everytime you connect a device with the new iOS/watchOS/tvOS, its symbols must be downloaded 
-to your computer, for efficient debugging. It consumes around 2GB per version. Even smallest updates requires new set of symbols. 
+to your computer, for efficient debugging. It consumes around 2-5GB per version. Even smallest updates requires new set of symbols. 
 
 It could accumulate to hold tens of gigabytes of data.
 
@@ -56,4 +56,4 @@ This application is my first macOS app, so feel free to give me some feedback or
 
 Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, as copyright holder can submit it to the Mac App Store.
 
-Copyright © 2018 One Minute Games Konrad Kołakowski.
+Copyright © 2019 One Minute Games Konrad Kołakowski.
