@@ -152,6 +152,12 @@ open class XcodeFileEntry: NSObject {
         self.paths.append(path)
     }
     
+    public func addPaths(paths: [URL]) {
+        for path in paths {
+            self.addPath(path: path)
+        }
+    }
+    
     // MARK: Selection
     public func selectWithChildItems() {
         self.selection = .on

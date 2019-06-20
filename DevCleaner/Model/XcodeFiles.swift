@@ -153,42 +153,54 @@ final public class XcodeFiles {
     
     // MARK: Creating entries
     private func deviceSupportEntry(from string: String, osLabel: String) -> DeviceSupportFileEntry? {
-        let splitted = string.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
+        // Sample paths:
+        // Watch2,7 5.2.1 (16U113)
+        // iPad 10.2 (11C203)
+        // 12.3 (16F156) arm64e
+        // 12.3.1 (16F203)
+        // 12.0 (16A367) arm64e
         
-        // we have device too
-        if splitted.count == 3 {
-            let device = String(splitted[0])
-            let version = Version(describing: String(splitted[1]))
-            let build = String(splitted[2])
-            
-            if let version = version {
-                return DeviceSupportFileEntry(device: device,
-                                              osType: DeviceSupportFileEntry.OSType(label: osLabel),
-                                              version: version,
-                                              build: build,
-                                              selected: true)
-            } else {
-                log.warning("XcodeFiles: No version for device support: \(string), skipping")
-            }
+        let splitted = string.split(separator: " ", maxSplits: 4, omittingEmptySubsequences: true)
+        
+        guard splitted.count >= 2 else { // for some other files we may have in the folder
+            return nil
         }
         
-        // no device so only version and build
-        if splitted.count == 2 {
-            let version = Version(describing: String(splitted[0]))
-            let build = String(splitted[1])
-            
-            if let version = version {
-                return DeviceSupportFileEntry(device: nil,
-                                              osType: DeviceSupportFileEntry.OSType(label: osLabel),
-                                              version: version,
-                                              build: build,
-                                              selected: true)
+        let device: String?
+        let version: Version
+        let build: String
+        let arch: String?
+        
+        // check if we have version first (then we may have additional architecture here)
+        if let foundVersion = Version(describing: String(splitted[0])) {
+            device = nil
+            version = foundVersion
+            build = String(splitted[1])
+            if splitted.count > 2 {
+                arch = String(splitted[2])
             } else {
-                log.warning("XcodeFiles: No version for device support: \(string), skipping")
+                arch = nil
             }
+        } else if let foundVersion = Version(describing: String(splitted[1])) { // if version is second, we may have extra device info
+            device = String(splitted[0])
+            version = foundVersion
+            build = String(splitted[2])
+            if splitted.count > 3 {
+                arch = String(splitted[3])
+            } else {
+                arch = nil
+            }
+        } else {
+            log.warning("XcodeFiles: No version for device support: \(string), skipping")
+            return nil
         }
         
-        return nil
+        return DeviceSupportFileEntry(device: device,
+                                      osType: DeviceSupportFileEntry.OSType(label: osLabel),
+                                      version: version,
+                                      build: build,
+                                      arch: arch,
+                                      selected: true)
     }
     
     private func derivedDataEntry(from location: URL) -> DerivedDataFileEntry? {
@@ -384,6 +396,28 @@ final public class XcodeFiles {
                 deviceSupportEntries = deviceSupportEntries.sorted { (lhs, rhs) -> Bool in
                     lhs.version > rhs.version
                 }
+                
+                // merge (in case we have different architectures)
+                var duplicatedEntries = [DeviceSupportFileEntry]()
+                let entriesWithArch = deviceSupportEntries.filter { $0.architecture != nil }
+                let entriesWithoutArch = deviceSupportEntries.filter { $0.architecture == nil }
+                for entryWithoutArch in entriesWithoutArch {
+                    for entryWithArch in entriesWithArch {
+                        if entryWithoutArch.version == entryWithArch.version && entryWithoutArch.build == entryWithArch.build {
+                            entryWithoutArch.addPaths(paths: entryWithArch.paths)
+                            duplicatedEntries.append(entryWithArch)
+                        }
+                    }
+                }
+                for entryToRemove in duplicatedEntries {
+                    deviceSupportEntries.removeAll {
+                        $0.version == entryToRemove.version &&
+                        $0.build == entryToRemove.build &&
+                        $0.architecture == entryToRemove.architecture &&
+                        $0.device == entryToRemove.device
+                    }
+                }
+                
                 
                 // deselect first one (we usually will want those symbols)
                 if let firstEntry = deviceSupportEntries.first {
