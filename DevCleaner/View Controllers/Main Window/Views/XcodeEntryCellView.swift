@@ -46,6 +46,7 @@ final class XcodeEntryCellView: NSTableCellView {
         self.checkBox.state = self.entrySelectionToControlState(xcodeEntry.selection)
         
         // label
+		self.textField?.font = NSFont.monospacedDigitSystemFont(ofSize: self.textField?.font?.pointSize ?? 13, weight: .regular)
         self.textField?.attributedStringValue = self.attributedString(for: xcodeEntry)
         self.textField?.sizeToFit()
         
