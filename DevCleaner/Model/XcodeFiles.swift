@@ -480,7 +480,7 @@ final public class XcodeFiles {
             // sort by version & build
             let projectArchiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
                 if lhs.version == rhs.version {
-                    return lhs.build > rhs.build
+					return lhs.build.localizedStandardCompare(rhs.build) == .orderedDescending
                 } else {
                     return lhs.version > rhs.version
                 }
