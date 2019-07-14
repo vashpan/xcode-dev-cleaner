@@ -39,10 +39,11 @@ public protocol XcodeFilesDeleteDelegate: class {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int {
-        case deviceSupport, archives, derivedData
+        case deviceSupport, archives, derivedData, logs
         
+        // FIXME: Use 'allCases' property from new Swifts
         public static var all: [Location] {
-            return [.deviceSupport, .archives, .derivedData]
+            return [.deviceSupport, .archives, .derivedData, .logs]
         }
     }
     
@@ -86,7 +87,8 @@ final public class XcodeFiles {
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
-            .derivedData: XcodeFileEntry(label: "Derived Data", selected: false)
+            .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
+            .logs: DeviceLogsFileEntry(selected: true)
         ]
     }
     
@@ -360,6 +362,10 @@ final public class XcodeFiles {
             
             case .derivedData:
                 entry.addChildren(items: self.scanDerivedDataLocations())
+            
+            case .logs:
+                // different, as we don't have an option to select separate entries here
+                entry.addPaths(paths: self.scanLogsLocations())
         }
         
         // check for those files sizes
@@ -523,6 +529,78 @@ final public class XcodeFiles {
         }
         
         return results
+    }
+    
+    private func scanLogsLocations() -> [URL] {
+        struct LogEntry {
+            let path: URL
+            let version: Version
+            
+            init?(path: URL) {
+                self.path = path
+                
+                // parse path to get a version
+                let filename = path.deletingPathExtension().lastPathComponent
+                let components = filename.split(separator: " ")
+                
+                var foundVersion: Version?
+                for component in components {
+                    if let version = Version(describing: String(component)) {
+                        if foundVersion == nil {
+                            foundVersion = version
+                            break
+                        }
+                    }
+                }
+                
+                if let finalFoundVersion = foundVersion {
+                    self.version = finalFoundVersion
+                } else {
+                    log.warning("XcodeFiles: Wrong log entry? Version not found (path: \(filename)")
+                    return nil
+                }
+            }
+        }
+        
+        // get location
+        let logsLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/iOS Device Logs")
+        
+        // create entry from all logs in given folder EXCEPT newest one
+        
+        // get all log entries from logs folder
+        var logs = [LogEntry]()
+        if let logFiles = try? FileManager.default.contentsOfDirectory(at: logsLocation, includingPropertiesForKeys: nil) {
+            for logFile in logFiles {
+                if let logEntry = LogEntry(path: logFile) {
+                    logs.append(logEntry)
+                }
+            }
+        }
+        
+        // find and remove highest version of logs
+        if !logs.isEmpty {
+            // find highest version
+            var highestVersion: Version?
+            for log in logs {
+                if let currentHighestVersion = highestVersion {
+                    if log.version > currentHighestVersion {
+                        highestVersion = log.version
+                    }
+                } else {
+                    highestVersion = log.version
+                }
+            }
+            
+            // remove highest version from logs list
+            if let highestVersion = highestVersion {
+                logs.removeAll { log -> Bool in
+                    return log.version == highestVersion
+                }
+            }
+        }
+        
+        // return all paths to remove
+        return logs.map { $0.path }
     }
     
     // MARK: Deleting files
