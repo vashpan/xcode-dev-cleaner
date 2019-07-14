@@ -50,15 +50,8 @@ open class XcodeFileEntry: NSObject {
     public let icon: Icon?
     public let label: String
     public let extraInfo: String
+    public let tooltipText: String
     public let tooltip: Bool
-    
-    public var fullDescription: String {
-        if !self.extraInfo.isEmpty {
-            return "\(self.label) \(self.extraInfo)"
-        } else {
-            return self.label
-        }
-    }
     
     public private(set) var selection: Selection
     public private(set) var size: Size
@@ -96,10 +89,11 @@ open class XcodeFileEntry: NSObject {
     }
     
     // MARK: Initialization
-    public init(label: String, extraInfo: String = String(), icon: Icon? = nil, tooltip: Bool = false, selected: Bool) {
+    public init(label: String, extraInfo: String = String(), tooltipText: String? = nil, icon: Icon? = nil, tooltip: Bool = false, selected: Bool) {
         self.icon = icon
         self.label = label
         self.extraInfo = extraInfo
+        self.tooltipText = (tooltipText ?? "\(label) \(extraInfo)").trimmingCharacters(in: .whitespacesAndNewlines)
         self.tooltip = tooltip
         
         self.selection = selected ? .on : .off
