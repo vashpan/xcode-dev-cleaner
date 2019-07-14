@@ -185,7 +185,7 @@ final class MainViewController: NSViewController {
         
         // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
-            xcodeFiles.scanFiles(in: XcodeFiles.Location.all)
+            xcodeFiles.scanFiles(in: XcodeFiles.Location.allCases)
         }
     }
 

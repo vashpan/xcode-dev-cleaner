@@ -38,13 +38,8 @@ public protocol XcodeFilesDeleteDelegate: class {
 // MARK: - Xcode files
 final public class XcodeFiles {
     // MARK: Types
-    public enum Location: Int {
+    public enum Location: Int, CaseIterable {
         case deviceSupport, archives, derivedData, logs
-        
-        // FIXME: Use 'allCases' property from new Swifts
-        public static var all: [Location] {
-            return [.deviceSupport, .archives, .derivedData, .logs]
-        }
     }
     
     // MARK: Properties
