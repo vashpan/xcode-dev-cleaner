@@ -39,7 +39,7 @@ public protocol XcodeFilesDeleteDelegate: class {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int, CaseIterable {
-        case deviceSupport, archives, derivedData, logs
+        case deviceSupport, archives, derivedData, logs, oldDocumentation
     }
     
     // MARK: Properties
@@ -83,7 +83,8 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
-            .logs: DeviceLogsFileEntry(selected: true)
+            .logs: DeviceLogsFileEntry(selected: true),
+            .oldDocumentation: OldDocumentationFileEntry(selected: true)
         ]
     }
     
@@ -358,9 +359,12 @@ final public class XcodeFiles {
             case .derivedData:
                 entry.addChildren(items: self.scanDerivedDataLocations())
             
+            // different for those, as we don't have an option to select separate entries here
             case .logs:
-                // different, as we don't have an option to select separate entries here
                 entry.addPaths(paths: self.scanLogsLocations())
+            
+            case .oldDocumentation:
+                entry.addPaths(paths: self.scanOldDocumentationLocations())
         }
         
         // check for those files sizes
@@ -596,6 +600,13 @@ final public class XcodeFiles {
         
         // return all paths to remove
         return logs.map { $0.path }
+    }
+    
+    private func scanOldDocumentationLocations() -> [URL] {
+        // get location
+        let docsLocation = self.userDeveloperFolderUrl.appendingPathComponent("Shared/Documentation")
+        
+        return [docsLocation]
     }
     
     // MARK: Deleting files

@@ -23,6 +23,7 @@
 		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
 		7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7164260B20B8903000D47EF2 /* StoreKit.framework */; };
 		716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */; };
+		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
 		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
 		7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185E5D220D0775200C1C918 /* DonationViewController.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
@@ -62,6 +63,7 @@
 		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+HomeFolder.swift"; sourceTree = "<group>"; };
+		717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldDocumentationFileEntry.swift; sourceTree = "<group>"; };
 		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7185E5D220D0775200C1C918 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */,
 				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
 				714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */,
+				717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
 				715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */,
+				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
 				71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
