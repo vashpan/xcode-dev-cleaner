@@ -58,12 +58,16 @@ final class MainViewController: NSViewController {
     
     @IBOutlet private weak var outlineView: NSOutlineView!
     
+    @IBOutlet private weak var dryModeView: NSView!
+    
     private var xcodeFiles: XcodeFiles?
     private var loaded = false
     
     // MARK: Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.dryModeView.wantsLayer = true
         
         // check for installed Xcode versions
         self.checkForInstalledXcode()
@@ -99,6 +103,9 @@ final class MainViewController: NSViewController {
     
     override func viewWillAppear() {
         super.viewWillAppear()
+        
+        // UI refresh
+        self.updateButtonsAndLabels()
         
         self.view.window?.delegate = self
     }
@@ -170,6 +177,13 @@ final class MainViewController: NSViewController {
         
         xcodeFiles.updateCustomFolders(customDerivedDataFolder: derivedDataFolder,
                                        customArchivesFolder: archivesFolder)
+    }
+    
+    private func updateButtonsAndLabels() {
+        self.dryModeView.isHidden = !Preferences.shared.dryRunEnabled
+        self.dryModeView.layer?.backgroundColor = NSColor.systemOrange.cgColor
+        self.dryModeView.layer?.cornerRadius = 4.0
+        self.dryModeView.layer?.masksToBounds = true
     }
     
     private func startScan() {
@@ -479,5 +493,7 @@ extension MainViewController: PreferencesObserver {
             self.updateCustomFolders()
             self.startScan()
         }
+        
+        self.updateButtonsAndLabels()
     }
 }
