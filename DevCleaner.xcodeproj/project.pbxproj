@@ -32,6 +32,9 @@
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
 		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
+		71B5366822E32FE40017D70A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5366722E32FE40017D70A /* main.swift */; };
+		71B5366F22E341670017D70A /* dev-cleaner in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B5366522E32FE40017D70A /* dev-cleaner */; };
+		71B5367122E342B20017D70A /* dev-cleaner in Copy Command Line Tool */ = {isa = PBXBuildFile; fileRef = 71B5366522E32FE40017D70A /* dev-cleaner */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
@@ -41,6 +44,39 @@
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71B5366C22E332A20017D70A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7110B4862030F17B00EDBFA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71B5366422E32FE40017D70A;
+			remoteInfo = "devcleaner-tool";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		71B5366322E32FE40017D70A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		71B5367022E342300017D70A /* Copy Command Line Tool */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				71B5367122E342B20017D70A /* dev-cleaner in Copy Command Line Tool */,
+			);
+			name = "Copy Command Line Tool";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7110B48E2030F17B00EDBFA3 /* DevCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +109,8 @@
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
+		71B5366522E32FE40017D70A /* dev-cleaner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "dev-cleaner"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71B5366722E32FE40017D70A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
@@ -89,6 +127,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */,
+				71B5366F22E341670017D70A /* dev-cleaner in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71B5366222E32FE40017D70A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +147,7 @@
 				718788E220E9169D007375AA /* LICENSE */,
 				7164260420ACE2EC00D47EF2 /* README.md */,
 				7110B4902030F17B00EDBFA3 /* DevCleaner */,
+				71B5366622E32FE40017D70A /* Command Line Tool */,
 				7110B48F2030F17B00EDBFA3 /* Products */,
 				7164260A20B8903000D47EF2 /* Frameworks */,
 			);
@@ -110,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				7110B48E2030F17B00EDBFA3 /* DevCleaner.app */,
+				71B5366522E32FE40017D70A /* dev-cleaner */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,6 +294,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		71B5366622E32FE40017D70A /* Command Line Tool */ = {
+			isa = PBXGroup;
+			children = (
+				71B5366722E32FE40017D70A /* main.swift */,
+			);
+			path = "Command Line Tool";
+			sourceTree = "<group>";
+		};
 		71FD37D5206AD67A0042812D /* Entries */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,16 +325,35 @@
 				7110B48A2030F17B00EDBFA3 /* Sources */,
 				7110B48B2030F17B00EDBFA3 /* Frameworks */,
 				7110B48C2030F17B00EDBFA3 /* Resources */,
+				71B5367022E342300017D70A /* Copy Command Line Tool */,
 				71C8ACDC20A2428E00E7A13B /* Update build number */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				71B5366D22E332A20017D70A /* PBXTargetDependency */,
 			);
 			name = DevCleaner;
 			productName = XcodeCleaner;
 			productReference = 7110B48E2030F17B00EDBFA3 /* DevCleaner.app */;
 			productType = "com.apple.product-type.application";
+		};
+		71B5366422E32FE40017D70A /* devcleaner-tool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71B5366B22E32FE40017D70A /* Build configuration list for PBXNativeTarget "devcleaner-tool" */;
+			buildPhases = (
+				71B5366122E32FE40017D70A /* Sources */,
+				71B5366222E32FE40017D70A /* Frameworks */,
+				71B5366322E32FE40017D70A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "devcleaner-tool";
+			productName = "devcleaner-tool";
+			productReference = 71B5366522E32FE40017D70A /* dev-cleaner */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -286,7 +361,7 @@
 		7110B4862030F17B00EDBFA3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "One Minute Games";
 				TargetAttributes = {
@@ -306,6 +381,10 @@
 							};
 						};
 					};
+					71B5366422E32FE40017D70A = {
+						CreatedOnToolsVersion = 11.0;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 7110B4892030F17B00EDBFA3 /* Build configuration list for PBXProject "DevCleaner" */;
@@ -322,6 +401,7 @@
 			projectRoot = "";
 			targets = (
 				7110B48D2030F17B00EDBFA3 /* DevCleaner */,
+				71B5366422E32FE40017D70A /* devcleaner-tool */,
 			);
 		};
 /* End PBXProject section */
@@ -393,7 +473,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		71B5366122E32FE40017D70A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71B5366822E32FE40017D70A /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71B5366D22E332A20017D70A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71B5366422E32FE40017D70A /* devcleaner-tool */;
+			targetProxy = 71B5366C22E332A20017D70A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7110B4972030F17B00EDBFA3 /* Main.storyboard */ = {
@@ -553,6 +649,37 @@
 			};
 			name = Release;
 		};
+		71B5366922E32FE40017D70A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3DS5SGYDG6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "dev-cleaner";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		71B5366A22E32FE40017D70A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3DS5SGYDG6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "dev-cleaner";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -570,6 +697,15 @@
 			buildConfigurations = (
 				7110B49F2030F17B00EDBFA3 /* Debug */,
 				7110B4A02030F17B00EDBFA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71B5366B22E32FE40017D70A /* Build configuration list for PBXNativeTarget "devcleaner-tool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71B5366922E32FE40017D70A /* Debug */,
+				71B5366A22E32FE40017D70A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
