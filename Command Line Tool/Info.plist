@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleShortVersionString</key>
@@ -12,5 +16,7 @@
 	<string>1</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2019 One Minute Games. All rights reserved.</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.14</string>
 </dict>
 </plist>
