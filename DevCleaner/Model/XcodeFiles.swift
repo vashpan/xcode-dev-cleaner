@@ -83,8 +83,8 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
-            .logs: DeviceLogsFileEntry(selected: true),
-            .oldDocumentation: OldDocumentationFileEntry(selected: true)
+            .logs: DeviceLogsFileEntry(selected: false),
+            .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
     
