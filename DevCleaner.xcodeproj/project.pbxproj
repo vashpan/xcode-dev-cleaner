@@ -127,6 +127,7 @@
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
 		71B5366522E32FE40017D70A /* dev-cleaner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "dev-cleaner"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71B5366722E32FE40017D70A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		71B5368122E467860017D70A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
@@ -314,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				71B5366722E32FE40017D70A /* main.swift */,
+				71B5368122E467860017D70A /* Info.plist */,
 			);
 			path = "Command Line Tool";
 			sourceTree = "<group>";
@@ -361,6 +363,7 @@
 				71B5366122E32FE40017D70A /* Sources */,
 				71B5366222E32FE40017D70A /* Frameworks */,
 				71B5366322E32FE40017D70A /* CopyFiles */,
+				71B5368322E46AC90017D70A /* Update Build Number */,
 			);
 			buildRules = (
 			);
@@ -430,6 +433,7 @@
 				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
+				71B5368222E467860017D70A /* Info.plist in Resources */,
 				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,6 +441,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		71B5368322E46AC90017D70A /* Update Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\ngit=$(sh /etc/profile; which git)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\n\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\nif [ -f \"$plist\" ]; then\necho \"Setting build number to: $number_of_commits\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\nfi\ndone\n";
+		};
 		71C8ACDC20A2428E00E7A13B /* Update build number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -685,11 +707,16 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Command Line Tool/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oneminutegames.XcodeCleaner.cmd-tool";
 				PRODUCT_NAME = "dev-cleaner";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -701,10 +728,15 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
 				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Command Line Tool/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.2.0;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.oneminutegames.XcodeCleaner.cmd-tool";
 				PRODUCT_NAME = "dev-cleaner";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
