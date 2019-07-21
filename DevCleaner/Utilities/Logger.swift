@@ -32,6 +32,7 @@ public class Logger {
     public var fileLogging: Bool {
         return self.logFileHandle != nil
     }
+    public let logFilePath: URL?
     
     private let logFileHandle: FileHandle?
     
@@ -51,15 +52,19 @@ public class Logger {
                 do {
                     FileManager.default.createFile(atPath: logFilePath.path, contents: nil, attributes: nil)
                     self.logFileHandle = try FileHandle(forWritingTo: logFilePath)
+                    self.logFilePath = logFilePath
                 } catch(let error) {
                     self.logFileHandle = nil
+                    self.logFilePath = nil
                     NSLog("❌ Can't create log file: \(logFilePath.path). Error: \(error)")
                 }
             } else {
                 self.logFileHandle = nil
+                self.logFilePath = nil
             }
         } else {
             self.logFileHandle = nil
+            self.logFilePath = nil
         }
     }
     
