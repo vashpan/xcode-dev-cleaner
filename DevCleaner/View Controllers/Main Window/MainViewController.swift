@@ -191,7 +191,11 @@ final class MainViewController: NSViewController {
         self.view.window?.title = "DevCleaner - \(totalSizeString) available to clean"
         
         // selected size
-        self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: xcodeFiles.selectedSize))"
+        let selectedSize = xcodeFiles.selectedSize
+        self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: selectedSize))"
+        
+        // clean button disabled when we selected nothing
+        self.cleanButton.isEnabled = selectedSize > 0
         
         // all time size / donate button
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
