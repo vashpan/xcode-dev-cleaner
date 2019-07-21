@@ -35,6 +35,22 @@
 		71B5366822E32FE40017D70A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B5366722E32FE40017D70A /* main.swift */; };
 		71B5366F22E341670017D70A /* dev-cleaner in Frameworks */ = {isa = PBXBuildFile; fileRef = 71B5366522E32FE40017D70A /* dev-cleaner */; };
 		71B5367122E342B20017D70A /* dev-cleaner in Copy Command Line Tool */ = {isa = PBXBuildFile; fileRef = 71B5366522E32FE40017D70A /* dev-cleaner */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		71B5367222E34CA60017D70A /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
+		71B5367322E34CA60017D70A /* FileManager+HomeFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */; };
+		71B5367422E34CA60017D70A /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F839214E9A4300A11601 /* String+MD5.swift */; };
+		71B5367522E34CA60017D70A /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
+		71B5367622E34CA60017D70A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
+		71B5367722E34CA60017D70A /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F837214E930500A11601 /* Messages.swift */; };
+		71B5367822E34CA60017D70A /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E1252097255C00081E4E /* Stack.swift */; };
+		71B5367922E34CA60017D70A /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715E8C3C216566FD0059A2E5 /* Weak.swift */; };
+		71B5367A22E34CA60017D70A /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
+		71B5367B22E34CA60017D70A /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
+		71B5367C22E34CA60017D70A /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
+		71B5367D22E34CA60017D70A /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
+		71B5367E22E34CA60017D70A /* DeviceLogsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */; };
+		71B5367F22E34CA60017D70A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
+		71B5368022E34CA60017D70A /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
+		71B5368222E467860017D70A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71B5368122E467860017D70A /* Info.plist */; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
@@ -477,7 +493,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71B5367222E34CA60017D70A /* FileManager+DirectorySize.swift in Sources */,
+				71B5368022E34CA60017D70A /* XcodeFiles.swift in Sources */,
+				71B5367622E34CA60017D70A /* Logger.swift in Sources */,
+				71B5367A22E34CA60017D70A /* XcodeFileEntry.swift in Sources */,
+				71B5367522E34CA60017D70A /* Version.swift in Sources */,
+				71B5367722E34CA60017D70A /* Messages.swift in Sources */,
+				71B5367822E34CA60017D70A /* Stack.swift in Sources */,
+				71B5367C22E34CA60017D70A /* DeviceSupportFileEntry.swift in Sources */,
+				71B5367E22E34CA60017D70A /* DeviceLogsFileEntry.swift in Sources */,
+				71B5367922E34CA60017D70A /* Weak.swift in Sources */,
+				71B5367D22E34CA60017D70A /* DerivedDataFileEntry.swift in Sources */,
+				71B5367322E34CA60017D70A /* FileManager+HomeFolder.swift in Sources */,
+				71B5367F22E34CA60017D70A /* OldDocumentationFileEntry.swift in Sources */,
 				71B5366822E32FE40017D70A /* main.swift in Sources */,
+				71B5367422E34CA60017D70A /* String+MD5.swift in Sources */,
+				71B5367B22E34CA60017D70A /* ArchiveFileEntry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

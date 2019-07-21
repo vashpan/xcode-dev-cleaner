@@ -8,5 +8,7 @@
 
 import Foundation
 
+let log = Logger(name: "MainLog-CommandLineTool", level: .info)
+
 print("Hello, World!")
 
