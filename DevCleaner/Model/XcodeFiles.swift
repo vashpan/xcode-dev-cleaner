@@ -298,8 +298,7 @@ final public class XcodeFiles {
     // MARK: Clearing items
     public func cleanAllEntries() {
         for location in locations.values {
-            location.removeAllChildren()
-            location.recalculateSize()
+            location.clear()
         }
     }
     
@@ -346,7 +345,7 @@ final public class XcodeFiles {
         }
         
         // remove previous entries
-        entry.removeAllChildren()
+        entry.clear()
         
         // scan and find files
         switch location {
