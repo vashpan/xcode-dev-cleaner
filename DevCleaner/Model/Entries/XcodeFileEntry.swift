@@ -234,6 +234,7 @@ open class XcodeFileEntry: NSObject {
     
     public func clear() {
         self.removeAllChildren()
+        self.paths.removeAll()
         self.size = .unknown
     }
     
