@@ -232,6 +232,12 @@ open class XcodeFileEntry: NSObject {
         return result
     }
     
+    public func clear() {
+        self.removeAllChildren()
+        self.paths.removeAll()
+        self.size = .unknown
+    }
+    
     public func debugRepresentation(level: Int = 1) -> String {
         var result = String()
         

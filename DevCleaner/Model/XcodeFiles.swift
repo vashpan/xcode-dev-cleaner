@@ -83,8 +83,8 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
-            .logs: DeviceLogsFileEntry(selected: true),
-            .oldDocumentation: OldDocumentationFileEntry(selected: true)
+            .logs: DeviceLogsFileEntry(selected: false),
+            .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
     
@@ -298,8 +298,7 @@ final public class XcodeFiles {
     // MARK: Clearing items
     public func cleanAllEntries() {
         for location in locations.values {
-            location.removeAllChildren()
-            location.recalculateSize()
+            location.clear()
         }
     }
     
@@ -346,7 +345,7 @@ final public class XcodeFiles {
         }
         
         // remove previous entries
-        entry.removeAllChildren()
+        entry.clear()
         
         // scan and find files
         switch location {

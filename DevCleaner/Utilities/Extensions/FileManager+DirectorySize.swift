@@ -40,7 +40,6 @@ extension FileManager {
     /// - note: There are a couple of oddities that are not taken into account (like symbolic links, meta data of
     /// directories, hard links, ...).
     public func allocatedSizeOfDirectory(atUrl url: URL) throws -> Int64 {
-        
         // We'll sum up content size here:
         var accumulatedSize: Int64 = 0
         
@@ -67,16 +66,18 @@ extension FileManager {
         
         // Start the traversal:
         while let contentURL = (enumerator?.nextObject() as? URL)  {
-            
             // Bail out on errors from the errorHandler.
             if let error = errorDidOccur { throw error }
             
             // Get the type of this item, making sure we only sum up sizes of regular files.
-            let resourceValues = try contentURL.resourceValues(forKeys: [.isRegularFileKey, .totalFileAllocatedSizeKey, .fileAllocatedSizeKey])
+            let isRegularFileResourceValues = try contentURL.resourceValues(forKeys: [.isRegularFileKey])
             
-            guard resourceValues.isRegularFile ?? false else {
+            guard isRegularFileResourceValues.isRegularFile ?? false else {
                 continue
             }
+            
+            // Get size values only if we're sure we calculating file size
+            let resourceValues = try contentURL.resourceValues(forKeys: [.fileAllocatedSizeKey, .totalFileAllocatedSizeKey])
             
             // To get the file's size we first try the most comprehensive value in terms of what the file may use on disk.
             // This includes metadata, compression (on file system level) and block size.

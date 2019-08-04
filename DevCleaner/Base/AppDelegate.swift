@@ -52,5 +52,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
+    
+    // MARK: Actions
+    @IBAction func showLogFiles(_ sender: Any) {
+        // logs folder
+        guard let logsUrl = log.logFilePath?.deletingLastPathComponent() else {
+            return
+        }
+        
+        NSWorkspace.shared.openFile(logsUrl.path)
+    }
 }
 

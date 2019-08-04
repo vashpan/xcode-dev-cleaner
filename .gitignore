@@ -10,6 +10,7 @@ build/*
 
 *.xcodeproj/xcuserdata/*
 *.xcodeproj/project.xcworkspace/*
+*.xcscheme
 
 # test suite files
 TestSuite/*

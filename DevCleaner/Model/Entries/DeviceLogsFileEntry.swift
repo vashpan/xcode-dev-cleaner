@@ -23,7 +23,7 @@ import AppKit
 
 public final class DeviceLogsFileEntry: XcodeFileEntry {
     public init(selected: Bool) {
-        super.init(label: "Simulator & Device Logs",
+        super.init(label: "Old Simulator & Device Logs",
                    tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.",
                    icon: .none,
                    tooltip: true,

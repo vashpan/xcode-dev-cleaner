@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE022F6E770002E82B2 /* Signposts.swift */; };
+		7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE122F6E771002E82B2 /* Profiler.swift */; };
 		7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4912030F17B00EDBFA3 /* AppDelegate.swift */; };
 		7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* MainViewController.swift */; };
 		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
@@ -95,6 +97,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7100BEE022F6E770002E82B2 /* Signposts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signposts.swift; sourceTree = "<group>"; };
+		7100BEE122F6E771002E82B2 /* Profiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profiler.swift; sourceTree = "<group>"; };
 		7110B48E2030F17B00EDBFA3 /* DevCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7110B4912030F17B00EDBFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7110B4932030F17B00EDBFA3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7100BEDB22F6E4D5002E82B2 /* Profiling */ = {
+			isa = PBXGroup;
+			children = (
+				7100BEE122F6E771002E82B2 /* Profiler.swift */,
+				7100BEE022F6E770002E82B2 /* Signposts.swift */,
+			);
+			path = Profiling;
+			sourceTree = "<group>";
+		};
 		7110B4852030F17B00EDBFA3 = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +285,7 @@
 		719B25D7205ECA40007560C0 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				7100BEDB22F6E4D5002E82B2 /* Profiling */,
 				719B25DA205EF996007560C0 /* Extensions */,
 				719B25D8205ECA53007560C0 /* Version.swift */,
 				7155325D2061AFD80025EB75 /* Logger.swift */,
@@ -502,7 +516,9 @@
 				7155325E2061AFD80025EB75 /* Logger.swift in Sources */,
 				71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */,
 				71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */,
+				7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */,
 				716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */,
+				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */,
 				712F999E20D65229003927BC /* Donations.swift in Sources */,

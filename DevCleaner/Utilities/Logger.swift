@@ -32,6 +32,7 @@ public class Logger {
     public var fileLogging: Bool {
         return self.logFileHandle != nil
     }
+    public let logFilePath: URL?
     
     private let logFileHandle: FileHandle?
     
@@ -43,23 +44,33 @@ public class Logger {
         if toFile {
             // create logfile path
             let bundleId = Bundle.main.bundleIdentifier ?? "UnknownApp"
-            let logFileName = "\(bundleId)-\(self.name)-LogFile-latest.log"
+            let newLogFileName = "\(bundleId)-\(self.name)-LogFile-latest.log"
+            let oldLogFileName = "\(bundleId)-\(self.name)-LogFile-previous.log"
             let documentsFolder = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             
             // create if needed & open log file to write
-            if let logFilePath = documentsFolder?.appendingPathComponent(logFileName) {
+            if let newLogFilePath = documentsFolder?.appendingPathComponent(newLogFileName), let oldLogFilePath = documentsFolder?.appendingPathComponent(oldLogFileName) {
+                // first rename old log if exists
+                if FileManager.default.fileExists(atPath: newLogFilePath.path) {
+                    try? FileManager.default.moveItem(at: newLogFilePath, to: oldLogFilePath)
+                }
+                
                 do {
-                    FileManager.default.createFile(atPath: logFilePath.path, contents: nil, attributes: nil)
-                    self.logFileHandle = try FileHandle(forWritingTo: logFilePath)
+                    FileManager.default.createFile(atPath: newLogFilePath.path, contents: nil, attributes: nil)
+                    self.logFileHandle = try FileHandle(forWritingTo: newLogFilePath)
+                    self.logFilePath = newLogFilePath
                 } catch(let error) {
                     self.logFileHandle = nil
-                    NSLog("❌ Can't create log file: \(logFilePath.path). Error: \(error)")
+                    self.logFilePath = nil
+                    NSLog("❌ Can't create log file: \(newLogFilePath.path). Error: \(error)")
                 }
             } else {
                 self.logFileHandle = nil
+                self.logFilePath = nil
             }
         } else {
             self.logFileHandle = nil
+            self.logFilePath = nil
         }
     }
     

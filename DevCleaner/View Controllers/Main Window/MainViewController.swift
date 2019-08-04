@@ -180,6 +180,27 @@ final class MainViewController: NSViewController {
     }
     
     private func updateButtonsAndLabels() {
+        guard let xcodeFiles = self.xcodeFiles else {
+            log.error("MainViewController: Cannot create XcodeFiles instance!")
+            return
+        }
+        
+        // total size
+        let totalSizeString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
+        self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
+        self.view.window?.title = "DevCleaner - \(totalSizeString) available to clean"
+        
+        // selected size
+        let selectedSize = xcodeFiles.selectedSize
+        self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: selectedSize))"
+        
+        // clean button disabled when we selected nothing
+        self.cleanButton.isEnabled = selectedSize > 0
+        
+        // all time size / donate button
+        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        
+        // dry mode label
         self.dryModeView.isHidden = !Preferences.shared.dryRunEnabled
         self.dryModeView.layer?.backgroundColor = NSColor.systemOrange.cgColor
         self.dryModeView.layer?.cornerRadius = 4.0
@@ -195,7 +216,7 @@ final class MainViewController: NSViewController {
         // clear data
         xcodeFiles.cleanAllEntries()
         
-        self.updateTotalAndSelectedSizes()
+        self.updateButtonsAndLabels()
         
         // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
@@ -212,24 +233,6 @@ final class MainViewController: NSViewController {
     
     private func formatBytesToString(bytes: Int64) -> String {
         return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
-    }
-    
-    private func updateTotalAndSelectedSizes() {
-        guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
-            return
-        }
-        
-        // total size
-        let totalSizeString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
-        self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
-        self.view.window?.title = "DevCleaner - \(totalSizeString) available to clean"
-        
-        // selected size
-        self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: xcodeFiles.selectedSize))"
-        
-        // all time size / donate button
-        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
     
     private func benefitsButtonAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
@@ -461,7 +464,7 @@ extension MainViewController: XcodeEntryCellViewDelegate {
             }
             self.outlineView.reloadItem(item, reloadChildren: true)
             
-            self.updateTotalAndSelectedSizes()
+            self.updateButtonsAndLabels()
         }
     }
 }
@@ -482,7 +485,7 @@ extension MainViewController: XcodeFilesScanDelegate {
     func scanDidFinish(xcodeFiles: XcodeFiles) {
         self.stopLoading()
 
-        self.updateTotalAndSelectedSizes()
+        self.updateButtonsAndLabels()
     }
 }
 
