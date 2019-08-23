@@ -20,10 +20,20 @@
 
 import Cocoa
 
-// for command line mode, we need a special first argument
-// FIXME: Maybe find some better way to recognize that we start from command line?
-if CommandLine.argc >= 2 && CommandLine.arguments.contains("--cmd-tool-mode") {
-    CmdLineTool.start(args: Array(CommandLine.arguments.suffix(from: 2)))
+// MARK: Helpers
+private func isRunningFromCommandLine() -> Bool {
+    let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
+    
+    // it seems that's enough, but maybe in the future we can also try to check parent PID,
+    // to make sure 
+    
+    return isTTY == 1
+}
+
+// MARK: App Start
+
+if isRunningFromCommandLine() {
+    CmdLineTool.start(args: CommandLine.arguments)
 } else {
     let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 }
