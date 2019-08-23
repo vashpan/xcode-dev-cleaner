@@ -42,6 +42,15 @@ This is the major "cache" part of Xcode files, where autocompletion data, logs, 
 The point is that it could be regenerated if necessary. Also some older projects could be removed completely because its rather unusual that 
 we would use them again.
 
+### Old Simulator & Device Logs
+
+Old device logs & crashes databases, only most recent ones are needed. It seems that new versions of Xcodes migrates old logs database, but keeping older ones on disk.
+
+### Old Documentation Downloads
+
+Old Xcodes had ability to download documentation to browse offline, it could've been many gigabytes. Although newer Xcodes has online documentation browser, 
+those old documentations may be still on your drive if you're an old Xcode user. 
+
 ## Contact
 
 If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
