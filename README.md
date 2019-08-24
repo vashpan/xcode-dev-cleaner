@@ -11,15 +11,13 @@ If you want to reclaim tens of gigabytes of your storage used for various Xcode 
 Xcode could store tens of gigabytes in `~/Developer` folder. Most of those cached files & symbols is not reclaimed over time
 and could consume a large amount of your storage, which is especially important if you have relatively small SSD drive.
 
-Xcode Cleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about 
+DevCleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about 
 scan after a while.
 
 Please note that **this application is relying on internal folder structures and undocumented features**. It could stop working with
 newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please **make backup before use it**.
 
 ## What DevCleaner could actually clean?
-
-<insert some screenshot here>
 
 ### Device Support
 
@@ -53,7 +51,7 @@ those old documentations may be still on your drive if you're an old Xcode user.
 
 ## Contact
 
-If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
+If you enjoy this application, consider support me by making a tip in the app, or by downloading/buying some of my games from the AppStore 😎
 
 Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
 
