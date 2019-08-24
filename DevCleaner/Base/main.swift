@@ -20,6 +20,8 @@
 
 import Cocoa
 
+internal let log = Logger(name: "MainLog", level: .info, toFile: true)
+
 // MARK: Helpers
 private func isRunningFromCommandLine() -> Bool {
     let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line

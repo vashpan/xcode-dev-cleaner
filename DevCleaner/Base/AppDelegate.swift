@@ -20,8 +20,6 @@
 
 import Cocoa
 
-let log = Logger(name: "MainLog", level: .info, toFile: true)
-
 class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: App configuration
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
