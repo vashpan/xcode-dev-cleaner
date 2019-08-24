@@ -2,7 +2,7 @@
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
-*Currently tested with macOS 10.14 and Xcode 10.2.x*
+*Currently tested with macOS 10.14 and Xcode 10.x. Should support Xcode 11*
 
 Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
 
@@ -11,15 +11,13 @@ If you want to reclaim tens of gigabytes of your storage used for various Xcode 
 Xcode could store tens of gigabytes in `~/Developer` folder. Most of those cached files & symbols is not reclaimed over time
 and could consume a large amount of your storage, which is especially important if you have relatively small SSD drive.
 
-Xcode Cleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about 
+DevCleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about 
 scan after a while.
 
 Please note that **this application is relying on internal folder structures and undocumented features**. It could stop working with
 newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please **make backup before use it**.
 
 ## What DevCleaner could actually clean?
-
-<insert some screenshot here>
 
 ### Device Support
 
@@ -42,9 +40,18 @@ This is the major "cache" part of Xcode files, where autocompletion data, logs, 
 The point is that it could be regenerated if necessary. Also some older projects could be removed completely because its rather unusual that 
 we would use them again.
 
+### Old Simulator & Device Logs
+
+Old device logs & crashes databases, only most recent ones are needed. It seems that new versions of Xcodes migrates old logs database, but keeping older ones on disk.
+
+### Old Documentation Downloads
+
+Old Xcodes had ability to download documentation to browse offline, it could've been many gigabytes. Although newer Xcodes has online documentation browser, 
+those old documentations may be still on your drive if you're an old Xcode user. 
+
 ## Contact
 
-If you enjoy this application, consider support me, by downloading/buying some of my games from the AppStore 😎
+If you enjoy this application, consider support me by making a tip in the app, or by downloading/buying some of my games from the AppStore 😎
 
 Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
 

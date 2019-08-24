@@ -220,7 +220,7 @@ final class MainViewController: NSViewController {
         
         // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
-            xcodeFiles.scanFiles(in: XcodeFiles.Location.allCases)
+            xcodeFiles.scanFiles(in: xcodeFiles.locations.keys.map { $0 })
         }
     }
 
