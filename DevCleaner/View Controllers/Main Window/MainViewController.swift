@@ -42,6 +42,7 @@ final class MainViewController: NSViewController {
     
     private enum Segue: String {
         case showCleaningView = "ShowCleaningView"
+        case showDonateView = "ShowDonateView"
         
         var segueIdentifier: NSStoryboardSegue.Identifier {
             return self.rawValue
@@ -129,6 +130,8 @@ final class MainViewController: NSViewController {
         switch segueId {
             case .showCleaningView:
                 self.prepareCleaningView(with: segue)
+            case .showDonateView:
+                break // nothing to be done here
         }
     }
     
