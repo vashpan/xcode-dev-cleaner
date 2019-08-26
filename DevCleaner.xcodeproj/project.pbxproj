@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE022F6E770002E82B2 /* Signposts.swift */; };
 		7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7100BEE122F6E771002E82B2 /* Profiler.swift */; };
+		71012FA9230C8A9E00FDF8ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71012FA8230C8A9E00FDF8ED /* main.swift */; };
+		71012FAC230C928600FDF8ED /* CmdLineTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71012FAB230C928600FDF8ED /* CmdLineTool.swift */; };
 		7110B4922030F17B00EDBFA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4912030F17B00EDBFA3 /* AppDelegate.swift */; };
 		7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7110B4932030F17B00EDBFA3 /* MainViewController.swift */; };
 		7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7110B4952030F17B00EDBFA3 /* Assets.xcassets */; };
@@ -28,6 +30,8 @@
 		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
 		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
 		7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185E5D220D0775200C1C918 /* DonationViewController.swift */; };
+		718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */; };
+		718D4ABE23140ABA001E9382 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABD23140ABA001E9382 /* Files.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -47,6 +51,8 @@
 /* Begin PBXFileReference section */
 		7100BEE022F6E770002E82B2 /* Signposts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signposts.swift; sourceTree = "<group>"; };
 		7100BEE122F6E771002E82B2 /* Profiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profiler.swift; sourceTree = "<group>"; };
+		71012FA8230C8A9E00FDF8ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		71012FAB230C928600FDF8ED /* CmdLineTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmdLineTool.swift; sourceTree = "<group>"; };
 		7110B48E2030F17B00EDBFA3 /* DevCleaner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevCleaner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7110B4912030F17B00EDBFA3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7110B4932030F17B00EDBFA3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +77,8 @@
 		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7185E5D220D0775200C1C918 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentsParser.swift; sourceTree = "<group>"; };
+		718D4ABD23140ABA001E9382 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -156,6 +164,8 @@
 			isa = PBXGroup;
 			children = (
 				7110B4912030F17B00EDBFA3 /* AppDelegate.swift */,
+				71012FAB230C928600FDF8ED /* CmdLineTool.swift */,
+				71012FA8230C8A9E00FDF8ED /* main.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -175,6 +185,7 @@
 				71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */,
 				7162E12C209905BC00081E4E /* Preferences.swift */,
 				712F999D20D65229003927BC /* Donations.swift */,
+				718D4ABD23140ABA001E9382 /* Files.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 				71E7F837214E930500A11601 /* Messages.swift */,
 				7162E1252097255C00081E4E /* Stack.swift */,
 				715E8C3C216566FD0059A2E5 /* Weak.swift */,
+				718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -376,18 +388,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */,
 				71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */,
 				71E7F838214E930500A11601 /* Messages.swift in Sources */,
 				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
 				7162E1262097255C00081E4E /* Stack.swift in Sources */,
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,
 				714AB65F22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift in Sources */,
+				71012FAC230C928600FDF8ED /* CmdLineTool.swift in Sources */,
 				719B25D9205ECA53007560C0 /* Version.swift in Sources */,
 				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
 				715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */,
 				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
 				71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
+				71012FA9230C8A9E00FDF8ED /* main.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
 				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
 				7110B4942030F17B00EDBFA3 /* MainViewController.swift in Sources */,
@@ -400,6 +415,7 @@
 				71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */,
 				7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */,
 				716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */,
+				718D4ABE23140ABA001E9382 /* Files.swift in Sources */,
 				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */,

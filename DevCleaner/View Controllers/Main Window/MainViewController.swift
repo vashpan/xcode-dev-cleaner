@@ -145,27 +145,24 @@ final class MainViewController: NSViewController {
     }
     
     private func acquireUserDeveloperFolderPermissions() -> URL? {
-        let userHomeDirectory = FileManager.default.realHomeDirectoryForCurrentUser
-        let userDeveloperFolder = userHomeDirectory.appendingPathComponent("Library/Developer", isDirectory: true)
-        
-        return self.acquireFolderPermissions(folderUrl: userDeveloperFolder,
+        return self.acquireFolderPermissions(folderUrl: Files.userDeveloperFolder,
                                              openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
     }
     
     private func acquireCustomDerivedDataFolderPermissions() -> URL? {
-        guard let customDerivedDataFolderUrl = Preferences.shared.customDerivedDataFolder else {
+        guard let customDerivedDataFolder = Files.customDerivedDataFolder else {
             return nil
         }
         
-        return self.acquireFolderPermissions(folderUrl: customDerivedDataFolderUrl)
+        return self.acquireFolderPermissions(folderUrl: customDerivedDataFolder)
     }
     
     private func acquireCustomArchivesFolderPermissions() -> URL? {
-        guard let customArchivesFolderUrl = Preferences.shared.customArchivesFolder else {
+        guard let customArchivesFolder = Files.customArchivesFolder else {
             return nil
         }
         
-        return self.acquireFolderPermissions(folderUrl: customArchivesFolderUrl)
+        return self.acquireFolderPermissions(folderUrl: customArchivesFolder)
     }
     
     // MARK: Helpers
@@ -228,7 +225,7 @@ final class MainViewController: NSViewController {
     }
 
     private func checkForInstalledXcode() {
-        if NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") == nil {
+        if !XcodeFiles.isXcodeIsInstalled() {
             Messages.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
                                               message: "Check if you have Xcode installed")
         }

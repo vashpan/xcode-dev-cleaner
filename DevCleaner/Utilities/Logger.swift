@@ -29,17 +29,20 @@ public class Logger {
     // MARK: Properties
     public let level: Level
     public let name: String
+    
+    public var consoleLogging: Bool
+    
     public var fileLogging: Bool {
         return self.logFileHandle != nil
     }
     public let logFilePath: URL?
-    
     private let logFileHandle: FileHandle?
     
     // MARK: Initialization
     public init(name: String, level: Level = .error, toFile: Bool = false) {
         self.name = name
         self.level = level
+        self.consoleLogging = true
         
         if toFile {
             // create logfile path
@@ -79,8 +82,19 @@ public class Logger {
     }
     
     // MARK: Helpers
-    private func writeLog(text: String) {
-        NSLog(text)
+    private func writeLog(text: String, level: Level) {
+        if self.consoleLogging {
+            NSLog(text)
+        } else {
+            // always write error logs, with info to check out full log in file
+            if level == .error {
+                NSLog(text)
+                
+                if let logPath = self.logFilePath {
+                    NSLog("\nYou can check full log here: %@", logPath.path)
+                }
+            }
+        }
         
         if let fileHandle = self.logFileHandle {
             let textToLogToFile = text + "\n" // add new line for each entry
@@ -95,7 +109,7 @@ public class Logger {
     public func info(_ message: String) {
         switch self.level {
             case .info:
-                self.writeLog(text: "❕ \(message)")
+                self.writeLog(text: "❕ \(message)", level: .info)
             default:
                 return
         }
@@ -104,7 +118,7 @@ public class Logger {
     public func warning(_ message: String) {
         switch self.level {
             case .info, .warning:
-                self.writeLog(text: "⚠️ \(message)")
+                self.writeLog(text: "⚠️ \(message)", level: .warning)
             default:
                 return
         }
@@ -113,7 +127,7 @@ public class Logger {
     public func error(_ message: String) {
         switch self.level {
             case .info, .warning, .error:
-                self.writeLog(text: "❌ \(message)")
+                self.writeLog(text: "❌ \(message)", level: .error)
         }
     }
 }

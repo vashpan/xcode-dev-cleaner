@@ -95,6 +95,10 @@ final public class XcodeFiles {
     }
     
     // MARK: Helpers
+    public static func isXcodeIsInstalled() -> Bool {
+        return NSWorkspace.shared.absolutePathForApplication(withBundleIdentifier: "com.apple.dt.Xcode") != nil
+    }
+    
     private static func checkForXcodeDataFolders(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)
@@ -107,6 +111,11 @@ final public class XcodeFiles {
             let folderPath = location.appendingPathComponent(folder)
             
             if !FileManager.default.fileExists(atPath: folderPath.path) {
+                structureProper = false
+                break
+            }
+            
+            if !FileManager.default.isWritableFile(atPath: folderPath.path) {
                 structureProper = false
                 break
             }
