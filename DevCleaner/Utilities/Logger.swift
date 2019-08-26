@@ -85,15 +85,6 @@ public class Logger {
     private func writeLog(text: String, level: Level) {
         if self.consoleLogging {
             NSLog(text)
-        } else {
-            // always write error logs, with info to check out full log in file
-            if level == .error {
-                NSLog(text)
-                
-                if let logPath = self.logFilePath {
-                    NSLog("\nYou can check full log here: %@", logPath.path)
-                }
-            }
         }
         
         if let fileHandle = self.logFileHandle {
