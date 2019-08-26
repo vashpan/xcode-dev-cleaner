@@ -30,6 +30,7 @@
 		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
 		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
 		7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185E5D220D0775200C1C918 /* DonationViewController.swift */; };
+		718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */; };
 		719B25D9205ECA53007560C0 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25D8205ECA53007560C0 /* Version.swift */; };
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
@@ -75,6 +76,7 @@
 		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7185E5D220D0775200C1C918 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentsParser.swift; sourceTree = "<group>"; };
 		719B25D8205ECA53007560C0 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				71E7F837214E930500A11601 /* Messages.swift */,
 				7162E1252097255C00081E4E /* Stack.swift */,
 				715E8C3C216566FD0059A2E5 /* Weak.swift */,
+				718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */,
 				71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */,
 				71E7F838214E930500A11601 /* Messages.swift in Sources */,
 				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
