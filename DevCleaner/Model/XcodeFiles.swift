@@ -79,13 +79,12 @@ final public class XcodeFiles {
             return nil
         }
         
-        // FIXME: Some locations are commented out, because they are prepared for vs. 2.x and needs some testing
         self.locations = [
             .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
             .archives: XcodeFileEntry(label: "Archives", selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
-            //.logs: DeviceLogsFileEntry(selected: false),
-            //.oldDocumentation: OldDocumentationFileEntry(selected: false)
+            .logs: DeviceLogsFileEntry(selected: false),
+            .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
     
