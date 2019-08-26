@@ -22,12 +22,12 @@ import Foundation
 
 final class CmdLineTool {
     // MARK: Types
-    private enum Mode {
-        case clean, info, help
-    }
-    
     private enum Error: Swift.Error {
         case wrongOption(option: String), conflictingOptions
+    }
+    
+    private enum Mode {
+        case clean, info, help
     }
     
     // MARK: Helpers
@@ -56,6 +56,10 @@ final class CmdLineTool {
     private static func printHelpAndExit(using argsParser: ArgumentsParser) {
         argsParser.printHelp()
         exit(0)
+    }
+    
+    private static func printAvailableEntriesToClean(entries: [XcodeFiles.Location: XcodeFileEntry]) {
+        print("Detailed informations to be done!")
     }
     
     private static func cleanOptionsToXcodeFileLocation(_ value: String) throws -> [XcodeFiles.Location] {
@@ -133,14 +137,14 @@ final class CmdLineTool {
                     throw ArgumentsParser.Error.noValue(optionName: "clean")
                 }
             } else {
-                locations = []
+                locations = XcodeFiles.Location.allCases // in case of an info, we justs check everything
             }
             
             // start or show help
             if mode == .help {
                 printHelpAndExit(using: argsParser)
             } else {
-                self.start(mode: mode, cleanLocations: locations)
+                self.start(mode: mode, locations: locations)
             }
         } catch(ArgumentsParser.Error.insufficientArguments) {
             printHelpAndExit(using: argsParser)
@@ -157,9 +161,32 @@ final class CmdLineTool {
         }
     }
     
-    private static func start(mode: Mode, cleanLocations: [XcodeFiles.Location]) {
-        // FIXME: Add listing and cleaning implementations
-        print("We will clean or show here something, I promise!")
-        print("Mode: \(mode), Locations: \(cleanLocations)")
+    private static func start(mode: Mode, locations: [XcodeFiles.Location]) {
+        guard XcodeFiles.isXcodeIsInstalled() else {
+            printErrorAndExit(errorMessage: "Xcode installation cannot be found! Check if you have Xcode installed.")
+            return
+        }
+        
+        guard let xcodeFiles = XcodeFiles(developerFolder: Files.userDeveloperFolder, customDerivedDataFolder: Files.customDerivedDataFolder, customArchivesFolder: Files.customArchivesFolder) else {
+            printErrorAndExit(errorMessage: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder.\nCheck if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
+            return
+        }
+        
+        // scan given locations
+        print("Scanning...")
+        xcodeFiles.cleanAllEntries()
+        xcodeFiles.scanFiles(in: locations)
+        let scannedEntries = xcodeFiles.locations
+        let totalSize = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
+        
+        switch mode {
+            case .clean:
+                print("Clean to be done!")
+            case .info:
+                printAvailableEntriesToClean(entries: scannedEntries)
+                print("Total size available to clean: \(totalSize)")
+            default:
+                fatalError("Can't start with mode different than \"info\" or \"clean\"")
+        }
     }
 }
