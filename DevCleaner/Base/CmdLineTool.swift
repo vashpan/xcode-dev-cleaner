@@ -50,6 +50,13 @@ final class CmdLineTool {
     
     private static func printErrorAndExit(errorMessage: String) {
         print("Error: \(errorMessage)")
+        print()
+        
+        if let logFilePath = log.logFilePath {
+            print("You can check full log here: \(logFilePath.path)")
+            print()
+        }
+        
         exit(1)
     }
     
