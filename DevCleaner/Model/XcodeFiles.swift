@@ -114,6 +114,11 @@ final public class XcodeFiles {
                 structureProper = false
                 break
             }
+            
+            if !FileManager.default.isWritableFile(atPath: folderPath.path) {
+                structureProper = false
+                break
+            }
         }
         
         return folderExists && structureProper
