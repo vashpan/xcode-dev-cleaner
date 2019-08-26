@@ -21,6 +21,15 @@
 import Foundation
 
 final class CmdLineTool {
+    // MARK: Types
+    private enum Mode {
+        case clean, info, help
+    }
+    
+    private enum Error: Swift.Error {
+        case wrongOption(option: String), conflictingOptions
+    }
+    
     // MARK: Helpers
     private static func printAppInfo() {
         guard let bundleInfoDictionary = Bundle.main.infoDictionary else {
@@ -36,12 +45,121 @@ final class CmdLineTool {
         }
         
         print("DevCleaner \(appVersion) (\(appBuildNumber))")
-        print("Command line mode.")
         print()
+    }
+    
+    private static func printErrorAndExit(errorMessage: String) {
+        print("Error: \(errorMessage)")
+        exit(1)
+    }
+    
+    private static func printHelpAndExit(using argsParser: ArgumentsParser) {
+        argsParser.printHelp()
+        exit(0)
+    }
+    
+    private static func cleanOptionsToXcodeFileLocation(_ value: String) throws -> [XcodeFiles.Location] {
+        // do we have all listed here?
+        if value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "all" {
+            return XcodeFiles.Location.allCases
+        }
+        // else just split it and parse each individual
+        else {
+            let splittedOptions = value.split(separator: ",")
+            let result: [XcodeFiles.Location] = try splittedOptions.map {
+                let trimmedOption = $0.trimmingCharacters(in: .whitespacesAndNewlines)
+                switch trimmedOption {
+                    case "device-support":
+                        return .deviceSupport
+                    case "archives":
+                        return .archives
+                    case "derived-data":
+                        return .derivedData
+                    case "old-logs":
+                        return .logs
+                    case "old-documentation":
+                        return .oldDocumentation
+                    default:
+                        throw Error.wrongOption(option: trimmedOption)
+                }
+            }
+            
+            return result
+        }
     }
     
     // MARK: Start command line tool
     static func start(args: [String]) {
         printAppInfo()
+        
+        let argsParser = ArgumentsParser(description: "Reclaims storage that Xcode stores in caches and old files")
+        argsParser.addOption(name: "info", description: "Show all items available to clean.")
+        argsParser.addOptionWithValue(name: "clean",
+                                      description: "Perform cleaning of given items. Available options: all,device-support,archives,derived-data,old-logs,old-documentation. If you want to clean all, pass \"all\"",
+                                      possibleValues: ["all","device-support","archives","derived-data","old-logs","old-documentation"])
+        argsParser.addOption(name: "--help", description: "Prints this message")
+        
+        do {
+            let options = try argsParser.parse(using: args)
+            
+            // if we have too many options that's wrong
+            if options.count > 1 {
+                throw Error.conflictingOptions
+            }
+            
+            // check mode from first option
+            let mode: Mode
+            if let firstOption = options.first {
+                switch firstOption.name {
+                    case "info":
+                        mode = .info
+                    case "clean":
+                        mode = .clean
+                    case "--help":
+                        mode = .help
+                    default:
+                        throw ArgumentsParser.Error.wrongArgument(name: firstOption.name)
+                }
+            } else {
+                throw ArgumentsParser.Error.insufficientArguments
+            }
+            
+            // check options if we want to clean
+            let locations: [XcodeFiles.Location]
+            if mode == .clean {
+                if let cleanOption = options.first as? OptionWithValue, let cleanOptionValue = cleanOption.value {
+                    locations = try cleanOptionsToXcodeFileLocation(cleanOptionValue)
+                } else {
+                    throw ArgumentsParser.Error.noValue(optionName: "clean")
+                }
+            } else {
+                locations = []
+            }
+            
+            // start or show help
+            if mode == .help {
+                printHelpAndExit(using: argsParser)
+            } else {
+                self.start(mode: mode, cleanLocations: locations)
+            }
+        } catch(ArgumentsParser.Error.insufficientArguments) {
+            printHelpAndExit(using: argsParser)
+        } catch(ArgumentsParser.Error.noValue(let optionName)) {
+            printErrorAndExit(errorMessage: "Expected value for option: \(optionName)")
+        } catch(ArgumentsParser.Error.wrongArgument(let name)) {
+            printErrorAndExit(errorMessage: "Unrecognized argument: \(name)")
+        } catch(Error.wrongOption(let option)) {
+            printErrorAndExit(errorMessage: "Wrong value for \"clean\": \(option)")
+        } catch(Error.conflictingOptions) {
+            printHelpAndExit(using: argsParser)
+        } catch {
+            printHelpAndExit(using: argsParser)
+        }
+    }
+    
+    private static func start(mode: Mode, cleanLocations: [XcodeFiles.Location]) {
+        // FIXME: Add listing and cleaning implementations
+        print("We will clean or show here something, I promise!")
+        print("Mode: \(mode), Locations: \(cleanLocations)")
     }
 }
