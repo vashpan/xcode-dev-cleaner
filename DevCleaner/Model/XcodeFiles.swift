@@ -619,11 +619,7 @@ final public class XcodeFiles {
     
     // MARK: Deleting files
     public func deleteSelectedEntries(dryRun: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            if let strongSelf = self {
-                strongSelf.deleteDelegate?.deleteWillBegin(xcodeFiles: strongSelf)
-            }
-        }
+        self.deleteDelegate?.deleteWillBegin(xcodeFiles: self)
         
         // gather a list of items to delete
         typealias DeletionItem = (location: String, label: String, path: URL)
@@ -656,16 +652,12 @@ final public class XcodeFiles {
         for itemToDelete in itemsToDelete {
             ordinal += 1
 
-            DispatchQueue.main.async { [weak self] in
-                if let strongSelf = self {
-                    strongSelf.deleteDelegate?.deleteInProgress(xcodeFiles: strongSelf,
-                                                                location: itemToDelete.location,
-                                                                label: itemToDelete.label,
-                                                                url: itemToDelete.path,
-                                                                current: ordinal,
-                                                                total: itemsCount)
-                }
-            }
+            self.deleteDelegate?.deleteInProgress(xcodeFiles: self,
+                                                    location: itemToDelete.location,
+                                                       label: itemToDelete.label,
+                                                         url: itemToDelete.path,
+                                                     current: ordinal,
+                                                       total: itemsCount)
             
             log.info("Deleting \(dryRunInfo): \(itemToDelete.location): \(itemToDelete.label) (\(itemToDelete.path.path))")
             
@@ -675,23 +667,15 @@ final public class XcodeFiles {
                 do {
                     try FileManager.default.removeItem(at: itemToDelete.path)
                 } catch(let error) {
-                    DispatchQueue.main.async { [weak self] in
-                        if let strongSelf = self {
-                            strongSelf.deleteDelegate?.deleteItemFailed(xcodeFiles: strongSelf,
-                                                                        error: error,
-                                                                        location: itemToDelete.location,
-                                                                        label: itemToDelete.label,
-                                                                        url: itemToDelete.path)
-                        }
-                    }
+                    self.deleteDelegate?.deleteItemFailed(xcodeFiles: self,
+                                                               error: error,
+                                                            location: itemToDelete.location,
+                                                               label: itemToDelete.label,
+                                                                 url: itemToDelete.path)
                 }
             }
         }
         
-        DispatchQueue.main.async { [weak self] in
-            if let strongSelf = self {
-                strongSelf.deleteDelegate?.deleteDidFinish(xcodeFiles: strongSelf)
-            }
-        }
+        self.deleteDelegate?.deleteDidFinish(xcodeFiles: self)
     }
 }

@@ -110,12 +110,16 @@ internal final class CleaningViewController: NSViewController {
 
 extension CleaningViewController: XcodeFilesDeleteDelegate {
     func deleteWillBegin(xcodeFiles: XcodeFiles) {
-        self.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+        DispatchQueue.main.async {
+            self.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+        }
     }
     
     func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL?, current: Int, total: Int) {
         let progress = Double(current) / Double(total) * 100.0
-        self.state = .working(title: location.capitalized, details: label, progress: progress)
+        DispatchQueue.main.async {
+            self.state = .working(title: location.capitalized, details: label, progress: progress)
+        }
     }
     
     func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL?) {
@@ -126,15 +130,19 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
         """
         
         // show error message
-        let alert = NSAlert()
-        alert.alertStyle = .critical
-        alert.messageText = "Failed to delete item"
-        alert.informativeText = message
-        alert.addButton(withTitle: "OK")
-        alert.runModal()
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.alertStyle = .critical
+            alert.messageText = "Failed to delete item"
+            alert.informativeText = message
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+        }
     }
     
     func deleteDidFinish(xcodeFiles: XcodeFiles) {
-        self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
+        DispatchQueue.main.async {
+            self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
+        }
     }
 }
