@@ -53,6 +53,10 @@ open class XcodeFileEntry: NSObject {
     public let tooltipText: String
     public let tooltip: Bool
     
+    public var fullDescription: String {
+        return "\(label) \(extraInfo)"
+    }
+    
     public private(set) var selection: Selection
     public private(set) var size: Size
     public var selectedSize: Int64 {

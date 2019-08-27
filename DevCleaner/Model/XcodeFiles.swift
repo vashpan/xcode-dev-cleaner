@@ -633,7 +633,7 @@ final public class XcodeFiles {
             while !searchStack.isEmpty {
                 if let currentEntry = searchStack.pop() {
                     if currentEntry.isSelected && currentEntry.paths.count > 0 {
-                        let pathsFromNode = currentEntry.paths.map { DeletionItem(location: location.label, label: currentEntry.label, path: $0) }
+                        let pathsFromNode = currentEntry.paths.map { DeletionItem(location: location.label, label: currentEntry.fullDescription, path: $0) }
                         itemsToDelete.append(contentsOf: pathsFromNode)
                     }
                     

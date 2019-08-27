@@ -28,6 +28,10 @@ public final class ArchiveFileEntry: XcodeFileEntry {
     public let build: String
     public let date: Date
     
+    public override var fullDescription: String {
+        return "\(projectName) \(self.version.description) (\(self.build)) (\(self.extraInfo))"
+    }
+    
     // MARK: Initialization
     public init(projectName: String, bundleName: String, version: Version, build: String, date: Date, location: URL, selected: Bool) {
         self.projectName = projectName

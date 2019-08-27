@@ -22,6 +22,10 @@ import Foundation
 import AppKit
 
 public final class OldDocumentationFileEntry: XcodeFileEntry {
+    public override var fullDescription: String {
+        return ""
+    }
+    
     public init(selected: Bool) {
         super.init(label: "Old Documentation Downloads",
                    tooltipText: "Old offline documentations, not used anymore in modern Xcodes",
