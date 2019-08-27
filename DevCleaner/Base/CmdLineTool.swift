@@ -66,7 +66,32 @@ final class CmdLineTool {
     }
     
     private static func printAvailableEntriesToClean(entries: [XcodeFiles.Location: XcodeFileEntry]) {
-        print("Detailed informations to be done!")
+        func locationToString(_ location: XcodeFiles.Location) -> String {
+            switch location {
+                case .deviceSupport: return "Device Support:"
+                case .archives: return "Archives:"
+                case .derivedData: return "Derived Data: "
+                case .logs: return "Old Logs: "
+                case .oldDocumentation: return "Old Documentation: "
+            }
+        }
+        
+        func printEntry(entry: XcodeFileEntry, tabs: Int = 0) {
+            let tabsString = String(repeating: "\t", count: tabs)
+            let entrySizeString = ByteCountFormatter.string(fromByteCount: entry.size.numberOfBytes ?? 0, countStyle: .file)
+            let extraInfoString = entry.extraInfo.count > 0 ? "(\(entry.extraInfo))" : String()
+            print("\(tabsString)[\(entrySizeString)] \(entry.label) \(extraInfoString)")
+            
+            for childEntry in entry.items {
+                printEntry(entry: childEntry, tabs: tabs + 1)
+            }
+        }
+        
+        let sortedFileEntries = entries.values.sorted { $0.label > $1.label }
+        for entry in sortedFileEntries {
+            printEntry(entry: entry)
+            print()
+        }
     }
     
     private static func cleanOptionsToXcodeFileLocation(_ value: String) throws -> [XcodeFiles.Location] {
@@ -189,6 +214,7 @@ final class CmdLineTool {
         let scannedEntries = xcodeFiles.locations
         let totalSize = ByteCountFormatter.string(fromByteCount: xcodeFiles.totalSize, countStyle: .file)
         
+        // immedietely clean or show info
         switch mode {
             case .clean:
                 print("Clean to be done!")
