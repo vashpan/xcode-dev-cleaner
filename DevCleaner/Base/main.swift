@@ -36,7 +36,7 @@ private func isRunningFromCommandLine() -> Bool {
 
 if isRunningFromCommandLine() {
     log.consoleLogging = false // disable console logging to not interfere with console output, file log will still be available
-    CmdLineTool.start(args: CommandLine.arguments)
+    CmdLineTool.shared.start(args: CommandLine.arguments)
 } else {
     let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 }

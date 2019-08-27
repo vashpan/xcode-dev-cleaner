@@ -20,7 +20,7 @@
 
 import Foundation
 
-final class CmdLineTool {
+public final class CmdLineTool {
     // MARK: Types
     private enum Error: Swift.Error {
         case wrongOption(option: String), conflictingOptions
@@ -30,8 +30,10 @@ final class CmdLineTool {
         case clean, info, help
     }
     
+    public static let shared = CmdLineTool()
+    
     // MARK: Helpers
-    private static func printAppInfo() {
+    private func printAppInfo() {
         guard let bundleInfoDictionary = Bundle.main.infoDictionary else {
             fatalError("CmdLineTool: No Info.plist in main app bundle!?")
         }
@@ -48,7 +50,7 @@ final class CmdLineTool {
         print()
     }
     
-    private static func printErrorAndExit(errorMessage: String) {
+    private func printErrorAndExit(errorMessage: String) {
         print("Error: \(errorMessage)")
         print()
         
@@ -60,41 +62,12 @@ final class CmdLineTool {
         exit(1)
     }
     
-    private static func printHelpAndExit(using argsParser: ArgumentsParser) {
+    private func printHelpAndExit(using argsParser: ArgumentsParser) {
         argsParser.printHelp()
         exit(0)
     }
     
-    private static func printAvailableEntriesToClean(entries: [XcodeFiles.Location: XcodeFileEntry]) {
-        func locationToString(_ location: XcodeFiles.Location) -> String {
-            switch location {
-                case .deviceSupport: return "Device Support:"
-                case .archives: return "Archives:"
-                case .derivedData: return "Derived Data: "
-                case .logs: return "Old Logs: "
-                case .oldDocumentation: return "Old Documentation: "
-            }
-        }
-        
-        func printEntry(entry: XcodeFileEntry, tabs: Int = 0) {
-            let tabsString = String(repeating: "\t", count: tabs)
-            let entrySizeString = ByteCountFormatter.string(fromByteCount: entry.size.numberOfBytes ?? 0, countStyle: .file)
-            let extraInfoString = entry.extraInfo.count > 0 ? "(\(entry.extraInfo))" : String()
-            print("\(tabsString)[\(entrySizeString)] \(entry.label) \(extraInfoString)")
-            
-            for childEntry in entry.items {
-                printEntry(entry: childEntry, tabs: tabs + 1)
-            }
-        }
-        
-        let sortedFileEntries = entries.values.sorted { $0.label > $1.label }
-        for entry in sortedFileEntries {
-            printEntry(entry: entry)
-            print()
-        }
-    }
-    
-    private static func cleanOptionsToXcodeFileLocation(_ value: String) throws -> [XcodeFiles.Location] {
+    private func cleanOptionsToXcodeFileLocation(_ value: String) throws -> [XcodeFiles.Location] {
         // do we have all listed here?
         if value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "all" {
             return XcodeFiles.Location.allCases
@@ -124,8 +97,56 @@ final class CmdLineTool {
         }
     }
     
+    // MARK: Cleaning & showing informations about entries
+    private func delete(xcodeFiles: XcodeFiles, selectedLocations: [XcodeFiles.Location], dryRun: Bool) {
+        if dryRun {
+            print("DRY RUN ENABLED")
+        }
+        
+        // select given locations
+        for (_, entry) in xcodeFiles.locations {
+            entry.deselectWithChildItems()
+        }
+        for selectedLocation in selectedLocations {
+            xcodeFiles.locations[selectedLocation]?.selectWithChildItems()
+        }
+        let selectedSize = xcodeFiles.selectedSize
+        
+        // delete selected items
+        xcodeFiles.deleteSelectedEntries(dryRun: dryRun)
+        print("\nTotal bytes cleaned: \(ByteCountFormatter.string(fromByteCount: selectedSize, countStyle: .file))")
+        
+        // update total bytes cleaned
+        #if DEBUG
+        Preferences.shared.totalBytesCleaned += selectedSize
+        #else
+        if !dryRun {
+            Preferences.shared.totalBytesCleaned += selectedSize
+        }
+        #endif
+    }
+    
+    private func info(about entries: [XcodeFiles.Location: XcodeFileEntry]) {
+        func printEntry(entry: XcodeFileEntry, tabs: Int = 0) {
+            let tabsString = String(repeating: "\t", count: tabs)
+            let entrySizeString = ByteCountFormatter.string(fromByteCount: entry.size.numberOfBytes ?? 0, countStyle: .file)
+            let extraInfoString = entry.extraInfo.count > 0 ? "(\(entry.extraInfo))" : String()
+            print("\(tabsString)[\(entrySizeString)] \(entry.label) \(extraInfoString)")
+            
+            for childEntry in entry.items {
+                printEntry(entry: childEntry, tabs: tabs + 1)
+            }
+        }
+        
+        let sortedFileEntries = entries.values.sorted { $0.label > $1.label }
+        for entry in sortedFileEntries {
+            printEntry(entry: entry)
+            print()
+        }
+    }
+    
     // MARK: Start command line tool
-    static func start(args: [String]) {
+    public func start(args: [String]) {
         printAppInfo()
         
         let argsParser = ArgumentsParser(description: "Reclaims storage that Xcode stores in caches and old files")
@@ -193,7 +214,7 @@ final class CmdLineTool {
         }
     }
     
-    private static func start(mode: Mode, locations: [XcodeFiles.Location]) {
+    private func start(mode: Mode, locations: [XcodeFiles.Location]) {
         guard XcodeFiles.isXcodeIsInstalled() else {
             printErrorAndExit(errorMessage: "Xcode installation cannot be found! Check if you have Xcode installed.")
             return
@@ -207,6 +228,8 @@ final class CmdLineTool {
             return
         }
         
+        xcodeFiles.deleteDelegate = self
+        
         // scan given locations
         print("Scanning...\n")
         xcodeFiles.cleanAllEntries()
@@ -217,12 +240,43 @@ final class CmdLineTool {
         // immedietely clean or show info
         switch mode {
             case .clean:
-                print("Clean to be done!")
+                #if DEBUG
+                let dryRun = true
+                #else
+                let dryRun = false
+                #endif
+                
+                delete(xcodeFiles: xcodeFiles, selectedLocations: locations, dryRun: dryRun)
             case .info:
-                printAvailableEntriesToClean(entries: scannedEntries)
+                info(about: scannedEntries)
                 print("Total size available to clean: \(totalSize)")
             default:
                 fatalError("Can't start with mode different than \"info\" or \"clean\"")
         }
+    }
+}
+
+// MARK: - XcodeFilesDeleteDelegate implementation
+extension CmdLineTool: XcodeFilesDeleteDelegate {
+    public func deleteWillBegin(xcodeFiles: XcodeFiles) {
+        print("Removing files:")
+    }
+    
+    public func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL?, current: Int, total: Int) {
+        if !label.isEmpty {
+            print("\(location): \(label) - \(current)/\(total)")
+        } else if let path = url?.path {
+            print("\(location): \(path) - \(current)/\(total)")
+        } else {
+            print("\(location): \(current)/\(total)")
+        }
+    }
+    
+    public func deleteItemFailed(xcodeFiles: XcodeFiles, error: Swift.Error, location: String, label: String, url: URL?) {
+        print("Warning: Following file couldn't be removed: \(location.capitalized): \(url?.path ?? "-") \(error.localizedDescription)")
+    }
+    
+    public func deleteDidFinish(xcodeFiles: XcodeFiles) {
+        
     }
 }
