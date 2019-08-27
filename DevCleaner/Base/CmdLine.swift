@@ -1,5 +1,5 @@
 //
-//  CmdLineTool.swift
+//  CmdLine.swift
 //  DevCleaner
 //
 //  Created by Konrad Kołakowski on 20/08/2019.
@@ -20,7 +20,7 @@
 
 import Foundation
 
-public final class CmdLineTool {
+public final class CmdLine {
     // MARK: Types
     private enum Error: Swift.Error {
         case wrongOption(option: String), conflictingOptions
@@ -30,7 +30,7 @@ public final class CmdLineTool {
         case clean, info, help
     }
     
-    public static let shared = CmdLineTool()
+    public static let shared = CmdLine()
     
     // MARK: Helpers
     private func printAppInfo() {
@@ -257,7 +257,7 @@ public final class CmdLineTool {
 }
 
 // MARK: - XcodeFilesDeleteDelegate implementation
-extension CmdLineTool: XcodeFilesDeleteDelegate {
+extension CmdLine: XcodeFilesDeleteDelegate {
     public func deleteWillBegin(xcodeFiles: XcodeFiles) {
         print("Removing files:")
     }
