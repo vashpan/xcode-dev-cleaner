@@ -77,10 +77,10 @@ final class MainViewController: NSViewController {
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // open ~/Library/Developer folder & create XcodeFiles instance
-        guard let developerLibraryFolder = self.acquireUserDeveloperFolderPermissions(),
+        guard let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
               let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
-                                          customDerivedDataFolder: self.acquireCustomDerivedDataFolderPermissions(),
-                                          customArchivesFolder: self.acquireCustomArchivesFolderPermissions()) else {
+                                          customDerivedDataFolder: Files.acquireCustomDerivedDataFolderPermissions(),
+                                          customArchivesFolder: Files.acquireCustomArchivesFolderPermissions()) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
             Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
@@ -135,36 +135,6 @@ final class MainViewController: NSViewController {
         }
     }
     
-    // MARK: Acquire folder permissions
-    private func acquireFolderPermissions(folderUrl: URL, openPanelMessage: String? = nil) -> URL? {
-        let message = openPanelMessage ??
-                      "DevCleaner needs permission to this folder to scan its contents. Folder should be already selected and all you need to do is to click \"Open\"."
-        
-        return folderUrl.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: folderUrl),
-                                          openPanelMessage: message)
-    }
-    
-    private func acquireUserDeveloperFolderPermissions() -> URL? {
-        return self.acquireFolderPermissions(folderUrl: Files.userDeveloperFolder,
-                                             openPanelMessage: "DevCleaner needs permission to your Developer folder to scan Xcode cache files. Folder should be already selected and all you need to do is to click \"Open\".")
-    }
-    
-    private func acquireCustomDerivedDataFolderPermissions() -> URL? {
-        guard let customDerivedDataFolder = Files.customDerivedDataFolder else {
-            return nil
-        }
-        
-        return self.acquireFolderPermissions(folderUrl: customDerivedDataFolder)
-    }
-    
-    private func acquireCustomArchivesFolderPermissions() -> URL? {
-        guard let customArchivesFolder = Files.customArchivesFolder else {
-            return nil
-        }
-        
-        return self.acquireFolderPermissions(folderUrl: customArchivesFolder)
-    }
-    
     // MARK: Helpers
     private func updateCustomFolders() {
         guard let xcodeFiles = self.xcodeFiles else {
@@ -172,8 +142,8 @@ final class MainViewController: NSViewController {
             return
         }
         
-        let derivedDataFolder = self.acquireCustomDerivedDataFolderPermissions()
-        let archivesFolder = self.acquireCustomArchivesFolderPermissions()
+        let derivedDataFolder = Files.acquireCustomDerivedDataFolderPermissions()
+        let archivesFolder = Files.acquireCustomArchivesFolderPermissions()
         
         xcodeFiles.updateCustomFolders(customDerivedDataFolder: derivedDataFolder,
                                        customArchivesFolder: archivesFolder)

@@ -174,13 +174,16 @@ final class CmdLineTool {
             return
         }
         
-        guard let xcodeFiles = XcodeFiles(developerFolder: Files.userDeveloperFolder, customDerivedDataFolder: Files.customDerivedDataFolder, customArchivesFolder: Files.customArchivesFolder) else {
+        guard let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
+              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
+                                          customDerivedDataFolder: Files.acquireCustomDerivedDataFolderPermissions(),
+                                          customArchivesFolder: Files.acquireCustomArchivesFolderPermissions()) else {
             printErrorAndExit(errorMessage: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder.\nCheck if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
             return
         }
         
         // scan given locations
-        print("Scanning...")
+        print("Scanning...\n")
         xcodeFiles.cleanAllEntries()
         xcodeFiles.scanFiles(in: locations)
         let scannedEntries = xcodeFiles.locations
