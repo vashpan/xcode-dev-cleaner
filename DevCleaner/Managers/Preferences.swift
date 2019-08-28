@@ -35,6 +35,7 @@ public final class Preferences {
         public static let totalBytesCleaned = "DCTotalBytesCleaned"
         public static let customArchivesFolder = "DCCustomArchivesFolderKey"
         public static let customDerivedDataFolder = "DCCustomDerivedDataFolderKey"
+        public static let appFolder = "DCAppFolder"
         
         fileprivate static func folderBookmarkKey(for url: URL) -> String {
             return "DCFolderBookmark_\(url.absoluteString.md5)"
@@ -183,6 +184,21 @@ public final class Preferences {
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.customDerivedDataFolder)
             self.informAllObserversAboutChange(keyThatChanged: Keys.customDerivedDataFolder)
+        }
+    }
+    
+    public var appFolder: URL {
+        get {
+            if let appFolderPath = UserDefaults.standard.object(forKey: Keys.appFolder) as? String {
+                return URL(fileURLWithPath: appFolderPath)
+            }
+            
+            return Bundle.main.bundleURL
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.appFolder)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.appFolder)
         }
     }
     

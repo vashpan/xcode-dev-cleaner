@@ -41,6 +41,9 @@ private func isRunningFromCommandLine(args: [String]) -> Bool {
 
 // MARK: App Start
 
+// save app path to defaults
+Preferences.shared.appFolder = Bundle.main.bundleURL
+
 if isRunningFromCommandLine(args: CommandLine.arguments) {
     log.consoleLogging = false // disable console logging to not interfere with console output, file log will still be available
     CmdLine.shared.start(args: CommandLine.arguments)
