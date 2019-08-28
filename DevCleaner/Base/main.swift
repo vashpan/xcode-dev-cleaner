@@ -23,18 +23,25 @@ import Cocoa
 internal let log = Logger(name: "MainLog", level: .info, toFile: true)
 
 // MARK: Helpers
-private func isRunningFromCommandLine() -> Bool {
+private func isRunningFromCommandLine(args: [String]) -> Bool {
     let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
     
     // it seems that's enough, but maybe in the future we can also try to check parent PID,
-    // to make sure 
+    // to make sure. We also check for a special argument passed usually by Xcode & debugger to mark we run from Xcode and usually
+    // want a full window, it's not a great way though
+
+    #if DEBUG
+    let isRunningFromXcode = args.contains("-NSDocumentRevisionsDebugMode")
+    #else
+    let isRunningFromXcode = false
+    #endif
     
-    return isTTY == 1
+    return isTTY == 1 && !isRunningFromXcode
 }
 
 // MARK: App Start
 
-if isRunningFromCommandLine() {
+if isRunningFromCommandLine(args: CommandLine.arguments) {
     log.consoleLogging = false // disable console logging to not interfere with console output, file log will still be available
     CmdLine.shared.start(args: CommandLine.arguments)
 } else {
