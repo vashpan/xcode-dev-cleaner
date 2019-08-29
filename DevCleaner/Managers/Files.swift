@@ -29,6 +29,8 @@ public final class Files {
         return userDeveloperFolder
     }
     
+    public static var commandLineToolFolder: URL = URL(fileURLWithPath: "/usr/local/bin", isDirectory: true)
+    
     // MARK: Acquire folder permissions
     private static func acquireFolderPermissions(folderUrl: URL, openPanelMessage: String? = nil) -> URL? {
         let message = openPanelMessage ??
@@ -36,6 +38,11 @@ public final class Files {
         
         return folderUrl.acquireAccessFromSandbox(bookmark: Preferences.shared.folderBookmark(for: folderUrl),
                                                   openPanelMessage: message)
+    }
+    
+    public static func aqcuireCommandLineToolFolderPermission() -> URL? {
+        return acquireFolderPermissions(folderUrl: Files.commandLineToolFolder,
+                                        openPanelMessage: "In order to install command line tool, DevCleaner needs permission to folder where you want to install it. You can choose a different one if you want, but then make sure it will be accessible from your PATH.")
     }
     
     public static func acquireUserDeveloperFolderPermissions() -> URL? {

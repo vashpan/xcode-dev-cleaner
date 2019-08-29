@@ -59,5 +59,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         NSWorkspace.shared.openFile(logsUrl.path)
     }
+    
+    @IBAction func installCommandLineTool(_ sender: Any) {
+        // acquire tool install path
+        guard let toolInstallPath = Files.aqcuireCommandLineToolFolderPermission() else {
+            Alerts.warningAlert(title: "Command line tool installation failed",
+                              message: "You need to choose proper folder to install command line tool!")
+            return
+        }
+        
+        // get tool path
+        guard let toolScriptPath = Bundle.main.url(forResource: "dev-cleaner", withExtension: "sh") else {
+            Alerts.warningAlert(title: "Command line tool installation failed",
+                              message: "Launch script cannot be found in resources folder!")
+            return
+        }
+        
+        // copy tool to proper folder
+        do {
+            try FileManager.default.copyItem(at: toolScriptPath, to: toolInstallPath.appendingPathComponent("dev-cleaner"))
+        } catch(let error) {
+            Alerts.warningAlert(title: "Command line tool installation failed",
+                              message: "Can't copy tool to selected folder: \(error.localizedDescription)")
+        }
+        
+        Alerts.infoAlert(title: "Command line tool installation",
+                       message: "Tool installed successfully!")
+    }
 }
 
