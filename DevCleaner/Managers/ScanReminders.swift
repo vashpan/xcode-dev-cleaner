@@ -30,14 +30,8 @@ public final class ScanReminders {
         internal var repeatInterval: DateComponents {
             var result = DateComponents()
             
-            let test: Bool
             #if DEBUG
-            test = Preferences.shared.envKeyPresent(key: "NOTIFICATIONS_TEST")
-            #else
-            test = false
-            #endif
-            
-            if test {
+            if Preferences.shared.envKeyPresent(key: "NOTIFICATIONS_TEST") {
                 result.day = 1 // for debug we change our periods to one day
             } else {
                 switch self {
@@ -49,6 +43,16 @@ public final class ScanReminders {
                         result.month = 2
                 }
             }
+            #else
+            switch self {
+                case .every2weeks:
+                    result.day = 7 * 2
+                case .everyMonth:
+                    result.month = 1
+                case .every2Months:
+                    result.month = 2
+            }
+            #endif
             
             return result
         }
