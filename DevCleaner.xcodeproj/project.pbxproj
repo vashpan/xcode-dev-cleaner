@@ -36,6 +36,7 @@
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
+		71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */; };
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
 		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
@@ -83,6 +84,7 @@
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
+		71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "dev-cleaner.sh"; sourceTree = "<group>"; };
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */,
 				71C8ACDD20A4EC2200E7A13B /* Credits.rtf */,
+				71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
+				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
 				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
