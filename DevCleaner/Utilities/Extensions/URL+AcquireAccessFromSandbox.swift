@@ -61,9 +61,9 @@ extension URL {
         // check if we get proper file & save bookmark to it, if not, repeat
         if let folderUrl = openPanel.urls.first {
             if folderUrl != self {
-                Messages.infoMessage(title: "Can't get access to \(self.path) folder",
-                                    message: "Did you choose the right folder?",
-                                    okButtonText: "Repeat")
+                Alerts.infoAlert(title: "Can't get access to \(self.path) folder",
+                               message: "Did you choose the right folder?",
+                          okButtonText: "Repeat")
                 
                 return self.acquireAccessFromSandbox(bookmark: nil, openPanelMessage: openPanelMessage)
             }

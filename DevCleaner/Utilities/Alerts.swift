@@ -1,5 +1,5 @@
 //
-//  Messages.swift
+//  Alerts.swift
 //  DevCleaner
 //
 //  Created by Konrad Kołakowski on 18.03.2018.
@@ -21,8 +21,8 @@
 import Foundation
 import Cocoa
 
-public class Messages {
-    class public func fatalErrorMessageAndQuit(title: String, message: String) {
+public class Alerts {
+    class public func fatalErrorAlertAndQuit(title: String, message: String) {
         // display a popup that tells us that this is basically a fatal error, and quit!
         let alert = NSAlert()
         alert.alertStyle = .critical
@@ -34,7 +34,7 @@ public class Messages {
         NSApp.terminate(nil)
     }
     
-    class public func warningMessage(title: String, message: String, okButtonText: String = "OK", window: NSWindow? = nil, completionHandler: @escaping (NSApplication.ModalResponse) -> Void) {
+    class public func warningAlert(title: String, message: String, okButtonText: String = "OK", window: NSWindow? = nil, completionHandler: ((NSApplication.ModalResponse) -> Void)? = nil) {
         let alert = NSAlert()
         alert.alertStyle = .critical
         alert.messageText = title
@@ -46,11 +46,11 @@ public class Messages {
             alert.beginSheetModal(for: currentWindow, completionHandler: completionHandler)
         } else {
             let response = alert.runModal()
-            completionHandler(response)
+            completionHandler?(response)
         }
     }
     
-    class public func infoMessage(title: String, message: String, okButtonText: String = "OK") {
+    class public func infoAlert(title: String, message: String, okButtonText: String = "OK") {
         let alert = NSAlert()
         alert.alertStyle = .informational
         alert.messageText = title

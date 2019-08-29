@@ -83,8 +83,8 @@ final class MainViewController: NSViewController {
                                           customArchivesFolder: Files.acquireCustomArchivesFolderPermissions()) else {
             log.error("MainViewController: Cannot create XcodeFiles instance!")
             
-            Messages.fatalErrorMessageAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
-                                              message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
+            Alerts.fatalErrorAlertAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
+                                        message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
             return
         }
         
@@ -196,8 +196,8 @@ final class MainViewController: NSViewController {
 
     private func checkForInstalledXcode() {
         if !XcodeFiles.isXcodeIsInstalled() {
-            Messages.fatalErrorMessageAndQuit(title: "Xcode cannot be found",
-                                              message: "Check if you have Xcode installed")
+            Alerts.fatalErrorAlertAndQuit(title: "Xcode cannot be found",
+                                        message: "Check if you have Xcode installed")
         }
     }
     
@@ -267,7 +267,7 @@ final class MainViewController: NSViewController {
         let dryRunEnabled = Preferences.shared.dryRunEnabled
         let warningMessage = dryRunEnabled ? "DevCleaner is running in \"dry run\" mode. It means that files won't be deleted and nothing will change. If you want to clean files for real, go to \"Preferences\" and disable dry run mode."
                                            : "Are you sure to proceed? This can't be undone."
-        Messages.warningMessage(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean", window: self.view.window) { (messageResult) in
+        Alerts.warningAlert(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean", window: self.view.window) { (messageResult) in
             if messageResult == .alertFirstButtonReturn {
                 self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
                 

@@ -80,14 +80,14 @@ final class PreferencesViewController: NSViewController {
                     Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: folderUrl)
                     return folderUrl
                 } else {
-                    Messages.infoMessage(title: "Can't choose this folder",
-                                         message: "Some problem with security.")
+                    Alerts.infoAlert(title: "Can't choose this folder",
+                                   message: "Some problem with security.")
                     
                     return nil
                 }
             } else {
-                Messages.infoMessage(title: "Can't choose this folder",
-                                     message: "Access to this folder is denied.")
+                Alerts.infoAlert(title: "Can't choose this folder",
+                               message: "Access to this folder is denied.")
                 
                 return nil
             }
