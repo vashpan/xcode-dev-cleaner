@@ -33,6 +33,7 @@ public final class Preferences {
         public static let notificationsPeriod = "DCNotificationsPeriodKey"
         public static let dryRunEnabled = "DCDryRunEnabledKey"
         public static let totalBytesCleaned = "DCTotalBytesCleaned"
+        public static let cleansSinceLastReview = "DCCleansSinceLastReview"
         public static let customArchivesFolder = "DCCustomArchivesFolderKey"
         public static let customDerivedDataFolder = "DCCustomDerivedDataFolderKey"
         public static let appFolder = "DCAppFolder"
@@ -154,6 +155,23 @@ public final class Preferences {
             UserDefaults.standard.set(numberValue, forKey: Keys.totalBytesCleaned)
             
             self.informAllObserversAboutChange(keyThatChanged: Keys.totalBytesCleaned)
+        }
+    }
+    
+    public var cleansSinceLastReview: Int {
+        get {
+            if let value = UserDefaults.standard.object(forKey: Keys.cleansSinceLastReview) as? NSNumber {
+                return value.intValue
+            }
+            
+            return 0
+        }
+        
+        set {
+            let numberValue = NSNumber(value: newValue)
+            UserDefaults.standard.set(numberValue, forKey: Keys.cleansSinceLastReview)
+            
+            self.informAllObserversAboutChange(keyThatChanged: Keys.cleansSinceLastReview)
         }
     }
     
