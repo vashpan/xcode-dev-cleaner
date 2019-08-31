@@ -226,6 +226,10 @@ internal final class DonationViewController: NSViewController {
         let sharingService = NSSharingServicePicker(items: [shareUrl])
         sharingService.show(relativeTo: .zero, of: shareView, preferredEdge: .minX)
     }
+    
+    @IBAction func openAppReview(_ sender: Any) {
+        ReviewRequests.shared.showReviewOnTheAppStore()
+    }
 }
 
 extension DonationViewController: DonationsDelegate {

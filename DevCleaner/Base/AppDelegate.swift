@@ -51,6 +51,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // MARK: Actions
+    
+    @IBAction func openAppReview(_ sender: Any) {
+        ReviewRequests.shared.showReviewOnTheAppStore()
+    }
+    
     @IBAction func showLogFiles(_ sender: Any) {
         // logs folder
         guard let logsUrl = log.logFilePath?.deletingLastPathComponent() else {

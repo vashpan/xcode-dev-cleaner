@@ -32,4 +32,13 @@ public final class ReviewRequests {
             Preferences.shared.cleansSinceLastReview = 0
         }
     }
+    
+    public func showReviewOnTheAppStore() {
+        guard let appStoreUrl = URL(string: "macappstore://apps.apple.com/app/id1388020431?action=write-review") else {
+            log.error("ReviewRequests: Can't make a review URL!")
+            return
+        }
+        
+        NSWorkspace.shared.open(appStoreUrl)
+    }
 }

@@ -143,6 +143,8 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
     func deleteDidFinish(xcodeFiles: XcodeFiles) {
         DispatchQueue.main.async {
             self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
+            
+            ReviewRequests.shared.requestReviewIfNeeded()
         }
     }
 }
