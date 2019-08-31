@@ -80,9 +80,9 @@ final public class XcodeFiles {
         }
         
         self.locations = [
-            .deviceSupport: XcodeFileEntry(label: "Device Support", selected: true),
-            .archives: XcodeFileEntry(label: "Archives", selected: false),
-            .derivedData: XcodeFileEntry(label: "Derived Data", selected: false),
+            .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: true),
+            .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
+            .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
             .logs: DeviceLogsFileEntry(selected: false),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
