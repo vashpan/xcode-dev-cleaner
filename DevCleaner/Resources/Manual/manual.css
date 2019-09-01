@@ -1,0 +1,14 @@
+body {
+  font-family: -apple-system;
+}
+
+.header img {
+    vertical-align: middle;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: black;
+        color: white;
+    }
+}

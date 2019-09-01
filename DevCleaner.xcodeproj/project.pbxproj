@@ -18,6 +18,7 @@
 		712F999E20D65229003927BC /* Donations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999D20D65229003927BC /* Donations.swift */; };
 		712F99A020D6810A003927BC /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999F20D6810A003927BC /* MessageView.swift */; };
 		7140B617231A81DC005768A7 /* ReviewRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7140B616231A81DC005768A7 /* ReviewRequests.swift */; };
+		7140B61A231BC697005768A7 /* Manual in Resources */ = {isa = PBXBuildFile; fileRef = 7140B619231BC697005768A7 /* Manual */; };
 		714AB65F22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */; };
 		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
 		715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715E8C3C216566FD0059A2E5 /* Weak.swift */; };
@@ -65,6 +66,7 @@
 		712F999D20D65229003927BC /* Donations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donations.swift; sourceTree = "<group>"; };
 		712F999F20D6810A003927BC /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		7140B616231A81DC005768A7 /* ReviewRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequests.swift; sourceTree = "<group>"; };
+		7140B619231BC697005768A7 /* Manual */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Manual; sourceTree = "<group>"; };
 		714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLogsFileEntry.swift; sourceTree = "<group>"; };
 		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		715E8C3C216566FD0059A2E5 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		7110B4A12033A9C600EDBFA3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7140B619231BC697005768A7 /* Manual */,
 				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */,
@@ -367,6 +370,7 @@
 				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
+				7140B61A231BC697005768A7 /* Manual in Resources */,
 				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
