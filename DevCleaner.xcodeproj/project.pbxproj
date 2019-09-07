@@ -19,6 +19,8 @@
 		712F99A020D6810A003927BC /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F999F20D6810A003927BC /* MessageView.swift */; };
 		7140B617231A81DC005768A7 /* ReviewRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7140B616231A81DC005768A7 /* ReviewRequests.swift */; };
 		7140B61A231BC697005768A7 /* Manual in Resources */ = {isa = PBXBuildFile; fileRef = 7140B619231BC697005768A7 /* Manual */; };
+		7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7140B61C231BE5FB005768A7 /* Help.storyboard */; };
+		7140B61F2323E1F7005768A7 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7140B61E2323E1F7005768A7 /* HelpViewController.swift */; };
 		714AB65F22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */; };
 		7155325E2061AFD80025EB75 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7155325D2061AFD80025EB75 /* Logger.swift */; };
 		715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715E8C3C216566FD0059A2E5 /* Weak.swift */; };
@@ -67,6 +69,8 @@
 		712F999F20D6810A003927BC /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		7140B616231A81DC005768A7 /* ReviewRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRequests.swift; sourceTree = "<group>"; };
 		7140B619231BC697005768A7 /* Manual */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Manual; sourceTree = "<group>"; };
+		7140B61C231BE5FB005768A7 /* Help.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Help.storyboard; sourceTree = "<group>"; };
+		7140B61E2323E1F7005768A7 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLogsFileEntry.swift; sourceTree = "<group>"; };
 		7155325D2061AFD80025EB75 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		715E8C3C216566FD0059A2E5 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
@@ -178,6 +182,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		7140B61B231BE5C5005768A7 /* Help Window */ = {
+			isa = PBXGroup;
+			children = (
+				7140B61C231BE5FB005768A7 /* Help.storyboard */,
+				7140B61E2323E1F7005768A7 /* HelpViewController.swift */,
+			);
+			path = "Help Window";
+			sourceTree = "<group>";
+		};
 		7162E1272097622B00081E4E /* Preferences Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +223,7 @@
 		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				7140B61B231BE5C5005768A7 /* Help Window */,
 				7162E1272097622B00081E4E /* Preferences Window */,
 				71743ECB207815D300EC0FE2 /* Main Window */,
 			);
@@ -370,6 +384,7 @@
 				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
+				7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */,
 				7140B61A231BC697005768A7 /* Manual in Resources */,
 				71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */,
 			);
@@ -430,6 +445,7 @@
 				718D4ABE23140ABA001E9382 /* Files.swift in Sources */,
 				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
+				7140B61F2323E1F7005768A7 /* HelpViewController.swift in Sources */,
 				717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */,
 				712F999E20D65229003927BC /* Donations.swift in Sources */,
 				7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */,

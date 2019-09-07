@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="lcH-gJ-8Xh">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14865.1"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14865.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="GYz-je-o37">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="lcH-gJ-8Xh" sceneMemberID="viewController">
+                    <window key="window" title="DevCleaner Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="rLk-dr-8gE">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <rect key="contentRect" x="425" y="461" width="600" height="800"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+                        <value key="minSize" type="size" width="300" height="600"/>
+                        <connections>
+                            <outlet property="delegate" destination="lcH-gJ-8Xh" id="fxE-Ns-1tf"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="3kP-K3-jsn" kind="relationship" relationship="window.shadowedContentViewController" id="iIj-rZ-etA"/>
+                    </connections>
+                </windowController>
+                <customObject id="w46-el-tsG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="197" y="-604"/>
+        </scene>
+        <!--DevCleaner for Xcode Help-->
+        <scene sceneID="CjE-oI-EP3">
+            <objects>
+                <viewController title="DevCleaner for Xcode Help" id="3kP-K3-jsn" customClass="HelpViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="QZq-ge-LiZ">
+                        <rect key="frame" x="0.0" y="0.0" width="544" height="477"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sQ7-Yg-Sup">
+                                <rect key="frame" x="0.0" y="0.0" width="544" height="477"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="NO" javaScriptEnabled="NO"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="sQ7-Yg-Sup" secondAttribute="bottom" id="D3s-FZ-H4w"/>
+                            <constraint firstAttribute="trailing" secondItem="sQ7-Yg-Sup" secondAttribute="trailing" id="XQb-Wh-NP1"/>
+                            <constraint firstItem="sQ7-Yg-Sup" firstAttribute="top" secondItem="QZq-ge-LiZ" secondAttribute="top" id="hxT-uQ-LlA"/>
+                            <constraint firstItem="sQ7-Yg-Sup" firstAttribute="leading" secondItem="QZq-ge-LiZ" secondAttribute="leading" id="w7j-6J-Plm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="helpWebView" destination="sQ7-Yg-Sup" id="0Dr-Du-CDx"/>
+                    </connections>
+                </viewController>
+                <customObject id="8A1-hA-bid" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="197" y="343.5"/>
+        </scene>
+    </scenes>
+</document>

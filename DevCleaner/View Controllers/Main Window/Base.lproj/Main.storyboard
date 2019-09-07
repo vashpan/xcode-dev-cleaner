@@ -109,7 +109,7 @@
                                     <items>
                                         <menuItem title="DevCleaner Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                                <segue destination="hQu-1h-PrG" kind="show" id="KpA-mP-HVH"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -125,7 +125,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="-138"/>
+            <point key="canvasLocation" x="-9" y="-211"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="t22-AP-hJD">
@@ -133,7 +133,15 @@
                 <controllerPlaceholder storyboardName="Preferences" id="nZ1-vI-bJQ" sceneMemberID="viewController"/>
                 <customObject id="h3h-tG-T4B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1" y="23"/>
+            <point key="canvasLocation" x="-49" y="37"/>
+        </scene>
+        <!--Help-->
+        <scene sceneID="6fu-lN-y6i">
+            <objects>
+                <controllerPlaceholder storyboardName="Help" id="hQu-1h-PrG" sceneMemberID="viewController"/>
+                <customObject id="ceU-06-grc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="55" y="37"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">

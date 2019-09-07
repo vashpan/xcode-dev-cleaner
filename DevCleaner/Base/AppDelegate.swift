@@ -51,7 +51,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // MARK: Actions
-    
     @IBAction func openAppReview(_ sender: Any) {
         ReviewRequests.shared.showReviewOnTheAppStore()
     }
