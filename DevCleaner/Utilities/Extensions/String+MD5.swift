@@ -28,6 +28,7 @@ extension String {
         let strLen = CUnsignedInt(self.lengthOfBytes(using: .utf8))
         let digestLength = Int(CC_MD5_DIGEST_LENGTH)
         let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLength)
+        defer { result.deallocate() }
         
         CC_MD5(str!, strLen, result)
         
@@ -37,8 +38,6 @@ extension String {
         for i in 0..<digestLength {
             hash += String(format:"%02x", result[i])
         }
-        
-        result.deallocate()
         
         return hash
     }
