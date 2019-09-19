@@ -31,14 +31,15 @@ extension String {
         
         CC_MD5(str!, strLen, result)
         
-        let hash = NSMutableString()
+        var hash = String()
+        hash.reserveCapacity(digestLength * 2)
         
         for i in 0..<digestLength {
-            hash.appendFormat("%02x", result[i])
+            hash += String(format:"%02x", result[i])
         }
         
         result.deallocate()
         
-        return hash as String
+        return hash
     }
 }
