@@ -37,7 +37,7 @@ extension String {
             hash.appendFormat("%02x", result[i])
         }
         
-        result.deinitialize(count: 1)
+        result.deallocate()
         
         return hash as String
     }
