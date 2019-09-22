@@ -38,7 +38,6 @@ public struct Version {
     init?(describing: String) {
         let stringComponents = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true).map(String.init)
         guard 2...3 ~= stringComponents.count else { return nil }
-        // ...
         let optionalUIntComponents = stringComponents.map(UInt.init)
         guard optionalUIntComponents.first(where: { $0 == nil }) == nil else { return nil }
         components = optionalUIntComponents.compactMap { $0 }
