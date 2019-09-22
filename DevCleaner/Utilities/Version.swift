@@ -23,103 +23,44 @@ import Foundation
 // MARK: Version struct
 public struct Version {
     // MARK: Properties
-    public let major: UInt
-    public let minor: UInt
-    public let patch: UInt?
-    
-    public var description: String {
-        var result = "\(self.major).\(self.minor)"
-        if let patch = self.patch {
-            result += ".\(patch)"
-        }
-        
-        return result
-    }
-    
+    public var major: UInt { return components[0] }
+    public var minor: UInt { return components[1] }
+    public var patch: UInt? { return components.count == 3 ? components[2] : nil }
+
+    // contains 2 or 3 items only
+    private let components: [UInt]
+
     // MARK: Initialization
     init(major: UInt, minor: UInt, patch: UInt? = nil) {
-        self.major = major
-        self.minor = minor
-        self.patch = patch
+        components = [major, minor, patch].compactMap { $0 }
     }
-    
+
     init?(describing: String) {
-        let components = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true)
-        
-        if components.count == 3 {
-            if let majorInt = UInt(components[0]) {
-                self.major = majorInt
-            } else {
-                return nil
-            }
-            
-            if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
-            } else {
-                return nil
-            }
-            
-            if let patchInt = UInt(components[2]) {
-                self.patch = patchInt
-            } else {
-                return nil
-            }
-        } else if components.count == 2 {
-            if let majorInt = UInt(components[0]) {
-                self.major = majorInt
-            } else {
-                return nil
-            }
-            
-            if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
-            } else {
-                return nil
-            }
-            
-            self.patch = nil
-            
-        } else {
-            return nil
-        }
+        let stringComponents = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true).map(String.init)
+        guard 2...3 ~= stringComponents.count else { return nil }
+        // ...
+        let optionalUIntComponents = stringComponents.map(UInt.init)
+        guard optionalUIntComponents.first(where: { $0 == nil }) == nil else { return nil }
+        components = optionalUIntComponents.compactMap { $0 }
     }
 }
 
 // MARK: Comparable implementation
 extension Version: Comparable {
     public static func ==(lhs: Version, rhs: Version) -> Bool {
-        if lhs.major == rhs.major {
-            if lhs.minor == rhs.minor {
-                let lhsPatch = lhs.patch ?? 0
-                let rhsPatch = rhs.patch ?? 0
-                
-                if lhsPatch == rhsPatch {
-                    return true
-                }
-            }
-        }
-        
-        return false
+        return lhs.minor == rhs.minor &&
+               lhs.minor == rhs.minor &&
+               lhs.patch ?? 0 == rhs.patch ?? 0
     }
-    
+
     public static func <(lhs: Version, rhs: Version) -> Bool {
-        if lhs.major == rhs.major {
-            if lhs.minor == rhs.minor {
-                let lhsPatch = lhs.patch ?? 0
-                let rhsPatch = rhs.patch ?? 0
-                
-                return lhsPatch < rhsPatch
-            } else {
-                return lhs.minor < rhs.minor
-            }
-        } else {
-            return lhs.major < rhs.major
-        }
+        return lhs.description.compare(rhs.description, options: .numeric) == .orderedAscending
     }
 }
 
 // MARK: CustomStringConvertible conformance
 extension Version: CustomStringConvertible {
-    
+    public var description: String {
+        return components.map(String.init).joined(separator: ".")
+    }
 }
-
