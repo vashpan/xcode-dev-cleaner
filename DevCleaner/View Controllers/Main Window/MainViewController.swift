@@ -297,13 +297,6 @@ final class MainViewController: NSViewController {
             NSWorkspace.shared.activateFileViewerSelecting(clickedEntry.paths)
         }
     }
-    
-    @IBAction func showGitHubPage(_ sender: Any) {
-        if let gitHubUrl = URL(string: "https://github.com/vashpan/xcode-dev-cleaner") {
-            NSWorkspace.shared.open(gitHubUrl)
-        }
-    }
-    
 }
 
 // MARK: NSOutlineViewDataSource implementation
