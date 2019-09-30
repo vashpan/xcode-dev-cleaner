@@ -20,7 +20,95 @@
         <p>DevCleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about scan after a while.</p>
         <p>Please note that <b>this application is relying on internal folder structures and undocumented features</b>. It could stop working with newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please <b>make backup before use it</b>.</p>
         
+        <h3>What can it clean?</h3>
         
+        <h4>Device Support</h4>
+        <p>In order to debug iOS/tvOS/iPadOS/watchOS devices, Xcode first needs to download debug symbols appropriate to version of OS that we currently use on a device. You may noticed that when connecting a new <b>or updated</b> device when having Xcode opened.</p> 
+        <p>Those symbols are needed for each of your device and for each of *OS version, after a new update, even a minor one, Xcode needs a new set of symbols. Unfortunately, old symbols are not removed and each of them take 2-5GB of disk space. As you can imagine, they can start to sum up pretty quickly. iOS 12 had 13 smaller updates in less than a year.</p>
+        <p>DevCleaner helps cleaning those symbols, selecting older ones by default, keeping only those most recent ones. Of course final decision is yours.</p>
+        
+        <h4>Archives</h4>
+        <p>As you write software and making a test or release builds, you probably use <i>Archive</i> option from Xcode. Sometimes you would end-up with a massive amount of archives, from which most of them not useful after a while. They can take various size, from just tens of MBs up to GBs.</p>
+        <p>Some archives are more useful than others though. Remember that if you submit your binary to the AppStore and release it, you have access to crashlogs from archives. Therefore deleting archives is not selected by default. Please review them before cleaning.</p>
+
+        <h4>Derived Data</h4>
+        <p>When you develop your app, Xcode caches your symbols, dependencies, logs, text - all to develop fast and to keep code completion working. Unfortunately this data tend to take a lot of space, especially for big projects. Also, they're not deleted automatically. This may be especially problematic if you open a lot of various projects.</p>
+        <p>Removing derived data won't is not harmful as Xcode can recreate them when you open this project again. Although it's not recommended for projects that you work on often. For this reason nothing is selected by default.</p>
+        
+        <h4>Old Simulator & Device Logs</h4>
+        <p>Each version of Xcode appears to have a new version of database that holds logs from devices & simulators. Those databases are migrated with content of the previous ones. If you use Xcode for a long time, it would accumulate to significant amount of unused data.</p>
+        
+        <p>It should be safe to check this option, although remember that this is an internal Xcode detail and can change in the future.</p>
+
+        <h4>Old Documentation Downloads</h4>
+        <p>For some time, recent versions of Xcode are using online help. But if you used Xcode in the past, you may still have documentation downloaded locally to your computer. It could take a lot of space and currently there is no use for it.</p>
+
+        <h3>Main Window</h3>
+
+        <img src="main-window.png" srcset="main-window.png 1x, main-window@2x.png 2x" alt="DevCleaner main window"/>
+
+        <h4>Items to Clean</h4>
+        <p>Select items you want to clean, you can choose details if you click on arrows. You can see how much space you can recover and how much you selected. Usually you don't want to clean everything, as most probably it will be restored by Xcode on next time you run your current project anyway, and it will take some time. Consult manual to get information what is the purpose of those items.</p>
+
+        <h4>Help Button</h4>
+        <p>Displays this help.</p>
+
+        <h4>Tip Button</h4>
+        <p>If you think this app helped you somehow, you can consider a small tip, or just share it. I would greatly appreciate it and continue development.</p>
+
+        <h4>Clean Button</h4>
+        <p>Click here if you're sure you have everything selected as you wish. If you have "Dry mode" enabled, it won't actually clean anything and a small label will be displayed nearby.</p>
+
+        <h3>Preferences</h3>
+
+        <img src="preferences.png" srcset="preferences.png 1x, preferences@2x.png 2x" alt="DevCleaner preferences window"/>
+
+        <h4>Notifications</h4>
+        <p>You can set notifications to remind you about scans. Available periods: 2 weeks, month, 2 monhts.</p>
+
+        <h4>Debug</h4>
+        <p>You can set "Dry Run" to check what exactly will be performed, without actually deleting any files.</p>
+
+        <h4>Derived Data & Archives Locations</h4>
+        <p>If you store those data in a custom location, you can set it here. It should be set to same folders as in "Locations" tab in Xcode "Preferences" window.</p>
+
+        <h3>Command Line Tool</h3>
+
+        <p>You can install command line tool from DevCleaner menu.</p>
+        <p>When you're asked about place where to install it, it's probably the best to choose default location. If you choose a different location, make sure it's in your <code>PATH</code></p>
+
+        <h4>Usage</h4>
+        <p>After installing tool, type <code>dev-cleaner</code> in your preferred terminal. It will show short instructions how to use it:</p>
+
+        <pre>
+DevCleaner 2.0.0 (1)
+
+OVERVIEW: Reclaims storage that Xcode stores in caches and old files
+
+USAGE: DevCleaner <command> [options]
+
+OPTIONS:
+
+    info
+        Show all items available to clean.
+    clean <all,device-support,archives,derived-data,old-logs,old-documentation>
+        Perform cleaning of given items. Available options: all,device-support,archives,derived-data,old-logs,old-documentation. If you want to clean all, pass "all"
+    --help
+        Prints this message
+        </pre>
+
+        <p>Please note that command line tool doesn't allow to select specific items, it's designed to run mostly in maintanance scripts or CI machines.</p>
+
+        <h3>FAQ</h3>
+
+        <h4>Q: Why I can't see disk space freed in Finder or ?</h4>
+        <p>Since APFS, hard disk free space is not so easy to calculate anymore (due to snapshots, clones and other features of new filesystem), hence small delay in refreshing it. Final space freed could also be different due to those features. Also, make sure you havan't enabled "Dry Mode".</p>
+
+        <h4>Q: How can I support development of the app?</h4>
+        <p>You can give me a tip, click on "Tip me or share it!" button. </p>
+
+        <h4>Q: Why do I have to confirm access to my developer folder again?</h4>
+        <p>To be honest, I don't know! It's probably a matter how system handles "security scoped bookmarks" that allows to access files outside sandbox. If you know a solution, let me know!</p>
     </div>
     
 </body>
