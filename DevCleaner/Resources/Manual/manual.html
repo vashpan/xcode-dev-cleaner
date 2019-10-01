@@ -44,8 +44,12 @@
         <p>For some time, recent versions of Xcode are using online help. But if you used Xcode in the past, you may still have documentation downloaded locally to your computer. It could take a lot of space and currently there is no use for it.</p>
 
         <h3>Main Window</h3>
+        
+        <picture>
+            <source srcset="main-window-dark.png 1x, main-window-dark@2x.png 2x" media="(prefers-color-scheme: dark)">
+            <img src="main-window.png" srcset="main-window.png 1x, main-window@2x.png 2x" alt="DevCleaner main window"/>
+        </picture>
 
-        <img src="main-window.png" srcset="main-window.png 1x, main-window@2x.png 2x" alt="DevCleaner main window"/>
 
         <h4>Items to Clean</h4>
         <p>Select items you want to clean, you can choose details if you click on arrows. You can see how much space you can recover and how much you selected. Usually you don't want to clean everything, as most probably it will be restored by Xcode on next time you run your current project anyway, and it will take some time. Consult manual to get information what is the purpose of those items.</p>
@@ -61,7 +65,10 @@
 
         <h3>Preferences</h3>
 
-        <img src="preferences.png" srcset="preferences.png 1x, preferences@2x.png 2x" alt="DevCleaner preferences window"/>
+        <picture>
+            <source srcset="preferences-dark.png 1x, preferences-dark@2x.png 2x" media="(prefers-color-scheme: dark)">
+            <img src="preferences.png" srcset="preferences.png 1x, preferences@2x.png 2x" alt="DevCleaner preferences window"/>
+        </picture>
 
         <h4>Notifications</h4>
         <p>You can set notifications to remind you about scans. Available periods: 2 weeks, month, 2 monhts.</p>
@@ -101,7 +108,7 @@ OPTIONS:
 
         <h3>FAQ</h3>
 
-        <h4>Q: Why I can't see disk space freed in Finder or ?</h4>
+        <h4>Q: Why I can't see disk space that I freed in Finder or System Info?</h4>
         <p>Since APFS, hard disk free space is not so easy to calculate anymore (due to snapshots, clones and other features of new filesystem), hence small delay in refreshing it. Final space freed could also be different due to those features. Also, make sure you havan't enabled "Dry Mode".</p>
 
         <h4>Q: How can I support development of the app?</h4>
