@@ -14,17 +14,19 @@
     </div>
     
     <div class="content">
-        <h3>What is DevCleaner?</h3>
+        <h3>Overview</h3>
         <p>DevCleaner is a tool that allows you to reclaim tens of gigabytes of your storage used for various Xcode caches.</p>
-        <p>Xcode could store massive amount of data in <code>~/Developer</code> folder. Most of those cached files & symbols are not reclaimed over time and could consume a large amount of your storage, which is especially important if you have relatively small SSD drive.</p>
+        <p>Xcode could store massive amount of data in <code>~/Developer</code> folder. Most of those are cached files & symbols are not reclaimed over time and could consume a large amount of your storage, which is especially important if you have relatively small SSD drive.</p>
         <p>DevCleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about scan after a while.</p>
         <p>Please note that <b>this application is relying on internal folder structures and undocumented features</b>. It could stop working with newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please <b>make backup before use it</b>.</p>
-        
-        <h3>What can it clean?</h3>
+        <p>Currently it was tested with Xcode 10.x & 11.x.</p>
+        <p>In case of any issues, please first consult <b>FAQ section at the end of this manual!</b></p>
+
+        <h3>What it cleans?</h3>
         
         <h4>Device Support</h4>
         <p>In order to debug iOS/tvOS/iPadOS/watchOS devices, Xcode first needs to download debug symbols appropriate to version of OS that we currently use on a device. You may noticed that when connecting a new <b>or updated</b> device when having Xcode opened.</p> 
-        <p>Those symbols are needed for each of your device and for each of *OS version, after a new update, even a minor one, Xcode needs a new set of symbols. Unfortunately, old symbols are not removed and each of them take 2-5GB of disk space. As you can imagine, they can start to sum up pretty quickly. iOS 12 had 13 smaller updates in less than a year.</p>
+        <p>Those symbols are needed for each of your device and for each of *OS version, after a new update, even a minor one, Xcode needs a new set of symbols. <b>Unfortunately, old symbols are not removed</b> and each of them take 2-5GB of disk space. As you can imagine, they can start to sum up pretty quickly. iOS 12 had 13 smaller updates in less than a year.</p>
         <p>DevCleaner helps cleaning those symbols, selecting older ones by default, keeping only those most recent ones. Of course final decision is yours.</p>
         
         <h4>Archives</h4>
@@ -44,7 +46,8 @@
         <p>For some time, recent versions of Xcode are using online help. But if you used Xcode in the past, you may still have documentation downloaded locally to your computer. It could take a lot of space and currently there is no use for it.</p>
 
         <h3>Main Window</h3>
-        
+        <p>This is the main interface of the application, you select here what you want to clean and performing cleaning itself. You can also <b>share or tip me</b> if you want &#128526;</p>
+
         <picture>
             <source srcset="main-window-dark.png 1x, main-window-dark@2x.png 2x" media="(prefers-color-scheme: dark)">
             <img src="main-window.png" srcset="main-window.png 1x, main-window@2x.png 2x" alt="DevCleaner main window"/>
@@ -87,7 +90,7 @@
         </picture>
 
         <h4>Preferences...</h4>
-        <p>Opens preferences window</p>
+        <p>Opens preferences window.</p>
 
         <h4>Show Log Files...</h4>
         <p>In case of problems, this will show application log files folder. If you ever will have any issues with the application, those files would help finding the cause. You may be asked to send them.</p>

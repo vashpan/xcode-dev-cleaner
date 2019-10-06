@@ -1,5 +1,7 @@
 body {
   font-family: -apple-system;
+  margin-left: 16pt;
+  margin-right: 16pt;
 }
 
 .header img {
@@ -8,7 +10,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background: black;
+        background: rgb(37, 37, 37);
         color: white;
     }
 }
