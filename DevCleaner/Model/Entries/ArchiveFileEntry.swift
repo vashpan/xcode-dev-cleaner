@@ -21,24 +21,39 @@
 import Foundation
 
 public final class ArchiveFileEntry: XcodeFileEntry {
+    // MARK: Types
+    public enum SubmissionStatus {
+        case success, failure, undefined
+        
+        fileprivate var glyph: String {
+            switch self {
+                case .success: return "✅"
+                case .failure: return "❌"
+                case .undefined: return String()
+            }
+        }
+    }
+    
     // MARK: Properties
     public let projectName: String
     public let bundleName: String
     public let version: Version
     public let build: String
     public let date: Date
+    public let submissionStatus: SubmissionStatus
     
     public override var fullDescription: String {
         return "\(projectName) \(self.version.description) (\(self.build)) (\(self.extraInfo))"
     }
     
     // MARK: Initialization
-    public init(projectName: String, bundleName: String, version: Version, build: String, date: Date, location: URL, selected: Bool) {
+    public init(projectName: String, bundleName: String, version: Version, build: String, date: Date, submissionStatus: SubmissionStatus, location: URL, selected: Bool) {
         self.projectName = projectName
         self.bundleName = bundleName
         self.version = version
         self.build = build
         self.date = date
+        self.submissionStatus = submissionStatus
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -46,7 +61,7 @@ public final class ArchiveFileEntry: XcodeFileEntry {
         
         let dateString = dateFormatter.string(from: self.date)
         
-        super.init(label: "\(self.version.description) (\(self.build))", extraInfo: dateString, icon: nil, tooltip: true, selected: selected)
+        super.init(label: "\(self.version.description) (\(self.build)) \(submissionStatus.glyph)", extraInfo: dateString, icon: nil, tooltip: true, selected: selected)
         
         self.addPath(path: location)
     }

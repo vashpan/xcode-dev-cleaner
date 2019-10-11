@@ -243,6 +243,7 @@ final public class XcodeFiles {
         let bundleVersion: Version
         let bundleBuild: String
         let archiveDate: Date
+        var status: ArchiveFileEntry.SubmissionStatus = .undefined
         
         let infoPath = location.appendingPathComponent("Info.plist")
         if let archiveInfoDict = NSDictionary(contentsOf: infoPath) {
@@ -260,6 +261,29 @@ final public class XcodeFiles {
             } else {
                 log.warning("XcodeFiles: Cannot get archive date from archive: \(location.path)")
                 return nil
+            }
+            
+            // submission status
+            if let distributionsData = archiveInfoDict["Distributions"] as? [[String: Any]] {
+                // first we have an array of dictionaries
+                //     for each submission, we check for upload event dict
+                //          check if "state" is "success" - in other case it will be failure
+                var uploadStatusFound = false
+                for distribution in distributionsData {
+                    if let uploadEvent = distribution["uploadEvent"] as? [String: Any] {
+                        if let state = uploadEvent["state"] as? String {
+                            if state == "success" {
+                                status = .success
+                                uploadStatusFound = true
+                                break
+                            }
+                        }
+                    }
+                }
+                
+                if !uploadStatusFound {
+                    status = .failure
+                }
             }
             
             if let archiveProperties = archiveInfoDict["ApplicationProperties"] as? [String : Any] {
@@ -300,6 +324,7 @@ final public class XcodeFiles {
                                 version: bundleVersion,
                                 build: bundleBuild,
                                 date: archiveDate,
+                                submissionStatus: status,
                                 location: location,
                                 selected: false)
     }
