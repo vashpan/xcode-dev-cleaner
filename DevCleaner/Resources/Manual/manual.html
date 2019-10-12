@@ -31,7 +31,7 @@
         
         <h4>Archives</h4>
         <p>As you write software and making a test or release builds, you probably use <i>Archive</i> option from Xcode. Sometimes you would end-up with a massive amount of archives, from which most of them not useful after a while. They can take various size, from just tens of MBs up to GBs.</p>
-        <p>Some archives are more useful than others though. Remember that if you submit your binary to the AppStore and release it, you have access to crashlogs from archives. Therefore deleting archives is not selected by default. Please review them before cleaning.</p>
+        <p>Some archives are more useful than others though. Remember that if you submit your binary to the AppStore and release it, you have access to crashlogs from archives, therefore archives are not selected by default. Archives that was submitted/deployed successfully are marked with &#9989; symbol, those that failed with &#10060;. Archives that weren't submitted nor deployed are not marked by any symbol, they are usually safe to clean.</p>
 
         <h4>Derived Data</h4>
         <p>When you develop your app, Xcode caches your symbols, dependencies, logs, text - all to develop fast and to keep code completion working. Unfortunately this data tend to take a lot of space, especially for big projects. Also, they're not deleted automatically. This may be especially problematic if you open a lot of various projects.</p>
