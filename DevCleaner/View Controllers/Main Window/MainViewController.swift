@@ -64,7 +64,7 @@ final class MainViewController: NSViewController {
     private var xcodeFiles: XcodeFiles?
     private var loaded = false
     
-    // MARK: Initialization
+    // MARK: Initialization & overrides
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,6 +109,30 @@ final class MainViewController: NSViewController {
         self.updateButtonsAndLabels()
         
         self.view.window?.delegate = self
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        if event.keyCode == 49 { // spacebar
+            let selectedRow = self.outlineView.selectedRow
+            if let selectedEntry = self.outlineView.item(atRow: selectedRow) as? XcodeFileEntry,
+               let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
+                let targetStateValue: NSControl.StateValue
+                switch selectedEntry.selection {
+                    case .on:
+                        targetStateValue = .off
+                    case .off:
+                        targetStateValue = .on
+                    case .mixed:
+                        targetStateValue = .on
+                }
+                
+                self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue, xcodeEntry: selectedEntry)
+                
+                self.outlineView.selectRowIndexes([selectedRow], byExtendingSelection: false)
+            }
+        }
+        
+        super.keyUp(with: event)
     }
     
     // MARK: Navigation
