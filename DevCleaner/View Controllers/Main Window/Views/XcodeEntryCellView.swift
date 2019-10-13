@@ -53,6 +53,8 @@ final class XcodeEntryCellView: NSTableCellView {
         // tooltip
         if xcodeEntry.tooltip {
             self.toolTip = xcodeEntry.tooltipText
+        } else {
+            self.toolTip = nil
         }
         
         // icon
