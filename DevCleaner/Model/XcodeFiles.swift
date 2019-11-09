@@ -159,7 +159,7 @@ final public class XcodeFiles {
     }
     
     // MARK: Creating entries
-    private func deviceSupportEntry(from string: String, osLabel: String) -> DeviceSupportFileEntry? {
+    private func deviceSupportEntry(from url: URL, osLabel: String) -> DeviceSupportFileEntry? {
         // Sample paths:
         // Watch2,7 5.2.1 (16U113)
         // iPad 10.2 (11C203)
@@ -167,6 +167,7 @@ final public class XcodeFiles {
         // 12.3.1 (16F203)
         // 12.0 (16A367) arm64e
         
+        let string = url.lastPathComponent
         let splitted = string.split(separator: " ", maxSplits: 4, omittingEmptySubsequences: true)
         
         guard splitted.count >= 2 else { // for some other files we may have in the folder
@@ -176,6 +177,7 @@ final public class XcodeFiles {
         let device: String?
         let version: Version
         let build: String
+        let creationDate: Date = FileManager.default.dateCreated(for: url)
         let arch: String?
         
         // check if we have version first (then we may have additional architecture here)
@@ -206,6 +208,7 @@ final public class XcodeFiles {
                                       osType: DeviceSupportFileEntry.OSType(label: osLabel),
                                       version: version,
                                       build: build,
+                                      date: creationDate,
                                       arch: arch,
                                       selected: true)
     }
@@ -423,7 +426,7 @@ final public class XcodeFiles {
             if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
                 var deviceSupportEntries = [DeviceSupportFileEntry]()
                 for symbolUrl in symbols {
-                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl.lastPathComponent, osLabel: osEntry.entry.label) {
+                    if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl, osLabel: osEntry.entry.label) {
                         deviceSupportEntry.addPath(path: symbolUrl)
                         
                         deviceSupportEntries.append(deviceSupportEntry)
