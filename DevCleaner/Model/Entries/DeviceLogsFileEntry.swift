@@ -22,14 +22,15 @@ import Foundation
 import AppKit
 
 public final class DeviceLogsFileEntry: XcodeFileEntry {
-    public override var fullDescription: String {
-        return ""
-    }
+    // MARK: Properties
+    public let version: Version
     
-    public init(selected: Bool) {
-        super.init(label: "Old Simulator & Device Logs",
-                   tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.",
-                   icon: .none,
+    public init(version: Version, selected: Bool) {
+        self.version = version
+        
+        super.init(label: "Logs from Xcode \(version)",
+                   tooltipText: "Old logs from Xcode \(version)",
+                   icon: .system(name: NSImage.multipleDocumentsName),
                    tooltip: true,
                    selected: selected)
     }

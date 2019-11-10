@@ -83,7 +83,7 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: true),
             .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
-            .logs: DeviceLogsFileEntry(selected: false),
+            .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: true),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
@@ -394,11 +394,11 @@ final public class XcodeFiles {
             
             case .derivedData:
                 entry.addChildren(items: self.scanDerivedDataLocations())
-            
-            // different for those, as we don't have an option to select separate entries here
+        
             case .logs:
-                entry.addPaths(paths: self.scanLogsLocations())
-            
+                entry.addChildren(items: self.scanLogsLocations())
+                
+            // different for those, as we don't have an option to select separate entries here
             case .oldDocumentation:
                 entry.addPaths(paths: self.scanOldDocumentationLocations())
         }
@@ -566,7 +566,7 @@ final public class XcodeFiles {
         return results
     }
     
-    private func scanLogsLocations() -> [URL] {
+    private func scanLogsLocations() -> [XcodeFileEntry] {
         struct LogEntry {
             let path: URL
             let version: Version
@@ -600,8 +600,6 @@ final public class XcodeFiles {
         // get location
         let logsLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/iOS Device Logs")
         
-        // create entry from all logs in given folder EXCEPT newest one
-        
         // get all log entries from logs folder
         var logs = [LogEntry]()
         if let logFiles = try? FileManager.default.contentsOfDirectory(at: logsLocation, includingPropertiesForKeys: nil) {
@@ -611,31 +609,31 @@ final public class XcodeFiles {
                 }
             }
         }
+        logs.sort { (lws, rws) -> Bool in lws.version > rws.version }
         
-        // find and remove highest version of logs
-        if !logs.isEmpty {
-            // find highest version
-            var highestVersion: Version?
-            for log in logs {
-                if let currentHighestVersion = highestVersion {
-                    if log.version > currentHighestVersion {
-                        highestVersion = log.version
-                    }
-                } else {
-                    highestVersion = log.version
+        // group logs by version numbers
+        var entries = [DeviceLogsFileEntry]()
+        var lastVersion: Version? = nil
+        for logEntry in logs {
+            if logEntry.version == lastVersion {
+                if let lastEntry = entries.last {
+                    lastEntry.addPath(path: logEntry.path)
                 }
-            }
-            
-            // remove highest version from logs list
-            if let highestVersion = highestVersion {
-                logs.removeAll { log -> Bool in
-                    return log.version == highestVersion
-                }
+            } else {
+                let newEntry = DeviceLogsFileEntry(version: logEntry.version, selected: true)
+                newEntry.addPath(path: logEntry.path)
+                entries.append(newEntry)
+                
+                lastVersion = logEntry.version
             }
         }
         
-        // return all paths to remove
-        return logs.map { $0.path }
+        // deselect first one
+        if let firstEntry = entries.first {
+            firstEntry.deselectWithChildItems()
+        }
+        
+        return entries
     }
     
     private func scanOldDocumentationLocations() -> [URL] {
