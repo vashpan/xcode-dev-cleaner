@@ -14,7 +14,7 @@ extension URL {
         
     }
     
-    public func acquireAccessFromSandbox(bookmark: Data? = nil, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
+    public func acquireAccessFromSandbox(bookmark: Data? = nil, allowCancel: Bool = false, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
         func doWeHaveAccess(for path: String) -> Bool {
             let fm = FileManager.default
             
@@ -42,7 +42,7 @@ extension URL {
                     throw SandboxFolderAccessError()
                 }
             } catch { // in case of stale bookmark or fail to get one, try again without it
-                return self.acquireAccessFromSandbox(bookmark: nil, openPanelMessage: openPanelMessage)
+                return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
             }
         }
         
@@ -65,7 +65,7 @@ extension URL {
                                message: "Did you choose the right folder?",
                           okButtonText: "Repeat")
                 
-                return self.acquireAccessFromSandbox(bookmark: nil, openPanelMessage: openPanelMessage)
+                return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
             }
             
             if doWeHaveAccess(for: folderUrl.path) {
@@ -82,8 +82,13 @@ extension URL {
                 
                 return nil
             }
+        } else {
+            // if we allow cancel, then legitimately return
+            if allowCancel {
+                return nil
+            }
         }
         
-        return self.acquireAccessFromSandbox(bookmark: nil, openPanelMessage: openPanelMessage)
+        return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
     }
 }
