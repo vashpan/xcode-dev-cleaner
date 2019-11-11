@@ -42,6 +42,7 @@
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
 		71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */; };
 		71AE37EF23776AFB009C03BB /* FileManager+DateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */; };
+		71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AE37F0237A1FAE009C03BB /* WebKit.framework */; };
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
 		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
@@ -95,6 +96,7 @@
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
 		71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "dev-cleaner.sh"; sourceTree = "<group>"; };
 		71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DateProperties.swift"; sourceTree = "<group>"; };
+		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */,
 				7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +220,7 @@
 		7164260A20B8903000D47EF2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				71AE37F0237A1FAE009C03BB /* WebKit.framework */,
 				7164260B20B8903000D47EF2 /* StoreKit.framework */,
 			);
 			name = Frameworks;
@@ -339,7 +343,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "One Minute Games";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
@@ -586,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DevCleaner/Resources/DevCleaner.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
@@ -604,6 +609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DevCleaner/Resources/DevCleaner.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
