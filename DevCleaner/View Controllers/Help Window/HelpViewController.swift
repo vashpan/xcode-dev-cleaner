@@ -17,6 +17,9 @@ final class HelpViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        // configuration
+        self.helpWebView.navigationDelegate = self
+        
         // load manual HTML
         guard let helpUrl = Bundle.main.url(forResource: "manual", withExtension: "html", subdirectory: "Manual") else {
             log.error("HelpViewController: Can't find manual HTML file!")
@@ -24,5 +27,19 @@ final class HelpViewController: NSViewController {
         }
         
         self.helpWebView.loadFileURL(helpUrl, allowingReadAccessTo: helpUrl.deletingLastPathComponent())
+    }
+}
+
+extension HelpViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated {
+            if let url = navigationAction.request.url {
+                NSWorkspace.shared.open(url)
+                decisionHandler(.cancel)
+                return
+            }
+        }
+        
+        decisionHandler(.allow)
     }
 }
