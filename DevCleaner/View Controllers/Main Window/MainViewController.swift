@@ -321,6 +321,10 @@ final class MainViewController: NSViewController {
             NSWorkspace.shared.activateFileViewerSelecting(clickedEntry.paths)
         }
     }
+    
+    @IBAction func rescan(_ sender: Any) {
+        self.startScan()
+    }
 }
 
 // MARK: NSOutlineViewDataSource implementation
