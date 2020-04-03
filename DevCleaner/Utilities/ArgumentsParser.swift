@@ -100,7 +100,7 @@ public class ArgumentsParser {
             
             var currentArgParsed = false
             for option in self.options {
-                if arg == option.name && !results.contains { $0.name == option.name } {
+                if arg == option.name && !results.contains(where: { $0.name == option.name }) {
                     // option with value
                     if var currentOptionWithValue = option as? OptionWithValue {
                         // find and parse value
