@@ -116,4 +116,14 @@ extension FileManager {
         
         return Int64(fileSize ?? 0)
     }
+    
+    public func volumeFreeDiskSpace(at url: URL) throws -> Int64 {
+        let attributes = try self.attributesOfFileSystem(forPath: url.path)
+        
+        if let size = attributes[.systemFreeSize] as? NSNumber {
+            return size.int64Value
+        } else {
+            return 0
+        }
+    }
 }
