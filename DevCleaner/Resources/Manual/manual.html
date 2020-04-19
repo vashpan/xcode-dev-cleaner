@@ -30,12 +30,12 @@
         <p>DevCleaner helps cleaning those symbols, selecting older ones by default, keeping only those most recent ones. Of course final decision is yours.</p>
         
         <h4>Archives</h4>
-        <p>As you write software and making a test or release builds, you probably use <i>Archive</i> option from Xcode. Sometimes you would end-up with a massive amount of archives, from which most of them not useful after a while. They can take various size, from just tens of MBs up to GBs.</p>
+        <p>As you write software and making a test or release builds, you probably use <i>Archive</i> option from Xcode. Sometimes you would end-up with a massive amount of archives, from which most of them are useful after a while. They can take various size, from just tens of MBs up to GBs.</p>
         <p>Some archives are more useful than others though. Remember that if you submit your binary to the AppStore and release it, you have access to crashlogs from archives, therefore archives are not selected by default. Archives that was submitted/deployed successfully are marked with &#9989; symbol, those that failed with &#10060;. Archives that weren't submitted nor deployed are not marked by any symbol, they are usually safe to clean.</p>
 
         <h4>Derived Data</h4>
         <p>When you develop your app, Xcode caches your symbols, dependencies, logs, text - all to develop fast and to keep code completion working. Unfortunately this data tend to take a lot of space, especially for big projects. Also, they're not deleted automatically. This may be especially problematic if you open a lot of various projects.</p>
-        <p>Removing derived data won't is not harmful as Xcode can recreate them when you open this project again. Although it's not recommended for projects that you work on often. For this reason nothing is selected by default.</p>
+        <p>Removing derived data is not harmful as Xcode can recreate them when you open project again. Although it's not recommended for projects that you work on often. For this reason nothing is selected by default.</p>
         
         <h4>Old Simulator & Device Logs</h4>
         <p>Each version of Xcode appears to have a new version of database that holds logs from devices & simulators. Those databases are migrated with content of the previous ones. If you use Xcode for a long time, it would accumulate to significant amount of unused data.</p>
@@ -75,7 +75,7 @@
         </picture>
 
         <h4>Notifications</h4>
-        <p>You can set notifications to remind you about scans. Available periods: 2 weeks, month, 2 monhts.</p>
+        <p>You can set notifications to remind you about scans. Available periods: 2 weeks, 1 month, 2 months.</p>
 
         <h4>Debug</h4>
         <p>You can set "Dry Run" to check what exactly will be performed, without actually deleting any files.</p>
@@ -99,6 +99,19 @@
         <h4>Install Command Line Tool...</h4>
         <p>This will open instructions how to install command line tool.</p>
 
+        <h3>File Menu<h2>
+            
+        <picture>
+            <source srcset="file-dark.png 1x, file-dark@2x.png 2x" media="(prefers-color-scheme: dark)">
+            <img src="file.png" srcset="file.png 1x, file@2x.png 2x" alt="DevCleaner file menu"/>
+        </picture>
+        
+        <h4>Rescan...</h4>
+        <p>Rescans all files manually.</p>
+        
+        <h4>Close</h4>
+        <p>Closes active window.</p>
+        
         <h3>Command Line Tool</h3>
 
         <p>You'll find instructions how to install command here: <a href="https://github.com/vashpan/xcode-dev-cleaner/blob/2.0.0/Documentation/Command%20Line%20Tool.md">Command Line Tool</a></p>
