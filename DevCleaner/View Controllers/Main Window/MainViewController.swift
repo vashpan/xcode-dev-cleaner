@@ -179,10 +179,14 @@ final class MainViewController: NSViewController {
             return
         }
         
-        // total size
-        let totalSizeString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
-        self.totalBytesTextField.stringValue = "Total: \(totalSizeString)"
-        self.view.window?.title = "DevCleaner - \(totalSizeString) available to clean"
+        let fileManager = FileManager.default
+        
+        // total size & free disk space
+        let totalSizeAvailableToCleanString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
+        let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
+        let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
+        self.totalBytesTextField.stringValue = "Total: \(totalSizeAvailableToCleanString)"
+        self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean, \(bytesFreeOnDiskString) free on disk"
         
         // selected size
         let selectedSize = xcodeFiles.selectedSize
