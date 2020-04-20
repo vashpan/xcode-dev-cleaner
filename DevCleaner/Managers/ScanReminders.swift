@@ -25,7 +25,24 @@ import NotificationCenter
 public final class ScanReminders {
     // MARK: Types
     public enum Period: Int {
-        case every2weeks, everyMonth, every2Months
+        case everyWeek, every2weeks, everyMonth, every2Months
+        
+        private var dateComponents: DateComponents {
+            var result = DateComponents()
+            
+            switch self {
+                case .everyWeek:
+                    result.day = 7
+                case .every2weeks:
+                    result.day = 7 * 2
+                case .everyMonth:
+                    result.month = 1
+                case .every2Months:
+                    result.month = 2
+            }
+            
+            return result
+        }
         
         internal var repeatInterval: DateComponents {
             var result = DateComponents()
@@ -34,24 +51,10 @@ public final class ScanReminders {
             if Preferences.shared.envKeyPresent(key: "NOTIFICATIONS_TEST") {
                 result.day = 1 // for debug we change our periods to one day
             } else {
-                switch self {
-                    case .every2weeks:
-                        result.day = 7 * 2
-                    case .everyMonth:
-                        result.month = 1
-                    case .every2Months:
-                        result.month = 2
-                }
+                result = self.dateComponents
             }
             #else
-            switch self {
-                case .every2weeks:
-                    result.day = 7 * 2
-                case .everyMonth:
-                    result.month = 1
-                case .every2Months:
-                    result.month = 2
-            }
+            result = self.dateComponents
             #endif
             
             return result

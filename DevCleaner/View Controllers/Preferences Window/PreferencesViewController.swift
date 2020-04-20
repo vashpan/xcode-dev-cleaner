@@ -133,12 +133,15 @@ final class PreferencesViewController: NSViewController {
     private func titleFromPeriod(_ period: ScanReminders.Period) -> String {
         let result: String
         switch period {
+            case .everyWeek:
+                result = "Every week"
             case .every2weeks:
                 result = "Every 2 weeks"
             case .everyMonth:
                 result = "Every month"
             case .every2Months:
                 result = "Every 2 months"
+        
         }
         
         return result
@@ -147,6 +150,8 @@ final class PreferencesViewController: NSViewController {
     private func periodFromTitle(_ title: String) -> ScanReminders.Period? {
         let result: ScanReminders.Period?
         switch title {
+            case "Every week":
+                result = .everyWeek
             case "Every 2 weeks":
                 result = .every2weeks
             case "Every month":
