@@ -215,11 +215,6 @@ public final class CmdLine {
     }
     
     private func start(mode: Mode, locations: [XcodeFiles.Location]) {
-        guard XcodeFiles.isXcodeIsInstalled() else {
-            printErrorAndExit(errorMessage: "Xcode installation cannot be found! Check if you have Xcode installed.")
-            return
-        }
-        
         guard let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
               let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
                                           customDerivedDataFolder: Files.acquireCustomDerivedDataFolderPermissions(),

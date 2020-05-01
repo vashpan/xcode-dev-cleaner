@@ -70,9 +70,6 @@ final class MainViewController: NSViewController {
         
         self.dryModeView.wantsLayer = true
         
-        // check for installed Xcode versions
-        self.checkForInstalledXcode()
-        
         // set all time saved bytes label
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
@@ -219,13 +216,6 @@ final class MainViewController: NSViewController {
         // start scan asynchronously
         DispatchQueue.global(qos: .userInitiated).async {
             xcodeFiles.scanFiles(in: xcodeFiles.locations.keys.map { $0 })
-        }
-    }
-
-    private func checkForInstalledXcode() {
-        if !XcodeFiles.isXcodeIsInstalled() {
-            Alerts.fatalErrorAlertAndQuit(title: "Xcode cannot be found",
-                                        message: "Check if you have Xcode installed")
         }
     }
     
