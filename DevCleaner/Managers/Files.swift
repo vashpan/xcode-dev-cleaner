@@ -30,7 +30,7 @@ public final class Files {
     }
     
     // MARK: Acquire folder permissions
-    private static func acquireFolderPermissions(folderUrl: URL, allowCancel: Bool = false, openPanelMessage: String? = nil) -> URL? {
+    private static func acquireFolderPermissions(folderUrl: URL, allowCancel: Bool = true, openPanelMessage: String? = nil) -> URL? {
         let message = openPanelMessage ??
                       "DevCleaner needs permission to this folder to scan its contents. Folder should be already selected and all you need to do is to click \"Open\"."
         

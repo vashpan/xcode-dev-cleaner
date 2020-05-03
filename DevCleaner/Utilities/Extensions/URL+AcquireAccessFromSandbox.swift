@@ -14,7 +14,7 @@ extension URL {
         
     }
     
-    public func acquireAccessFromSandbox(bookmark: Data? = nil, allowCancel: Bool = false, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
+    public func acquireAccessFromSandbox(bookmark: Data? = nil, allowCancel: Bool = true, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
         func doWeHaveAccess(for path: String) -> Bool {
             let fm = FileManager.default
             
