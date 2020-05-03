@@ -70,29 +70,14 @@ final class MainViewController: NSViewController {
         
         self.dryModeView.wantsLayer = true
         
-        // set all time saved bytes label
-        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
-        
-        // open ~/Library/Developer folder & create XcodeFiles instance
-        guard let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
-              let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
-                                          customDerivedDataFolder: Files.acquireCustomDerivedDataFolderPermissions(),
-                                          customArchivesFolder: Files.acquireCustomArchivesFolderPermissions()) else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
-            
-            Alerts.fatalErrorAlertAndQuit(title: "Cannot locate Xcode cache files, or can't get access to ~/Library/Developer folder",
-                                        message: "Check if you have Xcode installed and some projects built. Also, in the next run check if you selected proper folder.")
-            return
-        }
-        
-        xcodeFiles.scanDelegate = self
-        self.xcodeFiles = xcodeFiles
-    
         // observe preferences
         Preferences.shared.addObserver(self)
         
-        // start initial scan
-        self.startScan()
+        // open ~/Library/Developer folder, create XcodeFiles instance and start scanning
+        self.setupXcodeFilesAndStartScanningIfNeeded()
+        
+        // set all time saved bytes label
+        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
     
     deinit {
@@ -157,9 +142,28 @@ final class MainViewController: NSViewController {
     }
     
     // MARK: Helpers
+    private func setupXcodeFilesAndStartScanningIfNeeded() {
+        guard self.xcodeFiles == nil else {
+            return
+        }
+        
+        // open ~/Library/Developer folder & create XcodeFiles instance
+        if let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
+           let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
+                                       customDerivedDataFolder: Files.acquireCustomDerivedDataFolderPermissions(),
+                                       customArchivesFolder: Files.acquireCustomArchivesFolderPermissions()) {
+            xcodeFiles.scanDelegate = self
+            self.xcodeFiles = xcodeFiles
+            
+            // start initial scan
+            self.startScan()
+        } else {
+            log.warning("MainViewController: Cannot create XcodeFiles instance!")
+        }
+    }
+    
     private func updateCustomFolders() {
         guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
         
@@ -171,22 +175,19 @@ final class MainViewController: NSViewController {
     }
     
     private func updateButtonsAndLabels() {
-        guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
-            return
-        }
-        
         let fileManager = FileManager.default
         
         // total size & free disk space
-        let totalSizeAvailableToCleanString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
-        let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
-        let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
-        self.totalBytesTextField.stringValue = "Total: \(totalSizeAvailableToCleanString)"
-        self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean, \(bytesFreeOnDiskString) free on disk"
+        if let xcodeFiles = self.xcodeFiles {
+            let totalSizeAvailableToCleanString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
+            let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
+            let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
+            self.totalBytesTextField.stringValue = "Total: \(totalSizeAvailableToCleanString)"
+            self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean, \(bytesFreeOnDiskString) free on disk"
+        }
         
         // selected size
-        let selectedSize = xcodeFiles.selectedSize
+        let selectedSize = xcodeFiles?.selectedSize ?? 0
         self.bytesSelectedTextField.stringValue = "Selected: \(self.formatBytesToString(bytes: selectedSize))"
         
         // clean button disabled when we selected nothing
@@ -204,7 +205,6 @@ final class MainViewController: NSViewController {
     
     private func startScan() {
         guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
         
@@ -277,7 +277,6 @@ final class MainViewController: NSViewController {
     // MARK: Actions
     @IBAction func startCleaning(_ sender: NSButton) {
         guard let xcodeFiles = self.xcodeFiles else {
-            log.error("MainViewController: Cannot create XcodeFiles instance!")
             return
         }
         
