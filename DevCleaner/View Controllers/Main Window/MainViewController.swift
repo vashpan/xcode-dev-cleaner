@@ -81,7 +81,14 @@ final class MainViewController: NSViewController {
         self.disableAccessWarnings()
         
         // open ~/Library/Developer folder, create XcodeFiles instance and start scanning
-        self.setupXcodeFilesAndStartScanningIfNeeded()
+        if XcodeFiles.isDeveloperFolderExists() {
+            self.setupXcodeFilesAndStartScanningIfNeeded()
+        } else {
+            self.enableAccessWarnings(title: "\"~/Developer\" folder cannot be found",
+                                      content: "DevCleaner main function is to clean unnecessary files in this folder. Without it, it won't be very useful. This folder is usually created by Xcode during work. Make sure you've installed it.",
+                                      buttonTitle: "Download Xcode",
+                                      buttonActionSelector: #selector(downloadXcode(_:)))
+        }
         
         // set all time saved bytes label
         self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
@@ -347,6 +354,14 @@ final class MainViewController: NSViewController {
     
     @IBAction func rescan(_ sender: Any) {
         self.startScan()
+    }
+    
+    @IBAction func downloadXcode(_ sender: Any) {
+        guard let xcodeUrl = URL(string: "https://apps.apple.com/pl/app/xcode/id497799835?") else {
+            return
+        }
+        
+        NSWorkspace.shared.open(xcodeUrl)
     }
     
     @IBAction func selectDeveloperFolder(_ sender: Any) {

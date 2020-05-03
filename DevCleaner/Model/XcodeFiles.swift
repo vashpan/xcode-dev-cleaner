@@ -95,6 +95,12 @@ final public class XcodeFiles {
     }
     
     // MARK: Helpers
+    public static func isDeveloperFolderExists() -> Bool {
+        let developerFolder = Files.userDeveloperFolder
+        
+        return FileManager.default.fileExists(atPath: developerFolder.path)
+    }
+    
     private static func checkForXcodeDataFolders(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)
