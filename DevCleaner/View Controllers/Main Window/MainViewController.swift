@@ -57,6 +57,11 @@ final class MainViewController: NSViewController {
     @IBOutlet private weak var cleanButton: NSButton!
     @IBOutlet private weak var benefitsButton: NSButton!
     
+    @IBOutlet weak var accessWarningsView: NSView!
+    @IBOutlet weak var accessWarningTitle: NSTextField!
+    @IBOutlet weak var accessWarningContent: NSTextField!
+    @IBOutlet weak var accessWarningButton: NSButton!
+    
     @IBOutlet private weak var outlineView: NSOutlineView!
     
     @IBOutlet private weak var dryModeView: NSView!
@@ -72,6 +77,8 @@ final class MainViewController: NSViewController {
         
         // observe preferences
         Preferences.shared.addObserver(self)
+        
+        self.disableAccessWarnings()
         
         // open ~/Library/Developer folder, create XcodeFiles instance and start scanning
         self.setupXcodeFilesAndStartScanningIfNeeded()
@@ -155,10 +162,17 @@ final class MainViewController: NSViewController {
             xcodeFiles.scanDelegate = self
             self.xcodeFiles = xcodeFiles
             
+            self.disableAccessWarnings()
+            
             // start initial scan
             self.startScan()
         } else {
             log.warning("MainViewController: Cannot create XcodeFiles instance!")
+            
+            self.enableAccessWarnings(title: "Access to \"~/Developer\" folder is needed",
+                                      content: "DevCleaner needs permission to your Developer folder to scan Xcode cache files & archives",
+                                      buttonTitle: "Give Access",
+                                      buttonActionSelector: #selector(selectDeveloperFolder(_:)))
         }
     }
     
@@ -274,6 +288,22 @@ final class MainViewController: NSViewController {
         self.outlineView.reloadData()
     }
     
+    // MARK: Access Warnings
+    private func disableAccessWarnings() {
+        self.accessWarningsView.isHidden = true
+    }
+    
+    private func enableAccessWarnings(title: String, content: String, buttonTitle: String, buttonActionSelector: Selector) {
+        self.accessWarningTitle.stringValue = title
+        self.accessWarningContent.stringValue = content
+        
+        self.accessWarningButton.title = buttonTitle
+        self.accessWarningButton.target = self
+        self.accessWarningButton.action = buttonActionSelector
+        
+        self.accessWarningsView.isHidden = false
+    }
+    
     // MARK: Actions
     @IBAction func startCleaning(_ sender: NSButton) {
         guard let xcodeFiles = self.xcodeFiles else {
@@ -317,6 +347,10 @@ final class MainViewController: NSViewController {
     
     @IBAction func rescan(_ sender: Any) {
         self.startScan()
+    }
+    
+    @IBAction func selectDeveloperFolder(_ sender: Any) {
+        self.setupXcodeFilesAndStartScanningIfNeeded()
     }
 }
 
