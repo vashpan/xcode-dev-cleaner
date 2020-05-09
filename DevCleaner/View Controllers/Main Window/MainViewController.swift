@@ -161,6 +161,19 @@ final class MainViewController: NSViewController {
             return
         }
         
+        // reset custom folders to default if they don't exists
+        let fm = FileManager.default
+        if let customDerivedDataPath = Preferences.shared.customDerivedDataFolder?.path, !fm.fileExists(atPath: customDerivedDataPath) {
+            log.warning("Custom derived data folder no longer exists, resetting to default!")
+            Preferences.shared.customDerivedDataFolder = nil
+        }
+        
+        if let customArchivesPath = Preferences.shared.customArchivesFolder?.path, !fm.fileExists(atPath: customArchivesPath) {
+            log.warning("Custom archives folder no longer exists, resetting to default!")
+            Preferences.shared.customArchivesFolder = nil
+        }
+        
+        
         // open ~/Library/Developer folder & create XcodeFiles instance
         if let developerLibraryFolder = Files.acquireUserDeveloperFolderPermissions(),
            let xcodeFiles = XcodeFiles(developerFolder: developerLibraryFolder,
