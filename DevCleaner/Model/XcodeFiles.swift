@@ -470,7 +470,7 @@ final public class XcodeFiles {
                 osEntry.entry.addChildren(items: deviceSupportEntries)
                 
             } else {
-                log.warning("XcodeFiles: Cannot check contents of '\(entryUrl)', skipping")
+                log.warning("XcodeFiles: Cannot check contents of '\(entryUrl.path)', skipping")
             }
             
             entries.append(osEntry.entry)
