@@ -37,20 +37,22 @@ public final class ArchiveFileEntry: XcodeFileEntry {
     // MARK: Properties
     public let projectName: String
     public let bundleName: String
-    public let version: Version
+    public let versionString: String
+    public let version: Version?
     public let build: String
     public let date: Date
     public let submissionStatus: SubmissionStatus
     
     public override var fullDescription: String {
-        return "\(projectName) \(self.version.description) (\(self.build)) (\(self.extraInfo))"
+        return "\(projectName) \(self.versionString) (\(self.build)) (\(self.extraInfo))"
     }
     
     // MARK: Initialization
-    public init(projectName: String, bundleName: String, version: Version, build: String, date: Date, submissionStatus: SubmissionStatus, location: URL, selected: Bool) {
+    public init(projectName: String, bundleName: String, version: String, build: String, date: Date, submissionStatus: SubmissionStatus, location: URL, selected: Bool) {
         self.projectName = projectName
         self.bundleName = bundleName
-        self.version = version
+        self.versionString = version
+        self.version = Version(describing: self.versionString)
         self.build = build
         self.date = date
         self.submissionStatus = submissionStatus
@@ -61,7 +63,7 @@ public final class ArchiveFileEntry: XcodeFileEntry {
         
         let dateString = dateFormatter.string(from: self.date)
         
-        super.init(label: "\(self.version.description) (\(self.build)) \(submissionStatus.glyph)", extraInfo: dateString, icon: nil, tooltip: true, selected: selected)
+        super.init(label: "\(self.versionString) (\(self.build)) \(submissionStatus.glyph)", extraInfo: dateString, icon: nil, tooltip: true, selected: selected)
         
         self.addPath(path: location)
     }

@@ -246,7 +246,7 @@ final public class XcodeFiles {
         // open archive info.plist for more informations
         let projectName: String
         let bundleName: String
-        let bundleVersion: Version
+        let bundleVersionString: String
         let bundleBuild: String
         let archiveDate: Date
         var status: ArchiveFileEntry.SubmissionStatus = .undefined
@@ -302,10 +302,10 @@ final public class XcodeFiles {
                 }
                 
                 // version
-                if let versionString = archiveProperties["CFBundleShortVersionString"] as? String, let version = Version(describing: versionString) {
-                    bundleVersion = version
+                if let versionString = archiveProperties["CFBundleShortVersionString"] as? String {
+                    bundleVersionString = versionString
                 } else {
-                    log.warning("XcodeFiles: Cannot get bundle version from archive: \(location.path)")
+                    log.info("XcodeFiles: Cannot get bundle version from archive: \(location.path)")
                     return nil
                 }
                 
@@ -327,7 +327,7 @@ final public class XcodeFiles {
         
         return ArchiveFileEntry(projectName: projectName,
                                 bundleName: bundleName,
-                                version: bundleVersion,
+                                version: bundleVersionString,
                                 build: bundleBuild,
                                 date: archiveDate,
                                 submissionStatus: status,
@@ -526,12 +526,15 @@ final public class XcodeFiles {
             
             // sort by version & build
             let projectArchiveEntries = archiveEntries.sorted { (lhs, rhs) -> Bool in
-                if lhs.version == rhs.version {
-					return lhs.build.localizedStandardCompare(rhs.build) == .orderedDescending
+                if let lhsVersion = lhs.version, let rhsVersion = rhs.version {
+                    if lhsVersion == rhsVersion {
+                        return lhs.build.localizedStandardCompare(rhs.build) == .orderedDescending
+                    } else {
+                        return lhsVersion > rhsVersion
+                    }
                 } else {
-                    return lhs.version > rhs.version
+                    return lhs.versionString.localizedStandardCompare(rhs.versionString) == .orderedDescending
                 }
-                
             }
             
             projectEntry.addChildren(items: projectArchiveEntries)
@@ -576,6 +579,9 @@ final public class XcodeFiles {
         let xcodeUserDataLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/UserData")
         
         var entries = [InterfacePreviewsFileEntry]()
+        
+        // TODO: Probably use different technique for removing IB previews, as those simulators can't be just all removed,
+        //       they probably follow the rules for all installed simulators, depending on runtime etc.
         
         let simulatorFolderNames = ["Simulator Devices", "Simulator%20Devices"]
         for previewType in InterfacePreviewsFileEntry.PreviewType.allCases {
