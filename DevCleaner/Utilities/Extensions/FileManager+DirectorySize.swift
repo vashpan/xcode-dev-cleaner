@@ -118,12 +118,15 @@ extension FileManager {
     }
     
     public func volumeFreeDiskSpace(at url: URL) throws -> Int64 {
-        let attributes = try self.attributesOfFileSystem(forPath: url.path)
-        
-        if let size = attributes[.systemFreeSize] as? NSNumber {
-            return size.int64Value
-        } else {
-            return 0
+        do {
+            let values = try url.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            if let capacity = values.volumeAvailableCapacityForImportantUsage {
+                return capacity
+            }
+        } catch let error {
+            log.warning("FileManager+DirectorySize: Problem while requesting volume capacity: \(error)")
         }
+        
+        return 0
     }
 }
