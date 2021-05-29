@@ -19,9 +19,10 @@
 //  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import CryptoKit
 
 // MARK: Preferences Observer
-@objc public protocol PreferencesObserver: class {
+@objc public protocol PreferencesObserver: AnyObject {
     func preferenceDidChange(key: String)
 }
 

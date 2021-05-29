@@ -10,7 +10,7 @@ import Foundation
 import StoreKit
 
 // MARK: Donations Delegate
-public protocol DonationsDelegate: class {
+public protocol DonationsDelegate: AnyObject {
     func donations(_ donations: Donations, didReceive products: [Donations.Product])
     
     func transactionDidStart(for product: Donations.Product)

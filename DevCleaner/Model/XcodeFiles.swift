@@ -22,13 +22,13 @@ import Foundation
 import Cocoa
 
 // MARK: Xcode scan delegate
-public protocol XcodeFilesScanDelegate: class {
+public protocol XcodeFilesScanDelegate: AnyObject {
     func scanWillBegin(xcodeFiles: XcodeFiles)
     func scanDidFinish(xcodeFiles: XcodeFiles)
 }
 
 // MARK: - Xcode delete delegate
-public protocol XcodeFilesDeleteDelegate: class {
+public protocol XcodeFilesDeleteDelegate: AnyObject {
     func deleteWillBegin(xcodeFiles: XcodeFiles)
     func deleteInProgress(xcodeFiles: XcodeFiles, location: String, label: String, url: URL?, current: Int, total: Int)
     func deleteItemFailed(xcodeFiles: XcodeFiles, error: Error, location: String, label: String, url: URL?)
