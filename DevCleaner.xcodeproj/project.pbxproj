@@ -50,7 +50,6 @@
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
 		71E7F838214E930500A11601 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F837214E930500A11601 /* Alerts.swift */; };
-		71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F839214E9A4300A11601 /* String+MD5.swift */; };
 		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
@@ -105,7 +104,6 @@
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
 		71E7F837214E930500A11601 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
-		71E7F839214E9A4300A11601 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
 		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
 		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 				716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */,
 				71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */,
 				71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */,
-				71E7F839214E9A4300A11601 /* String+MD5.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -437,7 +434,6 @@
 				71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */,
 				715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */,
 				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
-				71E7F83A214E9A4300A11601 /* String+MD5.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
 				71012FA9230C8A9E00FDF8ED /* main.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
