@@ -169,17 +169,18 @@ final public class XcodeFiles {
         // 12.3 (16F156) arm64e
         // 12.3.1 (16F203)
         // 12.0 (16A367) arm64e
+        // 10.16
         
         let string = url.lastPathComponent
         let splitted = string.split(separator: " ", maxSplits: 4, omittingEmptySubsequences: true)
         
-        guard splitted.count >= 2 else { // for some other files we may have in the folder
+        guard splitted.count >= 1 else { // iOS and others have usually two parts, macOS just one
             return nil
         }
         
         let device: String?
         let version: Version
-        let build: String
+        let build: String?
         let creationDate: Date = FileManager.default.dateCreated(for: url)
         let arch: String?
         
@@ -187,19 +188,31 @@ final public class XcodeFiles {
         if let foundVersion = Version(describing: String(splitted[0])) {
             device = nil
             version = foundVersion
-            build = String(splitted[1])
-            if splitted.count > 2 {
-                arch = String(splitted[2])
+            
+            if splitted.count > 1 {
+                build = String(splitted[1])
+                if splitted.count > 2 {
+                    arch = String(splitted[2])
+                } else {
+                    arch = nil
+                }
             } else {
+                build = nil
                 arch = nil
             }
-        } else if let foundVersion = Version(describing: String(splitted[1])) { // if version is second, we may have extra device info
+        } else if splitted.count > 1, let foundVersion = Version(describing: String(splitted[1])) { // if version is second, we may have extra device info
             device = String(splitted[0])
             version = foundVersion
-            build = String(splitted[2])
-            if splitted.count > 3 {
-                arch = String(splitted[3])
+            
+            if splitted.count > 2 {
+                build = String(splitted[2])
+                if splitted.count > 3 {
+                    arch = String(splitted[3])
+                } else {
+                    arch = nil
+                }
             } else {
+                build = nil
                 arch = nil
             }
         } else {
@@ -420,7 +433,8 @@ final public class XcodeFiles {
         let deviceSupportEntries = [
             (entry: XcodeFileEntry(label: "iOS", icon: .image(name: "Devices/iPadIcon"), selected: true), path: "iOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "watchOS", icon: .image(name: "Devices/WatchIcon"), selected: true), path: "watchOS DeviceSupport"),
-            (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport")
+            (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "macOS", icon: .image(name: "Devices/MacBookIcon"), selected: true), path: "macOS DeviceSupport")
         ]
                 
         let xcodeLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode")

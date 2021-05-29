@@ -23,7 +23,7 @@ import Foundation
 public final class DeviceSupportFileEntry: XcodeFileEntry {
     // MARK: Types
     public enum OSType {
-        case iOS, watchOS, tvOS, other
+        case iOS, watchOS, tvOS, macOS, other
         
         public init(label: String) {
             switch label {
@@ -33,6 +33,8 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                     self = .watchOS
                 case "tvOS":
                     self = .tvOS
+                case "macOS":
+                    self = .macOS
                 default:
                     self = .other
             }
@@ -46,6 +48,8 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                     return "watchOS"
                 case .tvOS:
                     return "tvOS"
+                case .macOS:
+                    return "macOS"
                 case .other:
                     return ""
             }
@@ -56,12 +60,12 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
     public let device: String?
     public let osType: OSType
     public let version: Version
-    public let build: String
+    public let build: String?
     public let date: Date
     public let architecture: String?
     
     // MARK: Initialization
-    public init(device: String?, osType: OSType, version: Version, build: String, date: Date, arch: String?, selected: Bool) {
+    public init(device: String?, osType: OSType, version: Version, build: String?, date: Date, arch: String?, selected: Bool) {
         self.device = device
         self.osType = osType
         self.version = version
@@ -69,7 +73,7 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         self.date = date
         self.architecture = arch
         
-        let label = "\(self.osType.description) \(self.version) \(self.build)"
+        let label = "\(self.osType.description) \(self.version) \(self.build ?? "")"
         let tooltip = label + " " + DateFormatter.localizedString(from: self.date, dateStyle: .medium, timeStyle: .none)
         
         super.init(label: label, tooltipText: tooltip, icon: DeviceSupportFileEntry.icon(for: osType, version: version), tooltip: true, selected: selected)
@@ -100,6 +104,9 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 } else {
                     result = .image(name: "OS/tvOS/Generic")
                 }
+                
+            case .macOS:
+                result = .image(name: "OS/macOS/Generic")
             
             default:
                 result = .image(name: "OS/iOS/Generic")
