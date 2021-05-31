@@ -50,7 +50,7 @@ public final class InterfacePreviewsFileEntry: XcodeFileEntry {
         
         super.init(label: type.name,
                    tooltipText: type.tooltip,
-                   icon: .system(name: NSImage.multipleDocumentsName),
+                   icon: .image(name: "Files/SwiftUIPreview"),
                    tooltip: true,
                    selected: selected)
     }
