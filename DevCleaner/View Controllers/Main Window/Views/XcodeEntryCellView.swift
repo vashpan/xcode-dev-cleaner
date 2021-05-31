@@ -21,7 +21,7 @@
 import Cocoa
 
 // MARK: Xcode Entry Cell View Delegate
-protocol XcodeEntryCellViewDelegate: class {
+protocol XcodeEntryCellViewDelegate: AnyObject {
     func xcodeEntryCellSelectedChanged(_ cell: XcodeEntryCellView, state: NSControl.StateValue, xcodeEntry: XcodeFileEntry?)
 }
 

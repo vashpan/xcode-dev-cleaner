@@ -19,9 +19,10 @@
 //  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Foundation
+import CryptoKit
 
 // MARK: Preferences Observer
-@objc public protocol PreferencesObserver: class {
+@objc public protocol PreferencesObserver: AnyObject {
     func preferenceDidChange(key: String)
 }
 
@@ -39,7 +40,9 @@ public final class Preferences {
         public static let appFolder = "DCAppFolder"
         
         fileprivate static func folderBookmarkKey(for url: URL) -> String {
-            return "DCFolderBookmark_\(url.absoluteString.md5)"
+            let urlStringData = Data(url.path.utf8)
+            let sha256hash = SHA256.hash(data: urlStringData)
+            return "DCFolderBookmark_\(sha256hash.description)"
         }
     }
     

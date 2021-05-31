@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Generic.png",
+      "filename" : "MacBookIcon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Generic@2x.png",
+      "filename" : "MacBookIcon@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

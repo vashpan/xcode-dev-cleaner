@@ -21,7 +21,7 @@
 import Cocoa
 
 // MARK: Cleaning view controller delegate
-internal protocol CleaningViewControllerDelegate: class {
+internal protocol CleaningViewControllerDelegate: AnyObject {
     func didDismissViewController(_ vc: CleaningViewController)
 }
 
