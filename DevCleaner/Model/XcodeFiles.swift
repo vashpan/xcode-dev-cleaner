@@ -601,7 +601,6 @@ final public class XcodeFiles {
         for previewType in InterfacePreviewsFileEntry.PreviewType.allCases {
             let previewsFolderName: String
             switch previewType {
-                case .interfaceBuilderPreviews: previewsFolderName = "IB Support"
                 case .swiftUIPreviews: previewsFolderName = "Previews"
             }
             

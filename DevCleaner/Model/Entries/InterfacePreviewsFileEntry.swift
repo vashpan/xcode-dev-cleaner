@@ -22,21 +22,22 @@ import Foundation
 import AppKit
 
 public final class InterfacePreviewsFileEntry: XcodeFileEntry {
+    // TODO: Probably use different technique for removing IB previews, as those simulators can't be just all removed,
+    //       they probably follow the rules for all installed simulators, depending on runtime etc.
+    
     // MARK: Types
     public enum PreviewType: CaseIterable {
-        case swiftUIPreviews, interfaceBuilderPreviews
+        case swiftUIPreviews
         
         var name: String {
             switch self {
                 case .swiftUIPreviews: return "SwiftUI Previews"
-                case .interfaceBuilderPreviews: return "Interface Builder Previews"
             }
         }
         
         var tooltip: String {
             switch self {
                 case .swiftUIPreviews: return "SwiftUI previews cached simulators"
-                case .interfaceBuilderPreviews: return "Interface Builder previews cached simulators"
             }
         }
     }
