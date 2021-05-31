@@ -213,23 +213,6 @@ internal final class DonationViewController: NSViewController {
         
         Donations.shared.buy(product: product)
     }
-    
-    @IBAction func share(_ sender: Any) {
-        guard let shareUrl = URL(string: "https://itunes.apple.com/app/devcleaner/id1388020431") else {
-            return
-        }
-        
-        guard let shareView = sender as? NSView else {
-            return
-        }
-        
-        let sharingService = NSSharingServicePicker(items: [shareUrl])
-        sharingService.show(relativeTo: .zero, of: shareView, preferredEdge: .minX)
-    }
-    
-    @IBAction func openAppReview(_ sender: Any) {
-        ReviewRequests.shared.showReviewOnTheAppStore()
-    }
 }
 
 extension DonationViewController: DonationsDelegate {

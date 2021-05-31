@@ -55,7 +55,7 @@ final class MainViewController: NSViewController {
     
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var cleanButton: NSButton!
-    @IBOutlet private weak var benefitsButton: NSButton!
+    @IBOutlet private weak var benefitsTextField: NSTextField!
     
     @IBOutlet weak var accessWarningsView: NSView!
     @IBOutlet weak var accessWarningTitle: NSTextField!
@@ -91,7 +91,7 @@ final class MainViewController: NSViewController {
         }
         
         // set all time saved bytes label
-        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
     
     deinit {
@@ -228,7 +228,7 @@ final class MainViewController: NSViewController {
         self.cleanButton.isEnabled = selectedSize > 0
         
         // all time size / donate button
-        self.benefitsButton.attributedTitle = self.benefitsButtonAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
         
         // dry mode label
         self.dryModeView.isHidden = !Preferences.shared.dryRunEnabled
@@ -257,7 +257,7 @@ final class MainViewController: NSViewController {
         return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
     }
     
-    private func benefitsButtonAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
+    private func benefitsLabelAttributedString(totalBytesCleaned: Int64) -> NSAttributedString {
         let totalBytesString = ByteCountFormatter.string(fromByteCount: totalBytesCleaned, countStyle: .file)
         
         let fontSize: CGFloat = 12.0
@@ -272,7 +272,7 @@ final class MainViewController: NSViewController {
                 attributes: [.font : NSFont.boldSystemFont(ofSize: fontSize)])
             result.append(partTwo)
             
-            let partThree = NSAttributedString(string: "! Tip me or share it!",
+            let partThree = NSAttributedString(string: "! Tip me or share it:",
                                                attributes: [.font : NSFont.systemFont(ofSize: fontSize)])
             result.append(partThree)
         } else {
@@ -367,6 +367,31 @@ final class MainViewController: NSViewController {
     
     @IBAction func rescan(_ sender: Any) {
         self.startScan()
+    }
+    
+    @IBAction func share(_ sender: Any) {
+        guard let shareUrl = URL(string: "https://itunes.apple.com/app/devcleaner/id1388020431") else {
+            return
+        }
+        
+        guard let shareView = sender as? NSView else {
+            return
+        }
+        
+        let sharingService = NSSharingServicePicker(items: [shareUrl])
+        sharingService.show(relativeTo: .zero, of: shareView, preferredEdge: .minX)
+    }
+    
+    @IBAction func openAppReview(_ sender: Any) {
+        ReviewRequests.shared.showReviewOnTheAppStore()
+    }
+    
+    @IBAction func followMeOnTwitter(_ sender: Any) {
+        guard let myTwitterUrl = URL(string: "https://twitter.com/vashpan") else {
+            return
+        }
+        
+        NSWorkspace.shared.open(myTwitterUrl)
     }
     
     @IBAction func downloadXcode(_ sender: Any) {
