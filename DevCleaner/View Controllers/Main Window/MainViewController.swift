@@ -387,7 +387,7 @@ final class MainViewController: NSViewController {
     }
     
     @IBAction func followMeOnTwitter(_ sender: Any) {
-        guard let myTwitterUrl = URL(string: "https://twitter.com/vashpan") else {
+        guard let myTwitterUrl = URL(string: "https://twitter.com/intent/follow?screen_name=vashpan") else {
             return
         }
         

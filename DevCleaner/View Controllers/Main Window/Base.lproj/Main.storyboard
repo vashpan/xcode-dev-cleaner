@@ -454,8 +454,8 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nSL-jb-aDV">
-                                <rect key="frame" x="48" y="10" width="73" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="🤓 Tip me" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-2l-xC7">
+                                <rect key="frame" x="48" y="10" width="84" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="🤓 Tip me..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-2l-xC7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
@@ -464,7 +464,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jk9-Oc-a0l">
-                                <rect key="frame" x="129" y="10" width="58" height="19"/>
+                                <rect key="frame" x="140" y="10" width="58" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Share..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Q1-Dr-Ffd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -474,8 +474,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mia-rv-zCw">
-                                <rect key="frame" x="195" y="10" width="51" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Follow" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kAe-M1-9nY">
+                                <rect key="frame" x="206" y="10" width="70" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="Follow" bezelStyle="roundedRect" image="TwitterIcon" imagePosition="leading" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kAe-M1-9nY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
@@ -484,8 +484,8 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jjO-ih-b0v">
-                                <rect key="frame" x="254" y="10" width="90" height="19"/>
-                                <buttonCell key="cell" type="roundRect" title="Review app..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ee3-8t-HIR">
+                                <rect key="frame" x="284" y="10" width="64" height="19"/>
+                                <buttonCell key="cell" type="roundRect" title="Review..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ee3-8t-HIR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
@@ -611,11 +611,11 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fty-ns-5pG" userLabel="Donations View">
-                                <rect key="frame" x="0.0" y="36" width="430" height="169"/>
+                                <rect key="frame" x="0.0" y="44" width="430" height="161"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="qkx-cL-erD" userLabel="Small Donation Button">
-                                        <rect key="frame" x="20" y="19" width="100" height="80"/>
+                                        <rect key="frame" x="20" y="11" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$1.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D1f-mI-CJi">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -626,7 +626,7 @@ DQ
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="sCP-cr-bKl" userLabel="Medium Donation Button">
-                                        <rect key="frame" x="164" y="19" width="100" height="80"/>
+                                        <rect key="frame" x="164" y="11" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$3.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jsq-KV-oD3">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -637,7 +637,7 @@ DQ
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-LA-6s0" userLabel="Big Donation Button">
-                                        <rect key="frame" x="310" y="18" width="100" height="80"/>
+                                        <rect key="frame" x="310" y="10" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$9.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jaV-nX-mQ3">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -648,7 +648,7 @@ DQ
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hs-MD-87I">
-                                        <rect key="frame" x="18" y="132" width="394" height="17"/>
+                                        <rect key="frame" x="18" y="124" width="394" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="If you think this app helped you, consider a small tip" id="qCK-kW-qFt">
                                             <font key="font" metaFont="systemBold"/>
@@ -657,7 +657,7 @@ DQ
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTd-49-WSb">
-                                        <rect key="frame" x="18" y="111" width="394" height="17"/>
+                                        <rect key="frame" x="18" y="103" width="394" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved total of 100,0GB thanks to DevCleaner!" allowsEditingTextAttributes="YES" id="eYP-cA-BOu">
                                             <font key="font" metaFont="system"/>
@@ -777,5 +777,6 @@ DQ
     <resources>
         <image name="DevCleanerIcon" width="256" height="256"/>
         <image name="NSFolder" width="32" height="32"/>
+        <image name="TwitterIcon" width="12.5" height="10"/>
     </resources>
 </document>
