@@ -31,11 +31,13 @@ public class Logger {
     public let name: String
     
     public var consoleLogging: Bool
-    
     public var fileLogging: Bool {
         return self.logFileHandle != nil
     }
+    
     public let logFilePath: URL?
+    public let oldLogFilePath: URL?
+    
     private let logFileHandle: FileHandle?
     
     // MARK: Initialization
@@ -53,9 +55,12 @@ public class Logger {
             
             // create if needed & open log file to write
             if let newLogFilePath = documentsFolder?.appendingPathComponent(newLogFileName), let oldLogFilePath = documentsFolder?.appendingPathComponent(oldLogFileName) {
-                // first rename old log if exists
+                // first rename current log to old if exists
                 if FileManager.default.fileExists(atPath: newLogFilePath.path) {
                     try? FileManager.default.moveItem(at: newLogFilePath, to: oldLogFilePath)
+                    self.oldLogFilePath = oldLogFilePath
+                } else {
+                    self.oldLogFilePath = nil
                 }
                 
                 do {
@@ -70,10 +75,12 @@ public class Logger {
             } else {
                 self.logFileHandle = nil
                 self.logFilePath = nil
+                self.oldLogFilePath = nil
             }
         } else {
             self.logFileHandle = nil
             self.logFilePath = nil
+            self.oldLogFilePath = nil
         }
     }
     
