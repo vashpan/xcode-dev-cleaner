@@ -130,6 +130,19 @@
                                                 <segue destination="hQu-1h-PrG" kind="show" id="KpA-mP-HVH"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="PQy-TF-yVn"/>
+                                        <menuItem title="Send Feedback" id="iQI-Lw-44d">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="sendFeedback:" target="Voe-Tx-rLC" id="aQW-3P-6db"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Report an Issue" id="tUd-Zx-QAq">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="reportAnIssue:" target="Voe-Tx-rLC" id="1ve-U7-bEi"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -188,12 +201,12 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="661" height="639"/>
+                    <view key="view" wantsLayer="YES" misplaced="YES" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="646" height="639"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-v6-aG6" userLabel="Clean Button">
-                                <rect key="frame" x="568" y="13" width="80" height="32"/>
+                                <rect key="frame" x="553" y="13" width="80" height="32"/>
                                 <buttonCell key="cell" type="push" title="Clean..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpS-RA-DUz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -206,16 +219,16 @@ DQ
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eBx-hh-WZ7" userLabel="Main Views Container">
-                                <rect key="frame" x="20" y="94" width="621" height="401"/>
+                                <rect key="frame" x="20" y="94" width="606" height="401"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
-                                        <rect key="frame" x="0.0" y="0.0" width="621" height="401"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="606" height="401"/>
                                         <clipView key="contentView" drawsBackground="NO" id="dr2-Zy-P8I">
-                                            <rect key="frame" x="1" y="1" width="619" height="399"/>
+                                            <rect key="frame" x="1" y="1" width="604" height="399"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="619" height="376"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="604" height="376"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="2" height="3"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -282,7 +295,7 @@ DQ
                                                                 </tableCellView>
                                                             </prototypeCellViews>
                                                         </tableColumn>
-                                                        <tableColumn identifier="SizeColumn" width="75" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
+                                                        <tableColumn identifier="SizeColumn" width="60" minWidth="60" maxWidth="120" id="bT8-pV-TPW">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Size">
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -295,11 +308,11 @@ DQ
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="SizeCell" id="apc-cL-vXW" customClass="SizeCellView" customModule="DevCleaner" customModuleProvider="target">
-                                                                    <rect key="frame" x="538" y="1" width="80" height="17"/>
+                                                                    <rect key="frame" x="538" y="1" width="65" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
-                                                                            <rect key="frame" x="0.0" y="1" width="78" height="16"/>
+                                                                            <rect key="frame" x="0.0" y="1" width="63" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" placeholderString="Size" id="B9I-jq-BbO">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -329,7 +342,7 @@ DQ
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="p1y-QG-xIv">
-                                            <rect key="frame" x="1" y="383" width="615" height="16"/>
+                                            <rect key="frame" x="1" y="384" width="619" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="3Uz-J4-Lkn">
@@ -337,12 +350,12 @@ DQ
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <tableHeaderView key="headerView" wantsLayer="YES" id="v75-Hl-aeO">
-                                            <rect key="frame" x="0.0" y="0.0" width="619" height="23"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="604" height="23"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-KW-Rls" userLabel="Access Warnings View">
-                                        <rect key="frame" x="28" y="139" width="566" height="124"/>
+                                        <rect key="frame" x="20" y="139" width="566" height="124"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WG2-fv-9kB">
                                                 <rect key="frame" x="18" y="80" width="530" height="24"/>
@@ -384,7 +397,7 @@ DQ
                                         </constraints>
                                     </customView>
                                     <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-vG-o6z">
-                                        <rect key="frame" x="295" y="185" width="32" height="32"/>
+                                        <rect key="frame" x="287" y="185" width="32" height="32"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -408,7 +421,7 @@ DQ
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DevCleanerIcon" id="guH-2t-Xph"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
-                                <rect key="frame" x="93" y="515" width="550" height="80"/>
+                                <rect key="frame" x="93" y="515" width="535" height="80"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AcK-WQ-6Fn">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</string>
@@ -417,7 +430,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-87-JUR" userLabel="Info Header Label">
-                                <rect key="frame" x="93" y="603" width="550" height="16"/>
+                                <rect key="frame" x="93" y="603" width="535" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clean your Xcode cache files" id="8Ix-rm-3dw">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -433,7 +446,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-uh-F76">
-                                <rect key="frame" x="20" y="58" width="621" height="5"/>
+                                <rect key="frame" x="20" y="58" width="606" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S06-6o-y2V">
                                 <rect key="frame" x="17" y="16" width="25" height="25"/>
@@ -446,7 +459,7 @@ DQ
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
-                                <rect key="frame" x="557" y="69" width="86" height="17"/>
+                                <rect key="frame" x="542" y="69" width="86" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total: 0 bytes" id="4fM-lu-IeX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -494,7 +507,7 @@ DQ
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="uBF-IF-hdz">
-                                <rect key="frame" x="501" y="22" width="66" height="16"/>
+                                <rect key="frame" x="486" y="22" width="66" height="16"/>
                                 <subviews>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="67" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9g-tZ-X4X">
                                         <rect key="frame" x="5" y="3" width="57" height="11"/>
@@ -518,7 +531,7 @@ DQ
                                     <constraint firstAttribute="width" constant="400" id="Njh-fQ-xCA"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="You saved 100GB in total! Tip me or share it:" id="QE9-vR-tSp">
-                                    <font key="font" metaFont="system" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

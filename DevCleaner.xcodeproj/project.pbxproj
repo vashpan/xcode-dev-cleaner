@@ -41,6 +41,7 @@
 		719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */; };
 		71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0B20541BE800B55651 /* XcodeFiles.swift */; };
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
+		71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */; };
 		71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */; };
 		71AE37EF23776AFB009C03BB /* FileManager+DateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */; };
 		71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AE37F0237A1FAE009C03BB /* WebKit.framework */; };
@@ -95,6 +96,7 @@
 		719B25DB205EF9D7007560C0 /* FileManager+DirectorySize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DirectorySize.swift"; sourceTree = "<group>"; };
 		71A21A0B20541BE800B55651 /* XcodeFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFiles.swift; sourceTree = "<group>"; };
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
+		71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMailer.swift; sourceTree = "<group>"; };
 		71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "dev-cleaner.sh"; sourceTree = "<group>"; };
 		71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DateProperties.swift"; sourceTree = "<group>"; };
 		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -213,6 +215,7 @@
 				712F999D20D65229003927BC /* Donations.swift */,
 				718D4ABD23140ABA001E9382 /* Files.swift */,
 				7140B616231A81DC005768A7 /* ReviewRequests.swift */,
+				71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				715E8C3D216566FD0059A2E5 /* Weak.swift in Sources */,
 				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
+				71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */,
 				71012FA9230C8A9E00FDF8ED /* main.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
 				7162E12420966D1500081E4E /* CleaningViewController.swift in Sources */,
