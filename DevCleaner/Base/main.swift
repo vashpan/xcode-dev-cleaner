@@ -23,6 +23,14 @@ import Cocoa
 internal let log = Logger(name: "MainLog", level: .info, toFile: true)
 
 // MARK: Helpers
+private func commandLineDebugEnabled() -> Bool {
+    #if DEBUG
+    return ProcessInfo.processInfo.environment.keys.contains("DCCmdLineDebug")
+    #else
+    return false
+    #endif
+}
+
 private func isRunningFromCommandLine(args: [String]) -> Bool {
     let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
     
@@ -36,7 +44,21 @@ private func isRunningFromCommandLine(args: [String]) -> Bool {
     let isRunningFromXcode = false
     #endif
     
-    return isTTY == 1 && !isRunningFromXcode
+    return commandLineDebugEnabled() || (isTTY == 1 && !isRunningFromXcode)
+}
+
+private func cleanedCommandLineArguments(args: [String]) -> [String] {
+    var resultArgs = args
+    
+    // we have to remove some Xcode stuff here
+    if commandLineDebugEnabled() {
+        if let index = resultArgs.firstIndex(of: "-NSDocumentRevisionsDebugMode") {
+            resultArgs.remove(at: index)
+            resultArgs.remove(at: index) // twice as there's "YES" afterwards
+        }
+    }
+    
+    return resultArgs
 }
 
 // MARK: App Start
@@ -44,9 +66,10 @@ private func isRunningFromCommandLine(args: [String]) -> Bool {
 // save app path to defaults
 Preferences.shared.appFolder = Bundle.main.bundleURL
 
-if isRunningFromCommandLine(args: CommandLine.arguments) {
+let cleanedArgs = cleanedCommandLineArguments(args: CommandLine.arguments)
+if isRunningFromCommandLine(args: cleanedArgs) {
     log.consoleLogging = false // disable console logging to not interfere with console output, file log will still be available
-    CmdLine.shared.start(args: CommandLine.arguments)
+    CmdLine.shared.start(args: cleanedArgs)
 } else {
     let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
 }
