@@ -9,6 +9,11 @@
 import Foundation
 import Cocoa
 
+//
+// An article that tries to describe intricacies of sanbos file access:
+// https://benscheirman.com/2019/10/troubleshooting-appkit-file-permissions/
+//
+
 extension URL {
     private struct SandboxFolderAccessError: Error {
         
@@ -39,7 +44,14 @@ extension URL {
                         throw SandboxFolderAccessError()
                     }
                 } else {
-                    throw SandboxFolderAccessError()
+                    // refresh bookmark as it's stale, it can happen on some system changes, updates etc.
+                    if let bookmarkData = try? self.bookmarkData() {
+                        Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: self)
+                        
+                        return self.acquireAccessFromSandbox(bookmark: bookmarkData, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
+                    } else {
+                        throw SandboxFolderAccessError()
+                    }
                 }
             } catch { // in case of stale bookmark or fail to get one, try again without it
                 return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
