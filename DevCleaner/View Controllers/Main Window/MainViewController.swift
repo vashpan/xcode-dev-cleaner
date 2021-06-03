@@ -64,7 +64,7 @@ final class MainViewController: NSViewController {
     
     @IBOutlet private weak var outlineView: NSOutlineView!
     
-    @IBOutlet private weak var dryModeView: NSView!
+    private weak var dryModeView: NSView!
     
     private var xcodeFiles: XcodeFiles?
     private var loaded = false
@@ -72,8 +72,6 @@ final class MainViewController: NSViewController {
     // MARK: Initialization & overrides
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.dryModeView.wantsLayer = true
         
         // observe preferences
         Preferences.shared.addObserver(self)
@@ -211,6 +209,35 @@ final class MainViewController: NSViewController {
     private func updateButtonsAndLabels() {
         let fileManager = FileManager.default
         
+        // dry mode label
+        if let window = self.view.window {
+            if window.titlebarAccessoryViewControllers.count == 0 {
+                let dryLabelAccessoryVc = NSTitlebarAccessoryViewController()
+                dryLabelAccessoryVc.layoutAttribute = .trailing
+                dryLabelAccessoryVc.view = NSView(frame: NSRect(x: 0.0, y: 0.0, width: 80.0, height: 0.0))
+                
+                let dryModeView = NSView(frame: NSRect(x: 10.0, y: 6.0, width: 60.0, height: 16.0))
+                dryModeView.wantsLayer = true
+                dryModeView.layer?.backgroundColor = NSColor.systemOrange.cgColor
+                dryModeView.layer?.cornerRadius = 4.0
+                dryModeView.layer?.masksToBounds = true
+                
+                let dryModeLabel = NSTextField(labelWithString: "DRY MODE")
+                dryModeLabel.frame = NSRect(x: 0.0, y: -2.0, width: 60.0, height: 16.0)
+                dryModeLabel.font = NSFont.labelFont(ofSize: 9.0)
+                dryModeLabel.textColor = .white
+                dryModeLabel.alignment = .center
+                dryModeLabel.lineBreakMode = .byClipping
+                dryModeView.addSubview(dryModeLabel)
+                
+                dryLabelAccessoryVc.view.addSubview(dryModeView)
+                self.view.window?.addTitlebarAccessoryViewController(dryLabelAccessoryVc)
+                
+                self.dryModeView = dryModeView
+            }
+            self.dryModeView.isHidden = !Preferences.shared.dryRunEnabled
+        }
+        
         // total size & free disk space
         if let xcodeFiles = self.xcodeFiles {
             let totalSizeAvailableToCleanString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
@@ -229,12 +256,6 @@ final class MainViewController: NSViewController {
         
         // all time size / donate button
         self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
-        
-        // dry mode label
-        self.dryModeView.isHidden = !Preferences.shared.dryRunEnabled
-        self.dryModeView.layer?.backgroundColor = NSColor.systemOrange.cgColor
-        self.dryModeView.layer?.cornerRadius = 4.0
-        self.dryModeView.layer?.masksToBounds = true
     }
     
     private func startScan() {
