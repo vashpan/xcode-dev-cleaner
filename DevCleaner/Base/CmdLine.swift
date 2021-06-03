@@ -84,6 +84,8 @@ public final class CmdLine {
                         return .archives
                     case "derived-data":
                         return .derivedData
+                    case "previews":
+                        return .previews
                     case "old-logs":
                         return .logs
                     case "old-documentation":
@@ -153,7 +155,7 @@ public final class CmdLine {
         argsParser.addOption(name: "info", description: "Show all items available to clean.")
         argsParser.addOptionWithValue(name: "clean",
                                       description: "Perform cleaning of given items. Available options: all,device-support,archives,derived-data,old-logs,old-documentation. If you want to clean all, pass \"all\"",
-                                      possibleValues: ["all","device-support","archives","derived-data","old-logs","old-documentation"])
+                                      possibleValues: ["all","device-support","archives","derived-data", "previews","old-logs","old-documentation"])
         argsParser.addOption(name: "--help", description: "Prints this message")
         
         do {
