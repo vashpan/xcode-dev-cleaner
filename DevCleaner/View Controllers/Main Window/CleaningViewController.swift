@@ -144,7 +144,10 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
         DispatchQueue.main.async {
             self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
             
-            ReviewRequests.shared.requestReviewIfNeeded()
+            // ask after a little delay to let user enjoy their finished clean
+            DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 2.0) {
+                ReviewRequests.shared.requestReviewIfNeeded()
+            }
         }
     }
 }

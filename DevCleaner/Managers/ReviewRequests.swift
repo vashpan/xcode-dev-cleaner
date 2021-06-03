@@ -25,7 +25,7 @@ public final class ReviewRequests {
         // desired rules:
         // we show it either if we passed TOTAL of 20GB of cleaned bytes, which may be even on the first run of the app
         // or, if we clean smaller amounts, after 3 cleans
-        // after we pass those 20GB total cleaned amount, we ask everytime we clean basically
+        // after we pass those 20GB total cleaned amount, we ask everytime we clean basically (limits according to system)
         if totalBytesCleaned > ReviewRequests.bytesNeededForReviewRequest || totalCleansPerformedSinceLastRequest >= ReviewRequests.cleansNeededForReviewRequest {
             SKStoreReviewController.requestReview()
             
