@@ -25,7 +25,7 @@ internal let log = Logger(name: "MainLog", level: .info, toFile: true)
 // MARK: Helpers
 private func commandLineDebugEnabled() -> Bool {
     #if DEBUG
-    return ProcessInfo.processInfo.environment.keys.contains("DCCmdLineDebug")
+    return Preferences.shared.envKeyPresent(key: "DCCmdLineDebug")
     #else
     return false
     #endif
