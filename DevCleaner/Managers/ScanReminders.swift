@@ -48,7 +48,7 @@ public final class ScanReminders {
             var result = DateComponents()
             
             #if DEBUG
-            if Preferences.shared.envKeyPresent(key: "NOTIFICATIONS_TEST") {
+            if Preferences.shared.envKeyPresent(key: "DCNotificationsTest") {
                 result.day = 1 // for debug we change our periods to one day
             } else {
                 result = self.dateComponents
