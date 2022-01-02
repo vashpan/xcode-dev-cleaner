@@ -65,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func installCommandLineTool(_ sender: Any) {
-        guard let commandLineToolInstallInstructionsURL = URL(string: "https://github.com/vashpan/xcode-dev-cleaner/blob/2.0.0/Documentation/Command%20Line%20Tool.md") else { return }
+        guard let commandLineToolInstallInstructionsURL = URL(string: "https://github.com/vashpan/xcode-dev-cleaner/blob/2.4.0/Documentation/Command%20Line%20Tool.md") else { return }
         NSWorkspace.shared.open(commandLineToolInstallInstructionsURL)
     }
     
