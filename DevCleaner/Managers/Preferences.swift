@@ -42,7 +42,8 @@ public final class Preferences {
         fileprivate static func folderBookmarkKey(for url: URL) -> String {
             let urlStringData = Data(url.path.utf8)
             let sha256hash = SHA256.hash(data: urlStringData)
-            return "DCFolderBookmark_\(sha256hash.description)"
+            
+            return "DCFolderBookmark_\(sha256hash.hexStr)"
         }
     }
     

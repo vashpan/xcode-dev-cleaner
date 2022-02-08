@@ -31,6 +31,7 @@
 		7162E12D209905BC00081E4E /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7162E12C209905BC00081E4E /* Preferences.swift */; };
 		7164260C20B8903000D47EF2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7164260B20B8903000D47EF2 /* StoreKit.framework */; };
 		716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */; };
+		7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */; };
 		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
 		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
 		717FC51725B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717FC51625B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift */; };
@@ -85,6 +86,7 @@
 		7164260420ACE2EC00D47EF2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7164260B20B8903000D47EF2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+HomeFolder.swift"; sourceTree = "<group>"; };
+		7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Digest+Helpers.swift"; sourceTree = "<group>"; };
 		717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldDocumentationFileEntry.swift; sourceTree = "<group>"; };
 		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		717FC51625B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfacePreviewsFileEntry.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				716667CF221A26BA004D4FC4 /* FileManager+HomeFolder.swift */,
 				71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */,
 				71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */,
+				7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				717FC51725B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift in Sources */,
 				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
+				7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */,
 				7140B61F2323E1F7005768A7 /* HelpViewController.swift in Sources */,
 				717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */,
 				712F999E20D65229003927BC /* Donations.swift in Sources */,
