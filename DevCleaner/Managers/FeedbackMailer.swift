@@ -39,11 +39,20 @@ public final class FeedbackMailer {
         let osInfoString = "macOS \(osVersionInfo)"
         let macModelIdentifier = self.macModelIdentifier() ?? "-"
         let devFolderPath = Files.userDeveloperFolder.path
-        let hasAccessToDeveloperFolder = fm.isReadableFile(atPath: devFolderPath) && fm.isWritableFile(atPath: devFolderPath)
+        let isDevFolderExists = XcodeFiles.isDeveloperFolderExists()
+        let developerFolderReadable = fm.isReadableFile(atPath: devFolderPath)
+        let developerFolderWriteable = fm.isWritableFile(atPath: devFolderPath)
+        let customDerivedDataFolder = Preferences.shared.customDerivedDataFolder?.path ?? "-"
+        let customArchivesFolder = Preferences.shared.customArchivesFolder?.path ?? "-"
         
         return """
             DevCleaner \(appVersion) (\(appBuildNumber))
-            Access to '~/Library/Developer' folder: \(hasAccessToDeveloperFolder ? "YES" : "NO")
+            Does '~/Library/Developer' folder exists: \(isDevFolderExists ? "YES" : "NO")
+            Can read '~/Library/Developer' folder: \(developerFolderReadable ? "YES" : "NO")
+            Can write '~/Library/Developer' folder: \(developerFolderWriteable ? "YES" : "NO")
+            
+            Custom derived data folder: \(customDerivedDataFolder)
+            Custom archives folder: \(customArchivesFolder)
             
             System: \(osInfoString)
             Mac model: \(macModelIdentifier)

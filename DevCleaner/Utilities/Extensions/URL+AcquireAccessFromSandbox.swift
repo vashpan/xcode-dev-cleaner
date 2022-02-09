@@ -41,6 +41,7 @@ extension URL {
                     if doWeHaveAccess(for: bookmarkedUrl.path) {
                         return bookmarkedUrl
                     } else {
+                        log.warning("URL+AcquireAccessFromSandbox: Access denied after using bookmark but bookmark is not stale!")
                         throw SandboxFolderAccessError()
                     }
                 } else {
@@ -50,6 +51,7 @@ extension URL {
                         
                         return self.acquireAccessFromSandbox(bookmark: bookmarkData, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
                     } else {
+                        log.warning("URL+AcquireAccessFromSandbox: Bookmark was stale, but cannot refresh a bookmark for some reason!")
                         throw SandboxFolderAccessError()
                     }
                 }
@@ -68,7 +70,7 @@ extension URL {
         openPanel.allowsOtherFileTypes = false
         openPanel.canChooseDirectories = true
         
-        openPanel.runModal()
+        let openPanelResponse = openPanel.runModal()
         
         // check if we get proper file & save bookmark to it, if not, repeat
         if let folderUrl = openPanel.urls.first {
@@ -95,6 +97,8 @@ extension URL {
                 return nil
             }
         } else {
+            log.warning("URL+AcquireAccessFromSandbox: Didn't get folder from Open dialogue! Modal response: \(openPanelResponse)")
+            
             // if we allow cancel, then legitimately return
             if allowCancel {
                 return nil

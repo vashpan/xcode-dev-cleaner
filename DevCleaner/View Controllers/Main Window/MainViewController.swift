@@ -185,7 +185,7 @@ final class MainViewController: NSViewController {
             // start initial scan
             self.startScan()
         } else {
-            log.warning("MainViewController: Cannot create XcodeFiles instance!")
+            log.warning("MainViewController: Cannot acquire \"Developer\" folder access! Showing access warning!")
             
             self.enableAccessWarnings(title: "Access to \"~/Developer\" folder is needed",
                                       content: "DevCleaner needs permission to your Developer folder to scan Xcode cache files & archives",
