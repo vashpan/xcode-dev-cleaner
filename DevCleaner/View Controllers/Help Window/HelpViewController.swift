@@ -17,7 +17,11 @@ final class HelpViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        // [1] workaround to prevent "blinking" of help background when in dark mode:
+        //     https://stackoverflow.com/a/67674061
+        
         // configuration
+        self.helpWebView.setValue(true as NSNumber, forKey: "drawsTransparentBackground") // [1]
         self.helpWebView.navigationDelegate = self
         
         // load manual HTML
