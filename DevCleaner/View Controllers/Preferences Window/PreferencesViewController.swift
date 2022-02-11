@@ -76,7 +76,7 @@ final class PreferencesViewController: NSViewController {
         // check if we get proper file & save bookmark to it
         if let folderUrl = openPanel.urls.first {
             if doWeHaveAccess(for: folderUrl.path) {
-                if let bookmarkData = try? folderUrl.bookmarkData() {
+                if let bookmarkData = try? folderUrl.bookmarkData(options: [.withSecurityScope]) {
                     Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: folderUrl)
                     return folderUrl
                 } else {

@@ -20,14 +20,19 @@ extension URL {
     }
     
     public func acquireAccessFromSandbox(bookmark: Data? = nil, allowCancel: Bool = true, openPanelMessage: String = "Application needs permission to access this folder") -> URL? {
-        func doWeHaveAccess(for path: String) -> Bool {
+        func doWeHaveAccess(for url: URL) -> Bool {
             let fm = FileManager.default
             
-            return fm.isReadableFile(atPath: path) && fm.isWritableFile(atPath: path)
+            let isAccesible: Bool
+            let _ = url.startAccessingSecurityScopedResource()
+            isAccesible = fm.isReadableFile(atPath: url.path) && fm.isWritableFile(atPath: url.path)
+            url.stopAccessingSecurityScopedResource()
+            
+            return isAccesible
         }
         
         // check if we already have access, then we don't need to show the dialog or use security bookmarks
-        if doWeHaveAccess(for: self.path) {
+        if doWeHaveAccess(for: self) {
             return self
         }
         
@@ -35,10 +40,10 @@ extension URL {
         if let bookmarkData = bookmark {
             do {
                 var isBookmarkStale = false
-                let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, bookmarkDataIsStale: &isBookmarkStale)
+                let bookmarkedUrl = try URL(resolvingBookmarkData: bookmarkData, options: [.withSecurityScope], bookmarkDataIsStale: &isBookmarkStale)
                 
                 if !isBookmarkStale {
-                    if doWeHaveAccess(for: bookmarkedUrl.path) {
+                    if doWeHaveAccess(for: bookmarkedUrl) {
                         return bookmarkedUrl
                     } else {
                         log.warning("URL+AcquireAccessFromSandbox: Access denied after using bookmark but bookmark is not stale!")
@@ -46,7 +51,7 @@ extension URL {
                     }
                 } else {
                     // refresh bookmark as it's stale, it can happen on some system changes, updates etc.
-                    if let bookmarkData = try? self.bookmarkData() {
+                    if let bookmarkData = try? self.bookmarkData(options: [.withSecurityScope]) {
                         Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: self)
                         
                         return self.acquireAccessFromSandbox(bookmark: bookmarkData, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
@@ -55,7 +60,9 @@ extension URL {
                         throw SandboxFolderAccessError()
                     }
                 }
-            } catch { // in case of stale bookmark or fail to get one, try again without it
+            } catch(let error) { // in case of stale bookmark or fail to get one, try again without it
+                log.warning("URL+AcquireAccessFromSandbox: Failed to resolve bookmark: \(error.localizedDescription)")
+                
                 return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
             }
         }
@@ -82,14 +89,15 @@ extension URL {
                 return self.acquireAccessFromSandbox(bookmark: nil, allowCancel: allowCancel, openPanelMessage: openPanelMessage)
             }
             
-            if doWeHaveAccess(for: folderUrl.path) {
-                if let bookmarkData = try? folderUrl.bookmarkData() {
+            if doWeHaveAccess(for: folderUrl) {
+                if let bookmarkData = try? folderUrl.bookmarkData(options: [.withSecurityScope]) {
                     Preferences.shared.setFolderBookmark(bookmarkData: bookmarkData, for: self)
                     
                     return folderUrl
                 }
             } else {
                 // well, we tried but we can't get access to this folder
+                log.error("URL+AcquireAccessFromSandbox: Can't access folder after selecting it from Open panel, no access: \(self.path)")
                 
                 // delete folder bookmark just in case
                 Preferences.shared.setFolderBookmark(bookmarkData: nil, for: self)
@@ -97,7 +105,7 @@ extension URL {
                 return nil
             }
         } else {
-            log.warning("URL+AcquireAccessFromSandbox: Didn't get folder from Open dialogue! Modal response: \(openPanelResponse)")
+            log.warning("URL+AcquireAccessFromSandbox: Didn't get folder from Open panel! Modal response: \(openPanelResponse)")
             
             // if we allow cancel, then legitimately return
             if allowCancel {
