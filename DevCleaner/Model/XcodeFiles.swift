@@ -597,7 +597,7 @@ final public class XcodeFiles {
         // TODO: Probably use different technique for removing IB previews, as those simulators can't be just all removed,
         //       they probably follow the rules for all installed simulators, depending on runtime etc.
         
-        let simulatorFolderNames = ["Simulator Devices", "Simulator%20Devices"]
+        let simulatorFolderNames = [#"Simulator Devices"#, #"Simulator%20Devices"#]
         for previewType in InterfacePreviewsFileEntry.PreviewType.allCases {
             let previewsFolderName: String
             switch previewType {
@@ -610,8 +610,14 @@ final public class XcodeFiles {
             let previewsLocation = xcodeUserDataLocation.appendingPathComponent(previewsFolderName)
             
             for simulatorFolderName in simulatorFolderNames {
-                let simulatorFolderPath = previewsLocation.appendingPathComponent(simulatorFolderName)
-                previewsEntry.addPath(path: simulatorFolderPath)
+                let simulatorsFolderPath = previewsLocation.appendingPathComponent(simulatorFolderName)
+                
+                // get all simulators under this path
+                if let simulatorsLocations = try? FileManager.default.contentsOfDirectory(at: simulatorsFolderPath, includingPropertiesForKeys: nil) {
+                    for specificSimulatorPath in simulatorsLocations {
+                        previewsEntry.addPath(path: specificSimulatorPath)
+                    }
+                }
             }
             
             entries.append(previewsEntry)
