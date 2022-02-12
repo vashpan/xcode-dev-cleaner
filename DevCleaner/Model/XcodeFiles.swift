@@ -42,6 +42,12 @@ final public class XcodeFiles {
         case deviceSupport, archives, derivedData, previews, logs, oldDocumentation
     }
     
+    // MARK: Constants
+    private static let scanFileEnumationOptions: FileManager.DirectoryEnumerationOptions = [
+        .skipsHiddenFiles,
+        .skipsPackageDescendants
+    ]
+    
     // MARK: Properties
     private var userDeveloperFolderUrl: URL
     private var customDerivedDataFolderUrl: URL?
@@ -443,7 +449,7 @@ final public class XcodeFiles {
             let entryUrl = xcodeLocation.appendingPathComponent(osEntry.path)
             
             // scan for versions
-            if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil) {
+            if let symbols = try? FileManager.default.contentsOfDirectory(at: entryUrl, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
                 var deviceSupportEntries = [DeviceSupportFileEntry]()
                 for symbolUrl in symbols {
                     if let deviceSupportEntry = self.deviceSupportEntry(from: symbolUrl, osLabel: osEntry.entry.label) {
@@ -510,9 +516,9 @@ final public class XcodeFiles {
         // gather various projects, create entries for each of them
         var archiveInfos = [String : [ArchiveFileEntry]]()
         for archivesLocation in archiveLocations {
-            if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil) {
+            if let datesFolders = try? FileManager.default.contentsOfDirectory(at: archivesLocation, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
                 for dateFolder in datesFolders {
-                    if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil) {
+                    if let xcarchives = try? FileManager.default.contentsOfDirectory(at: dateFolder, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
                         for xcarchive in xcarchives {
                             if let xcarchiveEntry = self.archiveFileEntry(from: xcarchive) {
                                 if archiveInfos.keys.contains(xcarchiveEntry.bundleName) {
@@ -570,7 +576,7 @@ final public class XcodeFiles {
         // scan for derived data projects
         var results: [XcodeFileEntry] = []
         for derivedDataLocation in derivedDataLocations {
-            if let projectsFolders = try? FileManager.default.contentsOfDirectory(at: derivedDataLocation, includingPropertiesForKeys: nil) {
+            if let projectsFolders = try? FileManager.default.contentsOfDirectory(at: derivedDataLocation, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
                 for projectFolder in projectsFolders {
                     // ignore "ModuleCache" folder
                     if projectFolder.lastPathComponent == "ModuleCache" {
@@ -613,7 +619,7 @@ final public class XcodeFiles {
                 let simulatorsFolderPath = previewsLocation.appendingPathComponent(simulatorFolderName)
                 
                 // get all simulators under this path
-                if let simulatorsLocations = try? FileManager.default.contentsOfDirectory(at: simulatorsFolderPath, includingPropertiesForKeys: nil) {
+                if let simulatorsLocations = try? FileManager.default.contentsOfDirectory(at: simulatorsFolderPath, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
                     for specificSimulatorPath in simulatorsLocations {
                         previewsEntry.addPath(path: specificSimulatorPath)
                     }
@@ -662,7 +668,7 @@ final public class XcodeFiles {
         
         // get all log entries from logs folder
         var logs = [LogEntry]()
-        if let logFiles = try? FileManager.default.contentsOfDirectory(at: logsLocation, includingPropertiesForKeys: nil) {
+        if let logFiles = try? FileManager.default.contentsOfDirectory(at: logsLocation, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
             for logFile in logFiles {
                 if let logEntry = LogEntry(path: logFile) {
                     logs.append(logEntry)
