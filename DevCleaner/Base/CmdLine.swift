@@ -84,8 +84,6 @@ public final class CmdLine {
                         return .archives
                     case "derived-data":
                         return .derivedData
-                    case "previews":
-                        return .previews
                     case "old-logs":
                         return .logs
                     case "old-documentation":

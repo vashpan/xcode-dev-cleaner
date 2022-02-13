@@ -34,7 +34,6 @@
 		7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */; };
 		717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */; };
 		717AB6B620C71F4D0096743C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717AB6B520C71F4D0096743C /* LoadingView.swift */; };
-		717FC51725B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717FC51625B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift */; };
 		7185E5D320D0775200C1C918 /* DonationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7185E5D220D0775200C1C918 /* DonationViewController.swift */; };
 		718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */; };
 		718D4ABE23140ABA001E9382 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = 718D4ABD23140ABA001E9382 /* Files.swift */; };
@@ -89,7 +88,6 @@
 		7169D2AF27B32A8E00882E03 /* Digest+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Digest+Helpers.swift"; sourceTree = "<group>"; };
 		717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldDocumentationFileEntry.swift; sourceTree = "<group>"; };
 		717AB6B520C71F4D0096743C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		717FC51625B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfacePreviewsFileEntry.swift; sourceTree = "<group>"; };
 		7185E5D220D0775200C1C918 /* DonationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonationViewController.swift; sourceTree = "<group>"; };
 		718788E220E9169D007375AA /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		718D4ABB2311DE66001E9382 /* ArgumentsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentsParser.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */,
 				714AB65E22DA87FA00A7FBB7 /* DeviceLogsFileEntry.swift */,
 				717A9F1A22DBAF9300682A0A /* OldDocumentationFileEntry.swift */,
-				717FC51625B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -457,7 +454,6 @@
 				7100BEE222F6E771002E82B2 /* Signposts.swift in Sources */,
 				716667D0221A26BA004D4FC4 /* FileManager+HomeFolder.swift in Sources */,
 				718D4ABE23140ABA001E9382 /* Files.swift in Sources */,
-				717FC51725B4DABD00FA93EB /* InterfacePreviewsFileEntry.swift in Sources */,
 				7100BEE322F6E771002E82B2 /* Profiler.swift in Sources */,
 				71A21A0C20541BE800B55651 /* XcodeFiles.swift in Sources */,
 				7169D2B027B32A8E00882E03 /* Digest+Helpers.swift in Sources */,

@@ -39,7 +39,7 @@ public protocol XcodeFilesDeleteDelegate: AnyObject {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int, CaseIterable {
-        case deviceSupport, archives, derivedData, previews, logs, oldDocumentation
+        case deviceSupport, archives, derivedData, logs, oldDocumentation
     }
     
     // MARK: Constants
@@ -89,7 +89,6 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: true),
             .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
-            .previews: XcodeFileEntry(label: "UI Previews", tooltipText: "Cache for user interface previews", tooltip: true, selected: false),
             .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: true),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
@@ -416,9 +415,6 @@ final public class XcodeFiles {
             
             case .derivedData:
                 entry.addChildren(items: self.scanDerivedDataLocations())
-        
-            case .previews:
-                entry.addChildren(items: self.scanPreviewsLocations())
                 
             case .logs:
                 entry.addChildren(items: self.scanLogsLocations())
@@ -593,43 +589,6 @@ final public class XcodeFiles {
         }
         
         return results
-    }
-    
-    private func scanPreviewsLocations() -> [XcodeFileEntry] {
-        let xcodeUserDataLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/UserData")
-        
-        var entries = [InterfacePreviewsFileEntry]()
-        
-        // TODO: Probably use different technique for removing IB previews, as those simulators can't be just all removed,
-        //       they probably follow the rules for all installed simulators, depending on runtime etc.
-        
-        let simulatorFolderNames = [#"Simulator Devices"#, #"Simulator%20Devices"#]
-        for previewType in InterfacePreviewsFileEntry.PreviewType.allCases {
-            let previewsFolderName: String
-            switch previewType {
-                case .swiftUIPreviews: previewsFolderName = "Previews"
-            }
-            
-            let previewsEntry = InterfacePreviewsFileEntry(type: previewType, selected: false)
-            
-            // get all simulator paths
-            let previewsLocation = xcodeUserDataLocation.appendingPathComponent(previewsFolderName)
-            
-            for simulatorFolderName in simulatorFolderNames {
-                let simulatorsFolderPath = previewsLocation.appendingPathComponent(simulatorFolderName)
-                
-                // get all simulators under this path
-                if let simulatorsLocations = try? FileManager.default.contentsOfDirectory(at: simulatorsFolderPath, includingPropertiesForKeys: nil, options: Self.scanFileEnumationOptions) {
-                    for specificSimulatorPath in simulatorsLocations {
-                        previewsEntry.addPath(path: specificSimulatorPath)
-                    }
-                }
-            }
-            
-            entries.append(previewsEntry)
-        }
-        
-        return entries
     }
     
     private func scanLogsLocations() -> [XcodeFileEntry] {

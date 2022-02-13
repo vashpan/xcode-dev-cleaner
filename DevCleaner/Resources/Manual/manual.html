@@ -19,7 +19,7 @@
         <p>Xcode could store massive amount of data in <code>~/Developer</code> folder. Most of those are cached files & symbols are not reclaimed over time and could consume a large amount of your storage, which is especially important if you have relatively small SSD drive.</p>
         <p>DevCleaner gives you an easy way to inspect auto-generated files and clean them if necessary. It could also remind you about scan after a while.</p>
         <p>Please note that <b>this application is relying on internal folder structures and undocumented features</b>. It could stop working with newer versions of Xcode! I tried to make sure this application is safe, but if you want to be sure, please <b>make backup before use it</b>.</p>
-        <p>Currently it is tested with Xcode 12.x.</p>
+        <p>Currently it is tested with Xcode 13.x.</p>
         <p>In case of any issues, please first consult <b>FAQ section at the end of this manual!</b></p>
 
         <h3>What it cleans?</h3>
@@ -36,9 +36,6 @@
         <h4>Derived Data</h4>
         <p>When you develop your app, Xcode caches your symbols, dependencies, logs, text - all to develop fast and to keep code completion working. Unfortunately this data tend to take a lot of space, especially for big projects. Also, they're not deleted automatically. This may be especially problematic if you open a lot of various projects.</p>
         <p>Removing derived data is not harmful as Xcode can recreate them when you open project again. Although it's not recommended for projects that you work on often. For this reason nothing is selected by default.</p>
-        
-        <h4>UI Previews</h4>
-        <p>Modern Xcode can preview your UI as you design it. It's especially important and rich with SwiftUI. Unfortunately, UI previews are working based on simulators. If we have a lot of different previews, for different devices, they can quickly sum up to a significant amount of space.</p>
         
         <h4>Old Simulator & Device Logs</h4>
         <p>Each version of Xcode appears to have a new version of database that holds logs from devices & simulators. Those databases are migrated with content of the previous ones. If you use Xcode for a long time, it would accumulate to significant amount of unused data.</p>
@@ -132,7 +129,7 @@ OPTIONS:
 
     info
         Show all items available to clean.
-    clean <all,device-support,archives,derived-data,previews,old-logs,old-documentation>
+    clean <all,device-support,archives,derived-data,old-logs,old-documentation>
         Perform cleaning of given items. Available options: all,device-support,archives,derived-data,previews,old-logs,old-documentation. If you want to clean all, pass "all"
     --help
         Prints this message
