@@ -107,6 +107,19 @@ final public class XcodeFiles {
         return FileManager.default.fileExists(atPath: developerFolder.path)
     }
     
+    public static func isXcodeRunning() -> Bool {
+        #if DEBUG
+        return false
+        #else
+        
+        let runningXcodeApp = NSWorkspace.shared.runningApplications.first {
+            return $0.bundleIdentifier == "com.apple.dt.Xcode"
+        }
+        
+        return runningXcodeApp != nil
+        #endif
+    }
+    
     private static func checkForXcodeDataFolders(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)

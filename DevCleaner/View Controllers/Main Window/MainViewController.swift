@@ -102,6 +102,18 @@ final class MainViewController: NSViewController {
         // UI refresh
         self.updateButtonsAndLabels()
         
+        // notify about Xcode being open
+        if XcodeFiles.isXcodeRunning() {
+            Alerts.warningAlert(title: "Xcode is open",
+                                message: "DevCleaner can run with Xcode being opened, but cleaning some files may affect Xcode functions and maybe even cause its crash.",
+                                okButtonText: "Continue",
+                                cancelButtonText: "Close DevCleaner") { messageResult in
+                if messageResult == .alertSecondButtonReturn {
+                    NSApplication.shared.terminate(nil)
+                }
+            }
+        }
+        
         self.view.window?.delegate = self
     }
     
@@ -355,10 +367,11 @@ final class MainViewController: NSViewController {
         let dryRunEnabled = Preferences.shared.dryRunEnabled
         let warningMessage = dryRunEnabled ? "DevCleaner is running in \"dry run\" mode. It means that files won't be deleted and nothing will change. If you want to clean files for real, go to \"Preferences\" and disable dry run mode."
                                            : "Are you sure to proceed? This can't be undone."
-        Alerts.warningAlert(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean", window: self.view.window) { (messageResult) in
+        Alerts.warningAlert(title: "Clean Xcode cache files", message: warningMessage, okButtonText: "Clean", window: self.view.window) { messageResult in
             if messageResult == .alertFirstButtonReturn {
                 self.performSegue(withIdentifier: Segue.showCleaningView.segueIdentifier, sender: nil)
                 
+                // in debug "dry" cleaned bytes are added to total bytes clean
                 #if DEBUG
                 Preferences.shared.totalBytesCleaned += xcodeFiles.selectedSize
                 #else
