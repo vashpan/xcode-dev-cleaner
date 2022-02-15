@@ -198,7 +198,7 @@ final public class XcodeFiles {
         
         let device: String?
         let version: Version
-        let build: String?
+        let buildString: String?
         let creationDate: Date = FileManager.default.dateCreated(for: url)
         let arch: String?
         
@@ -208,14 +208,14 @@ final public class XcodeFiles {
             version = foundVersion
             
             if splitted.count > 1 {
-                build = String(splitted[1])
+                buildString = String(splitted[1])
                 if splitted.count > 2 {
                     arch = String(splitted[2])
                 } else {
                     arch = nil
                 }
             } else {
-                build = nil
+                buildString = nil
                 arch = nil
             }
         } else if splitted.count > 1, let foundVersion = Version(describing: String(splitted[1])) { // if version is second, we may have extra device info
@@ -223,14 +223,14 @@ final public class XcodeFiles {
             version = foundVersion
             
             if splitted.count > 2 {
-                build = String(splitted[2])
+                buildString = String(splitted[2])
                 if splitted.count > 3 {
                     arch = String(splitted[3])
                 } else {
                     arch = nil
                 }
             } else {
-                build = nil
+                buildString = nil
                 arch = nil
             }
         } else {
@@ -241,7 +241,7 @@ final public class XcodeFiles {
         return DeviceSupportFileEntry(device: device,
                                       osType: DeviceSupportFileEntry.OSType(label: osLabel),
                                       version: version,
-                                      build: build,
+                                      build: (buildString != nil) ? AppleBuild(string: buildString!) : nil,
                                       date: creationDate,
                                       arch: arch,
                                       selected: true)
@@ -470,7 +470,14 @@ final public class XcodeFiles {
                 
                 // sort
                 deviceSupportEntries = deviceSupportEntries.sorted { (lhs, rhs) -> Bool in
-                    lhs.version > rhs.version
+                    if lhs.version == rhs.version {
+                        let lhsBuild = lhs.build ?? AppleBuild.empty
+                        let rhsBuild = rhs.build ?? AppleBuild.empty
+                        
+                        return lhsBuild > rhsBuild
+                    } else {
+                        return lhs.version > rhs.version
+                    }
                 }
                 
                 // merge (in case we have different architectures)

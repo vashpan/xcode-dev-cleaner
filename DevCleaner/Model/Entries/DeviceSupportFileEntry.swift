@@ -60,12 +60,12 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
     public let device: String?
     public let osType: OSType
     public let version: Version
-    public let build: String?
+    public let build: AppleBuild?
     public let date: Date
     public let architecture: String?
     
     // MARK: Initialization
-    public init(device: String?, osType: OSType, version: Version, build: String?, date: Date, arch: String?, selected: Bool) {
+    public init(device: String?, osType: OSType, version: Version, build: AppleBuild?, date: Date, arch: String?, selected: Bool) {
         self.device = device
         self.osType = osType
         self.version = version
@@ -73,7 +73,7 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         self.date = date
         self.architecture = arch
         
-        let label = "\(self.osType.description) \(self.version) \(self.build ?? "")"
+        let label = "\(self.osType.description) \(self.version) \(self.build ?? AppleBuild.empty)"
         let tooltip = label + " " + DateFormatter.localizedString(from: self.date, dateStyle: .medium, timeStyle: .none)
         
         super.init(label: label, tooltipText: tooltip, icon: DeviceSupportFileEntry.icon(for: osType, version: version), tooltip: true, selected: selected)

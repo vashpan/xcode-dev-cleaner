@@ -27,15 +27,6 @@ public struct Version {
     public let minor: UInt
     public let patch: UInt?
     
-    public var description: String {
-        var result = "\(self.major).\(self.minor)"
-        if let patch = self.patch {
-            result += ".\(patch)"
-        }
-        
-        return result
-    }
-    
     // MARK: Initialization
     init(major: UInt, minor: UInt, patch: UInt? = nil) {
         self.major = major
@@ -85,7 +76,7 @@ public struct Version {
     }
 }
 
-// MARK: Comparable implementation
+// MARK: - Comparable implementation
 extension Version: Comparable {
     public static func ==(lhs: Version, rhs: Version) -> Bool {
         if lhs.major == rhs.major {
@@ -118,8 +109,15 @@ extension Version: Comparable {
     }
 }
 
-// MARK: CustomStringConvertible conformance
+// MARK: - CustomStringConvertible conformance
 extension Version: CustomStringConvertible {
-    
+    public var description: String {
+        var result = "\(self.major).\(self.minor)"
+        if let patch = self.patch {
+            result += ".\(patch)"
+        }
+        
+        return result
+    }
 }
 
