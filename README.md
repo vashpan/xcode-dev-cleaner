@@ -63,4 +63,4 @@ This application is my first macOS app, so feel free to give me some feedback or
 
 Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, as copyright holder can submit it to the Mac App Store.
 
-Copyright © 2020 One Minute Games Konrad Kołakowski.
+Copyright © 2018-2022 One Minute Games Konrad Kołakowski.
