@@ -2,7 +2,7 @@
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
-*Currently tested with macOS 10.15 and Xcode 11. Should support Xcode 12*
+*Currently tested with macOS 12 and Xcode 13. Should support earlier Xcode versions as well*
 
 Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
 
