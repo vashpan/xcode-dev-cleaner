@@ -106,8 +106,12 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 }
                 
             case .macOS:
-                result = .image(name: "OS/macOS/Generic")
-            
+                if version.major >= 12 && version.major <= 13 {
+                    result = .image(name: "OS/macOS/\(version.major)")
+                } else {
+                    result = .image(name: "OS/macOS/Generic")
+                }
+                
             default:
                 result = .image(name: "OS/iOS/Generic")
         }
