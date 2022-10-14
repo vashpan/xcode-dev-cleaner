@@ -198,6 +198,15 @@ open class XcodeFileEntry: NSObject {
     }
     
     @discardableResult
+    public func recalculateSizeIfNeeded() -> Size? {
+        guard case .value(let size) = self.size else {
+            return self.recalculateSize()
+        }
+        
+        return .value(size)
+    }
+    
+    @discardableResult
     public func recalculateSelection() -> Selection {
         var result: Selection
         
