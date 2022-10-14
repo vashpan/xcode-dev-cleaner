@@ -23,7 +23,7 @@ import Cocoa
 
 open class XcodeFileEntry: NSObject {
     // MARK: Types
-    public enum Size {
+    public enum Size: Comparable {
         case unknown, value(Int64)
         
         public var numberOfBytes: Int64? {

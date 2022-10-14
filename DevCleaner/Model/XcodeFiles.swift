@@ -438,7 +438,7 @@ final public class XcodeFiles {
         }
         
         // check for those files sizes
-        entry.recalculateSize()
+        entry.recalculateSizeIfNeeded()
         
         // check for selections
         entry.recalculateSelection()
@@ -606,6 +606,15 @@ final public class XcodeFiles {
                     }
                 }
             }
+        }
+        
+        // sort
+        for entry in results {
+            entry.recalculateSize()
+        }
+        
+        results = results.sorted { lhs, rhs in
+            return lhs.size > rhs.size
         }
         
         return results
