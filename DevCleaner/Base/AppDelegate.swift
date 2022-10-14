@@ -61,7 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
         
-        NSWorkspace.shared.openFile(logsUrl.path)
+        NSWorkspace.shared.open(logsUrl)
     }
     
     @IBAction func installCommandLineTool(_ sender: Any) {
