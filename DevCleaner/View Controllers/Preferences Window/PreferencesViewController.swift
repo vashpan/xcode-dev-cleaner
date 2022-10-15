@@ -32,6 +32,7 @@ final class PreferencesViewController: NSViewController {
     @IBOutlet private weak var notificationsPeriodPopUpButton: NSPopUpButton!
     
     @IBOutlet private weak var dryRunEnabledButton: NSButton!
+    @IBOutlet private weak var xcodeWarningButton: NSButton!
     
     @IBOutlet private weak var customDerivedDataTextField: NSTextField!
     @IBOutlet private weak var customArchivesTextField: NSTextField!
@@ -50,6 +51,7 @@ final class PreferencesViewController: NSViewController {
         self.setNotificationsEnabled(Preferences.shared.notificationsEnabled)
         self.setNotificationsPeriod(Preferences.shared.notificationsPeriod)
         self.setDryRunEnabled(Preferences.shared.dryRunEnabled)
+        self.setXcodeWarningEnabled(Preferences.shared.showXcodeWarning)
         self.setCustomDerivedData(folder: Preferences.shared.customDerivedDataFolder)
         self.setCustomArchives(folder: Preferences.shared.customArchivesFolder)
     }
@@ -179,6 +181,10 @@ final class PreferencesViewController: NSViewController {
         self.dryRunEnabledButton.state = value ? .on : .off
     }
     
+    private func setXcodeWarningEnabled(_ value: Bool) {
+        self.xcodeWarningButton.state = value ? .on : .off
+    }
+    
     private func setCustomDerivedData(folder: URL?) {
         if let customFolder = folder {
             self.customDerivedDataTextField.stringValue = customFolder.path
@@ -251,6 +257,14 @@ final class PreferencesViewController: NSViewController {
         self.setDryRunEnabled(enabled)
         
         Preferences.shared.dryRunEnabled = enabled
+    }
+    
+    @IBAction func updateXcodeWarning(_ sender: NSButton) {
+        let enabled = sender.state == .on
+        
+        self.setXcodeWarningEnabled(enabled)
+        
+        Preferences.shared.showXcodeWarning = enabled
     }
     
     @IBAction func changeDerivedDataFolder(_ sender: NSPopUpButton) {

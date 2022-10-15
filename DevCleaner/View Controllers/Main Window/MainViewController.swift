@@ -103,7 +103,8 @@ final class MainViewController: NSViewController {
         self.updateButtonsAndLabels()
         
         // notify about Xcode being open
-        if XcodeFiles.isXcodeRunning() {
+        let showXcodeWarning = Preferences.shared.showXcodeWarning
+        if showXcodeWarning && XcodeFiles.isXcodeRunning() {
             Alerts.warningAlert(title: "Xcode is open",
                                 message: "DevCleaner can run with Xcode being opened, but cleaning some files may affect Xcode functions and maybe even cause its crash.",
                                 okButtonText: "Continue",

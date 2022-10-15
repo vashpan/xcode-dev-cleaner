@@ -38,6 +38,7 @@ public final class Preferences {
         public static let customArchivesFolder = "DCCustomArchivesFolderKey"
         public static let customDerivedDataFolder = "DCCustomDerivedDataFolderKey"
         public static let appFolder = "DCAppFolder"
+        public static let showXcodeWarning = "DCShowXcodeWarning"
         
         fileprivate static func folderBookmarkKey(for url: URL) -> String {
             let urlStringData = Data(url.path.utf8)
@@ -221,6 +222,21 @@ public final class Preferences {
         set {
             UserDefaults.standard.set(newValue, forKey: Keys.appFolder)
             self.informAllObserversAboutChange(keyThatChanged: Keys.appFolder)
+        }
+    }
+    
+    public var showXcodeWarning: Bool {
+        get {
+            guard UserDefaults.standard.object(forKey: Keys.showXcodeWarning) != nil else {
+                return true
+            }
+            
+            return UserDefaults.standard.bool(forKey: Keys.showXcodeWarning)
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.showXcodeWarning)
+            self.informAllObserversAboutChange(keyThatChanged: Keys.showXcodeWarning)
         }
     }
     
