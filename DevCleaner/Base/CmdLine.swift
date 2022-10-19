@@ -155,7 +155,7 @@ public final class CmdLine {
         let argsParser = ArgumentsParser(toolName: "dev-cleaner", description: "Reclaims storage that Xcode stores in caches and old files")
         argsParser.addOption(name: "info", description: "Show all items available to clean.")
         argsParser.addOptionWithValue(name: "clean",
-                                      description: "Perform cleaning of given items. Available options: all,device-support,archives,derived-data,old-logs,old-documentation. If you want to clean all, pass \"all\"",
+                                      description: "Perform cleaning of given items. Available options: all, device-support, archives, derived-data, docs-cache, old-logs, old-documentation. If you want to clean all, pass \"all\" or nothing",
                                       possibleValues: ["all","device-support","archives","derived-data","docs-cache","old-logs","old-documentation"])
         argsParser.addOption(name: "--help", description: "Prints this message")
         
