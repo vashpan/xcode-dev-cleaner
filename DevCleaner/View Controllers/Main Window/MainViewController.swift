@@ -257,7 +257,7 @@ final class MainViewController: NSViewController {
             let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
             let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
             self.totalBytesTextField.stringValue = "Total: \(totalSizeAvailableToCleanString)"
-            self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean, \(bytesFreeOnDiskString) free on disk"
+            self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean; \(bytesFreeOnDiskString) free on disk"
         }
         
         // selected size
