@@ -2,7 +2,7 @@
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
-*Currently tested with macOS 12 and Xcode 13. Should support earlier Xcode versions as well*
+*Currently tested with macOS 12.x and Xcode 14.x. Should support earlier Xcode versions as well*
 
 Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
 
@@ -40,6 +40,11 @@ This is the major "cache" part of Xcode files, where autocompletion data, logs, 
 The point is that it could be regenerated if necessary. Also some older projects could be removed completely because its rather unusual that 
 we would use them again.
 
+### Documentation Cache
+
+Modern Xcodes are caching documentation that is accessed via the web. Unfortunately older caches are not cleaned up by Xcode and significant 
+amount of space may be wasted due to that.
+
 ### Old Simulator & Device Logs
 
 Old device logs & crashes databases, only most recent ones are needed. It seems that new versions of Xcodes migrates old logs database, but keeping older ones on disk.
@@ -59,8 +64,10 @@ Website: http://www.one-minute-games.com
 
 ## Contribution
 
-This application is my first macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, maybe some caches I missed, let me know as well in issues.
+This application is my first macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, 
+maybe some caches I missed, let me know as well in issues.
 
-Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, as copyright holder can submit it to the Mac App Store.
+Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, 
+as copyright holder can submit it to the Mac App Store.
 
 Copyright © 2018-2022 One Minute Games Konrad Kołakowski.

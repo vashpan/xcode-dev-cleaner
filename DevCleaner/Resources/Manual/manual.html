@@ -37,6 +37,11 @@
         <p>When you develop your app, Xcode caches your symbols, dependencies, logs, text - all to develop fast and to keep code completion working. Unfortunately this data tend to take a lot of space, especially for big projects. Also, they're not deleted automatically. This may be especially problematic if you open a lot of various projects.</p>
         <p>Removing derived data is not harmful as Xcode can recreate them when you open project again. Although it's not recommended for projects that you work on often. For this reason nothing is selected by default.</p>
         
+        <h4>Documentation Cache</h4>
+        <p>Modern Xcodes are caching documentation that is accessed via the web. Unfortunately older caches are not cleaned up by Xcode and significant
+        amount of space may be wasted due to that.</p>
+        <p>Removing all cache is not harmful but remember that your most current Xcode will regenerate it anyway if it'll have a chance. It also could slow down access to documentation after cleaning them.</p>
+        
         <h4>Old Simulator & Device Logs</h4>
         <p>Each version of Xcode appears to have a new version of database that holds logs from devices & simulators. Those databases are migrated with content of the previous ones. If you use Xcode for a long time, it would accumulate to significant amount of unused data.</p>
         
@@ -44,7 +49,7 @@
         <p><b>If you have multiple (older) Xcode installations, you probably should deselect those versions too.</b></p>
 
         <h4>Old Documentation Downloads</h4>
-        <p>For some time, recent versions of Xcode are using online help. But if you used Xcode in the past, you may still have documentation downloaded locally to your computer. It could take a lot of space and currently there is no use for it.</p>
+        <p>Recent versions of Xcode are using online help. But if you used Xcode in the past, you may still have documentation downloaded locally to your computer. It could take a lot of space and currently there is no use for it.</p>
 
         <h3>Main Window</h3>
         <p>This is the main interface of the application, you select here what you want to clean and performing cleaning itself. You can also <b>share or tip me</b> if you want &#128526;</p>
@@ -123,14 +128,14 @@ DevCleaner 2.4.0
 
 OVERVIEW: Reclaims storage that Xcode stores in caches and old files
 
-USAGE: DevCleaner <command> [options]
+USAGE: dev-cleaner <command> [options]
 
 OPTIONS:
 
     info
         Show all items available to clean.
-    clean <all,device-support,archives,derived-data,old-logs,old-documentation>
-        Perform cleaning of given items. Available options: all,device-support,archives,derived-data,previews,old-logs,old-documentation. If you want to clean all, pass "all"
+    clean <all,device-support,archives,derived-data,docs-cache,old-logs,old-documentation>
+        Perform cleaning of given items. Available options: all,device-support,archives,derived-data,docs-cache,previews,old-logs,old-documentation. If you want to clean all, pass "all" or nothing
     --help
         Prints this message
         </pre>
