@@ -1,22 +1,18 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
       "filename" : "WatchIcon.png",
+      "idiom" : "mac",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
       "filename" : "WatchIcon@2x.png",
+      "idiom" : "mac",
       "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
