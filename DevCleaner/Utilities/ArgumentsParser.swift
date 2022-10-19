@@ -63,11 +63,13 @@ public class ArgumentsParser {
     }
     
     // MARK: Properties
+    private let toolName: String
     private let description: String
     private var options: [CommandLineOption]
     
     // MARK: Initialization
-    public init(description: String) {
+    public init(toolName: String? = nil, description: String) {
+        self.toolName = toolName ?? ProcessInfo.processInfo.processName
         self.description = description
         self.options = []
     }
@@ -139,7 +141,7 @@ public class ArgumentsParser {
     // MARK: Utilities
     public func printHelp() {
         print("OVERVIEW: \(self.description)\n")
-        print("USAGE: \(ProcessInfo.processInfo.processName + " <command> [options]")\n")
+        print("USAGE: \(self.toolName + " <command> [options]")\n")
         print("OPTIONS:\n")
         
         for option in self.options {
