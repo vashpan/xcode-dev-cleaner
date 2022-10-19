@@ -39,7 +39,7 @@ public protocol XcodeFilesDeleteDelegate: AnyObject {
 final public class XcodeFiles {
     // MARK: Types
     public enum Location: Int, CaseIterable {
-        case deviceSupport, archives, derivedData, logs, oldDocumentation
+        case deviceSupport, archives, derivedData, documentationCache, logs, oldDocumentation
     }
     
     // MARK: Constants
@@ -89,6 +89,7 @@ final public class XcodeFiles {
             .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: true),
             .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
+            .documentationCache: XcodeFileEntry(label: "Documentation Cache", tooltipText: "Documentation cache for each Xcode version", tooltip: true, selected: true),
             .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: true),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
@@ -428,6 +429,9 @@ final public class XcodeFiles {
             
             case .derivedData:
                 entry.addChildren(items: self.scanDerivedDataLocations())
+            
+            case .documentationCache:
+                entry.addChildren(items: self.scanDocumentationCacheLocations())
                 
             case .logs:
                 entry.addChildren(items: self.scanLogsLocations())
@@ -618,6 +622,47 @@ final public class XcodeFiles {
         }
         
         return results
+    }
+    
+    private func scanDocumentationCacheLocations() -> [XcodeFileEntry] {
+        let docsCacheLocation = self.userDeveloperFolderUrl.appendingPathComponent("Xcode/DocumentationCache")
+        
+        var entries = [DocumentationCacheFileEntry]()
+        
+        // get documentation cache locations
+        if let cacheFolders = try? FileManager.default.contentsOfDirectory(at: docsCacheLocation, includingPropertiesForKeys: nil, options: Self.scanFileEnumerationOptions) {
+            for cacheFolder in cacheFolders {
+                if let xcodeDocsCaches = try? FileManager.default.contentsOfDirectory(at: cacheFolder, includingPropertiesForKeys: nil, options: Self.scanFileEnumerationOptions) {
+                    for xcodeDocsCache in xcodeDocsCaches {
+                        if let xcodeVersion = Version(describing: xcodeDocsCache.lastPathComponent) {
+                            // check if we already have entry for this Xcode version, and create it if not
+                            if let oldXcodeEntryIndex = entries.firstIndex(where: { $0.version == xcodeVersion }) {
+                                entries[oldXcodeEntryIndex].addPath(path: xcodeDocsCache)
+                            } else {
+                                let newEntry = DocumentationCacheFileEntry(version: xcodeVersion, selected: true)
+                                newEntry.addPath(path: xcodeDocsCache)
+                                
+                                entries.append(newEntry)
+                            }
+                        } else {
+                            log.warning("XcodeFiles: Invalid Xcode version while searching for documentation caches: \(xcodeDocsCache.lastPathComponent)")
+                        }
+                    }
+                }
+            }
+        }
+        
+        // sort
+        entries.sort { lhs, rhs in
+            return lhs.version > rhs.version
+        }
+        
+        // deselect first one
+        if let firstEntry = entries.first {
+            firstEntry.deselectWithChildItems()
+        }
+        
+        return entries
     }
     
     private func scanLogsLocations() -> [XcodeFileEntry] {
