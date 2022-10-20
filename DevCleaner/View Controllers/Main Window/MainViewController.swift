@@ -105,14 +105,24 @@ final class MainViewController: NSViewController {
         // notify about Xcode being open
         let showXcodeWarning = Preferences.shared.showXcodeWarning
         if showXcodeWarning && XcodeFiles.isXcodeRunning() {
-            Alerts.warningAlert(title: "Xcode is open",
-                                message: "DevCleaner can run with Xcode being opened, but cleaning some files may affect Xcode functions and maybe even cause its crash.",
-                                okButtonText: "Continue",
-                                cancelButtonText: "Close DevCleaner") { messageResult in
-                if messageResult == .alertSecondButtonReturn {
-                    NSApplication.shared.terminate(nil)
+            Alerts.warningAlert(
+                title: "Xcode is open",
+                message: "DevCleaner can run with Xcode being opened, but cleaning some files may affect Xcode functions and may even cause its crash.",
+                okButtonText: "Continue",
+                cancelButtonText: "Close DevCleaner",
+                alert: { alert in
+                    XcodeFiles.notifyWhenXcodeIsNotRunning {
+                        DispatchQueue.main.async {
+                            NSApp.endSheet(alert.window)
+                        }
+                    }
+                },
+                completionHandler: { messageResult in
+                    if messageResult == .alertSecondButtonReturn {
+                        NSApplication.shared.terminate(nil)
+                    }
                 }
-            }
+            )
         }
         
         self.view.window?.delegate = self

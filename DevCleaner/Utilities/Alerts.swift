@@ -34,14 +34,16 @@ public class Alerts {
         NSApp.terminate(nil)
     }
     
-    class public func warningAlert(title: String, message: String, okButtonText: String = "OK", cancelButtonText: String = "Cancel", window: NSWindow? = nil, completionHandler: ((NSApplication.ModalResponse) -> Void)? = nil) {
+    class public func warningAlert(title: String, message: String, okButtonText: String = "OK", cancelButtonText: String = "Cancel", window: NSWindow? = nil, alert alertCallback: ((NSAlert) -> Void)? = nil, completionHandler: ((NSApplication.ModalResponse) -> Void)? = nil) {
         let alert = NSAlert()
         alert.alertStyle = .critical
         alert.messageText = title
         alert.informativeText = message
         alert.addButton(withTitle: okButtonText)
         alert.addButton(withTitle: cancelButtonText)
-        
+
+        alertCallback?(alert)
+
         if let currentWindow = window {
             alert.beginSheetModal(for: currentWindow, completionHandler: completionHandler)
         } else {

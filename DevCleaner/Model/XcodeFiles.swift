@@ -35,6 +35,8 @@ public protocol XcodeFilesDeleteDelegate: AnyObject {
     func deleteDidFinish(xcodeFiles: XcodeFiles)
 }
 
+private var xcodeIsNotRunningCallback: () -> Void = {}
+
 // MARK: - Xcode files
 final public class XcodeFiles {
     // MARK: Types
@@ -120,7 +122,24 @@ final public class XcodeFiles {
         return runningXcodeApp != nil
         #endif
     }
-    
+
+    public static func notifyWhenXcodeIsNotRunning(_ callback: @escaping () -> Void) {
+        xcodeIsNotRunningCallback = callback
+        let t = DispatchSource.makeTimerSource()
+        t.schedule(deadline: .now(), repeating: DispatchTimeInterval.milliseconds(300))
+        t.setEventHandler {
+            let runningXcodeApp = NSWorkspace.shared.runningApplications.first {
+                return $0.bundleIdentifier == "com.apple.dt.Xcode"
+            }
+            guard runningXcodeApp == nil else {
+                return
+            }
+            xcodeIsNotRunningCallback()
+            t.cancel()
+        }
+        t.resume()
+    }
+
     private static func checkForXcodeDataFolders(location: URL) -> Bool {
         // check if folder exists
         let folderExists = FileManager.default.fileExists(atPath: location.path)
