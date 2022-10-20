@@ -32,7 +32,7 @@ private func commandLineDebugEnabled() -> Bool {
 }
 
 private func isRunningFromCommandLine(args: [String]) -> Bool {
-    let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
+    let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assume we run from command line
     
     // it seems that's enough, but maybe in the future we can also try to check parent PID,
     // to make sure. We also check for a special argument passed usually by Xcode & debugger to mark we run from Xcode and usually
