@@ -22,7 +22,7 @@ import Cocoa
 
 // MARK: Cleaning view controller delegate
 internal protocol CleaningViewControllerDelegate: AnyObject {
-    func didDismissViewController(_ vc: CleaningViewController)
+    func cleaningDidFinish(_ vc: CleaningViewController)
 }
 
 // MARK: - Cleaning view controller
@@ -31,7 +31,7 @@ internal final class CleaningViewController: NSViewController {
     internal enum State {
         case undefined
         
-        case idle(title: String, indeterminate: Bool, doneButtonEnabled: Bool)
+        case idle(title: String, progress: Double)
         case working(title: String, details: String, progress: Double)
     }
     
@@ -39,7 +39,6 @@ internal final class CleaningViewController: NSViewController {
     @IBOutlet private weak var headerLabel: NSTextField!
     @IBOutlet private weak var currentFileLabel: NSTextField!
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
-    @IBOutlet private weak var doneButton: NSButton!
     
     internal weak var delegate: CleaningViewControllerDelegate?
     
@@ -72,22 +71,15 @@ internal final class CleaningViewController: NSViewController {
     // MARK: Updating state
     private func update(state: State) {
         switch state {
-            case .idle(let title, let indeterminate, let doneButtonEnabled):
-                self.doneButton.isEnabled = doneButtonEnabled
+            case .idle(let title, let progress):
                 self.currentFileLabel.stringValue = title
                 
-                if indeterminate {
-                    self.progressIndicator.isIndeterminate = true
-                    self.progressIndicator.startAnimation(self)
-                } else {
-                    self.progressIndicator.isIndeterminate = false
-                    self.progressIndicator.stopAnimation(self)
-                    
-                    self.progressIndicator.doubleValue = 100.0
-                }
+                self.progressIndicator.isIndeterminate = false
+                self.progressIndicator.stopAnimation(self)
+                
+                self.progressIndicator.doubleValue = progress
             
             case .working(let title, let details, let progress):
-                self.doneButton.isEnabled = false
                 self.currentFileLabel.stringValue = "\(title): \(details)"
                 
                 self.progressIndicator.isIndeterminate = false
@@ -104,14 +96,20 @@ internal final class CleaningViewController: NSViewController {
     @IBAction func dismissCleaningView(_ sender: Any) {
         self.dismiss(sender)
         
-        self.delegate?.didDismissViewController(self)
+        self.delegate?.cleaningDidFinish(self)
+    }
+    
+    @IBAction func stopCleaning(_ sender: Any) {
+        self.dismiss(sender)
+        
+        self.delegate?.cleaningDidFinish(self)
     }
 }
 
 extension CleaningViewController: XcodeFilesDeleteDelegate {
     func deleteWillBegin(xcodeFiles: XcodeFiles) {
         DispatchQueue.main.async {
-            self.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+            self.state = .idle(title: "Initialization...", progress: 0.0)
         }
     }
     
@@ -142,11 +140,12 @@ extension CleaningViewController: XcodeFilesDeleteDelegate {
     
     func deleteDidFinish(xcodeFiles: XcodeFiles) {
         DispatchQueue.main.async {
-            self.state = .idle(title: "Finished!", indeterminate: false, doneButtonEnabled: true)
+            self.state = .idle(title: "Finished!", progress: 100.0)
             
-            // ask after a little delay to let user enjoy their finished clean
-            DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 2.0) {
-                ReviewRequests.shared.requestReviewIfNeeded()
+            // wait a little bit and then dismiss to avoid too abtrupt transition
+            DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 0.5) {
+                self.dismiss(self)
+                self.delegate?.cleaningDidFinish(self)
             }
         }
     }

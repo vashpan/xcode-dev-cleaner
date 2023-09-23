@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -202,10 +202,10 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="536" height="670"/>
+                        <rect key="frame" x="0.0" y="0.0" width="516" height="670"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-v6-aG6" userLabel="Clean Button">
-                                <rect key="frame" x="443" y="13" width="80" height="32"/>
+                                <rect key="frame" x="423" y="13" width="80" height="32"/>
                                 <buttonCell key="cell" type="push" title="Clean..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpS-RA-DUz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -218,12 +218,12 @@ DQ
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eBx-hh-WZ7" userLabel="Main Views Container">
-                                <rect key="frame" x="20" y="94" width="496" height="400"/>
+                                <rect key="frame" x="20" y="94" width="476" height="400"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
-                                        <rect key="frame" x="0.0" y="0.0" width="496" height="400"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="476" height="400"/>
                                         <clipView key="contentView" drawsBackground="NO" id="dr2-Zy-P8I">
-                                            <rect key="frame" x="1" y="1" width="494" height="398"/>
+                                            <rect key="frame" x="1" y="1" width="474" height="398"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
@@ -268,7 +268,7 @@ DQ
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSFolder" id="lhf-9j-XIn"/>
                                                                         </imageView>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bIy-yJ-gOB">
+                                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="bIy-yJ-gOB">
                                                                             <rect key="frame" x="52" y="1" width="103" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Xcode File Entry" id="Ei6-4h-Mtz">
                                                                                 <font key="font" metaFont="system"/>
@@ -310,7 +310,7 @@ DQ
                                                                     <rect key="frame" x="508" y="1" width="95" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
+                                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rz5-mq-2Ix">
                                                                             <rect key="frame" x="0.0" y="1" width="93" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" placeholderString="Size" id="B9I-jq-BbO">
                                                                                 <font key="font" metaFont="system"/>
@@ -341,7 +341,7 @@ DQ
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="p1y-QG-xIv">
-                                            <rect key="frame" x="1" y="383" width="494" height="16"/>
+                                            <rect key="frame" x="1" y="383" width="474" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="3Uz-J4-Lkn">
@@ -354,9 +354,9 @@ DQ
                                         </tableHeaderView>
                                     </scrollView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-KW-Rls" userLabel="Access Warnings View">
-                                        <rect key="frame" x="-35" y="138" width="566" height="124"/>
+                                        <rect key="frame" x="-45" y="138" width="566" height="124"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WG2-fv-9kB">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WG2-fv-9kB">
                                                 <rect key="frame" x="18" y="80" width="530" height="24"/>
                                                 <textFieldCell key="cell" allowsUndo="NO" alignment="center" title="Warning Title" id="cfA-tY-qwr">
                                                     <font key="font" metaFont="system" size="20"/>
@@ -364,7 +364,7 @@ DQ
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xdS-lQ-DR2">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xdS-lQ-DR2">
                                                 <rect key="frame" x="81" y="56" width="404" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="400" id="wXX-ZL-O35"/>
@@ -396,7 +396,7 @@ DQ
                                         </constraints>
                                     </customView>
                                     <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-vG-o6z">
-                                        <rect key="frame" x="232" y="184" width="32" height="32"/>
+                                        <rect key="frame" x="222" y="184" width="32" height="32"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -419,8 +419,8 @@ DQ
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DevCleanerIcon" id="guH-2t-Xph"/>
                             </imageView>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
-                                <rect key="frame" x="93" y="514" width="425" height="112"/>
+                            <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
+                                <rect key="frame" x="93" y="514" width="405" height="112"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AcK-WQ-6Fn">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</string>
@@ -428,15 +428,15 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-87-JUR" userLabel="Info Header Label">
-                                <rect key="frame" x="93" y="634" width="425" height="16"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-87-JUR" userLabel="Info Header Label">
+                                <rect key="frame" x="93" y="634" width="405" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clean your Xcode cache files" id="8Ix-rm-3dw">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7x4-OM-pal">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7x4-OM-pal">
                                 <rect key="frame" x="18" y="69" width="110" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Selected: 0 bytes" id="hwC-p3-Jb6">
                                     <font key="font" metaFont="system"/>
@@ -445,7 +445,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-uh-F76">
-                                <rect key="frame" x="20" y="58" width="496" height="5"/>
+                                <rect key="frame" x="20" y="58" width="476" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S06-6o-y2V">
                                 <rect key="frame" x="17" y="16" width="25" height="25"/>
@@ -457,8 +457,8 @@ DQ
                                     <segue destination="vw0-GD-BIK" kind="show" id="Z7o-S0-JxT"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
-                                <rect key="frame" x="432" y="69" width="86" height="17"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
+                                <rect key="frame" x="412" y="69" width="86" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total: 0 bytes" id="4fM-lu-IeX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -505,7 +505,7 @@ DQ
                                     <action selector="openAppReview:" target="XfG-lQ-9wD" id="e3r-g9-cw2"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qHE-u2-bEP">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qHE-u2-bEP">
                                 <rect key="frame" x="46" y="37" width="404" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="Njh-fQ-xCA"/>
@@ -606,7 +606,7 @@ DQ
                                 <rect key="frame" x="0.0" y="44" width="430" height="161"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="qkx-cL-erD" userLabel="Small Donation Button">
+                                    <button tag="1" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qkx-cL-erD" userLabel="Small Donation Button">
                                         <rect key="frame" x="20" y="11" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$1.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D1f-mI-CJi">
@@ -617,7 +617,7 @@ DQ
                                             <action selector="buyProduct:" target="IAy-IY-fju" id="77A-XU-MiL"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="sCP-cr-bKl" userLabel="Medium Donation Button">
+                                    <button tag="2" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sCP-cr-bKl" userLabel="Medium Donation Button">
                                         <rect key="frame" x="164" y="11" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$3.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Jsq-KV-oD3">
@@ -628,7 +628,7 @@ DQ
                                             <action selector="buyProduct:" target="IAy-IY-fju" id="a8t-AB-LPl"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-LA-6s0" userLabel="Big Donation Button">
+                                    <button tag="3" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9GG-LA-6s0" userLabel="Big Donation Button">
                                         <rect key="frame" x="310" y="10" width="100" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="smallSquare" title="$9.99" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jaV-nX-mQ3">
@@ -639,7 +639,7 @@ DQ
                                             <action selector="buyProduct:" target="IAy-IY-fju" id="yZU-8t-GgH"/>
                                         </connections>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hs-MD-87I">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hs-MD-87I">
                                         <rect key="frame" x="18" y="124" width="394" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="If you think this app helped you, consider a small tip" id="qCK-kW-qFt">
@@ -648,7 +648,7 @@ DQ
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTd-49-WSb">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTd-49-WSb">
                                         <rect key="frame" x="18" y="103" width="394" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You saved total of 100,0GB thanks to DevCleaner!" allowsEditingTextAttributes="YES" id="eYP-cA-BOu">
@@ -693,11 +693,11 @@ DQ
             <objects>
                 <viewController id="clE-D7-ddV" customClass="CleaningViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="Qar-gS-3Or">
-                        <rect key="frame" x="0.0" y="0.0" width="456" height="148"/>
+                        <rect key="frame" x="0.0" y="0.0" width="456" height="122"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="82I-5P-ih8">
-                                <rect key="frame" x="18" y="112" width="420" height="16"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="82I-5P-ih8">
+                                <rect key="frame" x="18" y="86" width="420" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cleaning Xcode cache files..." id="c30-6z-VCU">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -705,10 +705,10 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="o5G-Pd-N6U">
-                                <rect key="frame" x="20" y="50" width="416" height="20"/>
+                                <rect key="frame" x="20" y="19" width="416" height="20"/>
                             </progressIndicator>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qj2-Iq-HeV">
-                                <rect key="frame" x="18" y="77" width="420" height="16"/>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qj2-Iq-HeV">
+                                <rect key="frame" x="18" y="46" width="420" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="416" id="jn5-uL-Pn2"/>
                                 </constraints>
@@ -718,44 +718,28 @@ DQ
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f6e-XM-Ml5">
-                                <rect key="frame" x="377" y="8" width="66" height="32"/>
-                                <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VHB-aQ-ZWD">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <string key="keyEquivalent" base64-UTF8="YES">
-DQ
-</string>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="dismissCleaningView:" target="clE-D7-ddV" id="foH-ng-wQR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="f6e-XM-Ml5" secondAttribute="trailing" constant="20" id="0xa-6w-7f6"/>
                             <constraint firstItem="o5G-Pd-N6U" firstAttribute="top" secondItem="Qj2-Iq-HeV" secondAttribute="bottom" constant="8" id="0yu-Ig-7xC"/>
-                            <constraint firstItem="f6e-XM-Ml5" firstAttribute="top" secondItem="o5G-Pd-N6U" secondAttribute="bottom" constant="16" id="84r-OR-tM7"/>
-                            <constraint firstAttribute="bottom" secondItem="f6e-XM-Ml5" secondAttribute="bottom" constant="15" id="A9R-p7-Z1c"/>
                             <constraint firstItem="o5G-Pd-N6U" firstAttribute="leading" secondItem="Qar-gS-3Or" secondAttribute="leading" constant="20" id="NyL-Dl-80h"/>
                             <constraint firstAttribute="trailing" secondItem="82I-5P-ih8" secondAttribute="trailing" constant="20" id="PZ2-Mu-eKi"/>
                             <constraint firstItem="Qj2-Iq-HeV" firstAttribute="leading" secondItem="Qar-gS-3Or" secondAttribute="leading" constant="20" id="Z6V-3Y-BPi"/>
                             <constraint firstItem="82I-5P-ih8" firstAttribute="leading" secondItem="Qar-gS-3Or" secondAttribute="leading" constant="20" id="hnU-V6-Wv5"/>
                             <constraint firstAttribute="trailing" secondItem="o5G-Pd-N6U" secondAttribute="trailing" constant="20" id="imS-q5-QBQ"/>
+                            <constraint firstAttribute="bottom" secondItem="o5G-Pd-N6U" secondAttribute="bottom" constant="20" id="nRi-pq-ha0"/>
                             <constraint firstAttribute="trailing" secondItem="Qj2-Iq-HeV" secondAttribute="trailing" constant="20" id="uDh-Y7-aS9"/>
                             <constraint firstItem="82I-5P-ih8" firstAttribute="top" secondItem="Qar-gS-3Or" secondAttribute="top" constant="20" id="uzl-jV-pCW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="currentFileLabel" destination="Qj2-Iq-HeV" id="KXB-yF-QQ3"/>
-                        <outlet property="doneButton" destination="f6e-XM-Ml5" id="83S-qu-CDv"/>
                         <outlet property="headerLabel" destination="82I-5P-ih8" id="7JL-PS-iJ2"/>
                         <outlet property="progressIndicator" destination="o5G-Pd-N6U" id="psz-bl-Gcy"/>
                     </connections>
                 </viewController>
                 <customObject id="Oez-2f-U02" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="438" y="1661"/>
+            <point key="canvasLocation" x="438" y="1645"/>
         </scene>
         <!--Help-->
         <scene sceneID="IjA-iK-yrh">

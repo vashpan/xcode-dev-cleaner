@@ -145,7 +145,7 @@ final class MainViewController: NSViewController {
     // MARK: Navigation
     private func prepareCleaningView(with segue: NSStoryboardSegue) {
         if let cleaningViewController = segue.destinationController as? CleaningViewController {
-            cleaningViewController.state = .idle(title: "Initialization...", indeterminate: true, doneButtonEnabled: false)
+            cleaningViewController.state = .idle(title: "Initialization...", progress: 0.0)
             cleaningViewController.delegate = self
             
             self.xcodeFiles?.deleteDelegate = cleaningViewController
@@ -577,8 +577,13 @@ extension MainViewController: XcodeEntryCellViewDelegate {
 
 // MARK: CleaningViewControllerDelegate implememntation
 extension MainViewController: CleaningViewControllerDelegate {
-    func didDismissViewController(_ vc: CleaningViewController) {
+    func cleaningDidFinish(_ vc: CleaningViewController) {
         self.startScan()
+        
+        // ask after a little delay to let user enjoy their finished clean
+        DispatchQueue.main.asyncAfter(wallDeadline: DispatchWallTime.now() + 2.0) {
+            ReviewRequests.shared.requestReviewIfNeeded()
+        }
     }
 }
 
