@@ -69,7 +69,7 @@ final class PreferencesViewController: NSViewController {
         openPanel.message = "Choose a new location"
         openPanel.prompt = "Choose"
         
-        openPanel.allowedFileTypes = ["none"]
+        openPanel.allowedContentTypes = []
         openPanel.allowsOtherFileTypes = false
         openPanel.canChooseDirectories = true
         

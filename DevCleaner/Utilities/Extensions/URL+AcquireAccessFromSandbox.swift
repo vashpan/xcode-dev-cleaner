@@ -73,7 +73,7 @@ extension URL {
         openPanel.message = openPanelMessage
         openPanel.prompt = "Open"
         
-        openPanel.allowedFileTypes = ["none"]
+        openPanel.allowedContentTypes = []
         openPanel.allowsOtherFileTypes = false
         openPanel.canChooseDirectories = true
         
