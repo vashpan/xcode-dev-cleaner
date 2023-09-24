@@ -239,10 +239,18 @@ final public class XcodeFiles {
             return nil
         }
         
+        // create build version
+        let build: AppleBuild?
+        if let buildString {
+            build = AppleBuild(string: buildString)
+        } else {
+            build = nil
+        }
+        
         return DeviceSupportFileEntry(device: device,
                                       osType: DeviceSupportFileEntry.OSType(label: osLabel),
                                       version: version,
-                                      build: (buildString != nil) ? AppleBuild(string: buildString!) : nil,
+                                      build: build,
                                       date: creationDate,
                                       arch: arch,
                                       selected: true)
@@ -504,7 +512,6 @@ final public class XcodeFiles {
                         $0.device == entryToRemove.device
                     }
                 }
-                
                 
                 // deselect first one (we usually will want those symbols)
                 if let firstEntry = deviceSupportEntries.first {
