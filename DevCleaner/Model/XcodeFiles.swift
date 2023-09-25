@@ -94,11 +94,11 @@ final public class XcodeFiles {
         }
         
         self.locations = [
-            .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: true),
+            .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: false),
             .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
             .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
-            .documentationCache: XcodeFileEntry(label: "Documentation Cache", tooltipText: "Documentation cache for each Xcode version", tooltip: true, selected: true),
-            .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: true),
+            .documentationCache: XcodeFileEntry(label: "Documentation Cache", tooltipText: "Documentation cache for each Xcode version", tooltip: true, selected: false),
+            .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: false),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
@@ -261,7 +261,7 @@ final public class XcodeFiles {
                                       build: build,
                                       date: creationDate,
                                       arch: arch,
-                                      selected: true)
+                                      selected: false)
     }
     
     private func derivedDataEntry(from location: URL) -> DerivedDataFileEntry? {
@@ -658,7 +658,7 @@ final public class XcodeFiles {
                             if let oldXcodeEntryIndex = entries.firstIndex(where: { $0.version == xcodeVersion }) {
                                 entries[oldXcodeEntryIndex].addPath(path: xcodeDocsCache)
                             } else {
-                                let newEntry = DocumentationCacheFileEntry(version: xcodeVersion, selected: true)
+                                let newEntry = DocumentationCacheFileEntry(version: xcodeVersion, selected: false)
                                 newEntry.addPath(path: xcodeDocsCache)
                                 
                                 entries.append(newEntry)
