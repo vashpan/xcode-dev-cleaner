@@ -252,12 +252,19 @@ final class MainViewController: NSViewController {
         }
         
         // total size & free disk space
-        if let xcodeFiles = self.xcodeFiles {
+        let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
+        let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
+        
+        if let xcodeFiles = self.xcodeFiles, xcodeFiles.state == .scanComplete {
             let totalSizeAvailableToCleanString = self.formatBytesToString(bytes: xcodeFiles.totalSize)
-            let bytesFreeOnDisk = (try? fileManager.volumeFreeDiskSpace(at: Files.userDeveloperFolder)) ?? 0
-            let bytesFreeOnDiskString = self.formatBytesToString(bytes: bytesFreeOnDisk)
+            
             self.totalBytesTextField.stringValue = "Total: \(totalSizeAvailableToCleanString)"
             self.view.window?.title = "DevCleaner - \(totalSizeAvailableToCleanString) available to clean; \(bytesFreeOnDiskString) free on disk"
+        } else {
+            let zeroBytesAvailableToCleanString = self.formatBytesToString(bytes: 0)
+            
+            self.totalBytesTextField.stringValue = "Total: \(zeroBytesAvailableToCleanString)"
+            self.view.window?.title = "DevCleaner - \(bytesFreeOnDiskString) free on disk"
         }
         
         // selected size
@@ -591,6 +598,8 @@ extension MainViewController: CleaningViewControllerDelegate {
 extension MainViewController: XcodeFilesScanDelegate {
     func scanWillBegin(xcodeFiles: XcodeFiles) {
         self.startLoading()
+        
+        self.updateButtonsAndLabels()
     }
     
     func scanDidFinish(xcodeFiles: XcodeFiles) {

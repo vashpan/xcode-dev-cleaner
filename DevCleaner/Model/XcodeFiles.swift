@@ -42,6 +42,10 @@ final public class XcodeFiles {
         case deviceSupport, archives, derivedData, documentationCache, logs, oldDocumentation
     }
     
+    public enum State {
+        case initial, scanning, scanComplete
+    }
+    
     // MARK: Constants
     private static let scanFileEnumerationOptions: FileManager.DirectoryEnumerationOptions = [
         .skipsHiddenFiles,
@@ -49,6 +53,8 @@ final public class XcodeFiles {
     ]
     
     // MARK: Properties
+    public private(set) var state: State
+    
     private var userDeveloperFolderUrl: URL
     private var customDerivedDataFolderUrl: URL?
     private var customArchivesFolderUrl: URL?
@@ -72,6 +78,8 @@ final public class XcodeFiles {
     
     // MARK: Initialization
     public init?(developerFolder: URL, customDerivedDataFolder: URL?, customArchivesFolder: URL?) {
+        self.state = .initial
+        
         self.userDeveloperFolderUrl = developerFolder
         self.customDerivedDataFolderUrl = customDerivedDataFolder
         self.customArchivesFolderUrl = customArchivesFolder
@@ -399,6 +407,8 @@ final public class XcodeFiles {
     
     // MARK: Scan files
     public func scanFiles(in locations: [Location]) {
+        self.state = .scanning
+        
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
                 strongSelf.scanDelegate?.scanWillBegin(xcodeFiles: strongSelf)
@@ -410,6 +420,8 @@ final public class XcodeFiles {
         for location in locations {
             self.scanFiles(in: location)
         }
+        
+        self.state = .scanComplete
         
         DispatchQueue.main.async { [weak self] in
             if let strongSelf = self {
