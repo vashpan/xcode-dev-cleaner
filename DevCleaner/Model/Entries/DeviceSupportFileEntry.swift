@@ -97,28 +97,28 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         
         switch os {
             case .iOS:
-                if version.major >= 2 && version.major <= 16 {
+                if version.major >= 2 && version.major <= 17 {
                     result = .image(name: "OS/iOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/iOS/Generic")
                 }
             
             case .watchOS:
-                if version.major >= 2 && version.major <= 9 {
+                if version.major >= 2 && version.major <= 10 {
                     result = .image(name: "OS/watchOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/watchOS/Generic")
                 }
             
             case .tvOS:
-                if version.major >= 9 && version.major <= 16 {
+                if version.major >= 9 && version.major <= 17 {
                     result = .image(name: "OS/tvOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/tvOS/Generic")
                 }
                 
             case .macOS:
-                if version.major >= 12 && version.major <= 13 {
+                if version.major >= 12 && version.major <= 14 {
                     result = .image(name: "OS/macOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/macOS/Generic")
