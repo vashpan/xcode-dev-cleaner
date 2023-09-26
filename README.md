@@ -2,7 +2,7 @@
 
 ![Main Window Screenshot](https://github.com/vashpan/xcode-cleaner/raw/master/Documentation/Main%20Window%20Screenshot.png)
 
-*Currently tested with macOS 12.x and Xcode 14.x. Should support earlier Xcode versions as well*
+*Currently tested with macOS 13.x and Xcode 15.x. Should support earlier Xcode versions as well*
 
 Available on the [Mac App Store](https://itunes.apple.com/app/devcleaner/id1388020431)
 
@@ -56,18 +56,20 @@ those old documentations may be still on your drive if you're an old Xcode user.
 
 ## Contact
 
-If you enjoy this application, consider support me by making a tip in the app, or by downloading/buying some of my games from the AppStore 😎
+If you enjoy this application, consider support me by making a tip in the app, or by downloading/buying some of my other apps & games from the AppStore 😎
 
 Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
+Mastodon: [@kkolakowski](https://mastodon.social/@kkolakowski)
 
 Website: http://www.one-minute-games.com
+AppStore: https://apps.apple.com/developer/one-minute-games/id395763583
 
 ## Contribution
 
-This application is my first macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, 
+This application is my first (larger) macOS app, so feel free to give me some feedback or pull requests! If there's some new feature to support, 
 maybe some caches I missed, let me know as well in issues.
 
 Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, 
 as copyright holder can submit it to the Mac App Store.
 
-Copyright © 2018-2022 One Minute Games Konrad Kołakowski.
+Copyright © 2018-2023 One Minute Games Konrad Kołakowski.
