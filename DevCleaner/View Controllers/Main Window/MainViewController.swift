@@ -428,12 +428,32 @@ final class MainViewController: NSViewController {
         ReviewRequests.shared.showReviewOnTheAppStore()
     }
     
+    @IBAction func openFollowMenu(_ sender: NSButton) {
+        guard let followMenu = sender.menu else {
+            return
+        }
+        
+        guard let event = NSApplication.shared.currentEvent else {
+            return
+        }
+        
+        NSMenu.popUpContextMenu(followMenu, with: event, for: sender)
+    }
+    
     @IBAction func followMeOnTwitter(_ sender: Any) {
         guard let myTwitterUrl = URL(string: "https://twitter.com/intent/follow?screen_name=vashpan") else {
             return
         }
         
         NSWorkspace.shared.open(myTwitterUrl)
+    }
+    
+    @IBAction func followMeOnMastodon(_ sender: Any) {
+        guard let myMastodonUrl = URL(string: "https://mastodon.social/@kkolakowski") else {
+            return
+        }
+        
+        NSWorkspace.shared.open(myMastodonUrl)
     }
     
     @IBAction func downloadXcode(_ sender: Any) {
