@@ -23,35 +23,40 @@ import Cocoa
 internal let log = Logger(name: "MainLog", level: .info, toFile: true)
 
 // MARK: Helpers
-private func commandLineDebugEnabled() -> Bool {
+
+private var isHeadlessEnvironmentSet = {
+    guard let headlessValue = ProcessInfo.processInfo.environment["DEV_CLEANER_HEADLESS"] else {
+        return false
+    }
+
+    // See `NSString.boolValue` for behaviour
+    // https://developer.apple.com/documentation/foundation/nsstring/1409420-boolvalue
+    return NSString(string: headlessValue).boolValue
+}()
+
+private var isRunningFromXcode: Bool = {
     #if DEBUG
-    return Preferences.shared.envKeyPresent(key: "DCCmdLineDebug")
+    return CommandLine.arguments.contains("-NSDocumentRevisionsDebugMode")
     #else
     return false
     #endif
-}
+}()
 
-private func isRunningFromCommandLine(args: [String]) -> Bool {
-    let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
-    
+private var shouldRunAsCLI: Bool = {
+    let isTTY = isatty(STDIN_FILENO) == 1 // with this param true, we can always assune we run from command line
+
     // it seems that's enough, but maybe in the future we can also try to check parent PID,
     // to make sure. We also check for a special argument passed usually by Xcode & debugger to mark we run from Xcode and usually
     // want a full window, it's not a great way though
-
-    #if DEBUG
-    let isRunningFromXcode = args.contains("-NSDocumentRevisionsDebugMode")
-    #else
-    let isRunningFromXcode = false
-    #endif
     
-    return commandLineDebugEnabled() || (isTTY == 1 && !isRunningFromXcode)
-}
+    return isHeadlessEnvironmentSet || (isTTY && !isRunningFromXcode)
+}()
 
 private func cleanedCommandLineArguments(args: [String]) -> [String] {
     var resultArgs = args
     
     // we have to remove some Xcode stuff here
-    if commandLineDebugEnabled() {
+    if isRunningFromXcode {
         if let index = resultArgs.firstIndex(of: "-NSDocumentRevisionsDebugMode") {
             resultArgs.remove(at: index)
             resultArgs.remove(at: index) // twice as there's "YES" afterwards
@@ -66,9 +71,10 @@ private func cleanedCommandLineArguments(args: [String]) -> [String] {
 // save app path to defaults
 Preferences.shared.appFolder = Bundle.main.bundleURL
 
-let cleanedArgs = cleanedCommandLineArguments(args: CommandLine.arguments)
-if isRunningFromCommandLine(args: cleanedArgs) {
+if shouldRunAsCLI {
     log.consoleLogging = false // disable console logging to not interfere with console output, file log will still be available
+
+    let cleanedArgs = cleanedCommandLineArguments(args: CommandLine.arguments)
     CmdLine.shared.start(args: cleanedArgs)
 } else {
     let _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
