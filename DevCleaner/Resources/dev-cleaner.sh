@@ -24,7 +24,7 @@
 DEV_CLEANER_PATH=$(defaults read com.oneminutegames.XcodeCleaner DCAppFolder)
 
 if [ -d $DEV_CLEANER_PATH ]; then
-    "$DEV_CLEANER_PATH/Contents/MacOS/DevCleaner" "$@"
+    DEV_CLEANER_HEADLESS=1 "$DEV_CLEANER_PATH/Contents/MacOS/DevCleaner" "$@"
 else
     echo "DevCleaner cannot be found, check if you haven't uninstalled it or moved. Path where it was expected: $DEV_CLEANER_PATH"
 fi
