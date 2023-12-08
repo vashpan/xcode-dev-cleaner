@@ -9,9 +9,15 @@
 import Foundation
 import StoreKit
 
+// MARK: Donations product fetch error
+public enum DonationsProductsFetchError {
+    case noProductsAvailable
+    case invalidProducts([String])
+}
+
 // MARK: Donations Delegate
 public protocol DonationsDelegate: AnyObject {
-    func donations(_ donations: Donations, didReceive products: [Donations.Product])
+    func donations(_ donations: Donations, didReceive products: [Donations.Product], error: DonationsProductsFetchError?)
     
     func transactionDidStart(for product: Donations.Product)
     func transactionIsBeingProcessed(for product: Donations.Product)
@@ -98,13 +104,40 @@ public final class Donations: NSObject {
 
 extension Donations: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        self.iapProducts = response.products.compactMap { Product(product: $0) }
+        let expectedNumberOfProducts = Product.Kind.allKinds.count
         
-        self.delegate?.donations(self, didReceive: self.iapProducts)
+        guard !response.products.isEmpty else {
+            log.error("No products returned from store!")
+            
+            self.delegate?.donations(self, didReceive: [], error: .noProductsAvailable)
+            return
+        }
+        
+        guard response.products.count == expectedNumberOfProducts else {
+            log.error("Unexpected number of products returned from store: \(response.products.count)")
+            
+            self.delegate?.donations(self, didReceive: [], error: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            return
+        }
+        
+        let donationProducts = response.products.compactMap { Product(product: $0) }
+        guard donationProducts.count == expectedNumberOfProducts else {
+            log.error("Not all products have proper ids: \(response.products.count)")
+            
+            self.delegate?.donations(self, didReceive: [], error: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            return
+        }
+        
+        self.iapProducts = donationProducts
+        self.delegate?.donations(self, didReceive: self.iapProducts, error: nil)
     }
 }
 
 extension Donations: SKPaymentTransactionObserver {
+    public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
+        return true
+    }
+    
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             // get our product related to transaction

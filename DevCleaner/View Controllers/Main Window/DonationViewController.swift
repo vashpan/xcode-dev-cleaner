@@ -154,7 +154,7 @@ internal final class DonationViewController: NSViewController {
         button.attributedTitle = title
     }
     
-    private func updateDonationsButtons(for products: [Donations.Product]) {
+    private func updateDonationsButtons(for products: [Donations.Product], error: DonationsProductsFetchError?) {
         var priceFontSize: CGFloat = 25.0
         let infoFontSize: CGFloat = 13.0
         let buttonWidth: CGFloat = 100.0
@@ -174,28 +174,46 @@ internal final class DonationViewController: NSViewController {
         }
         
         // update all the buttons
-        for product in self.donationProducts {
-            switch product.kind {
-                case .smallCoffee:
-                    self.updateDonationButton(button: self.smallDonationButton,
-                                              price: product.price,
-                                              info: product.info,
-                                              priceFontSize: priceFontSize,
-                                              infoFontSize: infoFontSize)
-                case .bigCoffee:
-                    self.updateDonationButton(button: self.mediumDonationButton,
-                                              price: product.price,
-                                              info: product.info,
-                                              priceFontSize: priceFontSize,
-                                              infoFontSize: infoFontSize)
-                case .lunch:
-                    self.updateDonationButton(button: self.bigDonationButton,
-                                              price: product.price,
-                                              info: product.info,
-                                              priceFontSize: priceFontSize,
-                                              infoFontSize: infoFontSize)
-                
+        if error == nil && products.count == Donations.Product.Kind.allKinds.count {
+            for product in products {
+                switch product.kind {
+                    case .smallCoffee:
+                        self.updateDonationButton(button: self.smallDonationButton,
+                                                  price: product.price,
+                                                  info: product.info,
+                                                  priceFontSize: priceFontSize,
+                                                  infoFontSize: infoFontSize)
+                    case .bigCoffee:
+                        self.updateDonationButton(button: self.mediumDonationButton,
+                                                  price: product.price,
+                                                  info: product.info,
+                                                  priceFontSize: priceFontSize,
+                                                  infoFontSize: infoFontSize)
+                    case .lunch:
+                        self.updateDonationButton(button: self.bigDonationButton,
+                                                  price: product.price,
+                                                  info: product.info,
+                                                  priceFontSize: priceFontSize,
+                                                  infoFontSize: infoFontSize)
+                        
+                }
             }
+        } else { // it seems we have an error while loading donation products!
+            let title: String = "Error while loading tips"
+            let message: String
+            
+            if let error {
+                switch error {
+                    case .noProductsAvailable: message = "No tips available!"
+                    case .invalidProducts(let products): message = "Invalid tip products: \(products)"
+                }
+            } else {
+                message = "Unrecognized error!"
+            }
+            
+            Alerts.warningAlert(title: title, message: message)
+            
+            self.dismiss(self)
         }
     }
     
@@ -216,12 +234,12 @@ internal final class DonationViewController: NSViewController {
 }
 
 extension DonationViewController: DonationsDelegate {
-    public func donations(_ donations: Donations, didReceive products: [Donations.Product]) {
+    public func donations(_ donations: Donations, didReceive products: [Donations.Product], error: DonationsProductsFetchError?) {
         DispatchQueue.main.async {
             self.donationProducts = products
             
             // update UI
-            self.updateDonationsButtons(for: products)
+            self.updateDonationsButtons(for: products, error: error)
             
             self.stopLoading()
         }
