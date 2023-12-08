@@ -1,0 +1,118 @@
+{
+  "identifier" : "3AD57D62",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "1390773822",
+      "localizations" : [
+        {
+          "description" : "A tip that could buy me a big coffee!",
+          "displayName" : "Big Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "BIG_COFFEE",
+      "referenceName" : "Big Coffee",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "1390773830",
+      "localizations" : [
+        {
+          "description" : "A tip that could buy me a lunch!",
+          "displayName" : "Lunch",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "LUNCH",
+      "referenceName" : "Lunch",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "1390773318",
+      "localizations" : [
+        {
+          "description" : "A tip that could buy me a small coffee!",
+          "displayName" : "Small Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "SMALL_COFFEE",
+      "referenceName" : "Small Coffee",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1388020431",
+    "_developerTeamID" : "3DS5SGYDG6",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 723659050.64460695,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

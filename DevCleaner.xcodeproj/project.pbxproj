@@ -106,6 +106,7 @@
 		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
+		71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = DevCleanerStoreKit.storekit; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */,
+				71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */,
 				71C8ACDD20A4EC2200E7A13B /* Credits.rtf */,
 				71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */,
 			);
