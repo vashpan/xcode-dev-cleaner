@@ -13,11 +13,14 @@ import StoreKit
 public enum DonationsProductsFetchError {
     case noProductsAvailable
     case invalidProducts([String])
+    
+    case storeError(Error)
 }
 
 // MARK: - Donations delegate
 public protocol DonationsDelegate: AnyObject {
-    func donations(_ donations: Donations, didReceive products: [DonationProduct], error: DonationsProductsFetchError?)
+    func donations(_ donations: Donations, donationProductsFetchFailedWithError error: DonationsProductsFetchError)
+    func donations(_ donations: Donations, didReceive products: [DonationProduct])
     
     func transactionDidStart(for product: DonationProduct)
     func transactionIsBeingProcessed(for product: DonationProduct)
@@ -90,9 +93,13 @@ public final class Donations: NSObject {
         self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
         self.productsRequest?.delegate = self
         self.productsRequest?.start()
+        
+        log.info("Requesting donation products with ids: \(donationProductsIds)")
     }
     
     public func buy(product: DonationProduct) {
+        log.info("Purchasing donation product: \(product.kind.rawValue) - \(product.identifier)")
+        
         let payment = SKMutablePayment(product: product.skProduct)
         payment.quantity = 1
         
@@ -103,20 +110,29 @@ public final class Donations: NSObject {
 }
 
 extension Donations: SKProductsRequestDelegate {
+    public func requestDidFinish(_ request: SKRequest) {
+        log.info("Products request finished successfully")
+    }
+    
+    public func request(_ request: SKRequest, didFailWithError error: Error) {
+        log.error("SKProductsRequest failed: \(error)")
+        self.delegate?.donations(self, donationProductsFetchFailedWithError: .storeError(error))
+    }
+    
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         let expectedNumberOfProducts = DonationProduct.Kind.allKinds.count
         
         guard !response.products.isEmpty else {
             log.error("No products returned from store!")
-            
-            self.delegate?.donations(self, didReceive: [], error: .noProductsAvailable)
+
+            self.delegate?.donations(self, donationProductsFetchFailedWithError: .noProductsAvailable)
             return
         }
         
         guard response.products.count == expectedNumberOfProducts else {
             log.error("Unexpected number of products returned from store: \(response.products.count)")
             
-            self.delegate?.donations(self, didReceive: [], error: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            self.delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
             return
         }
         
@@ -124,12 +140,12 @@ extension Donations: SKProductsRequestDelegate {
         guard donationProducts.count == expectedNumberOfProducts else {
             log.error("Not all products have proper ids: \(response.products.count)")
             
-            self.delegate?.donations(self, didReceive: [], error: .invalidProducts(response.products.map { $0.productIdentifier } ))
+            self.delegate?.donations(self, donationProductsFetchFailedWithError: .invalidProducts(response.products.map { $0.productIdentifier } ))
             return
         }
         
         self.iapProducts = donationProducts
-        self.delegate?.donations(self, didReceive: self.iapProducts, error: nil)
+        self.delegate?.donations(self, didReceive: self.iapProducts)
     }
 }
 

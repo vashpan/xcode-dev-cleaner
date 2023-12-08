@@ -206,6 +206,8 @@ internal final class DonationViewController: NSViewController {
                 switch error {
                     case .noProductsAvailable: message = "No tips available!"
                     case .invalidProducts(let products): message = "Invalid tip products: \(products)"
+                        
+                    case .storeError(let error): message = "AppStore error: \(error.localizedDescription)"
                 }
             } else {
                 message = "Unrecognized error!"
@@ -234,12 +236,23 @@ internal final class DonationViewController: NSViewController {
 }
 
 extension DonationViewController: DonationsDelegate {
-    public func donations(_ donations: Donations, didReceive products: [DonationProduct], error: DonationsProductsFetchError?) {
+    public func donations(_ donations: Donations, donationProductsFetchFailedWithError error: DonationsProductsFetchError) {
+        DispatchQueue.main.async {
+            self.donationProducts = []
+            
+            // update UI
+            self.updateDonationsButtons(for: [], error: error)
+            
+            self.stopLoading()
+        }
+    }
+    
+    public func donations(_ donations: Donations, didReceive products: [DonationProduct]) {
         DispatchQueue.main.async {
             self.donationProducts = products
             
             // update UI
-            self.updateDonationsButtons(for: products, error: error)
+            self.updateDonationsButtons(for: products, error: nil)
             
             self.stopLoading()
         }
