@@ -34,7 +34,7 @@ internal final class DonationViewController: NSViewController {
     
     private var loadingView: LoadingView! = nil
 
-    private var donationProducts: [Donations.Product] = []
+    private var donationProducts: [DonationProduct] = []
     
     // MARK: Initialization & overrides
     override func viewDidLoad() {
@@ -93,7 +93,7 @@ internal final class DonationViewController: NSViewController {
         return result
     }
 
-    private func productKindForTag(_ tag: Int) -> Donations.Product.Kind? {
+    private func productKindForTag(_ tag: Int) -> DonationProduct.Kind? {
         switch tag {
             case 1: return .smallCoffee
             case 2: return .bigCoffee
@@ -102,7 +102,7 @@ internal final class DonationViewController: NSViewController {
         }
     }
     
-    private func productForProductKind(_ productKind: Donations.Product.Kind) -> Donations.Product? {
+    private func productForProductKind(_ productKind: DonationProduct.Kind) -> DonationProduct? {
         return self.donationProducts.filter { $0.kind == productKind }.first
     }
 
@@ -154,7 +154,7 @@ internal final class DonationViewController: NSViewController {
         button.attributedTitle = title
     }
     
-    private func updateDonationsButtons(for products: [Donations.Product], error: DonationsProductsFetchError?) {
+    private func updateDonationsButtons(for products: [DonationProduct], error: DonationsProductsFetchError?) {
         var priceFontSize: CGFloat = 25.0
         let infoFontSize: CGFloat = 13.0
         let buttonWidth: CGFloat = 100.0
@@ -174,7 +174,7 @@ internal final class DonationViewController: NSViewController {
         }
         
         // update all the buttons
-        if error == nil && products.count == Donations.Product.Kind.allKinds.count {
+        if error == nil && products.count == DonationProduct.Kind.allKinds.count {
             for product in products {
                 switch product.kind {
                     case .smallCoffee:
@@ -234,7 +234,7 @@ internal final class DonationViewController: NSViewController {
 }
 
 extension DonationViewController: DonationsDelegate {
-    public func donations(_ donations: Donations, didReceive products: [Donations.Product], error: DonationsProductsFetchError?) {
+    public func donations(_ donations: Donations, didReceive products: [DonationProduct], error: DonationsProductsFetchError?) {
         DispatchQueue.main.async {
             self.donationProducts = products
             
@@ -245,19 +245,19 @@ extension DonationViewController: DonationsDelegate {
         }
     }
     
-    public func transactionDidStart(for product: Donations.Product) {
+    public func transactionDidStart(for product: DonationProduct) {
         DispatchQueue.main.async {
             self.startLoading()
         }
     }
     
-    public func transactionIsBeingProcessed(for product: Donations.Product) {
+    public func transactionIsBeingProcessed(for product: DonationProduct) {
         DispatchQueue.main.async {
             self.startLoading()
         }
     }
     
-    public func transactionDidFinish(for product: Donations.Product, error: Error?) {
+    public func transactionDidFinish(for product: DonationProduct, error: Error?) {
         DispatchQueue.main.async {
             self.stopLoading()
             

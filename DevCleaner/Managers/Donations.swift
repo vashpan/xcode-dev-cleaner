@@ -15,59 +15,59 @@ public enum DonationsProductsFetchError {
     case invalidProducts([String])
 }
 
-// MARK: Donations Delegate
+// MARK: - Donations delegate
 public protocol DonationsDelegate: AnyObject {
-    func donations(_ donations: Donations, didReceive products: [Donations.Product], error: DonationsProductsFetchError?)
+    func donations(_ donations: Donations, didReceive products: [DonationProduct], error: DonationsProductsFetchError?)
     
-    func transactionDidStart(for product: Donations.Product)
-    func transactionIsBeingProcessed(for product: Donations.Product)
-    func transactionDidFinish(for product: Donations.Product, error: Error?)
+    func transactionDidStart(for product: DonationProduct)
+    func transactionIsBeingProcessed(for product: DonationProduct)
+    func transactionDidFinish(for product: DonationProduct, error: Error?)
+}
+
+// MARK: - Donation product
+public struct DonationProduct {
+    public enum Kind: String {
+        case smallCoffee = "SMALL_COFFEE"
+        case bigCoffee = "BIG_COFFEE"
+        case lunch = "LUNCH"
+        
+        public static var allKinds: [Kind] {
+            return [.smallCoffee, .bigCoffee, .lunch]
+        }
+    }
+    
+    public let kind: Kind
+    public let skProduct: SKProduct
+    
+    public let price: String
+    public let info: String
+    
+    public var identifier: String {
+        return self.kind.rawValue
+    }
+    
+    public init?(product: SKProduct) {
+        guard let kind = Kind(rawValue: product.productIdentifier) else {
+            return nil
+        }
+        
+        self.kind = kind
+        self.skProduct = product
+        
+        let nf = NumberFormatter()
+        nf.numberStyle = .currency
+        nf.locale = product.priceLocale
+        
+        self.price = nf.string(from: self.skProduct.price) ?? ""
+        self.info = self.skProduct.localizedTitle
+    }
 }
 
 // MARK: - Donations Manager
 public final class Donations: NSObject {
-    // MARK: Types
-    public struct Product {
-        public enum Kind: String {
-            case smallCoffee = "SMALL_COFFEE"
-            case bigCoffee = "BIG_COFFEE"
-            case lunch = "LUNCH"
-            
-            public static var allKinds: [Kind] {
-                return [.smallCoffee, .bigCoffee, .lunch]
-            }
-        }
-        
-        public let kind: Kind
-        public let skProduct: SKProduct
-        
-        public let price: String
-        public let info: String
-        
-        public var identifier: String {
-            return self.kind.rawValue
-        }
-        
-        public init?(product: SKProduct) {
-            guard let kind = Kind(rawValue: product.productIdentifier) else {
-                return nil
-            }
-            
-            self.kind = kind
-            self.skProduct = product
-            
-            let nf = NumberFormatter()
-            nf.numberStyle = .currency
-            nf.locale = product.priceLocale
-            
-            self.price = nf.string(from: self.skProduct.price) ?? ""
-            self.info = self.skProduct.localizedTitle
-        }
-    }
-    
     // MARK: Properties
     private var productsRequest: SKProductsRequest? = nil
-    private var iapProducts: [Product] = []
+    private var iapProducts: [DonationProduct] = []
     
     public weak var delegate: DonationsDelegate? = nil
     
@@ -85,14 +85,14 @@ public final class Donations: NSObject {
     
     // MARK: Purchasing donations
     public func fetchProductsInfo() {
-        let donationProductsIds = Product.Kind.allKinds.map { $0.rawValue }
+        let donationProductsIds = DonationProduct.Kind.allKinds.map { $0.rawValue }
         
         self.productsRequest = SKProductsRequest(productIdentifiers: Set(donationProductsIds))
         self.productsRequest?.delegate = self
         self.productsRequest?.start()
     }
     
-    public func buy(product: Product) {
+    public func buy(product: DonationProduct) {
         let payment = SKMutablePayment(product: product.skProduct)
         payment.quantity = 1
         
@@ -104,7 +104,7 @@ public final class Donations: NSObject {
 
 extension Donations: SKProductsRequestDelegate {
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        let expectedNumberOfProducts = Product.Kind.allKinds.count
+        let expectedNumberOfProducts = DonationProduct.Kind.allKinds.count
         
         guard !response.products.isEmpty else {
             log.error("No products returned from store!")
@@ -120,7 +120,7 @@ extension Donations: SKProductsRequestDelegate {
             return
         }
         
-        let donationProducts = response.products.compactMap { Product(product: $0) }
+        let donationProducts = response.products.compactMap { DonationProduct(product: $0) }
         guard donationProducts.count == expectedNumberOfProducts else {
             log.error("Not all products have proper ids: \(response.products.count)")
             
@@ -134,10 +134,6 @@ extension Donations: SKProductsRequestDelegate {
 }
 
 extension Donations: SKPaymentTransactionObserver {
-    public func paymentQueue(_ queue: SKPaymentQueue, shouldAddStorePayment payment: SKPayment, for product: SKProduct) -> Bool {
-        return true
-    }
-    
     public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             // get our product related to transaction
