@@ -32,19 +32,25 @@ private func commandLineDebugEnabled() -> Bool {
 }
 
 private func isRunningFromCommandLine(args: [String]) -> Bool {
-    let isTTY = isatty(STDIN_FILENO) // with this param true, we can always assune we run from command line
+    // We have few ways of checking it, first is checking if our STDOUT is bound to some terminal
+    // and second is checking for presence of env variable set in dev-cleaner.sh script. It helps
+    // in cases where we want to run the script from headless environments where there's no TTY.
+    //
+    // Maybe there're better & more sure ways of handling/checking that, but I could't really found them.
+    //
     
-    // it seems that's enough, but maybe in the future we can also try to check parent PID,
-    // to make sure. We also check for a special argument passed usually by Xcode & debugger to mark we run from Xcode and usually
-    // want a full window, it's not a great way though
+    let isTTY = isatty(STDIN_FILENO)
+    let haveProperEnvValue = Preferences.shared.envKeyPresent(key: "DEV_CLEANER_FROM_COMMAND_LINE")
+
+    let runningFromCommandLine = isTTY == 1 || haveProperEnvValue
 
     #if DEBUG
-    let isRunningFromXcode = args.contains("-NSDocumentRevisionsDebugMode")
+    let runningFromXcode = args.contains("-NSDocumentRevisionsDebugMode")
     #else
-    let isRunningFromXcode = false
+    let runningFromXcode = false
     #endif
     
-    return commandLineDebugEnabled() || (isTTY == 1 && !isRunningFromXcode)
+    return commandLineDebugEnabled() || (runningFromCommandLine && !runningFromXcode)
 }
 
 private func cleanedCommandLineArguments(args: [String]) -> [String] {

@@ -5,7 +5,7 @@
 #
 #  "dev-cleaner" command line tool wrapper script.
 #
-#  Copyright © 2019 One Minute Games. All rights reserved.
+#  Copyright © 2019-2024 One Minute Games. All rights reserved.
 #
 #  DevCleaner is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
 
 # get app updated app path
 DEV_CLEANER_PATH=$(defaults read com.oneminutegames.XcodeCleaner DCAppFolder)
+
+# set a command line run env value
+DEV_CLEANER_FROM_COMMAND_LINE=1
 
 if [ -d $DEV_CLEANER_PATH ]; then
     "$DEV_CLEANER_PATH/Contents/MacOS/DevCleaner" "$@"
