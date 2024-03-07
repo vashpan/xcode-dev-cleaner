@@ -45,6 +45,8 @@
 		71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */; };
 		71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */; };
 		71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */ = {isa = PBXBuildFile; fileRef = 71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */; };
+		71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */; };
+		71AC3EB72B991194002B21A7 /* CommandLineInstallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */; };
 		71AE37EF23776AFB009C03BB /* FileManager+DateProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */; };
 		71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AE37F0237A1FAE009C03BB /* WebKit.framework */; };
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
@@ -102,6 +104,8 @@
 		71A21A0D20544CA300B55651 /* XcodeFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeFileEntry.swift; sourceTree = "<group>"; };
 		71A2C11F2668FB1200F502A0 /* FeedbackMailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackMailer.swift; sourceTree = "<group>"; };
 		71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "dev-cleaner.sh"; sourceTree = "<group>"; };
+		71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CommandLineInstall.storyboard; sourceTree = "<group>"; };
+		71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLineInstallViewController.swift; sourceTree = "<group>"; };
 		71AE37EE23776AFB009C03BB /* FileManager+DateProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+DateProperties.swift"; sourceTree = "<group>"; };
 		71AE37F0237A1FAE009C03BB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 		71743ECA2078147B00EC0FE2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				71AC3EB32B990FD1002B21A7 /* Command Line Install Window */,
 				7140B61B231BE5C5005768A7 /* Help Window */,
 				7162E1272097622B00081E4E /* Preferences Window */,
 				71743ECB207815D300EC0FE2 /* Main Window */,
@@ -301,6 +306,15 @@
 				71A21A0B20541BE800B55651 /* XcodeFiles.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		71AC3EB32B990FD1002B21A7 /* Command Line Install Window */ = {
+			isa = PBXGroup;
+			children = (
+				71AC3EB42B991024002B21A7 /* CommandLineInstall.storyboard */,
+				71AC3EB62B991194002B21A7 /* CommandLineInstallViewController.swift */,
+			);
+			path = "Command Line Install Window";
 			sourceTree = "<group>";
 		};
 		71B01E8C20824F0F00940041 /* Views */ = {
@@ -401,6 +415,7 @@
 			files = (
 				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
 				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
+				71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
 				7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */,
@@ -437,6 +452,7 @@
 				718D4ABC2311DE66001E9382 /* ArgumentsParser.swift in Sources */,
 				71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */,
 				71E7F838214E930500A11601 /* Alerts.swift in Sources */,
+				71AC3EB72B991194002B21A7 /* CommandLineInstallViewController.swift in Sources */,
 				719B25DC205EF9D7007560C0 /* FileManager+DirectorySize.swift in Sources */,
 				7162E1262097255C00081E4E /* Stack.swift in Sources */,
 				71A21A0E20544CA300B55651 /* XcodeFileEntry.swift in Sources */,

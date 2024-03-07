@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,7 +43,7 @@
                                         <menuItem title="Install Command Line Tool..." id="PZe-ZI-m5F">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="installCommandLineTool:" target="Voe-Tx-rLC" id="Leg-ZR-heb"/>
+                                                <segue destination="pbf-7k-k0V" kind="show" id="JfZ-HR-5nP"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
@@ -156,7 +156,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="-211"/>
+            <point key="canvasLocation" x="-8" y="-226"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="t22-AP-hJD">
@@ -164,7 +164,7 @@
                 <controllerPlaceholder storyboardName="Preferences" id="nZ1-vI-bJQ" sceneMemberID="viewController"/>
                 <customObject id="h3h-tG-T4B" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="37"/>
+            <point key="canvasLocation" x="130" y="6"/>
         </scene>
         <!--Help-->
         <scene sceneID="6fu-lN-y6i">
@@ -172,7 +172,7 @@
                 <controllerPlaceholder storyboardName="Help" id="hQu-1h-PrG" sceneMemberID="viewController"/>
                 <customObject id="ceU-06-grc" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="55" y="37"/>
+            <point key="canvasLocation" x="-8" y="6"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -201,11 +201,11 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="MainViewController" customModule="DevCleaner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2S-Jp-Qdl">
+                    <view key="view" wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="496" height="686"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qY4-v6-aG6" userLabel="Clean Button">
-                                <rect key="frame" x="363" y="13" width="80" height="32"/>
+                                <rect key="frame" x="403" y="13" width="80" height="32"/>
                                 <buttonCell key="cell" type="push" title="Clean..." bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wpS-RA-DUz">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -218,12 +218,12 @@ DQ
                                 </connections>
                             </button>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eBx-hh-WZ7" userLabel="Main Views Container">
-                                <rect key="frame" x="20" y="94" width="416" height="400"/>
+                                <rect key="frame" x="20" y="94" width="456" height="400"/>
                                 <subviews>
                                     <scrollView autohidesScrollers="YES" horizontalLineScroll="21" horizontalPageScroll="10" verticalLineScroll="21" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynz-vf-S6e">
-                                        <rect key="frame" x="0.0" y="0.0" width="416" height="400"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="456" height="400"/>
                                         <clipView key="contentView" drawsBackground="NO" id="dr2-Zy-P8I">
-                                            <rect key="frame" x="1" y="1" width="414" height="398"/>
+                                            <rect key="frame" x="1" y="1" width="454" height="398"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="18" rowSizeStyle="automatic" headerView="v75-Hl-aeO" viewBased="YES" indentationPerLevel="18" outlineTableColumn="WoQ-aT-xsT" id="xU2-il-hl0">
@@ -341,7 +341,7 @@ DQ
                                             <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="p1y-QG-xIv">
-                                            <rect key="frame" x="1" y="383" width="414" height="16"/>
+                                            <rect key="frame" x="1" y="383" width="454" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="3Uz-J4-Lkn">
@@ -354,7 +354,7 @@ DQ
                                         </tableHeaderView>
                                     </scrollView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-KW-Rls" userLabel="Access Warnings View">
-                                        <rect key="frame" x="-75" y="138" width="566" height="124"/>
+                                        <rect key="frame" x="-55" y="138" width="566" height="124"/>
                                         <subviews>
                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WG2-fv-9kB">
                                                 <rect key="frame" x="18" y="80" width="530" height="24"/>
@@ -396,7 +396,7 @@ DQ
                                         </constraints>
                                     </customView>
                                     <progressIndicator hidden="YES" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kWj-vG-o6z">
-                                        <rect key="frame" x="192" y="184" width="32" height="32"/>
+                                        <rect key="frame" x="212" y="184" width="32" height="32"/>
                                     </progressIndicator>
                                 </subviews>
                                 <constraints>
@@ -420,7 +420,7 @@ DQ
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="DevCleanerIcon" id="guH-2t-Xph"/>
                             </imageView>
                             <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="RaE-kH-QJe">
-                                <rect key="frame" x="93" y="514" width="345" height="128"/>
+                                <rect key="frame" x="93" y="514" width="385" height="128"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="AcK-WQ-6Fn">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">Xcode generates large amount of cached data that could be beneficial to development speed but also tends to consume large amount of data on your hard drive. This tool allows to clean those caches allowing you to decide what you need and what not.  There's absolutely no warranty and you're using this tool for your responsibility!</string>
@@ -429,7 +429,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pF6-87-JUR" userLabel="Info Header Label">
-                                <rect key="frame" x="93" y="650" width="345" height="16"/>
+                                <rect key="frame" x="93" y="650" width="385" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Clean your Xcode cache files" id="8Ix-rm-3dw">
                                     <font key="font" metaFont="systemBold"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -445,10 +445,10 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0Yp-uh-F76">
-                                <rect key="frame" x="20" y="58" width="416" height="5"/>
+                                <rect key="frame" x="20" y="58" width="456" height="5"/>
                             </box>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S06-6o-y2V">
-                                <rect key="frame" x="17" y="16" width="13" height="25"/>
+                                <rect key="frame" x="17" y="16" width="25" height="25"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pba-GW-CWa">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -458,7 +458,7 @@ DQ
                                 </connections>
                             </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-LO-pmC">
-                                <rect key="frame" x="352" y="69" width="86" height="17"/>
+                                <rect key="frame" x="392" y="69" width="86" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Total: 0 bytes" id="4fM-lu-IeX">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -466,7 +466,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nSL-jb-aDV">
-                                <rect key="frame" x="36" y="10" width="84" height="19"/>
+                                <rect key="frame" x="48" y="10" width="84" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="🤓 Tip me..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pdM-2l-xC7">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -476,7 +476,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jk9-Oc-a0l">
-                                <rect key="frame" x="128" y="10" width="58" height="19"/>
+                                <rect key="frame" x="140" y="10" width="58" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Share..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3Q1-Dr-Ffd">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -486,7 +486,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Mia-rv-zCw">
-                                <rect key="frame" x="194" y="10" width="64" height="19"/>
+                                <rect key="frame" x="206" y="10" width="64" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Follow..." bezelStyle="roundedRect" imagePosition="leading" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kAe-M1-9nY">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -497,7 +497,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jjO-ih-b0v">
-                                <rect key="frame" x="266" y="10" width="64" height="19"/>
+                                <rect key="frame" x="278" y="10" width="64" height="19"/>
                                 <buttonCell key="cell" type="roundRect" title="Review..." bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ee3-8t-HIR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="cellTitle"/>
@@ -507,7 +507,7 @@ DQ
                                 </connections>
                             </button>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qHE-u2-bEP">
-                                <rect key="frame" x="34" y="37" width="404" height="15"/>
+                                <rect key="frame" x="46" y="37" width="404" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="400" id="Njh-fQ-xCA"/>
                                 </constraints>
@@ -765,6 +765,14 @@ DQ
                 <customObject id="9NB-YM-iaP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="143" y="1601"/>
+        </scene>
+        <!--CommandLineInstall-->
+        <scene sceneID="NjZ-zM-YnJ">
+            <objects>
+                <controllerPlaceholder storyboardName="CommandLineInstall" id="pbf-7k-k0V" sceneMemberID="viewController"/>
+                <customObject id="WHS-Xz-I3d" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="6"/>
         </scene>
     </scenes>
     <resources>
