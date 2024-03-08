@@ -23,7 +23,7 @@ import Foundation
 public final class DeviceSupportFileEntry: XcodeFileEntry {
     // MARK: Types
     public enum OSType {
-        case iOS, watchOS, tvOS, macOS, other
+        case iOS, watchOS, tvOS, macOS, visionOS, other
         
         public init(label: String) {
             switch label {
@@ -35,6 +35,8 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                     self = .tvOS
                 case "macOS":
                     self = .macOS
+                case "visionOS":
+                    self = .visionOS
                 default:
                     self = .other
             }
@@ -50,6 +52,8 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                     return "tvOS"
                 case .macOS:
                     return "macOS"
+                case .visionOS:
+                    return "visionOS"
                 case .other:
                     return ""
             }
@@ -123,6 +127,10 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 } else {
                     result = .image(name: "OS/macOS/Generic")
                 }
+                
+            case .visionOS:
+                // there's just one visionOS version so no logo was actually presented
+                result = .image(name: "OS/visionOS/Generic")
                 
             default:
                 result = .image(name: "OS/iOS/Generic")
@@ -339,9 +347,15 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "Apple TV 4K (2nd generation)"
             
             // HomePod
-            case "AudioAccessory1,1":                             return "HomePod"
-            case "AudioAccessory5,1":                             return "HomePod mini"
+            case "AudioAccessory1,1":                             
+                return "HomePod"
+            case "AudioAccessory5,1":                             
+                return "HomePod mini"
             
+            // Vision Pro
+            case "RealityDevice14,1":
+                return "Apple Vision Pro"
+                
             default:
                 return deviceId
         }

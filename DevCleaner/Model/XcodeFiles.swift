@@ -473,6 +473,7 @@ final public class XcodeFiles {
             (entry: XcodeFileEntry(label: "iOS", icon: .image(name: "Devices/iPadIcon"), selected: true), path: "iOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "watchOS", icon: .image(name: "Devices/WatchIcon"), selected: true), path: "watchOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "tvOS", icon: .image(name: "Devices/AppleTVIcon"), selected: true), path: "tvOS DeviceSupport"),
+            (entry: XcodeFileEntry(label: "visionOS", icon: .image(name: "Devices/VisionProIcon"), selected: true), path: "visionOS DeviceSupport"),
             (entry: XcodeFileEntry(label: "macOS", icon: .image(name: "Devices/MacBookIcon"), selected: true), path: "macOS DeviceSupport")
         ]
                 
