@@ -574,6 +574,7 @@ DQ
                         <outlet property="cleanButton" destination="qY4-v6-aG6" id="Txw-Is-yfd"/>
                         <outlet property="outlineView" destination="xU2-il-hl0" id="HhD-WY-k3B"/>
                         <outlet property="progressIndicator" destination="kWj-vG-o6z" id="9rB-Mr-oPa"/>
+                        <outlet property="tipMeButton" destination="nSL-jb-aDV" id="Oh2-hm-mdV"/>
                         <outlet property="totalBytesTextField" destination="lXf-LO-pmC" id="FZ6-xo-Qsp"/>
                         <segue destination="clE-D7-ddV" kind="sheet" identifier="ShowCleaningView" id="Yc0-bu-VmE"/>
                     </connections>

@@ -19,6 +19,7 @@
 //  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
+import StoreKit
 
 final class MainViewController: NSViewController {
     // MARK: Types
@@ -56,6 +57,7 @@ final class MainViewController: NSViewController {
     @IBOutlet private weak var progressIndicator: NSProgressIndicator!
     @IBOutlet private weak var cleanButton: NSButton!
     @IBOutlet private weak var benefitsTextField: NSTextField!
+    @IBOutlet private weak var tipMeButton: NSButton!
     
     @IBOutlet weak var accessWarningsView: NSView!
     @IBOutlet weak var accessWarningTitle: NSTextField!
@@ -276,6 +278,7 @@ final class MainViewController: NSViewController {
         
         // all time size / donate button
         self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
+        self.tipMeButton.isEnabled = SKPaymentQueue.canMakePayments()
     }
     
     private func startScan() {
