@@ -24,7 +24,7 @@
 DEV_CLEANER_PATH=$(defaults read com.oneminutegames.XcodeCleaner DCAppFolder)
 
 # set a command line run env value
-DEV_CLEANER_FROM_COMMAND_LINE=1
+export DEV_CLEANER_FROM_COMMAND_LINE=1
 
 if [ -d $DEV_CLEANER_PATH ]; then
     "$DEV_CLEANER_PATH/Contents/MacOS/DevCleaner" "$@"
