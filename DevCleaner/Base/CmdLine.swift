@@ -59,7 +59,7 @@ public final class CmdLine {
             print()
             print("To update command line tool for the future, link command line tool script to one of your directories in PATH, for example /usr/local/bin.")
             print()
-            print("$ sudo ln -s \(appPath)/Contents/Resources/dev-cleaner.sh /usr/local/bin/dev-cleaner")
+            print("$ sudo ln -sf \(appPath)/Contents/Resources/dev-cleaner.sh /usr/local/bin/dev-cleaner")
             print()
         }
     }

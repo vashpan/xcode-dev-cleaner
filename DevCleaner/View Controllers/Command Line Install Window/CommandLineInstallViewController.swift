@@ -27,7 +27,7 @@ final class CommandLineInstallViewController: NSViewController {
     private var commandString: String {
         let appPath = Bundle.main.bundlePath
         
-        return "sudo ln -s \(appPath)/Contents/Resources/dev-cleaner.sh /usr/local/bin/dev-cleaner"
+        return "sudo ln -sf \(appPath)/Contents/Resources/dev-cleaner.sh /usr/local/bin/dev-cleaner"
     }
     
     // MARK: Initialization & overrides
