@@ -21,7 +21,7 @@ newer versions of Xcode! I tried to make sure this application is safe, but if y
 
 ### Device Support
 
-It consumes the largest part of the Xcode caches. Everytime you connect a device with the new iOS/watchOS/tvOS, its symbols must be downloaded 
+It consumes the largest part of the Xcode caches. Everytime you connect a device with the new iOS/visionOS/watchOS/tvOS, its symbols must be downloaded 
 to your computer, for efficient debugging. It consumes around 2-5GB per version. Even smallest updates requires new set of symbols. 
 
 It could accumulate to hold tens of gigabytes of data.
@@ -58,8 +58,8 @@ those old documentations may be still on your drive if you're an old Xcode user.
 
 If you enjoy this application, consider support me by making a tip in the app, or by downloading/buying some of my other apps & games from the AppStore 😎
 
-Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
 Mastodon: [@kkolakowski](https://mastodon.social/@kkolakowski)
+Twitter: [@vashpan](https://twitter.com/vashpan), [@oneminutegames](https://twitter.com/OneMinuteGames)
 
 Website: http://www.one-minute-games.com
 AppStore: https://apps.apple.com/developer/one-minute-games/id395763583
@@ -72,4 +72,4 @@ maybe some caches I missed, let me know as well in issues.
 Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, 
 as copyright holder can submit it to the Mac App Store.
 
-Copyright © 2018-2023 One Minute Games Konrad Kołakowski.
+Copyright © 2018-2024 One Minute Games Konrad Kołakowski.
