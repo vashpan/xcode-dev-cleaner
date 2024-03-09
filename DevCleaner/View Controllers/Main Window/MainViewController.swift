@@ -278,7 +278,7 @@ final class MainViewController: NSViewController {
         
         // all time size / donate button
         self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
-        self.tipMeButton.isEnabled = SKPaymentQueue.canMakePayments()
+        self.tipMeButton.isEnabled = Donations.shared.canMakeDonations
     }
     
     private func startScan() {

@@ -74,6 +74,24 @@ public final class Donations: NSObject {
     
     public weak var delegate: DonationsDelegate? = nil
     
+    public var canMakeDonations: Bool {
+        #if DEBUG
+        return SKPaymentQueue.canMakePayments()
+        #else
+        // we can make payments and we're on Mac App Store build
+        let canMakePayments = SKPaymentQueue.canMakePayments()
+        let receiptPresent: Bool
+        if let receiptURL = Bundle.main.appStoreReceiptURL, FileManager.default.fileExists(atPath: receiptURL.path) {
+            receiptPresent = true
+        } else {
+            receiptPresent = false
+        }
+        
+        return canMakePayments && receiptPresent
+        
+        #endif
+    }
+    
     public static let shared = Donations()
     
     // MARK: Initialization
