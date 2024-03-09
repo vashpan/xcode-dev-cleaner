@@ -369,7 +369,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = "One Minute Games";
 				TargetAttributes = {
 					7110B48D2030F17B00EDBFA3 = {
