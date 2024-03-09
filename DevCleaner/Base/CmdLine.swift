@@ -46,8 +46,22 @@ public final class CmdLine {
             fatalError("CmdLineTool: Can't get app build number from main bundle!")
         }
         
+        // app info
         print("DevCleaner \(appVersion) (\(appBuildNumber))")
         print()
+        
+        // check if we have command line tool properly updated
+        if !Preferences.shared.envKeyPresent(key: "DEV_CLEANER_FROM_COMMAND_LINE") {
+            let appPath = Bundle.main.bundlePath
+            
+            print("WARNING: It seems you haven't updated your command line tool!")
+            print("You might have problems running this tool from headless environments like SSH, or CI servers...")
+            print()
+            print("To update command line tool for the future, link command line tool script to one of your directories in PATH, for example /usr/local/bin.")
+            print()
+            print("$ sudo ln -s \(appPath)/Contents/Resources/dev-cleaner.sh /usr/local/bin/dev-cleaner")
+            print()
+        }
     }
     
     private func printErrorAndExit(errorMessage: String) {
