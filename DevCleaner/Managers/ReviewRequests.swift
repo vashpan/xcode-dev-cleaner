@@ -27,6 +27,13 @@ public final class ReviewRequests {
         // or, if we clean smaller amounts, after 3 cleans
         // after we pass those 20GB total cleaned amount, we ask everytime we clean basically (limits according to system)
         if totalBytesCleaned > ReviewRequests.bytesNeededForReviewRequest || totalCleansPerformedSinceLastRequest >= ReviewRequests.cleansNeededForReviewRequest {
+            // workaround due to an issue with presenting review popups in the background
+            // https://furnacecreek.org/blog/2024-04-14-how-to-prevent-background-mac-app-store-rating-windows
+            //
+            if #available(macOS 14.0, *) {
+                NSApp.yieldActivation(toApplicationWithBundleIdentifier: "com.apple.storeuid")
+            }
+            
             SKStoreReviewController.requestReview()
             
             Preferences.shared.cleansSinceLastReview = 0
