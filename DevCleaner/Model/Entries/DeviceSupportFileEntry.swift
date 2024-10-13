@@ -101,36 +101,39 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
         
         switch os {
             case .iOS:
-                if version.major >= 2 && version.major <= 17 {
+                if version.major >= 2 && version.major <= 18 {
                     result = .image(name: "OS/iOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/iOS/Generic")
                 }
             
             case .watchOS:
-                if version.major >= 2 && version.major <= 10 {
+                if version.major >= 2 && version.major <= 11 {
                     result = .image(name: "OS/watchOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/watchOS/Generic")
                 }
             
             case .tvOS:
-                if version.major >= 9 && version.major <= 17 {
+                if version.major >= 9 && version.major <= 18 {
                     result = .image(name: "OS/tvOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/tvOS/Generic")
                 }
                 
             case .macOS:
-                if version.major >= 12 && version.major <= 14 {
+                if version.major >= 12 && version.major <= 15 {
                     result = .image(name: "OS/macOS/\(version.major)")
                 } else {
                     result = .image(name: "OS/macOS/Generic")
                 }
                 
             case .visionOS:
-                // there's just one visionOS version so no logo was actually presented
-                result = .image(name: "OS/visionOS/Generic")
+                if version.major >= 2 && version.major <= 2 {
+                    result = .image(name: "OS/visionOS/\(version.major)")
+                } else {
+                    result = .image(name: "OS/visionOS/Generic")
+                }
                 
             default:
                 result = .image(name: "OS/iOS/Generic")
