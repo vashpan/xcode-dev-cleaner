@@ -237,7 +237,15 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "iPhone 15 Pro"
             case "iPhone16,2":                                    
                 return "iPhone 15 Pro Max"
-            case "iPhone8,4":                                     
+            case "iPhone17,1":
+                return "iPhone 16 Pro"
+            case "iPhone17,2":
+                return "iPhone 16 Pro Max"
+            case "iPhone17,3":
+                return "iPhone 16"
+            case "iPhone17,4":
+                return "iPhone 16 Plus"
+            case "iPhone8,4":
                 return "iPhone SE"
             case "iPhone12,8":                                    
                 return "iPhone SE (2nd generation)"
@@ -311,6 +319,10 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "iPad Pro (12.9-inch) (5th generation)"
             case "iPad14,5", "iPad14,6":                          
                 return "iPad Pro (12.9-inch) (6th generation)"
+            case "iPad16,3", "iPad16,4":
+                return "iPad Pro (11-inch) (5th generation)"
+            case "iPad16,5", "iPad16,6":
+                return "iPad Pro (12.9 inch) (7th generation)"
             
             // Apple Watch
             case "Watch1,1", "Watch1,2":
@@ -337,6 +349,10 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "Apple Watch Series 8"
             case "Watch6,18":
                 return "Apple Watch Ultra"
+            case "Watch7,1", "Watch7,2", "Watch7,3", "Watch7,4":
+                return "Apple Watch Series 9"
+            case "Watch7,5":
+                return "Apple Watch Ultra 2"
                 
             // Apple TV
             case "AppleTV5,3":
