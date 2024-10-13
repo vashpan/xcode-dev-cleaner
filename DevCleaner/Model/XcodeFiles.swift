@@ -94,11 +94,11 @@ final public class XcodeFiles {
         }
         
         self.locations = [
-            .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "Systems debug symbols that are retained every version, usually you need only the newer ones", tooltip: true, selected: false),
-            .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps, delete only if you sure you don't need them", tooltip: true, selected: false),
-            .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached projects data & symbol index", tooltip: true, selected: false),
-            .documentationCache: XcodeFileEntry(label: "Documentation Cache", tooltipText: "Documentation cache for each Xcode version", tooltip: true, selected: false),
-            .logs: XcodeFileEntry(label: "Old Simulator & Device Logs", tooltipText: "Old device logs & crashes databases, only most recent ones are usually needed as they are copies of previous ones.", tooltip: true, selected: false),
+            .deviceSupport: XcodeFileEntry(label: "Device Support", tooltipText: "System debug symbols retained for each version. You usually only need the most recent ones.", tooltip: true, selected: false),
+            .archives: XcodeFileEntry(label: "Archives", tooltipText: "Archived apps. Delete only if you're sure you don't need them.", tooltip: true, selected: false),
+            .derivedData: XcodeFileEntry(label: "Derived Data", tooltipText: "Cached project data and symbol index.", tooltip: true, selected: false),
+            .documentationCache: XcodeFileEntry(label: "Documentation Cache", tooltipText: "Documentation cache for each version of Xcode.", tooltip: true, selected: false),
+            .logs: XcodeFileEntry(label: "Old Logs", tooltipText: "Old device logs and crash databases. Usually, only the most recent ones are needed as they are duplicates of earlier logs.", tooltip: true, selected: false),
             .oldDocumentation: OldDocumentationFileEntry(selected: false)
         ]
     }
