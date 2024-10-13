@@ -297,6 +297,15 @@ final class MainViewController: NSViewController {
         }
     }
     
+    private func playCompletionSound() {
+        guard let sound = NSSound(named: "Blow") else {
+            log.error("MainViewController: Completion sound 'Blow' not found!")
+            return
+        }
+        
+        sound.play()
+    }
+    
     private func formatBytesToString(bytes: Int64) -> String {
         return ByteCountFormatter.string(fromByteCount: bytes, countStyle: .file)
     }
@@ -608,6 +617,7 @@ extension MainViewController: XcodeEntryCellViewDelegate {
 // MARK: CleaningViewControllerDelegate implememntation
 extension MainViewController: CleaningViewControllerDelegate {
     func cleaningDidFinish(_ vc: CleaningViewController) {
+        self.playCompletionSound()
         self.startScan()
         
         // ask after a little delay to let user enjoy their finished clean
