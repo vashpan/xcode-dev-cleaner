@@ -19,7 +19,7 @@
 //  along with DevCleaner.  If not, see <http://www.gnu.org/licenses/>.
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 final class HelpViewController: NSViewController {
     // MARK: Properties & outlets
