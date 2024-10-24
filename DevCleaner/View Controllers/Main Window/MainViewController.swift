@@ -120,24 +120,30 @@ final class MainViewController: NSViewController {
         self.view.window?.delegate = self
     }
     
+    func toggleRow(_ row: Int) {
+        guard let selectedEntry = self.outlineView.item(atRow: row) as? XcodeFileEntry,
+              let selectedCellView = self.outlineView.view(atColumn: 0, row: row, makeIfNecessary: false) as? XcodeEntryCellView else {
+            return
+        }
+
+        let targetStateValue: NSControl.StateValue
+        switch selectedEntry.selection {
+            case .on:
+                targetStateValue = .off
+            case .off:
+                targetStateValue = .on
+            case .mixed:
+                targetStateValue = .on
+        }
+        
+        self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue,
+                                           xcodeEntry: selectedEntry)
+    }
+    
     override func keyUp(with event: NSEvent) {
         if event.keyCode == 49 { // spacebar
-            let selectedRow = self.outlineView.selectedRow
-            if let selectedEntry = self.outlineView.item(atRow: selectedRow) as? XcodeFileEntry,
-               let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
-                let targetStateValue: NSControl.StateValue
-                switch selectedEntry.selection {
-                    case .on:
-                        targetStateValue = .off
-                    case .off:
-                        targetStateValue = .on
-                    case .mixed:
-                        targetStateValue = .on
-                }
-                
-                self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue, xcodeEntry: selectedEntry)
-                
-                self.outlineView.selectRowIndexes([selectedRow], byExtendingSelection: false)
+            for row in self.outlineView.selectedRowIndexes {
+                toggleRow(row)
             }
         }
         
@@ -410,12 +416,16 @@ final class MainViewController: NSViewController {
     }
     
     @IBAction func showInFinder(_ sender: Any) {
-        guard let clickedEntry = self.outlineView.item(atRow: self.outlineView.clickedRow) as? XcodeFileEntry else {
-            return
+        var clickedEntries = [XcodeFileEntry]()
+        for row in self.outlineView.selectedRowIndexes {
+            if let clickedEntry = self.outlineView.item(atRow: row) as? XcodeFileEntry {
+                clickedEntries.append(clickedEntry)
+            }
         }
-        
-        if clickedEntry.paths.count > 0 {
-            NSWorkspace.shared.activateFileViewerSelecting(clickedEntry.paths)
+
+        let paths = [URL](clickedEntries.map(\.paths).joined())
+        if paths.count > 0 {
+            NSWorkspace.shared.activateFileViewerSelecting(paths)
         }
     }
     
