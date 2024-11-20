@@ -356,7 +356,9 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "Apple Watch Series 9"
             case "Watch7,5":
                 return "Apple Watch Ultra 2"
-                
+            case "Watch7,8", "Watch7,9", "Watch7,10", "Watch7,11":
+                return "Apple Watch Series 10"
+            
             // Apple TV
             case "AppleTV5,3":
                 return "Apple TV"
