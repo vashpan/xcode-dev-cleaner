@@ -35,44 +35,42 @@ public struct Version {
     }
     
     init?(describing: String) {
-        let components = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true)
-        
-        if components.count == 3 {
-            if let majorInt = UInt(components[0]) {
-                self.major = majorInt
-            } else {
-                return nil
+        // Check for new format: NSOperatingSystemVersion(majorVersion: 16, minorVersion: 2, patchVersion: 0)
+        let pattern = #"NSOperatingSystemVersion\s*\(\s*majorVersion:\s*(\d+),\s*minorVersion:\s*(\d+),\s*patchVersion:\s*(\d+)\s*\)"#
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+
+        if let match = regex?.firstMatch(in: describing, options: [], range: NSRange(describing.startIndex..., in: describing)) {
+            if let majorRange = Range(match.range(at: 1), in: describing),
+               let minorRange = Range(match.range(at: 2), in: describing),
+               let patchRange = Range(match.range(at: 3), in: describing),
+               let major = UInt(describing[majorRange]),
+               let minor = UInt(describing[minorRange]),
+               let patch = UInt(describing[patchRange]) {
+                self.major = major
+                self.minor = minor
+                self.patch = patch
+                return
             }
-            
-            if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
-            } else {
-                return nil
-            }
-            
-            if let patchInt = UInt(components[2]) {
-                self.patch = patchInt
-            } else {
-                return nil
-            }
-        } else if components.count == 2 {
-            if let majorInt = UInt(components[0]) {
-                self.major = majorInt
-            } else {
-                return nil
-            }
-            
-            if let minorInt = UInt(components[1]) {
-                self.minor = minorInt
-            } else {
-                return nil
-            }
-            
-            self.patch = nil
-            
         } else {
-            return nil
+            // Fall back to legacy format (e.g., "15.4" or "15.4.1")
+            let components = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true)
+
+            if components.count == 2 || components.count == 3 {
+                guard let major = UInt(components[0]),
+                      let minor = UInt(components[1]) else {
+                    log.warning("Version: Invalid version parsing: \(describing)")
+                    return nil
+                }
+                let patch = components.count == 3 ? UInt(components[2]) : nil
+
+                self.major = major
+                self.minor = minor
+                self.patch = patch
+                return
+            }
         }
+        log.warning("Version: Invalid version parsing: \(describing)")
+        return nil
     }
 }
 
