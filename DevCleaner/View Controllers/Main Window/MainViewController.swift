@@ -90,6 +90,9 @@ final class MainViewController: NSViewController {
                                       buttonActionSelector: #selector(downloadXcode(_:)))
         }
         
+        // multiselect allowed
+        self.outlineView.allowsMultipleSelection = true
+        
         // set all time saved bytes label
         self.benefitsTextField.attributedStringValue = self.benefitsLabelAttributedString(totalBytesCleaned: Preferences.shared.totalBytesCleaned)
     }
@@ -122,23 +125,25 @@ final class MainViewController: NSViewController {
     
     override func keyUp(with event: NSEvent) {
         if event.keyCode == 49 { // spacebar
-            let selectedRow = self.outlineView.selectedRow
-            if let selectedEntry = self.outlineView.item(atRow: selectedRow) as? XcodeFileEntry,
-               let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
-                let targetStateValue: NSControl.StateValue
-                switch selectedEntry.selection {
-                    case .on:
-                        targetStateValue = .off
-                    case .off:
-                        targetStateValue = .on
-                    case .mixed:
-                        targetStateValue = .on
+            let selectedRowIndexes = self.outlineView.selectedRowIndexes
+            for selectedRow in selectedRowIndexes {
+                if let selectedEntry = self.outlineView.item(atRow: selectedRow) as? XcodeFileEntry,
+                   let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
+                    let targetStateValue: NSControl.StateValue
+                    switch selectedEntry.selection {
+                        case .on:
+                            targetStateValue = .off
+                        case .off:
+                            targetStateValue = .on
+                        case .mixed:
+                            targetStateValue = .on
+                    }
+                    
+                    self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue, xcodeEntry: selectedEntry)
                 }
-                
-                self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue, xcodeEntry: selectedEntry)
-                
-                self.outlineView.selectRowIndexes([selectedRow], byExtendingSelection: false)
             }
+            
+            self.outlineView.selectRowIndexes(selectedRowIndexes, byExtendingSelection: false)
         }
         
         super.keyUp(with: event)
