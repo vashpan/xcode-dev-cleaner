@@ -34,8 +34,8 @@ public struct Version {
         self.patch = patch
     }
     
-    init?(describing: String) {
-        let components = describing.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true)
+    init?(string: String) {
+        let components = string.split(separator: ".", maxSplits: 3, omittingEmptySubsequences: true)
         
         if components.count == 3 {
             if let majorInt = UInt(components[0]) {
@@ -72,6 +72,38 @@ public struct Version {
             
         } else {
             return nil
+        }
+    }
+    
+    init?(osVersionRawString: String) {
+        // regex to get version from strings like those: NSOperatingSystemVersion(majorVersion/ 16, minorVersion/ 2, patchVersion/ 0)
+        let pattern = #"majorVersion[:/]\s*(\d+).*?minorVersion[:/]\s*(\d+).*?patchVersion[:/]\s*(\d+)"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        
+        let range = NSRange(osVersionRawString.startIndex..., in: osVersionRawString)
+        guard let match = regex.firstMatch(in: osVersionRawString, range: range), match.numberOfRanges == 4 else { return nil }
+        
+        let nsString = osVersionRawString as NSString
+        let major = nsString.substring(with: match.range(at: 1))
+        let minor = nsString.substring(with: match.range(at: 2))
+        let patch = nsString.substring(with: match.range(at: 3))
+        
+        // if we have "0" in patch, ignore it as Apple convention is to use 16.2 instead of 16.2.0
+        let versionString: String
+        if patch == "0" {
+            versionString = "\(major).\(minor)"
+        } else {
+            versionString = "\(major).\(minor).\(patch)"
+        }
+        
+        self.init(string: versionString)
+    }
+    
+    init?(describing: String) {
+        let isRawOSVersionString = describing.starts(with: "NSOperatingSystemVersion")
+        switch isRawOSVersionString {
+            case true: self.init(osVersionRawString: describing)
+            case false: self.init(string: describing)
         }
     }
 }
