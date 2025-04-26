@@ -278,9 +278,11 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "iPad (9th generation)"
             case "iPad13,18", "iPad13,19":                        
                 return "iPad (10th generation)"
-            case "iPad4,1", "iPad4,2", "iPad4,3":                 
+            case "iPad15,7", "iPad15,8":
+                return "iPad (11th generation)"
+            case "iPad4,1", "iPad4,2", "iPad4,3":
                 return "iPad Air"
-            case "iPad5,3", "iPad5,4":                            
+            case "iPad5,3", "iPad5,4":
                 return "iPad Air 2"
             case "iPad11,3", "iPad11,4":                          
                 return "iPad Air (3rd generation)"
@@ -288,7 +290,15 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "iPad Air (4th generation)"
             case "iPad13,16", "iPad13,17":                        
                 return "iPad Air (5th generation)"
-            case "iPad2,5", "iPad2,6", "iPad2,7":                 
+            case "iPad14,8", "iPad14,9":
+                return "iPad Air (6th generation, 11-inch)"
+            case "iPad14,10", "iPad14,11":
+                return "iPad Air (6th generation, 13-inch)"
+            case "iPad15,3", "iPad15,4":
+                return "iPad Air (7th generation, 11-inch)"
+            case "iPad15,5", "iPad15,6":
+                return "iPad Air (7th generation, 13-inch)"
+            case "iPad2,5", "iPad2,6", "iPad2,7":
                 return "iPad mini"
             case "iPad4,4", "iPad4,5", "iPad4,6":                 
                 return "iPad mini 2"
