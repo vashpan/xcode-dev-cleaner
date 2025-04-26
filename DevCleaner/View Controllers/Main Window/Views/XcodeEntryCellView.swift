@@ -32,7 +32,7 @@ final class XcodeEntryCellView: NSTableCellView {
     
     internal weak var delegate: XcodeEntryCellViewDelegate? = nil
     
-    private weak var entry: XcodeFileEntry?
+    internal private(set) weak var entry: XcodeFileEntry?
     
     // MARK: Setup
     internal func setup(with xcodeEntry: XcodeFileEntry, delegate: XcodeEntryCellViewDelegate) {
@@ -135,6 +135,18 @@ final class XcodeEntryCellView: NSTableCellView {
     }
     
     // MARK: Actions
+    internal func toggleSelection() {
+        let targetStateValue: NSControl.StateValue
+        if self.checkBox.state == .on {
+            targetStateValue = .off
+        } else {
+            targetStateValue = .on
+        }
+        
+        self.checkBox.state = targetStateValue
+        self.delegate?.xcodeEntryCellSelectedChanged(self, state: targetStateValue, xcodeEntry: self.entry)
+    }
+    
     @IBAction func checkBoxSwitched(_ sender: NSButton) {
         // when we click, disallow mixed state
         if sender.state == .mixed {

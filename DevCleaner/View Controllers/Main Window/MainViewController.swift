@@ -125,24 +125,13 @@ final class MainViewController: NSViewController {
     
     override func keyUp(with event: NSEvent) {
         if event.keyCode == 49 { // spacebar
-            let selectedRowIndexes = self.outlineView.selectedRowIndexes
-            for selectedRow in selectedRowIndexes {
-                if let selectedEntry = self.outlineView.item(atRow: selectedRow) as? XcodeFileEntry,
-                   let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
-                    let targetStateValue: NSControl.StateValue
-                    switch selectedEntry.selection {
-                        case .on:
-                            targetStateValue = .off
-                        case .off:
-                            targetStateValue = .on
-                        case .mixed:
-                            targetStateValue = .on
-                    }
-                    
-                    self.xcodeEntryCellSelectedChanged(selectedCellView, state: targetStateValue, xcodeEntry: selectedEntry)
-                }
+            // we select only one - it will trigger selection of all other
+            let selectedRow = self.outlineView.selectedRow
+            if let selectedCellView = self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView {
+                selectedCellView.toggleSelection()
             }
             
+            let selectedRowIndexes = self.outlineView.selectedRowIndexes
             self.outlineView.selectRowIndexes(selectedRowIndexes, byExtendingSelection: false)
         }
         
@@ -592,30 +581,50 @@ extension MainViewController: NSMenuDelegate {
 // MARK: XcodeEntryCellViewDelegate implementation
 extension MainViewController: XcodeEntryCellViewDelegate {
     func xcodeEntryCellSelectedChanged(_ cell: XcodeEntryCellView, state: NSControl.StateValue, xcodeEntry: XcodeFileEntry?) {
-        if let item = xcodeEntry {
-            if state == .on {
-                item.selectWithChildItems()
-            } else if state == .off {
-                item.deselectWithChildItems()
-            }
-            
-            // create a list of current and parent items
-            var rootEntry: XcodeFileEntry = item.parent ?? item
-            var itemsToRefresh: [XcodeFileEntry] = [rootEntry]
-            while let parentEntry = rootEntry.parent {
-                itemsToRefresh.append(parentEntry)
-                rootEntry = parentEntry
-            }
-            rootEntry.recalculateSelection()
-            
-            // refresh parent items and current item
-            for itemToRefresh in itemsToRefresh {
-                self.outlineView.reloadItem(itemToRefresh, reloadChildren: false)
-            }
-            self.outlineView.reloadItem(item, reloadChildren: true)
-            
-            self.updateButtonsAndLabels()
+        let selected = state == .on
+        
+        // update current cell
+        self.changeSelection(for: [cell], selected: selected)
+        
+        // we also need to make sure that we select *all* selected views, not only the current one
+        let selectedRowIndexes = self.outlineView.selectedRowIndexes
+        let allSelectedCellViews = selectedRowIndexes.compactMap { selectedRow in
+            return self.outlineView.view(atColumn: 0, row: selectedRow, makeIfNecessary: false) as? XcodeEntryCellView
         }
+        
+        // BUT only if our cell is among selected indexes (as they might be outside of our cell)
+        if allSelectedCellViews.contains(where: { cellView in cellView == cell}) {
+            self.changeSelection(for: allSelectedCellViews, selected: selected)
+        }
+    }
+    
+    private func changeSelection(for cells: [XcodeEntryCellView], selected: Bool) {
+        for cell in cells {
+            if let item = cell.entry {
+                switch selected {
+                    case true: item.selectWithChildItems()
+                    case false: item.deselectWithChildItems()
+                }
+                
+                // create a list of current and parent items
+                var rootEntry: XcodeFileEntry = item.parent ?? item
+                var itemsToRefresh: [XcodeFileEntry] = [rootEntry]
+                while let parentEntry = rootEntry.parent {
+                    itemsToRefresh.append(parentEntry)
+                    rootEntry = parentEntry
+                }
+                rootEntry.recalculateSelection()
+                
+                // refresh parent items and current item
+                for itemToRefresh in itemsToRefresh {
+                    self.outlineView.reloadItem(itemToRefresh, reloadChildren: false)
+                }
+                
+                self.outlineView.reloadItem(item, reloadChildren: true)
+            }
+        }
+        
+        self.updateButtonsAndLabels()
     }
 }
 
