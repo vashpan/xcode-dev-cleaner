@@ -248,6 +248,8 @@ public final class DeviceSupportFileEntry: XcodeFileEntry {
                 return "iPhone 16"
             case "iPhone17,4":
                 return "iPhone 16 Plus"
+            case "iPhone17,5":
+                return "iPhone 16e"
             case "iPhone8,4":
                 return "iPhone SE"
             case "iPhone12,8":                                    
