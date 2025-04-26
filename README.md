@@ -72,4 +72,4 @@ maybe some caches I missed, let me know as well in issues.
 Application is licensed using GPL3. You may freely modify, download, redistribute and use this application from this source code, but only me, 
 as copyright holder can submit it to the Mac App Store.
 
-Copyright © 2018-2024 One Minute Games Konrad Kołakowski.
+Copyright © 2018-2025 One Minute Games Konrad Kołakowski.
