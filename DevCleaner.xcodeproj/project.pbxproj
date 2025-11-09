@@ -51,6 +51,7 @@
 		71AE37F1237A1FAE009C03BB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71AE37F0237A1FAE009C03BB /* WebKit.framework */; };
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
 		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
+		71BC7B902EC0EC6900B4FED4 /* AppleDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC7B8F2EC0EC6100B4FED4 /* AppleDevices.swift */; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
@@ -58,6 +59,7 @@
 		71FD37D7206AD6BE0042812D /* ArchiveFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */; };
 		71FD37D9206AD72C0042812D /* DeviceSupportFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */; };
 		71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */; };
+		A84F5D2C631C44F6A400B49D /* device_identifiers.csv in Resources */ = {isa = PBXBuildFile; fileRef = BAF8F9B5BB114D2196AD27A1 /* device_identifiers.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,7 @@
 		71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XcodeEntryCellView.swift; sourceTree = "<group>"; };
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
 		71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = DevCleanerStoreKit.storekit; sourceTree = "<group>"; };
+		71BC7B8F2EC0EC6100B4FED4 /* AppleDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleDevices.swift; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
@@ -118,6 +121,7 @@
 		71FD37D6206AD6BE0042812D /* ArchiveFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveFileEntry.swift; sourceTree = "<group>"; };
 		71FD37D8206AD72C0042812D /* DeviceSupportFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSupportFileEntry.swift; sourceTree = "<group>"; };
 		71FD37DC206AD76D0042812D /* DerivedDataFileEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivedDataFileEntry.swift; sourceTree = "<group>"; };
+		BAF8F9B5BB114D2196AD27A1 /* device_identifiers.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = device_identifiers.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 				71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */,
 				71C8ACDD20A4EC2200E7A13B /* Credits.rtf */,
 				71AAD2A22316A99F00D6B133 /* dev-cleaner.sh */,
+				BAF8F9B5BB114D2196AD27A1 /* device_identifiers.csv */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				7100BEDB22F6E4D5002E82B2 /* Profiling */,
 				719B25DA205EF996007560C0 /* Extensions */,
 				719B25D8205ECA53007560C0 /* Version.swift */,
+				71BC7B8F2EC0EC6100B4FED4 /* AppleDevices.swift */,
 				710C965327BBE09200A1DA6A /* AppleBuild.swift */,
 				7155325D2061AFD80025EB75 /* Logger.swift */,
 				71E7F837214E930500A11601 /* Alerts.swift */,
@@ -415,6 +421,7 @@
 			files = (
 				7162E1292097624600081E4E /* Preferences.storyboard in Resources */,
 				71AAD2A32316A99F00D6B133 /* dev-cleaner.sh in Resources */,
+				A84F5D2C631C44F6A400B49D /* device_identifiers.csv in Resources */,
 				71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
@@ -465,6 +472,7 @@
 				717A3EC928FC3DDC002A0C8F /* DocumentationCacheFileEntry.swift in Sources */,
 				717A9F1B22DBAF9300682A0A /* OldDocumentationFileEntry.swift in Sources */,
 				71FD37DD206AD76D0042812D /* DerivedDataFileEntry.swift in Sources */,
+				71BC7B902EC0EC6900B4FED4 /* AppleDevices.swift in Sources */,
 				71A2C1202668FB1200F502A0 /* FeedbackMailer.swift in Sources */,
 				71012FA9230C8A9E00FDF8ED /* main.swift in Sources */,
 				7162E12D209905BC00081E4E /* Preferences.swift in Sources */,
