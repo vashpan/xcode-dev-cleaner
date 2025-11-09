@@ -40,7 +40,7 @@
                                                 <action selector="showLogFiles:" target="Voe-Tx-rLC" id="zhA-DJ-t4A"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Install Command Line Tool..." secondaryImage="terminal" catalog="system" id="PZe-ZI-m5F">
+                                        <menuItem title="Install Command Line Tool..." secondaryImage="apple.terminal" catalog="system" id="PZe-ZI-m5F">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <segue destination="pbf-7k-k0V" kind="show" id="JfZ-HR-5nP"/>
@@ -779,11 +779,11 @@ DQ
     <resources>
         <image name="DevCleanerIcon" width="256" height="256"/>
         <image name="NSFolder" width="32" height="32"/>
+        <image name="apple.terminal" catalog="system" width="18" height="14"/>
         <image name="document" catalog="system" width="14" height="16"/>
         <image name="finder" catalog="system" width="16" height="15"/>
         <image name="gear" catalog="system" width="17" height="16"/>
         <image name="magnifyingglass" catalog="system" width="16" height="15"/>
         <image name="storefront" catalog="system" width="18" height="16"/>
-        <image name="terminal" catalog="system" width="18" height="14"/>
     </resources>
 </document>
