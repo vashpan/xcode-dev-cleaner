@@ -52,6 +52,7 @@
 		71B01E8E20824F2A00940041 /* XcodeEntryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8D20824F2A00940041 /* XcodeEntryCellView.swift */; };
 		71B01E902082551000940041 /* SizeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B01E8F2082551000940041 /* SizeCellView.swift */; };
 		71BC7B902EC0EC6900B4FED4 /* AppleDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BC7B8F2EC0EC6100B4FED4 /* AppleDevices.swift */; };
+		71BC7B982EC11B0600B4FED4 /* DevCleaner.icon in Resources */ = {isa = PBXBuildFile; fileRef = 71BC7B972EC11B0600B4FED4 /* DevCleaner.icon */; };
 		71C8ACDE20A4EC2200E7A13B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 71C8ACDD20A4EC2200E7A13B /* Credits.rtf */; };
 		71C8ACE020A62B8000E7A13B /* ScanReminders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */; };
 		71E7F836214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */; };
@@ -114,6 +115,7 @@
 		71B01E8F2082551000940041 /* SizeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeCellView.swift; sourceTree = "<group>"; };
 		71B76BC52B222690002A2A03 /* DevCleanerStoreKit.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = DevCleanerStoreKit.storekit; sourceTree = "<group>"; };
 		71BC7B8F2EC0EC6100B4FED4 /* AppleDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleDevices.swift; sourceTree = "<group>"; };
+		71BC7B972EC11B0600B4FED4 /* DevCleaner.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = DevCleaner.icon; sourceTree = "<group>"; };
 		71C8ACDD20A4EC2200E7A13B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		71C8ACDF20A62B8000E7A13B /* ScanReminders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReminders.swift; sourceTree = "<group>"; };
 		71E7F835214E8D4400A11601 /* URL+AcquireAccessFromSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AcquireAccessFromSandbox.swift"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				7140B619231BC697005768A7 /* Manual */,
+				71BC7B972EC11B0600B4FED4 /* DevCleaner.icon */,
 				7110B4952030F17B00EDBFA3 /* Assets.xcassets */,
 				7110B49A2030F17B00EDBFA3 /* Info.plist */,
 				7110B49B2030F17B00EDBFA3 /* DevCleaner.entitlements */,
@@ -424,6 +427,7 @@
 				A84F5D2C631C44F6A400B49D /* device_identifiers.csv in Resources */,
 				71AC3EB52B991024002B21A7 /* CommandLineInstall.storyboard in Resources */,
 				7110B4962030F17B00EDBFA3 /* Assets.xcassets in Resources */,
+				71BC7B982EC11B0600B4FED4 /* DevCleaner.icon in Resources */,
 				7110B4992030F17B00EDBFA3 /* Main.storyboard in Resources */,
 				7140B61D231BE5FB005768A7 /* Help.storyboard in Resources */,
 				7140B61A231BC697005768A7 /* Manual in Resources */,
@@ -637,7 +641,8 @@
 		7110B49F2030F17B00EDBFA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = DevCleaner;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = DevCleaner/Resources/DevCleaner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -660,7 +665,8 @@
 		7110B4A02030F17B00EDBFA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = DevCleaner;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = DevCleaner/Resources/DevCleaner.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
