@@ -280,7 +280,7 @@ extension DonationViewController: DonationsDelegate {
             // add a message view
             let messageView = MessageView(frame: self.view.frame)
             messageView.backgroundColor = .clear
-            self.view.addSubview(messageView)
+            self.view.addSubview(messageView, positioned: .below, relativeTo: self.closeButton)
             
             // check for error or dismiss our donation sheet
             if error == nil {
